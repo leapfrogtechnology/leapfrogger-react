@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "leapfroggerReact.app"
-               BlueprintName = "leapfroggerReact"
-               ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+               BuildableName = "LeapfroggerReact.app"
+               BlueprintName = "LeapfroggerReact"
+               ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "leapfroggerReactTests.xctest"
-               BlueprintName = "leapfroggerReactTests"
-               ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+               BuildableName = "LeapfroggerReactTests.xctest"
+               BlueprintName = "LeapfroggerReactTests"
+               ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "leapfroggerReactTests.xctest"
-               BlueprintName = "leapfroggerReactTests"
-               ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+               BuildableName = "LeapfroggerReactTests.xctest"
+               BlueprintName = "LeapfroggerReactTests"
+               ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "leapfroggerReact.app"
-            BlueprintName = "leapfroggerReact"
-            ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+            BuildableName = "LeapfroggerReact.app"
+            BlueprintName = "LeapfroggerReact"
+            ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "leapfroggerReact.app"
-            BlueprintName = "leapfroggerReact"
-            ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+            BuildableName = "LeapfroggerReact.app"
+            BlueprintName = "LeapfroggerReact"
+            ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "leapfroggerReact.app"
-            BlueprintName = "leapfroggerReact"
-            ReferencedContainer = "container:leapfroggerReact.xcodeproj">
+            BuildableName = "LeapfroggerReact.app"
+            BlueprintName = "LeapfroggerReact"
+            ReferencedContainer = "container:LeapfroggerReact.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
