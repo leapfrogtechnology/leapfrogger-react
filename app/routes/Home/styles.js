@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 65,
     flex: 1,
   },
   row: {
@@ -19,6 +18,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: '#222'
+  },
+  searchBar: {
+    borderColor: 'rgba(0, 147, 209, 0.7)'
   }
 });
 

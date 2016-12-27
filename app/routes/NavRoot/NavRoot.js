@@ -8,7 +8,8 @@ import {
 } from 'react-native'
 
 const {
-  CardStack: NavigationCardStack
+  CardStack: NavigationCardStack,
+  Header: NavigationHeader
 } = NavigationExperimental
 
 export default class NavRoot extends Component {
@@ -35,7 +36,7 @@ export default class NavRoot extends Component {
 
 		if(route.key === 'employeeDetails') {
 			return (
-				<EmployeeDetails _goBack={this._handleBackAction.bind(this)} />
+				<EmployeeDetails _goBack={this._handleBackAction.bind(this)} employee={route.employee}/>
 			);
 		}
 	}
@@ -49,7 +50,6 @@ export default class NavRoot extends Component {
 	}
 
 	_handleNavigate(action) {
-		console.log('yeha pugyo with action: ', action)
 		switch (action && action.type) {
 			case 'push':
 				this.props.pushRoute(action.route)
@@ -64,12 +64,22 @@ export default class NavRoot extends Component {
 	}
 
 	render () {
-    return (
+    	return (
 			<NavigationCardStack
 				direction='vertical'
 				navigationState={this.props.navigation}
 				onNavigate={this._handleNavigate.bind(this)}
-				renderScene={this._renderScene} 
+				renderScene={this._renderScene}
+				renderHeader={props => (
+					<NavigationHeader
+						{...props}
+						onNavigateBack={this._handleBackAction}
+						renderTitleComponent={props => {
+							const title = props.scene.route.title
+							return <NavigationHeader.Title>{title}</NavigationHeader.Title>
+						}}
+					/>
+				)}
 			/>
 		)
    }

@@ -4,21 +4,14 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Image } from 'react-native';
+  Image,
+  TextInput } from 'react-native';
 
 import RestClient from '../../utils/RestClient';
 import { ENV } from '../../../environment';
 import { API } from '../../config/apis';
 
 import styles from './styles.js';
-
-const route = {
-	type: 'push',
-	route: {
-		key: 'employeeDetail',
-		title: 'Employee Detail'
-	}
-}
 
 export default class Home extends Component{
 
@@ -34,10 +27,22 @@ export default class Home extends Component{
     	});
 	}
 
+	_makePayload(employee) {
+		return {
+			type: 'push',
+			route: {
+				key: 'employeeDetails',
+				title: `${employee.firstName} ${employee.lastName}`,
+				employee: employee
+			}
+		}
+	}
+
 	_renderRow(employee) {
 		return (
 			<TouchableHighlight
 				underlayColor='#35b5ff'
+				onPress={() => this.props._handleNavigate(this._makePayload(employee))}
 			>
 	          <View style={styles.row}>
 	            <View style={{flex:3}}>
@@ -56,10 +61,15 @@ export default class Home extends Component{
 
 	render() {
 		return (
-		    <ListView style={styles.container}
-		      dataSource={this.state.employees}
-		      renderRow={(employee) => this._renderRow(employee)}
-		    />
+			<View style={{flex:1}}>
+				<View><TextInput placeholder='Search Employee' style={styles.searchBar}/></View>
+			   	<View style={{flex: 1}}>
+			   		<ListView style={styles.container}
+				      dataSource={this.state.employees}
+				      renderRow={(employee) => this._renderRow(employee)}
+				    />
+				</View>
+			</View>
 		);
 	}
 

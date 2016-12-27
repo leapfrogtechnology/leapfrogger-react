@@ -22,13 +22,15 @@ export default class EmployeeDetails extends Component{
       return(
         <View style={styles.container}>
             <View style={{flex:1}}>
-              <Image style={styles.image} source={{uri: 'http://lorempixel.com/400/200'}}/>
+              <Image style={styles.image} source={{uri: this.props.employee.avatarUrl}}/>
             </View>
             <View style={{flex:2, padding:10}}>
-              <Text style={styles.title}>Achyut Pokhrel</Text>
+              <Text style={styles.title}>{this.props.employee.firstName}</Text>
               {this._separator()}
             </View>
-            <Button onPress={_goBack} label='Go Back' />
+            <View style={{flex: 1}}>
+              <Button onPress={() => this.props._goBack()} label='Go Back' />
+            </View>
         </View>
       );
     }
