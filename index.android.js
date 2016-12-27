@@ -4,12 +4,12 @@
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import Root from './app';
+import Home from './app/layouts/Home/Home';
 
 export default class LeapfroggerReact extends Component {
   render() {
     return (
-      <Root />
+      <Home />
     );
   }
 }
