@@ -4,12 +4,18 @@
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import Home from './app/routes/Home/Home';
+import NavigationRootContainer from './app/routes/NavRoot';
+import { Provider } from 'react-redux'
+
+import configureStore from './app/store/configureStore'
+const store = configureStore();
 
 export default class LeapfroggerReact extends Component {
   render() {
     return (
-      <Home />
+		<Provider store={store}>
+			<NavigationRootContainer />
+		</Provider>
     );
   }
 }

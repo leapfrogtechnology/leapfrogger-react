@@ -5,6 +5,8 @@ import {
   View,
   StyleSheet } from 'react-native';
 
+import Button from '../../components/Button';
+
 export default class EmployeeDetails extends Component{
   constructor(props) {
     super(props);
@@ -20,12 +22,13 @@ export default class EmployeeDetails extends Component{
       return(
         <View style={styles.container}>
             <View style={{flex:1}}>
-          <Image style={styles.image} source={{uri: 'http://lorempixel.com/400/200'}}/>
+              <Image style={styles.image} source={{uri: 'http://lorempixel.com/400/200'}}/>
             </View>
             <View style={{flex:2, padding:10}}>
-          <Text style={styles.title}>Achyut Pokhrel</Text>
-          {this._separator()}
+              <Text style={styles.title}>Achyut Pokhrel</Text>
+              {this._separator()}
             </View>
+            <Button onPress={_goBack} label='Go Back' />
         </View>
       );
     }

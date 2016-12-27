@@ -12,6 +12,14 @@ import { API } from '../../config/apis';
 
 import styles from './styles.js';
 
+const route = {
+	type: 'push',
+	route: {
+		key: 'employeeDetail',
+		title: 'Employee Detail'
+	}
+}
+
 export default class Home extends Component{
 
 	constructor(props){
@@ -28,7 +36,9 @@ export default class Home extends Component{
 
 	_renderRow(employee) {
 		return (
-			<TouchableHighlight>
+			<TouchableHighlight
+				underlayColor='#35b5ff'
+			>
 	          <View style={styles.row}>
 	            <View style={{flex:3}}>
 	              <Image style={styles.image} source={{uri: employee.avatarUrl}} />
