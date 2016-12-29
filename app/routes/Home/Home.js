@@ -29,13 +29,10 @@ export default class Home extends Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log('receive props: ', nextProps)
-		console.log(this.props.employees)
 		if(nextProps.employees !== this.props.employees){
 			this.setState({isLoading:nextProps.employees.isLoading})
 			this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.employees.employees)});
 		}
-		console.log(this.state.isLoading)
 	}
 
 	_makePayload(employee) {
