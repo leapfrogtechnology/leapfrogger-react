@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux'
-import navReducer from './navReducer'
+import { combineReducers } from 'redux';
+import navReducer from './navReducer';
+import employeeReducer from './employeeReducer';
 
 const rootReducer = combineReducers({
-  navReducer
+  navReducer,
+  employeeReducer
 })
 
-export default rootReducer
+export default rootReducer;

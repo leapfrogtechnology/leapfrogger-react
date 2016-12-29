@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Home from '../Home';
 import EmployeeDetails from '../EmployeeDetails';
 
+import RestClient from '../../utils/RestClient';
+import { ENV } from '../../../environment';
+import { API } from '../../config/apis';
+
 import {
   BackAndroid,
   NavigationExperimental
@@ -20,6 +24,10 @@ export default class NavRoot extends Component {
 	}
 
 	componentDidMount () {
+		RestClient.get(API.listEmployees, ENV.apiKey).then((data) => {
+    		this.props.loadedEmployees({employees: data, isLoading: false});
+    	})
+
 		BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
 	}
 	componentWillUnmount () {
@@ -30,7 +38,7 @@ export default class NavRoot extends Component {
 		const { route } = props.scene;
 		if(route.key === 'home'){
 			return (
-				<Home _handleNavigate={this._handleNavigate.bind(this)} />
+				<Home _handleNavigate={this._handleNavigate.bind(this)} employees={this.props.employees}/>
 			);
 		}
 

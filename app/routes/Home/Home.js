@@ -5,7 +5,8 @@ import {
   View,
   TouchableHighlight,
   Image,
-  TextInput } from 'react-native';
+  TextInput,
+  ActivityIndicator } from 'react-native';
 
 import RestClient from '../../utils/RestClient';
 import { ENV } from '../../../environment';
@@ -17,14 +18,24 @@ export default class Home extends Component{
 
 	constructor(props){
 		super(props);
+	}
+
+	componentWillMount(){
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     	this.state = {
-      		employees: ds.cloneWithRows([])
+    		isLoading: true,
+      		dataSource: ds.cloneWithRows(this.props.employees.employees)
     	};
+	}
 
-    	RestClient.get(API.listEmployees, ENV.apiKey).then((data) => {
-    		this.setState({employees: ds.cloneWithRows(data)});
-    	});
+	componentWillReceiveProps(nextProps){
+		console.log('receive props: ', nextProps)
+		console.log(this.props.employees)
+		if(nextProps.employees !== this.props.employees){
+			this.setState({isLoading:nextProps.employees.isLoading})
+			this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.employees.employees)});
+		}
+		console.log(this.state.isLoading)
 	}
 
 	_makePayload(employee) {
@@ -63,9 +74,14 @@ export default class Home extends Component{
 		return (
 			<View style={{flex:1}}>
 				<View><TextInput placeholder='Search Employee' style={styles.searchBar}/></View>
+				<ActivityIndicator
+			        animating={this.state.isLoading}
+			        style={[styles.centering, {height: 10}]}
+			        size="large"
+			     />
 			   	<View style={{flex: 1}}>
 			   		<ListView style={styles.container}
-				      dataSource={this.state.employees}
+				      dataSource={this.state.dataSource}
 				      renderRow={(employee) => this._renderRow(employee)}
 				    />
 				</View>
