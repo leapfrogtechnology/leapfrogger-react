@@ -11,7 +11,6 @@ import {
 import RestClient from '../../utils/RestClient';
 import {ENV} from '../../../environment';
 import {API} from '../../config/apis';
-
 import styles from './styles.js';
 
 export default class Home extends Component {

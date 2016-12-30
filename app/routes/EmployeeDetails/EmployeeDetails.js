@@ -1,55 +1,69 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Image,
   Text,
   View,
-  StyleSheet } from 'react-native';
+  StyleSheet
+} from 'react-native';
 
-import Button from '../../components/Button';
+import styles from './styles.js';
 
-export default class EmployeeDetails extends Component{
+export default class EmployeeDetails extends Component {
   constructor(props) {
     super(props);
   }
 
-  _separator(){
-      return(
-          <View style={{height:1, backgroundColor: 'lightgray', margin:5}}/>
-      );
-    }
-
-    render() {
-      return(
-        <View style={styles.container}>
-            <View style={{flex:1}}>
-              <Image style={styles.image} source={{uri: this.props.employee.avatarUrl}}/>
-            </View>
-            <View style={{flex:2, padding:10}}>
-              <Text style={styles.title}>{this.props.employee.firstName}</Text>
-              {this._separator()}
-            </View>
-            <View style={{flex: 1}}>
-              <Button onPress={() => this.props._goBack()} label='Go Back' />
-            </View>
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={styles.headerImageContainer}>
+            <Image style={styles.headerImage} source={{uri: this.props.employee.avatarUrl}}/>
+          </View>
+          <View style={styles.headerNameContainer}>
+            <Text style={styles.headerName}>{this.props.employee.firstName} {this.props.employee.lastName}</Text>
+            <Text style={styles.headerName}>{this.props.employee.department.name}</Text>
+            <Text style={styles.headerName}>{this.props.employee.designation}</Text>
+          </View>
+          {/*<View>*/}
+          {/*<Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>*/}
+          {/*</View>*/}
         </View>
-      );
-    }
-}
-
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    padding: 10,
-    paddingTop: 70,
-    flexDirection: 'row'
-  },
-  image: {
-    height: 200
-  },
-  title: {
-    fontSize: 25
-  },
-  subTitle:{
-    fontSize: 20
+        <View style={styles.detailsContainer}>
+          <View style={styles.phoneDetailsContainer}>
+            <View>
+              {/*Phone Image*/}
+            </View>
+            <View>
+              {/*List of phone numbers*/}
+            </View>
+          </View>
+          <View style={styles.emailDetailsContainer}>
+            <View>
+              {/*Email Image*/}
+            </View>
+            <View>
+              {/* Email */}
+            </View>
+          </View>
+          <View style={styles.skypeDetailsContainer}>
+            <View>
+              {/*Skype Image*/}
+            </View>
+            <View>
+              {/*Skype address*/}
+            </View>
+          </View>
+          <View style={styles.addressDetailsConatiner}>
+            <View>
+              {/*Address Image*/}
+            </View>
+            <View>
+              {/*Address*/}
+            </View>
+          </View>
+        </View>
+      </View>
+    );
   }
-});
+}
