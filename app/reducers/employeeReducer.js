@@ -5,7 +5,6 @@ const initialState = {
 }
 
 function employeeState(state = initialState, action) {
-console.log('feri call vayo,', action)
 	switch(action.type) {
 		case LOADED_EMPLOYEES:
 			return Object.assign({}, state, {...state, employees: action.payload.employees, isLoading: action.payload.isLoading})
