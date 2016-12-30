@@ -31,32 +31,35 @@ export default class EmployeeDetails extends Component {
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.phoneDetailsContainer}>
-            <View>
-              {/*Phone Image*/}
+            <View style={styles.phoneImageContainer}>
+              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
-            <View>
+            <View style={styles.phoneDetails}>
+              <Text>123456789</Text>
+              <Text>123456789</Text>
+              <Text>123456789</Text>
               {/*List of phone numbers*/}
             </View>
           </View>
           <View style={styles.emailDetailsContainer}>
-            <View>
-              {/*Email Image*/}
+            <View style={styles.emailImageContainer}>
+              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/* Email */}
             </View>
           </View>
           <View style={styles.skypeDetailsContainer}>
-            <View>
-              {/*Skype Image*/}
+            <View style={styles.skypeImageContainer}>
+              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/*Skype address*/}
             </View>
           </View>
           <View style={styles.addressDetailsConatiner}>
-            <View>
-              {/*Address Image*/}
+            <View style={styles.addressImageContainer}>
+              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/*Address*/}

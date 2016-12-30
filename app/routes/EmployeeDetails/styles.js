@@ -36,10 +36,42 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center'
   },
-  phoneDetailsContainer: {},
-  emailDetailsContainer: {},
-  skypeDetailsContainer: {},
-  addressDetailsContainer: {}
+  phoneDetailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+  phoneImageContainer: {
+    flex: 2,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+  phoneDetails: {
+    flex: 8,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+  emailDetailsContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+  skypeDetailsContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+  addressDetailsContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'red'
+  },
+
 });
 
 export default styles;
