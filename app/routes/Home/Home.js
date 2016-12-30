@@ -18,19 +18,24 @@ export default class Home extends Component{
 
 	constructor(props){
 		super(props);
-	}
-
-	componentWillMount(){
+		console.log('call from constructor')
+		this.state = {};
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     	this.state = {
-    		isLoading: true,
       		dataSource: ds.cloneWithRows(this.props.employees.employees)
     	};
 	}
 
+	componentWillMount(){
+		console.log('inside componentWillMount: ', this.state);
+	}
+
+	componentWillUnmount() {
+		console.log('inside componentWillUnmount: ', this.state)
+	}
+
 	componentWillReceiveProps(nextProps){
 		if(nextProps.employees !== this.props.employees){
-			this.setState({isLoading:nextProps.employees.isLoading})
 			this.setState({dataSource: this.state.dataSource.cloneWithRows(nextProps.employees.employees)});
 		}
 	}
@@ -72,7 +77,7 @@ export default class Home extends Component{
 			<View style={{flex:1}}>
 				<View><TextInput placeholder='Search Employee' style={styles.searchBar}/></View>
 				<ActivityIndicator
-			        animating={this.state.isLoading}
+			        animating={this.props.employees.isLoading}
 			        style={[styles.centering, {height: 10}]}
 			        size="large"
 			     />

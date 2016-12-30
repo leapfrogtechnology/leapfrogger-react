@@ -9,7 +9,7 @@ const initialState = {
   key: 'root',
   routes: [{
    key: 'home',
-   title: 'Home'
+   title: 'Employees'
   }]
 }
 
