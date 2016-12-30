@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   ListView,
   Text,
@@ -8,30 +8,21 @@ import {
   TextInput,
   ActivityIndicator } from 'react-native';
 
+
 import RestClient from '../../utils/RestClient';
-import { ENV } from '../../../environment';
-import { API } from '../../config/apis';
+import {ENV} from '../../../environment';
+import {API} from '../../config/apis';
 
 import styles from './styles.js';
 
-export default class Home extends Component{
+export default class Home extends Component {
 
 	constructor(props){
 		super(props);
-		console.log('call from constructor')
-		this.state = {};
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     	this.state = {
       		dataSource: ds.cloneWithRows(this.props.employees.employees)
     	};
-	}
-
-	componentWillMount(){
-		console.log('inside componentWillMount: ', this.state);
-	}
-
-	componentWillUnmount() {
-		console.log('inside componentWillUnmount: ', this.state)
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -40,37 +31,37 @@ export default class Home extends Component{
 		}
 	}
 
-	_makePayload(employee) {
-		return {
-			type: 'push',
-			route: {
-				key: 'employeeDetails',
-				title: `${employee.firstName} ${employee.lastName}`,
-				employee: employee
-			}
-		}
-	}
+  _makePayload(employee) {
+    return {
+      type: 'push',
+      route: {
+        key: 'employeeDetails',
+        title: `${employee.firstName} ${employee.lastName}`,
+        employee: employee
+      }
+    }
+  }
 
-	_renderRow(employee) {
-		return (
-			<TouchableHighlight
-				underlayColor='#35b5ff'
-				onPress={() => this.props._handleNavigate(this._makePayload(employee))}
-			>
-	          <View style={styles.row}>
-	            <View style={{flex:3}}>
-	              <Image style={styles.image} source={{uri: employee.avatarUrl}} />
-	            </View>
-	            <View style={{flex:10, padding: 10}}>
-	              <Text style={styles.title}>{employee.firstName} {employee.lastName}</Text>
-	            </View>
-	            <View style={{flex:1, justifyContent: 'center'}}>
-	              <Text style={styles.title}> > </Text>
-	            </View>
-	          </View>
-	        </TouchableHighlight>
-		);
-	}
+  _renderRow(employee) {
+    return (
+      <TouchableHighlight
+        style={styles.employeeRowContainer}
+        underlayColor='grey'
+        onPress={() => this.props._handleNavigate(this._makePayload(employee))}>
+        <View style={styles.employeeRow}>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={{uri: employee.avatarUrl}}/>
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{employee.firstName} {employee.lastName}</Text>
+          </View>
+          <View style={styles.favIconContainer}>
+            <Image style={styles.favIcon} source={require('../../images/ic_star_rate_black_18dp.png')}/>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  }
 
 	render() {
 		return (
