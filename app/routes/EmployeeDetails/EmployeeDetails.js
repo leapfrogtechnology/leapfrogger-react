@@ -32,7 +32,7 @@ export default class EmployeeDetails extends Component {
         <View style={styles.detailsContainer}>
           <View style={styles.phoneDetailsContainer}>
             <View style={styles.phoneImageContainer}>
-              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+              <Image style={styles.phoneImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View style={styles.phoneDetails}>
               <Text>123456789</Text>
@@ -43,7 +43,7 @@ export default class EmployeeDetails extends Component {
           </View>
           <View style={styles.emailDetailsContainer}>
             <View style={styles.emailImageContainer}>
-              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+              <Image style={styles.emailImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/* Email */}
@@ -51,7 +51,7 @@ export default class EmployeeDetails extends Component {
           </View>
           <View style={styles.skypeDetailsContainer}>
             <View style={styles.skypeImageContainer}>
-              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+              <Image style={styles.skypeImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/*Skype address*/}
@@ -59,7 +59,7 @@ export default class EmployeeDetails extends Component {
           </View>
           <View style={styles.addressDetailsConatiner}>
             <View style={styles.addressImageContainer}>
-              <Image style={styles.headerImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+              <Image style={styles.addressImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View>
               {/*Address*/}
