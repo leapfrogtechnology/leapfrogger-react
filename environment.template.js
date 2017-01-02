@@ -3,7 +3,7 @@
 **/
 
 const ENV = {
-	apiKey: 'dummy key...dummy key'
+	apiKey: 'KwFCd240ziWFHM-FvpCT6xx34NY9C3o3gtvaSEuh'
 }
 
 export { ENV };
