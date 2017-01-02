@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import navReducer from './navReducer';
+import homeNavReducer from './homeNavReducer';
 import employeeReducer from './employeeReducer';
+import mainNavReducer from './mainNavReducer';
 
 const rootReducer = combineReducers({
-  navReducer,
-  employeeReducer
+  homeNavReducer,
+  employeeReducer,
+  mainNavReducer
 })
 
 export default rootReducer;

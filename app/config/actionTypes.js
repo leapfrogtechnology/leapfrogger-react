@@ -1,3 +1,4 @@
-export const PUSH_ROUTE = 'PUSH_ROUTE'
-export const POP_ROUTE = 'POP_ROUTE'
+export const PUSH_HOME_ROUTE = 'PUSH_HOME_ROUTE'
+export const POP_HOME_ROUTE = 'POP_HOME_ROUTE'
+export const CHANGE_PAGE = 'CHANGE_PAGE'
 export const LOADED_EMPLOYEES = 'LOADED_EMPLOYEES'

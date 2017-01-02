@@ -1,4 +1,4 @@
-aimport React, { Component, PropTypes } from 'react'
+import Ract, { Component, PropTypes } from 'react'
 import { NavigationExperimental, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 

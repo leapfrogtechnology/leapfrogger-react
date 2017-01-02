@@ -8,7 +8,6 @@ exports.get = async function(url, apiKey = ''){
         'ApiKey': apiKey
       }
       });
-    console.log(response);
     return await response.json();
   } catch(error) {
     throw error;
