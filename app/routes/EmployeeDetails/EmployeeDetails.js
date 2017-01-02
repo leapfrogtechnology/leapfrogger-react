@@ -20,49 +20,87 @@ export default class EmployeeDetails extends Component {
           <View style={styles.headerImageContainer}>
             <Image style={styles.headerImage} source={{uri: this.props.employee.avatarUrl}}/>
           </View>
-          <View style={styles.headerNameContainer}>
             <Text style={styles.headerName}>{this.props.employee.firstName} {this.props.employee.lastName}</Text>
-            <Text style={styles.headerName}>{this.props.employee.department.name}</Text>
-            <Text style={styles.headerName}>{this.props.employee.designation}</Text>
-          </View>
+            <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
+            <Text style={styles.headerNameSub}>{this.props.employee.designation}</Text>
           {/*<View>*/}
           {/*<Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>*/}
           {/*</View>*/}
         </View>
         <View style={styles.detailsContainer}>
-          <View style={styles.phoneDetailsContainer}>
+          <View style={styles.eachDetailsContainer}>
             <View style={styles.phoneImageContainer}>
               <Image style={styles.phoneImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
             <View style={styles.phoneDetails}>
-              <Text>123456789</Text>
-              <Text>123456789</Text>
-              <Text>123456789</Text>
-              {/*List of phone numbers*/}
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
+                  <Text style={styles.contactInfoMore}>mobile</Text>
+                </View>
+                <Image style={[styles.phoneImage, styles.contactRowImage]}
+                       source={require('../../images/ic_phone_white_24dp.png')}/>
+              </View>
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text
+                    style={styles.contactInfo}>{this.props.employee.contact.homePhone ? this.props.employee.contact.homePhone : '-'}</Text>
+                  <Text style={styles.contactInfoMore}>mobile</Text>
+                </View>
+                <Image style={[styles.phoneImage, styles.contactRowImage]}
+                       source={require('../../images/ic_home_black_24dp.png')}/>
+              </View>
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
+                  <Text style={styles.contactInfoMore}>message</Text>
+                </View>
+                <Image style={[styles.phoneImage, styles.contactRowImage]}
+                       source={require('../../images/ic_message_white_24dp.png')}/>
+              </View>
+              <View style={styles.divider}/>
             </View>
           </View>
-          <View style={styles.emailDetailsContainer}>
-            <View style={styles.emailImageContainer}>
-              <Image style={styles.emailImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+          <View style={styles.eachDetailsContainer}>
+            <View style={styles.phoneImageContainer}>
+              <Image style={styles.phoneImage} source={require('../../images/ic_email_white_24dp.png')}/>
             </View>
-            <View>
-              {/* Email */}
-            </View>
-          </View>
-          <View style={styles.skypeDetailsContainer}>
-            <View style={styles.skypeImageContainer}>
-              <Image style={styles.skypeImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
-            </View>
-            <View>
-              {/*Skype address*/}
+            <View style={styles.phoneDetails}>
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
+                  <Text style={styles.contactInfoMore}>email</Text>
+                </View>
+              </View>
+              <View style={styles.divider}/>
             </View>
           </View>
-          <View style={styles.addressDetailsConatiner}>
-            <View style={styles.addressImageContainer}>
-              <Image style={styles.addressImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
+          <View style={styles.eachDetailsContainer}>
+            <View style={styles.phoneImageContainer}>
+              <Image style={styles.phoneImage} source={require('../../images/ic_smartphone_black_24dp.png')}/>
             </View>
-            <View>
-              {/*Address*/}
+            <View style={styles.phoneDetails}>
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text style={styles.contactInfo}>{this.props.employee.contact.skypeId}</Text>
+                  <Text style={styles.contactInfoMore}>skype</Text>
+                </View>
+              </View>
+              <View style={styles.divider}/>
+            </View>
+          </View>
+          <View style={styles.eachDetailsContainer}>
+            <View style={styles.phoneImageContainer}>
+              <Image style={styles.phoneImage} source={require('../../images/ic_home_black_24dp.png')}/>
+            </View>
+            <View style={styles.phoneDetails}>
+              <View style={styles.contactDetailsRow}>
+                <View style={styles.contactInfoContainer}>
+                  <Text style={styles.contactInfo}>{this.props.employee.address.temporaryAddress}</Text>
+                  <Text style={styles.contactInfoMore}>address</Text>
+                </View>
+              </View>
+              <View style={styles.divider}/>
             </View>
           </View>
         </View>
