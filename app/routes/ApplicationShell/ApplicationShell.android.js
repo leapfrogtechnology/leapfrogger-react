@@ -50,7 +50,7 @@ export default class ApplicationShell extends Component {
 		    </DrawerLayoutAndroid>
 		);
 	}
-
+	
 	_renderNavigationView() {
 		return (
 			<View style={{flex: 1, backgroundColor: '#fff'}}>
