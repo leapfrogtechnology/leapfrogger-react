@@ -5,21 +5,24 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   },
-  title: {
-    fontSize: 25
-  },
-  subTitle: {
-    fontSize: 20
+  divider: {
+    backgroundColor: 'green',
+    height: 1,
+    marginTop: 5
   },
   headerContainer: {
-    flex: 3,
-    backgroundColor: '#84827B',
-    padding: 20
+    flex: 3
   },
   detailsContainer: {
-    flex: 7,
-    borderWidth: 1,
-    borderColor: 'red'
+    flex: 7
+  },
+  headerBackgroundImage: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   headerImageContainer: {
     alignItems: 'center'
@@ -29,49 +32,58 @@ const styles = StyleSheet.create({
     width: 80,
     borderRadius: 80
   },
-  headerNameContainer: {
-    flex: 1
-  },
   headerName: {
-    fontSize: 18,
+    fontSize: 16,
+    color: 'white',
     textAlign: 'center'
   },
-  phoneDetailsContainer: {
+  headerNameSub: {
+    fontSize: 14,
+    color: 'white',
+    textAlign: 'center'
+  },
+  eachDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'red'
+    padding: 10
   },
   phoneImageContainer: {
     flex: 2,
-    borderWidth: 1,
-    borderColor: 'red'
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  phoneImage: {
+    height: 25,
+    width: 25,
+    tintColor: 'green'
   },
   phoneDetails: {
     flex: 8,
-    borderWidth: 1,
-    borderColor: 'red'
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 5,
+    paddingRight: 5
   },
-  emailDetailsContainer: {
+  contactDetailsRow: {
     flexDirection: 'row',
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'red'
+    padding: 2
   },
-  skypeDetailsContainer: {
-    flexDirection: 'row',
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'red'
+  contactInfoContainer: {
+    flexDirection: 'column',
+    flex: 9
   },
-  addressDetailsContainer: {
-    flexDirection: 'row',
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'red'
+  contactInfo: {
+    fontSize: 12
   },
-
+  contactInfoMore: {
+    fontSize: 11
+  },
+  contactRowImage: {
+    height: 20,
+    width: 20
+  }
 });
 
 export default styles;

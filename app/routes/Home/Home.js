@@ -18,7 +18,7 @@ import styles from './styles.js';
 const {
   CardStack: NavigationCardStack,
   Header: NavigationHeader
-} = NavigationExperimental
+} = NavigationExperimental;
 
 export default class Home extends Component {
   constructor(props) {
