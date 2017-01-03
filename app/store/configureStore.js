@@ -5,9 +5,10 @@ import rootReducer from '../reducers';
 
 const middleWare = [];
 const storeWithMiddleWare = applyMiddleware(...middleWare)(createStore);
+const transientState = ['homeNavReducer', 'mainNavReducer'];
 
 export default configureStore = (onComplete) => {
 	const store = autoRehydrate()(storeWithMiddleWare)(rootReducer);
-	persistStore(store, {storage: AsyncStorage }, onComplete);
+	persistStore(store, { blacklist: transientState, storage: AsyncStorage }, onComplete);
 	return store;
 };
