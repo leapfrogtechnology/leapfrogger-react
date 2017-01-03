@@ -8,10 +8,12 @@ import {
 
 import EmployeeList from '../EmployeeList';
 import EmployeeDetails from '../EmployeeDetails';
+
 import {ENV} from '../../../environment';
 import {API} from '../../config/apis';
 import RestClient from '../../utils/RestClient';
-import styles from './styles.js'
+
+import styles from './styles.js';
 
 const {
   CardStack: NavigationCardStack,
@@ -21,6 +23,8 @@ const {
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    this._handleBackAction = this._handleBackAction.bind(this);
+    this._handleNavigate = this._handleNavigate.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +32,8 @@ export default class Home extends Component {
         this.props.loadedEmployees({employees: data, isLoading: false});
       },
       (error) => {
-        ToastAndroid.showWithGravity(error, ToastAndroid.SHORT, ToastAndroid.CENTER);
+        this.setState({isLoading: false});
+        ToastAndroid.showWithGravity('Error occur while fetching data', ToastAndroid.SHORT, ToastAndroid.CENTER);
       })
 
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
@@ -49,7 +54,7 @@ export default class Home extends Component {
           <NavigationHeader
             style={styles.navBar}
             {...props}
-            onNavigateBack={this._handleBackAction.bind(this)}
+            onNavigateBack={this._handleBackAction}
             renderTitleComponent={props => {
               const title = props.scene.route.title
               return (
@@ -68,13 +73,13 @@ export default class Home extends Component {
     const {route} = props.scene;
     if (route.key === 'employeeList') {
       return (
-        <EmployeeList _handleNavigate={this._handleNavigate.bind(this)} employees={this.props.employees}/>
+        <EmployeeList _handleNavigate={this._handleNavigate} employees={this.props.employees}/>
       );
     }
 
     if (route.key === 'employeeDetails') {
       return (
-        <EmployeeDetails _goBack={this._handleBackAction.bind(this)} employee={route.employee}/>
+        <EmployeeDetails _goBack={this._handleBackAction} employee={route.employee}/>
       );
     }
   }

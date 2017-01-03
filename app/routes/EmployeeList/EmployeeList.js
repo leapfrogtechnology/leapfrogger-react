@@ -10,6 +10,7 @@ import {
 
 
 import RestClient from '../../utils/RestClient';
+import { getEmployeeFullName } from '../../utils/EmployeeUtils';
 import {ENV} from '../../../environment';
 import {API} from '../../config/apis';
 
@@ -86,15 +87,15 @@ export default class EmployeeList extends Component {
   }
 
   _searchEmployee(event){
-    let employeeName = event.nativeEvent.text.toLowerCase();
-    let filteredEmployees = this._filterEmployee(employeeName);
+    let searchText = event.nativeEvent.text.toLowerCase();
+    let filteredEmployees = this._filterEmployee(searchText);
     this.setState({dataSource: this.state.dataSource.cloneWithRows(filteredEmployees)});
   }
 
-  _filterEmployee(employeeName){
+  _filterEmployee(searchText){
     return this.props.employees.employees.filter((employee) => {
-      let name = `${employee.firstName} ${employee.lastName}`;
-      return name.toLowerCase().search(employeeName) !== -1;
+      let name = getEmployeeFullName(employee);
+      return name.toLowerCase().search(searchText) !== -1;
     })
   }
 

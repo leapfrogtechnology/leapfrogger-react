@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+	BackAndroid,
 	DrawerLayoutAndroid,
 	View,
 	Text,
@@ -7,7 +8,6 @@ import {
 	TouchableHighlight
 } from 'react-native';
 
-// import Home from '../Home';
 import Favourites from '../Favourites';
 import Home from '../Home';
 
@@ -22,7 +22,16 @@ export default class ApplicationShell extends Component {
         super(props);
         this._renderNavigationView = this._renderNavigationView.bind(this);
         this._renderScene = this._renderScene.bind(this);
+        this._handleBackAction = this._handleBackAction.bind(this);
     }
+
+	componentDidMount() {
+		BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
+	}
+
+	componentWillUnmount() {
+		BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
+	}
 
 	render(){
 		return(
@@ -76,6 +85,11 @@ export default class ApplicationShell extends Component {
 
 	_closeDrawer(){
 		this.refs['APPLICATION_DRAWER'].closeDrawer();
+	}
+
+	_handleBackAction(){
+		this._navigatePage({key: 'home'});
+		return true;
 	}
 
 }
