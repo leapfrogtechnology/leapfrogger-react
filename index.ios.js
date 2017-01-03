@@ -3,11 +3,19 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
-import App from './app';
+import { AppRegistry, Text } from 'react-native';
+import { Provider } from 'react-redux'
+import configureStore from './app/store/configureStore'
+
+// import App from './app';
+import GoogleSigninComponentContainer from './app/routes/GoogleSigninComponent'
+
+const store = configureStore();
 
 const LeapfroggerReact = () => (
-	<App />
+	<Provider store={store}>
+      	<GoogleSigninComponentContainer/>
+    </Provider>
 )
 
 AppRegistry.registerComponent('LeapfroggerReact', () => LeapfroggerReact);

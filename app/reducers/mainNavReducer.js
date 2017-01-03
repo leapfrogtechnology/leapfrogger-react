@@ -3,7 +3,8 @@ import { CHANGE_PAGE } from '../config/actionTypes'
 const routes = [
   {key: 'home', title: 'Leapfroggers'},
   {key: 'favourites', title: 'Favourites'},
-  {key: 'profile', title: 'Profile'}
+  {key: 'profile', title: 'Profile'},
+  {key: 'login', title: 'Login'}
 ]
 
 const initialState = {
@@ -22,7 +23,7 @@ function mainNavigationState (state = initialState, action) {
     currentIndex = _findIndexOfPage(action.page.key);
   }
 
-  if (action.index === state.index){
+  if (action.index === state.index) {
     return state;
   } 
   
