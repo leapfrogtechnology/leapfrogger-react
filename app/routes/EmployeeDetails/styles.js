@@ -11,13 +11,18 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   headerContainer: {
-    flex: 3,
-    backgroundColor: '#84827B',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flex: 3
   },
   detailsContainer: {
     flex: 7
+  },
+  headerBackgroundImage: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   headerImageContainer: {
     alignItems: 'center'
@@ -29,10 +34,12 @@ const styles = StyleSheet.create({
   },
   headerName: {
     fontSize: 16,
+    color: 'white',
     textAlign: 'center'
   },
   headerNameSub: {
     fontSize: 14,
+    color: 'white',
     textAlign: 'center'
   },
   eachDetailsContainer: {
