@@ -41,7 +41,6 @@ class GoogleSigninComponent extends Component {
     GoogleSignin.signIn()
     .then((user) => {
       console.log(user);
-
       this.props.logInSuccess(user)
       // this.setState({user: user});
       console.log('This is props after login success')
@@ -62,8 +61,8 @@ class GoogleSigninComponent extends Component {
   }
 
    render() {
-
-    if (!this.props.user.isLoggedIn) {
+   	console.log("#######", this.props)
+    if (!this.props.session.isLoggedIn) {
      console.log("User from props in GoogleSigninComponent (no user case)")
 
       return (
@@ -73,12 +72,12 @@ class GoogleSigninComponent extends Component {
       );
     }
 
-    if (this.props.user.isLoggedIn) {
+    if (this.props.session.isLoggedIn) {
     console.log("User from props in GoogleSigninComponent", this.props.user)
       return (
         <View style={styles.container}>
-          <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 20}}>Welcome {this.props.user.name}</Text>
-          <Text>Your email is: {this.props.user.email}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 20}}>Welcome {this.props.session.user.name}</Text>
+          <Text>Your email is: {this.props.session.user.email}</Text>
           <TouchableOpacity onPress={() => {this._signOut(); }}>
             <View style={{marginTop: 50}}>
               <Text>Log out</Text>
@@ -88,7 +87,6 @@ class GoogleSigninComponent extends Component {
       );
     }
   }
-
 }
 
 const styles = StyleSheet.create({

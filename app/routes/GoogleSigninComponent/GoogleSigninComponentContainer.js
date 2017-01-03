@@ -4,8 +4,9 @@ import { logInSuccess, logOut } from '../../actions/userActions'
 
 
 function mapStateToProps (state) {
+	console.log('atti k', state)
   return {
-    user: state.userReducer
+    session: state.userReducer
   }
 }
 

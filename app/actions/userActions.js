@@ -1,10 +1,10 @@
 import * as types from '../config/actionTypes';
 
 export function logInSuccess(user) {
-	console.log("Login Success called")
+	console.log("Login Success called", user)
 	return {
 		type: types.USER_LOGIN_SUCCESS,
-		user: user
+		payload: user
 	}
 }
 
