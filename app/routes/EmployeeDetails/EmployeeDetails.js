@@ -8,6 +8,7 @@ import {
   ScrollView
 } from 'react-native';
 
+import { getEmployeeFullName } from '../../utils/EmployeeUtils';
 import styles from './styles.js';
 
 export default class EmployeeDetails extends Component {
@@ -31,7 +32,7 @@ export default class EmployeeDetails extends Component {
             <View style={styles.headerImageContainer}>
               <Image style={styles.headerImage} source={{uri: this.props.employee.avatarUrl}}/>
             </View>
-            <Text style={styles.headerName}>{this.props.employee.firstName} {this.props.employee.lastName}</Text>
+            <Text style={styles.headerName}>{getEmployeeFullName(this.props.employee)}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.designation}</Text>
           </Image>

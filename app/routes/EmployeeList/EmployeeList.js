@@ -8,12 +8,7 @@ import {
   TextInput,
   ActivityIndicator } from 'react-native';
 
-
-import RestClient from '../../utils/RestClient';
 import { getEmployeeFullName } from '../../utils/EmployeeUtils';
-import {ENV} from '../../../environment';
-import {API} from '../../config/apis';
-
 import styles from './styles.js';
 
 export default class EmployeeList extends Component {
@@ -65,7 +60,7 @@ export default class EmployeeList extends Component {
             <Image style={styles.image} source={{uri: employee.avatarUrl}}/>
           </View>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{employee.firstName} {employee.lastName}</Text>
+            <Text style={styles.title}>{getEmployeeFullName(employee)}</Text>
           </View>
           <View style={styles.favIconContainer}>
             <Image style={styles.favIcon} source={require('../../images/ic_star_rate_black_18dp.png')}/>
