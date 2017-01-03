@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  BackAndroid,
   Image,
   Text,
   View,
@@ -12,6 +13,14 @@ import styles from './styles.js';
 export default class EmployeeDetails extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', this.props._goBack)
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.props._goBack)
   }
 
   render() {
