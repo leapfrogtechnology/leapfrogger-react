@@ -1,4 +1,8 @@
 import { CHANGE_PAGE } from '../config/actionTypes'
+import { NavigationExperimental } from 'react-native'
+const {
+  StateUtils: NavigationStateUtils
+} = NavigationExperimental
 
 const routes = [
   {key: 'home', title: 'Leapfroggers'},
@@ -12,28 +16,16 @@ const initialState = {
   routes
 }
 
-function _findIndexOfPage(key) {
-  return routes.findIndex((route) => {return (route.key === key) });
-}
-
 function mainNavigationState (state = initialState, action) {
-  let currentIndex = -1;
 
-  if('page' in action){
-    currentIndex = _findIndexOfPage(action.page.key);
-  }
-
-  if (action.index === state.index) {
+  if (action.index === state.index){
     return state;
   } 
   
   switch (action.type) {
     
     case CHANGE_PAGE:
-    return {
-      ...state,
-      index: currentIndex
-    }
+      return NavigationStateUtils.jumpTo(state, action.page.key)
 
    default:
      return state

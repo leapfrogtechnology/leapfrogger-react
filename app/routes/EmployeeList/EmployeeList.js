@@ -8,11 +8,7 @@ import {
   TextInput,
   ActivityIndicator } from 'react-native';
 
-
-import RestClient from '../../utils/RestClient';
-import {ENV} from '../../../environment';
-import {API} from '../../config/apis';
-
+import { getEmployeeFullName } from '../../utils/EmployeeUtils';
 import styles from './styles.js';
 
 export default class EmployeeList extends Component {
@@ -64,7 +60,7 @@ export default class EmployeeList extends Component {
             <Image style={styles.image} source={{uri: employee.avatarUrl}}/>
           </View>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{employee.firstName} {employee.lastName}</Text>
+            <Text style={styles.title}>{getEmployeeFullName(employee)}</Text>
           </View>
           <View style={styles.favIconContainer}>
             <Image style={styles.favIcon} source={require('../../images/ic_star_rate_black_18dp.png')}/>
@@ -86,15 +82,15 @@ export default class EmployeeList extends Component {
   }
 
   _searchEmployee(event){
-    let employeeName = event.nativeEvent.text.toLowerCase();
-    let filteredEmployees = this._filterEmployee(employeeName);
+    let searchText = event.nativeEvent.text.toLowerCase();
+    let filteredEmployees = this._filterEmployee(searchText);
     this.setState({dataSource: this.state.dataSource.cloneWithRows(filteredEmployees)});
   }
 
-  _filterEmployee(employeeName){
+  _filterEmployee(searchText){
     return this.props.employees.employees.filter((employee) => {
-      let name = `${employee.firstName} ${employee.lastName}`;
-      return name.toLowerCase().search(employeeName) !== -1;
+      let name = getEmployeeFullName(employee);
+      return name.toLowerCase().search(searchText) !== -1;
     })
   }
 
