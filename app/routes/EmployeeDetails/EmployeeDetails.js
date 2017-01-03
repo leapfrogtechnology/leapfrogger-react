@@ -58,7 +58,7 @@ export default class EmployeeDetails extends Component {
                   <View style={styles.contactInfoContainer}>
                     <Text
                       style={styles.contactInfo}>{this.props.employee.contact.homePhone ? this.props.employee.contact.homePhone : '-'}</Text>
-                    <Text style={styles.contactInfoMore}>mobile</Text>
+                    <Text style={styles.contactInfoMore}>emergency</Text>
                   </View>
                   <Image style={[styles.phoneImage, styles.contactRowImage]}
                          source={require('../../images/ic_home_black_24dp.png')}/>
@@ -81,7 +81,7 @@ export default class EmployeeDetails extends Component {
               <View style={styles.phoneDetails}>
                 <View style={styles.contactDetailsRow}>
                   <View style={styles.contactInfoContainer}>
-                    <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
+                    <Text style={styles.contactInfo}>{this.props.employee.username}</Text>
                     <Text style={styles.contactInfoMore}>email</Text>
                   </View>
                 </View>
