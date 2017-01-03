@@ -1,14 +1,13 @@
-import { createStore } from 'redux'
-import rootReducer from '../reducers'
+import { AsyncStorage } from 'react-native';
+import { createStore, applyMiddleware } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import rootReducer from '../reducers';
 
-export default function configureStore () {
-  const store = createStore(rootReducer)
+const middleWare = [];
+const storeWithMiddleWare = applyMiddleware(...middleWare)(createStore);
 
-if (module.hot) {
-    module.hot.accept(() => {
-      const nextRootReducer = require('../reducers/index').default
-      store.replaceReducer(nextRootReducer)
-    })
-  }
-  return store
-}
+export default configureStore = (onComplete) => {
+	const store = autoRehydrate()(storeWithMiddleWare)(rootReducer);
+	persistStore(store, {storage: AsyncStorage }, onComplete);
+	return store;
+};
