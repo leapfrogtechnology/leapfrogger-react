@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     flex: 3
   },
   detailsContainer: {
-    flex: 7
+    flex: 7,
+    paddingTop: 20
   },
   headerBackgroundImage: {
     flex: 1,
@@ -83,6 +84,22 @@ const styles = StyleSheet.create({
   contactRowImage: {
     height: 20,
     width: 20
+  },
+  favIconContainer: {
+    backgroundColor: '#FF5722',
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: -20,
+    right: 20,
+  },
+  favIcon: {
+    height: 25,
+    width: 25,
+    tintColor: 'white'
   }
 });
 

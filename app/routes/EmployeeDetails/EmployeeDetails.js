@@ -39,9 +39,9 @@ export default class EmployeeDetails extends Component {
             <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.designation}</Text>
           </Image>
-          {/*<View>*/}
-          {/*<Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>*/}
-          {/*</View>*/}
+          <View style={styles.favIconContainer}>
+            <Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>
+          </View>
         </View>
         <View style={styles.detailsContainer}>
           <ScrollView>
