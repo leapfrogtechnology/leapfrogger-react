@@ -8,9 +8,9 @@ import {
   ScrollView
 } from 'react-native';
 
-import GreenPhoneButton from '../../components/GreenPhoneCallButton/GreenPhoneCallButton'
-import GreenHomeSMSButton from '../../components/GreenHomeCallButton/GreenHomeCallButton'
-import GreenTextSMSButton from '../../components/GreenTextSMSButton/GreenTextSMSButton'
+import GreenPhoneCallButton from '../../components/GreenPhoneCallButton'
+import GreenHomeCallButton from '../../components/GreenHomeCallButton'
+import GreenTextSMSButton from '../../components/GreenTextSMSButton'
 import {getEmployeeFullName} from '../../utils/EmployeeUtils';
 import styles from './styles.js';
 
@@ -55,7 +55,7 @@ export default class EmployeeDetails extends Component {
                     <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
                     <Text style={styles.contactInfoMore}>mobile</Text>
                   </View>
-                  <GreenPhoneButton url={this.props.employee.contact.mobilePhone}/>
+                  <GreenPhoneCallButton url={this.props.employee.contact.mobilePhone}/>
                 </View>
                 <View style={styles.contactDetailsRow}>
                   <View style={styles.contactInfoContainer}>
@@ -63,7 +63,7 @@ export default class EmployeeDetails extends Component {
                       style={styles.contactInfo}>{this.props.employee.contact.homePhone ? this.props.employee.contact.homePhone : '-'}</Text>
                     <Text style={styles.contactInfoMore}>emergency</Text>
                   </View>
-                  <GreenHomeSMSButton url={this.props.employee.contact.homePhone}/>
+                  <GreenHomeCallButton url={this.props.employee.contact.homePhone}/>
                 </View>
                 <View style={styles.contactDetailsRow}>
                   <View style={styles.contactInfoContainer}>
