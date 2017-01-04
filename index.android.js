@@ -1,17 +1,12 @@
 /**
  *  This is main registry Component for Android app
  */
-
-import React, { Component } from 'react';
+import React from 'react'
 import { AppRegistry } from 'react-native';
-import Root from './app';
+import App from './app';
 
-export default class LeapfroggerReact extends Component {
-  render() {
-    return (
-      <Root />
-    );
-  }
-}
+const LeapfroggerReact = () => (
+	<App />
+)
 
 AppRegistry.registerComponent('LeapfroggerReact', () => LeapfroggerReact);
