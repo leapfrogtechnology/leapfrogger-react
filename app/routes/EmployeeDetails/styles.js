@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -20,
     right: 20,
+    elevation: 10
   },
   favIcon: {
     height: 25,
