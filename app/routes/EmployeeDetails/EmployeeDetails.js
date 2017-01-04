@@ -16,14 +16,6 @@ export default class EmployeeDetails extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.props._goBack)
-  }
-
-  componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.props._goBack)
-  }
-
   render() {
     return (
       <View style={styles.container}>
