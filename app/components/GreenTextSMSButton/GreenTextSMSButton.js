@@ -12,14 +12,14 @@ export default class GreenTextSMSButton extends LinkingButton {
   render() {
     if (this.props.url === null) {
       return (
-        <Image style={[styles.phoneImage, styles.contactRowImage]}
+        <Image style={[styles.phoneImage, this.props.color && {tintColor: this.props.color}]}
                source={require('../../images/ic_message_white_24dp.png')}/>
       )
     } else {
       return (
         <TouchableOpacity
           onPress={this._handleClick.bind(this)}>
-          <Image style={[styles.phoneImage, styles.contactRowImage]}
+          <Image style={[styles.phoneImage, this.props.color && {tintColor: this.props.color}]}
                  source={require('../../images/ic_message_white_24dp.png')}/>
         </TouchableOpacity>
       )
@@ -32,9 +32,5 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     tintColor: 'green'
-  },
-  contactRowImage: {
-    height: 20,
-    width: 20
   }
 });

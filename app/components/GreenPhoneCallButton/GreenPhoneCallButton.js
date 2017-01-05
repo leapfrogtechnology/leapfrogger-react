@@ -6,6 +6,7 @@ import LinkingButton from '../LinkingButton/LinkingButton';
 export default class GreenPhoneCallButton extends LinkingButton {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {linkType: 'tel:'};
   }
 
@@ -13,7 +14,7 @@ export default class GreenPhoneCallButton extends LinkingButton {
     if (this.props.url === null) {
       return (
         <Image
-          style={[styles.phoneImage, styles.contactRowImage]}
+          style={[styles.phoneImage, this.props.color && {tintColor: this.props.color}]}
           source={require('../../images/ic_phone_white_24dp.png')}/>
       )
     } else {
@@ -21,7 +22,7 @@ export default class GreenPhoneCallButton extends LinkingButton {
         <TouchableOpacity
           onPress={this._handleClick.bind(this)}>
           <Image
-            style={[styles.phoneImage, styles.contactRowImage]}
+            style={[styles.phoneImage, this.props.color && {tintColor: this.props.color}]}
             source={require('../../images/ic_phone_white_24dp.png')}/>
         </TouchableOpacity>
       )
@@ -34,9 +35,5 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     tintColor: 'green'
-  },
-  contactRowImage: {
-    height: 20,
-    width: 20
   }
 });

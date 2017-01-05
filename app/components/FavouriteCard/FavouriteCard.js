@@ -6,7 +6,11 @@ import {
 } from 'react-native'
 import styles from './styles';
 import { getEmployeeFullName } from '../../utils/EmployeeUtils';
+
 import FavIcon from '../../components/FavIcon'
+import GreenPhoneCallButton from '../../components/GreenPhoneCallButton'
+import GreenHomeCallButton from '../../components/GreenHomeCallButton'
+import GreenTextSMSButton from '../../components/GreenTextSMSButton'
 
 export default ({employee}) => {
     return (
@@ -20,14 +24,11 @@ export default ({employee}) => {
                 <Text style={styles.employeeDesignation}>{employee.designation}</Text>
             </View>
             <View style={styles.thumbnailTabContainer}>
-                <Image style={styles.phoneImage}
-                 source={require('../../images/ic_phone_white_24dp.png')} />
+                <GreenPhoneCallButton url={employee.contact.mobilePhone} color='white'/>
 
-                <Image style={styles.phoneImage}
-                 source={require('../../images/ic_home_black_24dp.png')} />
+                <GreenHomeCallButton url={employee.contact.homePhone} color='white'/>
 
-                <Image style={styles.phoneImage}
-                 source={require('../../images/ic_message_white_24dp.png')}/>
+                <GreenTextSMSButton url={employee.contact.mobilePhone} color='white'/>
             </View>
         </View>
     );
