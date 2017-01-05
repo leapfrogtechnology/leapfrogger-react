@@ -5,9 +5,11 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
 
+import AddToContactButton from '../../components/AddToContactButton'
 import GreenPhoneCallButton from '../../components/GreenPhoneCallButton'
 import GreenHomeCallButton from '../../components/GreenHomeCallButton'
 import GreenTextSMSButton from '../../components/GreenTextSMSButton'
@@ -39,9 +41,7 @@ export default class EmployeeDetails extends Component {
             <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.designation}</Text>
           </Image>
-          <View style={styles.favIconContainer}>
-            <Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>
-          </View>
+          <AddToContactButton employee={this.props.employee}/>
         </View>
         <View style={styles.detailsContainer}>
           <ScrollView>

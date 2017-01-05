@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import LinkingButton from '../LinkingButton/LinkingButton';
 
-
 export default class GreenHomeCallButton extends LinkingButton {
   constructor(props) {
     super(props);

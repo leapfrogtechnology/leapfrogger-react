@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   divider: {
     backgroundColor: 'green',
     height: 1,
-    marginTop: 5
+    marginTop: 10
   },
   headerContainer: {
     flex: 3
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
   eachDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 10
+    paddingLeft: 10,
+    paddingRight: 10
   },
   phoneImageContainer: {
     flex: 2,
@@ -62,10 +63,7 @@ const styles = StyleSheet.create({
     flex: 8,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 5,
-    paddingRight: 5
+    padding: 5
   },
   contactDetailsRow: {
     flexDirection: 'row',
@@ -84,23 +82,6 @@ const styles = StyleSheet.create({
   contactRowImage: {
     height: 20,
     width: 20
-  },
-  favIconContainer: {
-    backgroundColor: '#FF5722',
-    height: 50,
-    width: 50,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    bottom: -20,
-    right: 20,
-    elevation: 10
-  },
-  favIcon: {
-    height: 25,
-    width: 25,
-    tintColor: 'white'
   }
 });
 
