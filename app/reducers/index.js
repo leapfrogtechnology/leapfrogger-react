@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   homeNavReducer,
   employeeReducer,
   mainNavReducer,
-  favouriteReducer
+  favouriteReducer,
   userReducer
 })
 
