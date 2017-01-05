@@ -5,12 +5,22 @@ import Contacts from 'react-native-contacts';
 export default class AddToContactButton extends Component {
   constructor(props) {
     super(props);
+    this._askForAddToContactPermission = this._askForAddToContactPermission.bind(this);
+    this._addEmployeeToContact = this._addEmployeeToContact.bind(this);
   }
 
   _handleClick() {
+    this._askForAddToContactPermission();
+  }
+
+  _askForAddToContactPermission() {
+    this._addEmployeeToContact();
+  }
+
+  _addEmployeeToContact() {
     let employee = this.props.employee;
     let newPerson = {
-      company: "leapfrog",
+      company: "Leapfrog",
       emailAddresses: [{
         label: "work",
         email: employee.username,
@@ -29,8 +39,10 @@ export default class AddToContactButton extends Component {
 
     Contacts.addContact(newPerson, (err) => {
       if (err) {
+        alert('Contact could not be created');
         console.log('contact could not be created', err)
       } else {
+        alert('Contact saved.');
         console.log(newPerson)
       }
     });
