@@ -9,6 +9,7 @@ import {
   ActivityIndicator } from 'react-native';
 
 import { getEmployeeFullName } from '../../utils/EmployeeUtils';
+import FavIcon from '../../components/FavIcon'
 import styles from './styles.js';
 
 export default class EmployeeList extends Component {
@@ -63,7 +64,7 @@ export default class EmployeeList extends Component {
             <Text style={styles.title}>{getEmployeeFullName(employee)}</Text>
           </View>
           <View style={styles.favIconContainer}>
-            <Image style={styles.favIcon} source={require('../../images/ic_star_rate_black_18dp.png')}/>
+            <FavIcon isFavourite={employee.isFavourite} employeeId={employee.empId}/>
           </View>
         </View>
       </TouchableHighlight>

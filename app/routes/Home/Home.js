@@ -29,6 +29,13 @@ export default class Home extends Component {
 
   componentDidMount() {
     RestClient.get(API.listEmployees, ENV.apiKey).then((data) => {
+        data.forEach((employee) => {
+          let isFavourite = false;
+          if(this.props.favourites.includes(parseInt(employee.empId))){
+            isFavourite = true
+          }
+          employee['isFavourite'] = isFavourite;
+        })
         this.props.loadedEmployees({employees: data, isLoading: false});
       },
       (error) => {

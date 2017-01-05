@@ -1,3 +1,3 @@
-import Favourites from './Favourites';
+import FavouritesContainer from './FavouritesContainer';
 
-export default Favourites;
+export default FavouritesContainer;
