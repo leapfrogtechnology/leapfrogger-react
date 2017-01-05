@@ -10,6 +10,8 @@ import {
 
 import Favourites from '../Favourites';
 import Home from '../Home';
+import MyProfile from '../MyProfile';
+
 
 const {
   CardStack: NavigationCardStack,
@@ -50,6 +52,9 @@ export default class ApplicationShell extends Component {
 		      <TouchableHighlight  onPress={() => this._navigatePage({key: 'favourites'})}>
 		      	<Text>Favourite</Text>
 		      </TouchableHighlight>
+		       <TouchableHighlight  onPress={() => this._navigatePage({key: 'profile'})}>
+		      	<Text>My Profile</Text>
+		      </TouchableHighlight>
 		    </View>
 		);
 	}
@@ -62,6 +67,9 @@ export default class ApplicationShell extends Component {
 			
 			case 'favourites':
 				return <Favourites />
+
+			case 'profile':
+				return <MyProfile />
 			
 			default:
 				return null;
