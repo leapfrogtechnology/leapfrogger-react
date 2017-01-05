@@ -1,0 +1,2 @@
+import GoogleSigninComponentContainer from './GoogleSigninComponentContainer'
+export default  GoogleSigninComponentContainer;

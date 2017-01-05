@@ -8,7 +8,10 @@ import {
   ScrollView
 } from 'react-native';
 
-import { getEmployeeFullName } from '../../utils/EmployeeUtils';
+import GreenPhoneCallButton from '../../components/GreenPhoneCallButton'
+import GreenHomeCallButton from '../../components/GreenHomeCallButton'
+import GreenTextSMSButton from '../../components/GreenTextSMSButton'
+import {getEmployeeFullName} from '../../utils/EmployeeUtils';
 import styles from './styles.js';
 
 export default class EmployeeDetails extends Component {
@@ -44,8 +47,7 @@ export default class EmployeeDetails extends Component {
                     <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
                     <Text style={styles.contactInfoMore}>mobile</Text>
                   </View>
-                  <Image style={[styles.phoneImage, styles.contactRowImage]}
-                         source={require('../../images/ic_phone_white_24dp.png')}/>
+                  <GreenPhoneCallButton url={this.props.employee.contact.mobilePhone}/>
                 </View>
                 <View style={styles.contactDetailsRow}>
                   <View style={styles.contactInfoContainer}>
@@ -53,16 +55,14 @@ export default class EmployeeDetails extends Component {
                       style={styles.contactInfo}>{this.props.employee.contact.homePhone ? this.props.employee.contact.homePhone : '-'}</Text>
                     <Text style={styles.contactInfoMore}>emergency</Text>
                   </View>
-                  <Image style={[styles.phoneImage, styles.contactRowImage]}
-                         source={require('../../images/ic_home_black_24dp.png')}/>
+                  <GreenHomeCallButton url={this.props.employee.contact.homePhone}/>
                 </View>
                 <View style={styles.contactDetailsRow}>
                   <View style={styles.contactInfoContainer}>
                     <Text style={styles.contactInfo}>{this.props.employee.contact.mobilePhone}</Text>
                     <Text style={styles.contactInfoMore}>message</Text>
                   </View>
-                  <Image style={[styles.phoneImage, styles.contactRowImage]}
-                         source={require('../../images/ic_message_white_24dp.png')}/>
+                  <GreenTextSMSButton url={this.props.employee.contact.mobilePhone}/>
                 </View>
                 <View style={styles.divider}/>
               </View>
