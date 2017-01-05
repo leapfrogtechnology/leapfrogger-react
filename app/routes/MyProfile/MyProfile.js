@@ -18,12 +18,7 @@ export default class MyProfile extends Component {
     super(props);
   }
 
-  componentDidMount(){
-    console.log('>>>>>>>>: ', this.props)
-  }
-
   render() {
-    console.log(this.props.employee)
     if(!this.props.employee){
       return (
         <ActivityIndicator
@@ -32,6 +27,7 @@ export default class MyProfile extends Component {
         />
       );
     }
+
     return (
      <View style={styles.container}>
         <View style={styles.headerContainer}>

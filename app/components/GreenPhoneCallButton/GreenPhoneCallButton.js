@@ -6,7 +6,6 @@ import LinkingButton from '../LinkingButton/LinkingButton';
 export default class GreenPhoneCallButton extends LinkingButton {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {linkType: 'tel:'};
   }
 
