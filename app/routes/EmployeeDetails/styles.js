@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerImage: {
-    height: 80,
-    width: 80,
-    borderRadius: 80
+    height: 80.0,
+    width: 80.0,
+    borderRadius: 40.0
   },
   headerName: {
     fontSize: 16,

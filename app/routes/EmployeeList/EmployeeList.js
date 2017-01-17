@@ -57,7 +57,10 @@ export default class EmployeeList extends Component {
         onPress={() => this.props._handleNavigate(this._makePayload(employee))}>
         <View style={styles.employeeRow}>
           <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{uri: employee.avatarUrl}}/>
+            <Image style={styles.image} source={
+              employee.avatarUrl? {uri: employee.avatarUrl} :
+              require('../../images/ic_star_rate_black_18dp.png')
+            }/>
           </View>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{getEmployeeFullName(employee)}</Text>
