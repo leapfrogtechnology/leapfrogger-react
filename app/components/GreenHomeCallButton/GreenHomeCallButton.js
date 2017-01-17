@@ -11,14 +11,14 @@ export default class GreenHomeCallButton extends LinkingButton {
   render() {
     if (this.props.url === null) {
       return (
-        <Image style={[styles.phoneImage, styles.contactRowImage]}
+        <Image style={styles.contactRowImage}
                source={require('../../images/ic_home_black_24dp.png')}/>
       )
     } else {
       return (
         <TouchableOpacity
           onPress={this._handleClick.bind(this)}>
-          <Image style={[styles.phoneImage, styles.contactRowImage]}
+          <Image style={styles.contactRowImage}
                  source={require('../../images/ic_home_black_24dp.png')}/>
         </TouchableOpacity>
       )
@@ -27,13 +27,9 @@ export default class GreenHomeCallButton extends LinkingButton {
 }
 
 const styles = StyleSheet.create({
-  phoneImage: {
-    height: 25,
-    width: 25,
-    tintColor: 'green'
-  },
   contactRowImage: {
-    height: 20,
-    width: 20
+    tintColor: 'green',
+    height: 28,
+    width: 28
   }
 });

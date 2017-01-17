@@ -10,7 +10,19 @@ export default class AddToContactButton extends Component {
   }
 
   _handleClick() {
-    this._askForAddToContactPermission();
+    Contacts.checkPermission( (err, permission) => {
+      if(permission === 'undefined'){
+        Contacts.requestPermission( (err, permission) => {
+          alert ('ask') 
+        })
+      }
+      if(permission === 'authorized'){
+        this._askForAddToContactPermission();
+      }
+      if(permission === 'denied'){
+        alert('Cant add to contacts. Please give permission.')
+      }
+    })
   }
 
   _askForAddToContactPermission() {

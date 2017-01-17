@@ -30,7 +30,7 @@ export default class EmployeeList extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-        <TextInput placeholder='Search Employee' 
+        <TextInput placeholder='Search Employee'
           style={styles.searchBar}
           value={this.state.searchText}
           onChange={this._searchEmployee.bind(this)}

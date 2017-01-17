@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
   divider: {
     backgroundColor: 'green',
     height: 1,
-    marginTop: 10
+    marginTop: 5,
+    marginBottom: 5
   },
   headerContainer: {
     flex: 3
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
   phoneImageContainer: {
     flex: 2,
@@ -63,21 +64,25 @@ const styles = StyleSheet.create({
     flex: 8,
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: 5
+    paddingLeft: 5,
+    paddingRight: 5
   },
   contactDetailsRow: {
     flexDirection: 'row',
-    padding: 2
+    margin: 4
   },
   contactInfoContainer: {
     flexDirection: 'column',
     flex: 9
   },
   contactInfo: {
-    fontSize: 12
+    fontSize: 14,
+    lineHeight: 16,
   },
   contactInfoMore: {
-    fontSize: 11
+    fontSize: 10,
+    lineHeight: 12,
+    color: '#9B9D9C'
   },
   contactRowImage: {
     height: 20,
