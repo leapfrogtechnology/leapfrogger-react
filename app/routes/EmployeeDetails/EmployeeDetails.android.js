@@ -35,7 +35,9 @@ export default class EmployeeDetails extends Component {
         <View style={styles.headerContainer}>
           <Image style={styles.headerBackgroundImage} source={require('../../images/hands-coffee-cup-apple-15.jpg')}>
             <View style={styles.headerImageContainer}>
-              <Image style={styles.headerImage} source={{uri: this.props.employee.avatarUrl}}/>
+              <Image style={styles.headerImage} source={
+                this.props.employee.avatarUrl? {uri: this.props.employee.avatarUrl} :
+                require('../../images/ic_star_rate_black_18dp.png')}/>
             </View>
             <Text style={styles.headerName}>{getEmployeeFullName(this.props.employee)}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
