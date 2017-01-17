@@ -37,12 +37,14 @@ const styles = StyleSheet.create({
   headerName: {
     fontSize: 16,
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'transparent'
   },
   headerNameSub: {
     fontSize: 14,
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'transparent'
   },
   eachDetailsContainer: {
     flexDirection: 'row',
