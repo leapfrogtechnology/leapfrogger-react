@@ -19,7 +19,7 @@ export default class GreenHomeCallButton extends LinkingButton {
         <TouchableOpacity
           onPress={this._handleClick.bind(this)}>
           <Image style={[styles.contactRowImage, this.props.color && {tintColor: this.props.color}]}
-=                 source={require('../../images/ic_home_black_24dp.png')}/>
+                 source={require('../../images/ic_home_black_24dp.png')}/>
         </TouchableOpacity>
       )
     }
