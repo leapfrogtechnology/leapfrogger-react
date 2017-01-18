@@ -29,6 +29,7 @@
 		9713702B263E4068A00AFC80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FA42F7A1FE64C519A113D03 /* SystemConfiguration.framework */; };
 		AEB20EB588F74A19B07F5D63 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AEDD305B0D4C5A90B7DA16 /* SafariServices.framework */; };
 		CD1C82F41E1A74BC002FF3F7 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9D5FCA1E1A2D6300B47D15 /* libRNGoogleSignin.a */; };
+		CD7FF5771E2E246700DC736D /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7FF5651E2E242200DC736D /* libRCTContacts.a */; };
 		CD9D5FE41E1A308000B47D15 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD9D5FDD1E1A308000B47D15 /* GoogleSignIn.bundle */; };
 		CD9D5FE81E1A320200B47D15 /* GoogleSignIn.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9D5FDD1E1A308000B47D15 /* GoogleSignIn.bundle */; };
 		CD9D5FE91E1A320200B47D15 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD9D5FDE1E1A308000B47D15 /* GoogleSignIn.framework */; };
@@ -131,6 +132,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		CD7FF5641E2E242200DC736D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD7FF55D1E2E242200DC736D /* RCTContacts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
+			remoteInfo = RCTContacts;
+		};
 		CD9D5FAD1E1A2D6300B47D15 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -216,6 +224,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8B3E699F473A4F0790D652B0 /* AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CD7FF55D1E2E242200DC736D /* RCTContacts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTContacts.xcodeproj; path = "../node_modules/react-native-contacts/ios/RCTContacts.xcodeproj"; sourceTree = "<group>"; };
 		CD9D5FDA1E1A308000B47D15 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
 		CD9D5FDB1E1A308000B47D15 /* GoogleAuthUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAuthUtilities.framework; sourceTree = "<group>"; };
 		CD9D5FDC1E1A308000B47D15 /* GoogleNetworkingUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleNetworkingUtilities.framework; sourceTree = "<group>"; };
@@ -239,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7FF5771E2E246700DC736D /* libRCTContacts.a in Frameworks */,
 				CD1C82F41E1A74BC002FF3F7 /* libRNGoogleSignin.a in Frameworks */,
 				CD9D5FE81E1A320200B47D15 /* GoogleSignIn.bundle in Frameworks */,
 				CD9D5FE91E1A320200B47D15 /* GoogleSignIn.framework in Frameworks */,
@@ -389,6 +399,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD7FF55D1E2E242200DC736D /* RCTContacts.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -432,6 +443,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* LeapfroggerReact.app */,
 				00E356EE1AD99517003FC87E /* LeapfroggerReactTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD7FF55E1E2E242200DC736D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD7FF5651E2E242200DC736D /* libRCTContacts.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -546,6 +565,10 @@
 				{
 					ProductGroup = 5E91572E1DD0AC6500FF2AA8 /* Products */;
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
+				},
+				{
+					ProductGroup = CD7FF55E1E2E242200DC736D /* Products */;
+					ProjectRef = CD7FF55D1E2E242200DC736D /* RCTContacts.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -679,6 +702,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CD7FF5651E2E242200DC736D /* libRCTContacts.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTContacts.a;
+			remoteRef = CD7FF5641E2E242200DC736D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CD9D5FAE1E1A2D6300B47D15 /* libRCTImage-tvOS.a */ = {
@@ -875,6 +905,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lftechnology.leapfroggers;
 				PRODUCT_NAME = LeapfroggerReact;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -899,6 +930,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lftechnology.leapfroggers;
 				PRODUCT_NAME = LeapfroggerReact;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     flex: 2
   },
   image: {
-    height: 36,
-    width: 36,
-    borderRadius: 20
+    height: 36.0,
+    width: 36.0,
+    borderRadius: 18.0
   },
   titleContainer: {
     flex: 9

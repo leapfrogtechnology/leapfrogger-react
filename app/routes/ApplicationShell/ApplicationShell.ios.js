@@ -1,28 +1,90 @@
 import React, { Component } from 'react';
 import {
+	BackAndroid,
 	View,
 	Text,
 	NavigationExperimental,
 	TouchableHighlight
 } from 'react-native';
-// import Home from '../Home';
+
 import Favourites from '../Favourites';
 import Home from '../Home';
-import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
-import {GoogleSigninComponent} from '../Login'
 
 const {
-  CardStack: NavigationCardStack,
-  StateUtils: NavigationStateUtils,
+	CardStack: NavigationCardStack,
+	StateUtils: NavigationStateUtils,
 } = NavigationExperimental;
 
-class ApplicationShell extends Component {
+export default class ApplicationShell extends Component {
 
 	constructor(props) {
-        super(props);
-    }
+		super(props);
+		this._renderNavigationView = this._renderNavigationView.bind(this);
+		this._renderScene = this._renderScene.bind(this);
+		this._handleBackAction = this._handleBackAction.bind(this);
+	}
+
+	componentDidMount() {
+		BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
+	}
+
+	componentWillUnmount() {
+		BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
+	}
 
 	render(){
-		return <GoogleSigninComponent/>
+		return(
+
+	<NavigationCardStack
+		direction='vertical'
+		navigationState={this.props.mainNavigation}
+		renderScene={this._renderScene}
+	/>
+	);
 	}
+
+	_renderNavigationView() {
+		return (
+			<View style={{flex: 1, backgroundColor: '#fff'}}>
+	<TouchableHighlight  onPress={() => this._navigatePage({key: 'home'})}>
+	<Text>Home</Text>
+		</TouchableHighlight>
+		<TouchableHighlight  onPress={() => this._navigatePage({key: 'favourites'})}>
+	<Text>Favourite</Text>
+		</TouchableHighlight>
+		</View>
+	);
+	}
+
+	_renderScene(props) {
+		const { route } = props.scene;
+
+		switch(route.key){
+
+			case 'home':
+			console.log("****ROUTE****", route.key)
+				return <Home />
+
+			case 'favourites':
+				return <Favourites />
+
+			default:
+				return null;
+		}
+	}
+
+	_navigatePage(route){
+		this._closeDrawer();
+		this.props.navigatePage(route);
+	}
+
+	_closeDrawer(){
+		this.refs['APPLICATION_DRAWER'].closeDrawer();
+	}
+
+	_handleBackAction(){
+		this._navigatePage({key: 'home'});
+		return true;
+	}
+
 }
