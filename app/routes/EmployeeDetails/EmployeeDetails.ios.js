@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {
-  BackAndroid,
   Image,
   Text,
   View,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  TouchableHighlight
 } from 'react-native';
 
+import AddToContactButton from '../../components/AddToContactButton'
 import GreenPhoneCallButton from '../../components/GreenPhoneCallButton'
 import GreenHomeCallButton from '../../components/GreenHomeCallButton'
 import GreenTextSMSButton from '../../components/GreenTextSMSButton'
@@ -20,11 +21,9 @@ export default class EmployeeDetails extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', this.props._goBack)
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.props._goBack)
   }
 
   render() {
@@ -33,15 +32,15 @@ export default class EmployeeDetails extends Component {
         <View style={styles.headerContainer}>
           <Image style={styles.headerBackgroundImage} source={require('../../images/hands-coffee-cup-apple-15.jpg')}>
             <View style={styles.headerImageContainer}>
-              <Image style={styles.headerImage} source={{uri: this.props.employee.avatarUrl}}/>
+              <Image style={styles.headerImage} source={
+                this.props.employee.avatarUrl ? {uri: this.props.employee.avatarUrl} :
+                  require('../../images/ic_star_rate_black_18dp.png')}/>
             </View>
             <Text style={styles.headerName}>{getEmployeeFullName(this.props.employee)}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.department.name}</Text>
             <Text style={styles.headerNameSub}>{this.props.employee.designation}</Text>
           </Image>
-          {/*<View>*/}
-          {/*<Image style={styles.favIcon} source={require('../../images/ic_add_black_24dp.png')}/>*/}
-          {/*</View>*/}
+          <AddToContactButton employee={this.props.employee}/>
         </View>
         <View style={styles.detailsContainer}>
           <ScrollView>

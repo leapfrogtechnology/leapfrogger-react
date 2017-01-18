@@ -8,13 +8,15 @@ const styles = StyleSheet.create({
   divider: {
     backgroundColor: 'green',
     height: 1,
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 5
   },
   headerContainer: {
     flex: 3
   },
   detailsContainer: {
-    flex: 7
+    flex: 7,
+    paddingTop: 20
   },
   headerBackgroundImage: {
     flex: 1,
@@ -28,24 +30,27 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   headerImage: {
-    height: 80,
-    width: 80,
-    borderRadius: 80
+    height: 80.0,
+    width: 80.0,
+    borderRadius: 40.0
   },
   headerName: {
     fontSize: 16,
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'transparent'
   },
   headerNameSub: {
     fontSize: 14,
     color: 'white',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'transparent'
   },
   eachDetailsContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 10
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   phoneImageContainer: {
     flex: 2,
@@ -61,24 +66,25 @@ const styles = StyleSheet.create({
     flex: 8,
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
     paddingLeft: 5,
     paddingRight: 5
   },
   contactDetailsRow: {
     flexDirection: 'row',
-    padding: 2
+    margin: 4
   },
   contactInfoContainer: {
     flexDirection: 'column',
     flex: 9
   },
   contactInfo: {
-    fontSize: 12
+    fontSize: 14,
+    lineHeight: 16,
   },
   contactInfoMore: {
-    fontSize: 11
+    fontSize: 10,
+    lineHeight: 12,
+    color: '#9B9D9C'
   },
   contactRowImage: {
     height: 20,
