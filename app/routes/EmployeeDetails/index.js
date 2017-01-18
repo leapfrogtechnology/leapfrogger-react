@@ -1,3 +1,3 @@
-import EmployeeDetails from './EmployeeDetails.android';
+import EmployeeDetails from './EmployeeDetails';
 
 export default EmployeeDetails;
