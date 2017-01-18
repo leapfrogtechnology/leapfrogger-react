@@ -5,31 +5,39 @@ import Contacts from 'react-native-contacts';
 export default class AddToContactButton extends Component {
   constructor(props) {
     super(props);
-    this._askForAddToContactPermission = this._askForAddToContactPermission.bind(this);
     this._addEmployeeToContact = this._addEmployeeToContact.bind(this);
   }
 
   _handleClick() {
-    Contacts.checkPermission( (err, permission) => {
-      if(permission === 'undefined'){
-        Contacts.requestPermission( (err, permission) => {
-          alert ('ask') 
+    Contacts.checkPermission((err, permission) => {
+      if (permission === 'undefined') {
+        alert('You are required to give permission to access the contact')
+        Contacts.requestPermission((err, permission) => {
+          alert(err)
         })
       }
-      if(permission === 'authorized'){
-        this._askForAddToContactPermission();
+      else if (permission === 'authorized') {
+        this._addEmployeeToContact();
       }
-      if(permission === 'denied'){
+      else if (permission === 'denied') {
         alert('Cant add to contacts. Please give permission.')
       }
     })
   }
 
-  _askForAddToContactPermission() {
-    this._addEmployeeToContact();
-  }
-
   _addEmployeeToContact() {
+    alert('Authorized')
+    Contacts.getAll((err, contacts) => {
+      console.log(contacts[0])
+      // check for old contact
+      // let someRecord = contacts[0]
+      // someRecord.emailAddresses.push({
+      //   label: "junk",
+      //   email: "mrniet+junkmail@test.com",
+      // })
+      // Contacts.updateContact(someRecord, (err) => { /*...*/ })
+    })
+
     let employee = this.props.employee;
     let newPerson = {
       company: "Leapfrog",
@@ -51,10 +59,10 @@ export default class AddToContactButton extends Component {
 
     Contacts.addContact(newPerson, (err) => {
       if (err) {
-        alert('Contact could not be created');
+        alert('Contact could not be created', err);
         console.log('contact could not be created', err)
       } else {
-        alert('Contact saved.');
+        alert('Contact saved, Yay');
         console.log(newPerson)
       }
     });
