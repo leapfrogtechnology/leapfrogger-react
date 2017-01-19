@@ -10,6 +10,8 @@ import {
 
 import Favourites from '../Favourites';
 import Home from '../Home';
+import MyProfile from '../MyProfile';
+
 
 const {
   CardStack: NavigationCardStack,
@@ -22,16 +24,7 @@ export default class ApplicationShell extends Component {
         super(props);
         this._renderNavigationView = this._renderNavigationView.bind(this);
         this._renderScene = this._renderScene.bind(this);
-        this._handleBackAction = this._handleBackAction.bind(this);
     }
-
-	componentDidMount() {
-		BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction)
-	}
-
-	componentWillUnmount() {
-		BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction)
-	}
 
 	render(){
 		return(
@@ -40,7 +33,6 @@ export default class ApplicationShell extends Component {
 		      drawerWidth={300}
 		      drawerPosition={DrawerLayoutAndroid.positions.Left}
 		      renderNavigationView={() => this._renderNavigationView()}>
-
 		      	<NavigationCardStack
 	                direction='vertical'
 	                navigationState={this.props.mainNavigation}
@@ -60,6 +52,9 @@ export default class ApplicationShell extends Component {
 		      <TouchableHighlight  onPress={() => this._navigatePage({key: 'favourites'})}>
 		      	<Text>Favourite</Text>
 		      </TouchableHighlight>
+		       <TouchableHighlight  onPress={() => this._navigatePage({key: 'profile'})}>
+		      	<Text>My Profile</Text>
+		      </TouchableHighlight>
 		    </View>
 		);
 	}
@@ -72,6 +67,9 @@ export default class ApplicationShell extends Component {
 			
 			case 'favourites':
 				return <Favourites />
+
+			case 'profile':
+				return <MyProfile />
 			
 			default:
 				return null;
@@ -86,10 +84,4 @@ export default class ApplicationShell extends Component {
 	_closeDrawer(){
 		this.refs['APPLICATION_DRAWER'].closeDrawer();
 	}
-
-	_handleBackAction(){
-		this._navigatePage({key: 'home'});
-		return true;
-	}
-
 }

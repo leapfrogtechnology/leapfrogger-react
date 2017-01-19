@@ -6,7 +6,8 @@ import { loadedEmployees } from '../../actions/employeeActions';
 function mapStateToProps (state) {
   return {
     homeNavigation: state.homeNavReducer,
-    employees: state.employeeReducer
+    employees: state.employeeReducer,
+    favourites: state.favouriteReducer
   }
 }
 
