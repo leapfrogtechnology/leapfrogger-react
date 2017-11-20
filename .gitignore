@@ -1,0 +1,64 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+ios/build/
+ios/Pods/
+ios/sansaire-6b644-firebase-crashreporting-l6ic1-104a18c1c4.json
+ios/Sansaire/GoogleService-Info.plist
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+.vscode
+
+# Android/IntelliJ
+#
+build/
+android/app/src/main/assets/index.android.bundle
+.idea
+.gradle
+local.properties
+*.iml
+android/.project
+android/app/.project
+android/app/bin/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+ios/Podfile.lock
+yarn.lock
