@@ -1,11 +1,3 @@
-import React, { Component } from 'react';
-import { 
-  View, Text
- } from 'react-native';
-import style from './styles';
+import LoginScreen from './login';
 
- class LoginScreen extends Component {
-
- }
-
- export default LoginScreen
+export default LoginScreen;
