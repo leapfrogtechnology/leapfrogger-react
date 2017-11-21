@@ -77,14 +77,14 @@ import splash from '../../../assets/images/splash-screen.png';
             />
           </View>
         </View>
-      <View style={style.buttonContainer}>
-        <Button 
-          style={style.googleLoginButton}
-          title={'Signin with Google'}
-          onPress={console.log('asd')}
-        />
+        <View style={style.buttonContainer}>
+          <Button 
+            style={style.googleLoginButton}
+            title={'Signin with Google'}
+            onPress={console.log('asd')}
+          />
+        </View>
       </View>
-    </View>
     );
   }
 

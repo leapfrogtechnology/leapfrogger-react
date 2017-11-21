@@ -40,21 +40,23 @@ const style = StyleSheet.create({
 
   mainContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonContainer: {
     flex: 1,
     padding: 16,
     borderRadius: 5,
-    alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
   },
   button: {
-    alignSelf: 'stretch',
+    alignSelf: 'center',
     borderWidth: 1,    
     borderRadius: 8,
     borderColor: colors.LF_GRAY,
-    height: 50,    
+    height: 44,
+    width: 240,    
   },
   textLabel: {
     fontSize: 16,

@@ -65,8 +65,6 @@ const style = StyleSheet.create({
 
   },
   buttonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
     flex: 0.23,
   },
   googleLoginButton: {
