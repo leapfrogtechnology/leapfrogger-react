@@ -7,6 +7,7 @@ import {
  } from 'react-native';
 
 import { BlurView } from 'react-native-blur';
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import Button from './../../components/Button';
 
@@ -20,12 +21,41 @@ import splash from '../../../assets/images/splash-screen.png';
     super();
   }
 
-  componentWillMount() {
-
+  componentDidMount() {
+    this._setupGoogleSignin();
   }
 
   _login = (event) => {
     console.log('x0x0x0x0', this.email);
+  }
+
+  async _setupGoogleSignin() {
+    try {
+      await GoogleSignin.hasPlayServices({ autoResolve: true });
+      await GoogleSignin.configure({
+        iosClientId: '663889381642-iqslrisaiqqrr5dhbmmol8ahtos97v2d.apps.googleusercontent.com',
+        offlineAccess: false
+      });
+
+      const user = await GoogleSignin.currentUserAsync();
+      console.log(user);
+      this.setState({user});
+    }
+    catch(err) {
+      console.log("Play services error", err.code, err.message);
+    }
+  }
+
+  _googleSignIn() {
+    GoogleSignin.signIn()
+    .then((user) => {
+      console.log(user);
+      this.setState({user: user});
+    })
+    .catch((err) => {
+      console.log('WRONG SIGNIN', err);
+    })
+    .done();
   }
 
   render() {
@@ -73,16 +103,16 @@ import splash from '../../../assets/images/splash-screen.png';
             <Button 
               style={style.loginButton}
               title={'Login'}
-              onPress={console.log('asd')}
+              onPress={console.log('asssd')}
             />
           </View>
         </View>
         <View style={style.buttonContainer}>
-          <Button 
-            style={style.googleLoginButton}
-            title={'Signin with Google'}
-            onPress={console.log('asd')}
-          />
+          <GoogleSigninButton
+            style={{width: 212, height: 48}}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={this._googleSignIn}/>
         </View>
       </View>
     );
