@@ -7,39 +7,43 @@ import {
  } from 'react-native';
 
 import { BlurView } from 'react-native-blur';
+import { setInterval } from 'core-js/library/web/timers';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
-import Button from './../../components/Button';
-
 import style from './styles';
+import Button from './../../components/Button';
+import { IOS_GOOGLE_CLIENT_ID } from './../../constants/keysConstant';
+
 import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
 
  class LoginScreen extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   componentDidMount() {
     this._setupGoogleSignin();
   }
 
-  _login = (event) => {
-    console.log('x0x0x0x0', this.email);
+  _login = () => {
+    console.log('mock login');
   }
 
   async _setupGoogleSignin() {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
-        iosClientId: '663889381642-iqslrisaiqqrr5dhbmmol8ahtos97v2d.apps.googleusercontent.com',
+        iosClientId: IOS_GOOGLE_CLIENT_ID,
         offlineAccess: false
       });
 
       const user = await GoogleSignin.currentUserAsync();
       console.log(user);
       this.setState({user});
+      this.props.onLogin(user);      
     }
     catch(err) {
       console.log("Play services error", err.code, err.message);
@@ -49,8 +53,8 @@ import splash from '../../../assets/images/splash-screen.png';
   _googleSignIn() {
     GoogleSignin.signIn()
     .then((user) => {
-      console.log(user);
       this.setState({user: user});
+      this.props.onLogin(user);
     })
     .catch((err) => {
       console.log('WRONG SIGNIN', err);
@@ -103,7 +107,7 @@ import splash from '../../../assets/images/splash-screen.png';
             <Button 
               style={style.loginButton}
               title={'Login'}
-              onPress={console.log('asssd')}
+              onPress={this._login.bind(this)}
             />
           </View>
         </View>

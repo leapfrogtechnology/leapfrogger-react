@@ -12,10 +12,10 @@ import {
 class Button extends Component {
 
   render() {
-    const { loginButton, onPressAction } = this.props;
+    const { loginButton, onPress } = this.props;
     return (
       <View style={style.mainContainer}>
-        <TouchableOpacity style={[style.button, loginButton]} onPress={onPressAction}>  
+        <TouchableOpacity style={[style.button, loginButton]} onPress={this.props.onPress}>  
           <View style={ [style.buttonContainer] }>
             <Text style={style.textLabel}>{ this.props.title }</Text>    
           </View>

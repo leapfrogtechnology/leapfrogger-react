@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -12,31 +6,42 @@ import {
   View
 } from 'react-native';
 
+import { Provider } from 'react-redux';
+import { Navigation } from 'react-native-navigation';
+import configureStore from './app/store/configStore.js';
+
 import colors from './app/config/colors';
-import LoginScreen from './app/screens/login'
+import LoginScreen from './app/screens/login';
+import registerScreens from './screenRegistry';
+import screens from './app/constants/screens';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const store = configureStore();
 
-export default class App extends Component<{}> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <LoginScreen />
-      </View>
-    );
+registerScreens(store, Provider);
+
+export default class App extends Component {
+  
+  startApp = () => {
+    const options = {
+      screen: {
+        screen: screens.LoginScreen,
+        navigatorStyle: {
+          navBarHidden: true,
+          navBarNoBorder: true
+        }
+      },
+      appStyle: {
+        orientation: 'portrait'
+      }
+    };
+
+    Navigation.startSingleScreenApp(options);
   }
-}
+  
+  constructor(props) {
+    super(props);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#c4dfd0',  
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+    this.startApp();
+  }
+
+}

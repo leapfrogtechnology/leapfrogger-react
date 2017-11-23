@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-navigation')
     compile project(':react-native-google-signin')
     compile project(':react-native-blur')
     compile fileTree(dir: "libs", include: ["*.jar"])

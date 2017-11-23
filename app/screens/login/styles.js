@@ -8,6 +8,7 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
+    alignSelf: 'center',
     alignItems: 'center',
     flexDirection: 'column',    
     justifyContent: 'center', 
@@ -25,7 +26,7 @@ const style = StyleSheet.create({
     flex: 0.5,
     width: 300,    
     borderRadius: 12,      
-    shadowColor: '#c4dfd0',
+    shadowColor: '#000',
     paddingHorizontal: 25,
     flexDirection: 'column',
     backgroundColor: '#eff7f3',        
