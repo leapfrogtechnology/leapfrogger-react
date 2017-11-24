@@ -27,8 +27,8 @@ import splash from '../../../assets/images/splash-screen.png';
     super(props);
 
     this.state = { 
-      email: '',
-      password: '',
+      email: loginCredentials.email,
+      password: loginCredentials.password,
       isEmailValid: false,
       errorMessage: '',
     }
@@ -122,6 +122,7 @@ import splash from '../../../assets/images/splash-screen.png';
                   this._validateEmail(this.state.email);                  
                   this.passwordField.focus()
                 }}
+                value={this.state.email}
               />
             </View>
             <View style={style.passwordFieldWrapper}>
@@ -136,6 +137,7 @@ import splash from '../../../assets/images/splash-screen.png';
                 underlineColorAndroid='transparent'
                 onChangeText={ (text) => this.setState({ password: text, isValidPassword: true }) }
                 onSubmitEditing={ () => { this._login() } }
+                value={this.state.password}                
               />
             </View>
           </View>
