@@ -15,7 +15,7 @@ const style = StyleSheet.create({
     width: 0.5 * screen.width,    
   },
   logoContainer: {
-    flex: 0.27,
+    flex: 0.25,
     justifyContent: 'center',    
   },
   logoImage: {
@@ -68,12 +68,20 @@ const style = StyleSheet.create({
 
   },
   buttonContainer: {
-    flex: 0.23,
+    flex: 0.25,
     alignItems: 'center',
     justifyContent: 'center',
   },
   googleLoginButton: {
     height: 44,    
+  },
+  errorLabelContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+    marginTop: 20,
+  },
+  errorLabel: {
+    color: 'red',
   }
 
 });

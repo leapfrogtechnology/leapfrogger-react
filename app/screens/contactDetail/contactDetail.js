@@ -4,7 +4,7 @@ import {
  } from 'react-native';
 import style from './styles';
 
- class ProfileScreen extends Component {
+ class ContactDetailScreen extends Component {
 
   render() {
     return (
@@ -16,4 +16,4 @@ import style from './styles';
 
  }
 
- export default ProfileScreen
+ export default ContactDetailScreen

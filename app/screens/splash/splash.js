@@ -5,36 +5,38 @@ import {
   Image,  
   TextInput,
  } from 'react-native';
-import TimerMixin from 'react-timer-mixin';
  
+import { createTransition, Fade } from 'react-native-transition';
+
+import InitialScreen from './../initial';
 import style from './style';
 
-// import 
- class SplashScreen extends Component {
+// const Transition = createTransition(Fade);
 
-  mixins = [TimerMixin];
+ class SplashScreen extends Component {
 
   constructor() {
     super();
 
+    this.state = { splashShowed: false };
   }
 
   componentDidMount() {
-    this.setTimeout( () => { 
+    this.timeout = setTimeout(() => {
       console.log('Timer invoked'); 
-      this._navigateToScreenRouter();
-    }, 1000 );
+      this.setState({ splashShowed: true });
+    }, 1000);
   }
 
-  _navigateToScreenRouter = () => {
-    // navigate to initial
+  componentWillUnmount() {
+    clearInterval(this.timeout);
   }
 
   render() {
     return (
-      <View style={style.mainContainer}>
-        <Text>Splash Screen</Text>
-      </View>
+        <View style={style.mainContainer}>
+          { this.state.splashShowed ? <InitialScreen/> : null }
+        </View>
     );
   }
 

@@ -53,10 +53,11 @@ const style = StyleSheet.create({
   button: {
     alignSelf: 'center',
     borderWidth: 1,    
-    borderRadius: 8,
+    borderRadius: 5,
     borderColor: colors.LF_GRAY,
     height: 44,
-    width: 240,    
+    width: 240,
+    // backgroundColor: colors.LF_LIGHT_GREEN,    
   },
   textLabel: {
     fontSize: 16,
