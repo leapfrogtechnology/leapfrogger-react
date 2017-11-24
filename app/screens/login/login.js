@@ -27,14 +27,22 @@ import splash from '../../../assets/images/splash-screen.png';
     super(props);
 
     this.state = { 
-      email: loginCredentials.email,
-      password: loginCredentials.password,
+      email: '',
+      password: '',
       isEmailValid: false,
       errorMessage: '',
-    }
+    }    
   }
 
-  componentDidMount() {
+  _presetLogin = () => {
+    this.setState({
+      email: loginCredentials.email,
+      password: loginCredentials.password,
+    });
+  }
+
+  componentDidMount() {  
+    this._presetLogin();
     this._setupGoogleSignin();
   }
 
