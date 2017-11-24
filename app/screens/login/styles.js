@@ -15,7 +15,7 @@ const style = StyleSheet.create({
     width: 0.5 * screen.width,    
   },
   logoContainer: {
-    flex: 0.25,
+    flex: 0.225,
     justifyContent: 'center',    
   },
   logoImage: {
@@ -25,6 +25,7 @@ const style = StyleSheet.create({
   formContainer: {
     flex: 0.5,
     width: 300,    
+    height: 320,
     borderRadius: 12,      
     shadowColor: '#000',
     paddingHorizontal: 25,
@@ -68,7 +69,7 @@ const style = StyleSheet.create({
 
   },
   buttonContainer: {
-    flex: 0.25,
+    flex: 0.275,
     alignItems: 'center',
     justifyContent: 'center',
   },
