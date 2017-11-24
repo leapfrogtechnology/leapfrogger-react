@@ -14,7 +14,7 @@ export const startLoginScreen = () => {
       orientation: 'portrait'
     },
     passProps: {},
-    animationType: 'slide-down',
+    animationType: 'fade',
   };
 
   Navigation.startSingleScreenApp(options);
