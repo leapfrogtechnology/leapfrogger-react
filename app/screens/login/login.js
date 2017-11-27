@@ -6,7 +6,7 @@ import {
   TextInput,
  } from 'react-native';
 
-import {Keyboard} from 'react-native' 
+import { Keyboard } from 'react-native'; 
 import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -17,9 +17,11 @@ import Button from './../../components/Button';
 import { validateEmail } from './../../utils/validator';
 import { startTabScreen } from './../../navigator/tabNavigator';
 import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from './../../constants/credentials';
+import { INVALID_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
+import { INCORRECT_CREDENTIALS } from '../../constants/errorConstants';
 
  class LoginScreen extends Component {
 
@@ -53,7 +55,7 @@ import splash from '../../../assets/images/splash-screen.png';
       startTabScreen();      
     } else {
       // incorrect email / password
-      this._setErrorMessage('Incorrect Credentials!');      
+      this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
     }
   }
 
@@ -71,7 +73,7 @@ import splash from '../../../assets/images/splash-screen.png';
       this.props.onLogin(user);      
     }
     catch(err) {
-      console.log("Play services error", err.code, err.message);
+      console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
     }
   }
 
@@ -82,7 +84,7 @@ import splash from '../../../assets/images/splash-screen.png';
       this.props.onLogin(user);
     })
     .catch((err) => {
-      console.log('WRONG SIGNIN', err);
+      console.log(WRONG_SIGNIN.message, err);
     })
     .done();
   }
@@ -90,7 +92,7 @@ import splash from '../../../assets/images/splash-screen.png';
   _validateEmail = (email) => {
     isEmailValid = validateEmail(email);
     if (!isEmailValid) {
-      this._setErrorMessage('Invalid Email!');
+      this._setErrorMessage(INVALID_Email.message);
     }
   }
 
