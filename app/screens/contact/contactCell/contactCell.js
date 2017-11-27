@@ -3,7 +3,8 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  TouchableHighlight
  } from 'react-native';
 import style from './styles';
 
@@ -17,6 +18,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
   constructor(props) {
     super(props);
 
+    console.log('xxxxx',this.props);
     this.state = {
       isMoreButtonPressed: false
     }
@@ -55,27 +57,34 @@ import placeHolderImage from './../../../../assets/images/default.png';
     )
   }
 
+  _onPressRow = () => {
+    // console.log('zxzxzx', this.props);
+    this.props.onPress();
+  }
+
   render() {
     return (
-      <View style={ style.mainContainer }>
-        <View style={style.imageContainer}>
-          <Image source={placeHolderImage} style={style.contactImage}/>
-        </View>
-        <View style={style.titleContainer}>
-          <View style={style.titleSubContainer}>
-            <Text style={style.titleLabel}>Name</Text>
-            <Text style={style.subTitleLabel}>work</Text>
+      <TouchableHighlight onPress={this._onPressRow.bind(this)}>
+        <View style={ style.mainContainer }>
+          <View style={style.imageContainer}>
+            <Image source={placeHolderImage} style={style.contactImage}/>
+          </View>
+          <View style={style.titleContainer}>
+            <View style={style.titleSubContainer}>
+              <Text style={style.titleLabel}>Name</Text>
+              <Text style={style.subTitleLabel}>work</Text>
+            </View>
+          </View>
+          <View style={style.buttonContainer}>
+            {
+              this.state.isMoreButtonPressed ? this._showCallMessageButtons() : null
+            }
+            <TouchableOpacity style={style.moreButton} onPress={this._moreButtonPressed.bind(this)}>
+              <Image source={moreImage} style={style.moreImage}/>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={style.buttonContainer}>
-          {
-            this.state.isMoreButtonPressed ? this._showCallMessageButtons() : null
-          }
-          <TouchableOpacity style={style.moreButton} onPress={this._moreButtonPressed.bind(this)}>
-            <Image source={moreImage} style={style.moreImage}/>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 
