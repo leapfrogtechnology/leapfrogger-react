@@ -6,6 +6,7 @@ import {
   TextInput,
  } from 'react-native';
 
+import { Keyboard } from 'react-native';
 import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -13,7 +14,10 @@ import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import style from './styles';
 import Button from './../../components/Button';
-import { IOS_GOOGLE_CLIENT_ID } from './../../constants/keysConstant';
+import { validateEmail } from './../../utils/validator';
+import { startTabScreen } from './../../navigator/tabNavigator';
+import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from './../../constants/credentials';
+import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
@@ -22,14 +26,36 @@ import splash from '../../../assets/images/splash-screen.png';
 
   constructor(props) {
     super(props);
+
+    this.state = { 
+      email: '',
+      password: '',
+      isEmailValid: false,
+      errorMessage: '',
+    }    
   }
 
-  componentDidMount() {
+  _presetLogin = () => {
+    this.setState({
+      email: loginCredentials.email,
+      password: loginCredentials.password,
+    });
+  }
+
+  componentDidMount() {  
+    this._presetLogin();
     this._setupGoogleSignin();
   }
 
   _login = () => {
-    console.log('mock login');
+    Keyboard.dismiss();
+    this._setErrorMessage();    
+    if (this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) {
+      startTabScreen();      
+    } else {
+      // incorrect email / password
+      this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
+    }
   }
 
   async _setupGoogleSignin() {
@@ -46,7 +72,7 @@ import splash from '../../../assets/images/splash-screen.png';
       this.props.onLogin(user);      
     }
     catch(err) {
-      console.log("Play services error", err.code, err.message);
+      console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
     }
   }
 
@@ -57,9 +83,20 @@ import splash from '../../../assets/images/splash-screen.png';
       this.props.onLogin(user);
     })
     .catch((err) => {
-      console.log('WRONG SIGNIN', err);
+      console.log(WRONG_SIGNIN.message, err);
     })
     .done();
+  }
+
+  _validateEmail = (email) => {
+    isEmailValid = validateEmail(email);
+    if (!isEmailValid) {
+      this._setErrorMessage(INVALID_Email.message);
+    }
+  }
+
+  _setErrorMessage = (message) => {
+    this.setState({ errorMessage: message })
   }
 
   render() {
@@ -69,37 +106,47 @@ import splash from '../../../assets/images/splash-screen.png';
           <Image source={logo} style={style.logoImage}/>
         </View>
         <View style={style.formContainer}>
+          <View style={style.errorLabelContainer}>
+            <Text style={style.errorLabel}>{ this.state.errorMessage }</Text>
+          </View>
           <View style={style.formSubContainer}>
             <View style={style.emailFieldWrapper}>
               <TextInput
-                ref={(email) => this.email = email }
+                ref={(component) => this.emailField = component }
                 placeholder='Email'
                 returnKeyType='next'
                 autoCapitalize='none'
                 autoCorrect={ false }
                 style={ style.emailField }
                 keyboardType='email-address'
+                onFocus={() => this._setErrorMessage()}
                 onChangeText={
                   (text) => {
                     this.setState({ email: text });
-
-                    // this._validateEmail(text);
                   }
                 }
                 underlineColorAndroid='#bbb'
                 placeholderTextColor='#bbb'
-                onSubmitEditing={ () => this.refs.Password.focus() }
+                onSubmitEditing={ () => {
+                  this._validateEmail(this.state.email);                  
+                  this.passwordField.focus()
+                }}
+                value={this.state.email}
               />
             </View>
             <View style={style.passwordFieldWrapper}>
               <TextInput
-                ref='Password'
+                ref={(component) => this.passwordField = component }
+                returnKeyType='default'
                 placeholder='Password'
                 secureTextEntry={ true }
                 style={ style.passwordField }
                 placeholderTextColor='#bbb'
+                onFocus={() => this._validateEmail(this.state.email)}                
                 underlineColorAndroid='transparent'
                 onChangeText={ (text) => this.setState({ password: text, isValidPassword: true }) }
+                onSubmitEditing={ () => { this._login() } }
+                value={this.state.password}                
               />
             </View>
           </View>

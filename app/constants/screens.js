@@ -1,9 +1,27 @@
 export default {
-  PreLoginRoot: 'PreLoginRoot',
-  SplashScreen: 'SplashScreen',
-  LoginScreen: 'LoginScreen',
+  INITIAL_SCREEN: {
+    id: 'InitialScreen',
+    name: ''
+  },
+  SPLASH_SCREEN: {
+    id: 'SplashScreen',
+    name: ''
+  },
+  LOGIN_SCREEN: {
+    id: 'LoginScreen',
+    name: 'Login'
+  },
 
-  PostLoginRoot: 'PostLoginRoot',
-  ContactScreen: 'ContactScreen',
-  ProfileScreen: 'ProfileScreen',
+  POST_LOGIN_ROOT: {
+    id: 'PostLoginRoot',
+    name: ''
+  },
+  CONTACT_SCREEN: {
+    id: 'ContactScreen',
+    name: 'Contact'
+  },
+  PROFILE_SCREEN: {
+    id: 'ProfileScreen',
+    name: 'Profile'
+  }
 };
