@@ -7,7 +7,7 @@ import {
  } from 'react-native';
  import PropTypes from 'prop-types'; 
 
- import colors from './../../config/colors';
+ import colors from 'App/config/colors';
 
 class Button extends Component {
 
@@ -15,7 +15,7 @@ class Button extends Component {
     const { loginButton, onPress } = this.props;
     return (
       <View style={style.mainContainer}>
-        <TouchableOpacity style={[style.button, loginButton]} onPress={this.props.onPress}>  
+        <TouchableOpacity style={[style.button, loginButton]} onPress={onPress}>  
           <View style={ [style.buttonContainer] }>
             <Text style={style.textLabel}>{ this.props.title }</Text>    
           </View>

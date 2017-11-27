@@ -5,14 +5,11 @@ import {
   Image,  
   TextInput,
  } from 'react-native';
-import TimerMixin from 'react-timer-mixin';
  
 import style from './style';
 
 // import 
  class SplashScreen extends Component {
-
-  mixins = [TimerMixin];
 
   constructor() {
     super();
@@ -20,7 +17,7 @@ import style from './style';
   }
 
   componentDidMount() {
-    this.setTimeout( () => { 
+    setTimeout( () => { 
       console.log('Timer invoked'); 
       this._navigateToScreenRouter();
     }, 1000 );
