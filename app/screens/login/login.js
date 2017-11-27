@@ -13,15 +13,14 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import style from './styles';
-import Button from './../../components/Button';
-import { validateEmail } from './../../utils/validator';
-import { startTabScreen } from './../../navigator/tabNavigator';
-import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from './../../constants/credentials';
+import Button from 'App/components/Button';
+import { validateEmail } from 'App/utils/validator';
+import { startTabScreen } from 'App/navigator/tabNavigator';
+import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
 import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
-import { INCORRECT_CREDENTIALS } from '../../constants/errorConstants';
 
  class LoginScreen extends Component {
 

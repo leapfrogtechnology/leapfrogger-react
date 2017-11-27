@@ -11,7 +11,7 @@ const style = StyleSheet.create({
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   contactImage: {
     width: 60,
@@ -23,7 +23,7 @@ const style = StyleSheet.create({
     shadowOpacity: 0.6,
     shadowOffset: { width: 0, height: 0 },
     resizeMode: 'contain',
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     margin: 4,    
   },
   titleContainer: {
@@ -37,7 +37,7 @@ const style = StyleSheet.create({
     alignContent: 'center',   
   },
   titleLabel: {
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
     flex: 0.5,
     alignContent: 'flex-end',
     paddingTop: 16,
@@ -50,26 +50,59 @@ const style = StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.2,
-    alignContent: 'center',
-    justifyContent: 'center'
+    alignContent: 'flex-end',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: 35,
+  },
+  moreImage: {
+    width: 18,        
+    marginHorizontal: 8,
+    resizeMode: 'contain',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 4,
+    shadowOpacity: 0.8,
   },
   moreButton: {
     alignSelf: 'center',
     justifyContent: 'center',    
-    backgroundColor: 'purple',        
+    // backgroundColor: 'purple',
   },
-  callMessageButtonContainer: {
+  callMessageButtonsContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    
+    alignSelf: 'center',
+    right: 46,
+
+  },
+  callImage: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain', 
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 1,
+    shadowOpacity: 0.8,   
   },
   callButton: {
-    width: 44,
-    height: 44,
+    alignItems: 'center',
+    // backgroundColor: 'red',
+    padding: 6,    
+  },
+  messageImage: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain', 
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 1,
+    shadowOpacity: 0.8,   
   },
   messageButton: {
-    width: 44,
-    height: 44,
+    alignItems: 'center',
+    // backgroundColor: 'blue',
+    padding: 6,    
   }
 
 });
