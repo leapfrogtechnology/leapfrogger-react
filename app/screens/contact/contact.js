@@ -28,4 +28,4 @@ import ContactCell from './contactCell';
 
  }
 
- export default ContactScreen
+ export default ContactScreen;

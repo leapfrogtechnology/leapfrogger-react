@@ -10,9 +10,9 @@ import { createTransition, Fade } from 'react-native-transition';
 
 import InitialScreen from './../initial';
 import style from './style';
+import splashImage from './../../../assets/images/splash-screen.png';
 
 // const Transition = createTransition(Fade);
-
  class SplashScreen extends Component {
 
   constructor() {
@@ -36,6 +36,7 @@ import style from './style';
     return (
         <View style={style.mainContainer}>
           { this.state.splashShowed ? <InitialScreen/> : null }
+          <Image source={splashImage} style={style.splashImage}/>
         </View>
     );
   }
