@@ -6,7 +6,7 @@ import {
   TextInput,
  } from 'react-native';
 
-import {Keyboard} from 'react-native' 
+import { Keyboard } from 'react-native';
 import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';

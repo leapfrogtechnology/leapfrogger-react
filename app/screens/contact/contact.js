@@ -16,4 +16,4 @@ import style from './styles';
 
  }
 
- export default ContactScreen
+ export default ContactScreen;
