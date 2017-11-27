@@ -13,7 +13,6 @@ import style from './style';
 import splashImage from './../../../assets/images/splash-screen.png';
 
 // const Transition = createTransition(Fade);
-
  class SplashScreen extends Component {
 
   constructor() {
