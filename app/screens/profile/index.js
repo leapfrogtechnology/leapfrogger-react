@@ -1,11 +1,3 @@
-import React, { Component } from 'react';
-import { 
-  View, Text
- } from 'react-native';
-import style from './styles';
+import ProfileScreen from './profile';
 
- class ProfileScreen extends Component {
-
- }
-
- export default ProfileScreen
+export default ProfileScreen;

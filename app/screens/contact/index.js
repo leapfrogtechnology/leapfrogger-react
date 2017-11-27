@@ -1,11 +1,3 @@
-import React, { Component } from 'react';
-import { 
-  View, Text
- } from 'react-native';
-import style from './styles';
+import ContactScreen from './contact';
 
- class ContactScreen extends Component {
-
- }
-
- export default ContactScreen
+export default ContactScreen;
