@@ -7,10 +7,12 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
     flexDirection: 'row',
+    paddingVertical: 8,
   },
   imageContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 8,    
     // backgroundColor: 'red',
   },
   contactImage: {
@@ -24,9 +26,13 @@ const style = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     resizeMode: 'contain',
     // backgroundColor: 'blue',
+    borderColor: colors.LIGHT_GRAY,
+    borderRadius: 30,
+    borderWidth: 1,
     margin: 4,    
   },
   titleContainer: {
+    paddingHorizontal: 4,
     flex: 0.8,
     justifyContent: 'center',
   },

@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { 
   View,
   Text,
+  Image,
   SectionList
  } from 'react-native';
+import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
- 
-import style from './styles';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
+import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT } from './styles';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
+import { getWidth, getHeight } from './../../utils/dimension';
+
+const PARALLAX_HEADER_HEIGHT = 250;
 
  class ContactScreen extends Component {
 
@@ -42,6 +48,77 @@ import screens from 'App/constants/screens';
     });
   }
 
+  _renderParallaxTableHeaderView = () => {
+    return (
+      <ParallaxScrollView
+        onScroll={this.props.onScroll}
+
+        headerBackgroundColor="#333"
+        stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
+        parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
+        backgroundSpeed={10}
+
+        renderBackground={() => (
+          <View key="background">
+            <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg',
+                            width: getWidth(),
+                            height: PARALLAX_HEADER_HEIGHT}}/>
+            <View style={{position: 'absolute',
+                          top: 0,
+                          width: getWidth(),
+                          backgroundColor: 'rgba(0,0,0,.4)',
+                          height: PARALLAX_HEADER_HEIGHT}}/>
+          </View>
+        )}
+
+        renderForeground={() => (
+          <View key="parallax-header" style={ style.parallaxHeader }>
+            <Image style={ style.avatar } source={{
+              uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg',
+              width: AVATAR_SIZE,
+              height: AVATAR_SIZE
+            }}/>
+            <Text style={ style.sectionSpeakerText }>
+              Rich Hickey
+            </Text>
+            <Text style={ style.sectionTitleText }>
+              CTO of Cognitec, Creator of Clojure
+            </Text>
+          </View>
+        )}
+
+        renderStickyHeader={() => (
+          <View key="sticky-header" style={style.stickySection}>
+            <Text style={style.stickySectionText}>Rich Hickey</Text>
+          </View>
+        )}
+      />
+    );
+  }
+
+  _renderTableView = (key) => {
+    return (
+      <SectionList
+        ref="ListView"
+        key={key}                  
+        sections={[
+          {title: 'D', data: ['Devin']},
+          {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+        ]}
+        keyExtractor={(item, index) => index}
+        renderItem={({item, section, index}) => <ContactCell index={index} section={section} data={item} onPress={this._onCellSelection}/>}
+        renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
+        renderScrollComponent={props => (
+          this._renderParallaxTableHeaderView()
+        )}
+      />
+    );
+  }
+
+  _dot = () => {
+    return (<View style={{backgroundColor:'rgba(0,0,0,.2)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />);
+  }
+
   render() {
     return (
       <View style={ style.mainContainer }>
@@ -56,15 +133,11 @@ import screens from 'App/constants/screens';
           keyboardDismissOnSubmit={true}
           blurOnSubmit={true}
         />
-        <SectionList
-          sections={[
-            {title: 'D', data: ['Devin']},
-            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-          ]}
-          keyExtractor={(item, index) => index}
-          renderItem={({item, section, index}) => <ContactCell index={index} section={section} data={item} onPress={this._onCellSelection}/>}
-          renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        />
+        <Swiper style={style.wrapper} loop={false} dot={this._dot()}>
+          {
+            [1, 1].map((key) => this._renderTableView(key))
+          }
+        </Swiper>
       </View>
     );
   }
