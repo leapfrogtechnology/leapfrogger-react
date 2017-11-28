@@ -9,14 +9,14 @@ import Swiper from 'react-native-swiper';
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT } from './styles';
+import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN } from './styles';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
 import { getWidth, getHeight } from './../../utils/dimension';
 
 const PARALLAX_HEADER_HEIGHT = 250;
-
+const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
  class ContactScreen extends Component {
 
   constructor(props) {
@@ -45,6 +45,7 @@ const PARALLAX_HEADER_HEIGHT = 250;
       screen: screens.CONTACT_DETAIL_SCREEN.id,
       animated: true,
       overrideBackPress: true,
+      navigatorStyle: {}
     });
   }
 
@@ -106,17 +107,19 @@ const PARALLAX_HEADER_HEIGHT = 250;
           {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
         ]}
         keyExtractor={(item, index) => index}
-        renderItem={({item, section, index}) => <ContactCell index={index} section={section} data={item} onPress={this._onCellSelection}/>}
+        renderItem={({item, section, index}) => 
+          <ContactCell 
+            index={index} 
+            section={section} 
+            data={item} 
+            onPress={this._onCellSelection}/>
+          }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView()
         )}
       />
     );
-  }
-
-  _dot = () => {
-    return (<View style={{backgroundColor:'rgba(0,0,0,.2)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />);
   }
 
   render() {
@@ -133,10 +136,14 @@ const PARALLAX_HEADER_HEIGHT = 250;
           keyboardDismissOnSubmit={true}
           blurOnSubmit={true}
         />
-        <Swiper style={style.wrapper} loop={false} dot={this._dot()}>
-          {
-            [1, 1].map((key) => this._renderTableView(key))
-          }
+        <Swiper
+          style={style.wrapper}
+          loop={false} 
+          activeDotStyle={{marginBottom: DOT_MARGIN}} 
+          dotStyle={{marginBottom: DOT_MARGIN}}>
+            {
+              DEPARTMENT_LIST.map((key) => this._renderTableView(key))
+            }
         </Swiper>
       </View>
     );

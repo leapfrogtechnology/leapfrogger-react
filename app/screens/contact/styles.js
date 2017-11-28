@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import colors from 'App/config/colors';
 
+export const DOT_MARGIN = -28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
 
