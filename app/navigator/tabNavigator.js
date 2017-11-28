@@ -1,7 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 
-import screens from 'App/constants/screens';
 import colors from 'App/config/colors';
+import screens from 'App/constants/screens';
 
 import profileIcon from './../../assets/images/profile.png';
 
@@ -13,11 +13,11 @@ export const startTabScreen = () => {
         screen: screens.CONTACT_SCREEN.id,
         icon: profileIcon,
         // selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
-        iconInsets: { // add this to change icon position (optional, iOS only).
-          top: 0, // optional, default is 0.
-          left: 0, // optional, default is 0.
-          bottom: 0, // optional, default is 0.
-          right: 0 // optional, default is 0.
+        iconInsets: {
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
         },
         title: '',
         // titleImage: require('../img/titleImage.png'), // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
@@ -29,11 +29,11 @@ export const startTabScreen = () => {
         screen: screens.PROFILE_SCREEN.id,
         icon: profileIcon,
         // selectedIcon: require('../img/two_selected.png'),
-        iconInsets: { // add this to change icon position (optional, iOS only).
-          top: 0, // optional, default is 0.
-          left: 0, // optional, default is 0.
-          bottom: 0, // optional, default is 0.
-          right: 0 // optional, default is 0.
+        iconInsets: { 
+          top: 0, 
+          left: 0,
+          bottom: 0,
+          right: 0
         },
         navigatorStyle: {
           navBarTransparent: true,

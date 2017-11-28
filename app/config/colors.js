@@ -3,8 +3,8 @@ const colors = {
   LF_LIGHT_GREEN: '#6cc067',
   LF_GRAY: '#6e6f72',
   LIGHT_GRAY: '#c8c8c8',
-  SYSTEM_LIGHT_GRAY: '#f7f7f7',
   SYSTEM_BLUE: '#007aff',
+  SYSTEM_LIGHT_GRAY: '#f7f7f7',  
 };
 
 const TOUCH_OPACITY = 0.6;

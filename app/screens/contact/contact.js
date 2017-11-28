@@ -9,13 +9,12 @@ import Swiper from 'react-native-swiper';
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN } from './styles';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
-import { getWidth, getHeight } from './../../utils/dimension';
+import { getWidth, getHeight } from 'App/utils/dimension';
+import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
-const PARALLAX_HEADER_HEIGHT = 250;
 const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
  class ContactScreen extends Component {
 
@@ -61,36 +60,26 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
 
         renderBackground={() => (
           <View key="background">
-            <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg',
-                            width: getWidth(),
-                            height: PARALLAX_HEADER_HEIGHT}}/>
-            <View style={{position: 'absolute',
-                          top: 0,
-                          width: getWidth(),
-                          backgroundColor: 'rgba(0,0,0,.4)',
-                          height: PARALLAX_HEADER_HEIGHT}}/>
+            <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg'}} style={style.tableHeaderBackgroundImage}/>
+            <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
 
         renderForeground={() => (
           <View key="parallax-header" style={ style.parallaxHeader }>
-            <Image style={ style.avatar } source={{
-              uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg',
-              width: AVATAR_SIZE,
-              height: AVATAR_SIZE
-            }}/>
+            <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
-              Rich Hickey
+              iOS
             </Text>
             <Text style={ style.sectionTitleText }>
-              CTO of Cognitec, Creator of Clojure
+              Leapfrog, Inc.
             </Text>
           </View>
         )}
 
         renderStickyHeader={() => (
           <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>Rich Hickey</Text>
+            <Text style={style.stickySectionText}>iOS</Text>
           </View>
         )}
       />

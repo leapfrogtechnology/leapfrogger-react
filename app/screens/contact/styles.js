@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 import colors from 'App/config/colors';
+import { getWidth, getHeight } from 'App/utils/dimension';
 
 export const DOT_MARGIN = -28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
+export const PARALLAX_HEADER_HEIGHT = 250;
 
 const style = StyleSheet.create({
   
@@ -24,6 +26,17 @@ const style = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
+  },
+  tableHeaderBackgroundImage: {
+    width: getWidth(),
+    height: PARALLAX_HEADER_HEIGHT
+  },
+  tableHeaderBackgroundOverlay: {
+    position: 'absolute',
+    top: 0,
+    width: getWidth(),
+    backgroundColor: 'rgba(0,0,0,.4)',
+    height: PARALLAX_HEADER_HEIGHT
   },
   stickySection: {
     justifyContent: 'flex-end',    
@@ -53,6 +66,8 @@ const style = StyleSheet.create({
   },
   avatar: {
     marginBottom: 5,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
     borderRadius: AVATAR_SIZE / 2
   },
   sectionSpeakerText: {
