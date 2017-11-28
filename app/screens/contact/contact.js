@@ -44,7 +44,8 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
       screen: screens.CONTACT_DETAIL_SCREEN.id,
       animated: true,
       overrideBackPress: true,
-      navigatorStyle: {}
+      navigatorStyle: {},
+      title: 'Detail Page',
     });
   }
 
