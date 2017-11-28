@@ -13,9 +13,13 @@
 		"react-native-google-signin": "0.12.0",
 		"react-native-keyboard-spacer": "0.4.1",
 		"react-native-navigation": "1.1.287",
+		"react-native-parallax-scroll-view": "0.20.1",
+		"react-native-search-box": "0.0.13",
+		"react-native-swiper": "1.5.13",
 		"react-native-transition": "1.1.8",
 		"react-redux": "5.0.6",
 		"redux": "3.7.2",
+		"redux-persist": "5.4.0",
 		"redux-thunk": "2.2.0"
 	},
 	"devDependencies": {

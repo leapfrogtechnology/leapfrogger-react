@@ -1,7 +1,9 @@
 import { Navigation } from 'react-native-navigation';
 
-import screens from './../constants/screens';
-import colors from './../config/colors';
+import colors from 'App/config/colors';
+import screens from 'App/constants/screens';
+
+import profileIcon from './../../assets/images/profile.png';
 
 export const startTabScreen = () => {
   const options = {
@@ -9,15 +11,15 @@ export const startTabScreen = () => {
       {
         label: 'Contacts',
         screen: screens.CONTACT_SCREEN.id,
-        // icon: require('../img/one.png'),
+        icon: profileIcon,
         // selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
-        iconInsets: { // add this to change icon position (optional, iOS only).
-          top: 6, // optional, default is 0.
-          left: 0, // optional, default is 0.
-          bottom: -6, // optional, default is 0.
-          right: 0 // optional, default is 0.
+        iconInsets: {
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
         },
-        title: '',
+        title: 'Leapfroggers',
         // titleImage: require('../img/titleImage.png'), // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
         navigatorStyle: {}, // override the navigator style for the tab screen, see "Styling the navigator" below (optional),
         navigatorButtons: {} // override the nav buttons for the tab screen, see "Adding buttons to the navigator" below (optional)
@@ -25,9 +27,18 @@ export const startTabScreen = () => {
       {
         label: 'Profile',
         screen: screens.PROFILE_SCREEN.id,
-        // icon: require('../img/two.png'),
+        icon: profileIcon,
         // selectedIcon: require('../img/two_selected.png'),
-        title: ''
+        iconInsets: { 
+          top: 0, 
+          left: 0,
+          bottom: 0,
+          right: 0
+        },
+        navigatorStyle: {
+          navBarTransparent: true,
+        },
+        title: 'My Profile'
       }
     ],
     tabsStyle: {
