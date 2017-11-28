@@ -7,6 +7,7 @@ import {
   TouchableHighlight
  } from 'react-native';
 import style from './styles';
+import colors from 'App/config/colors';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -64,7 +65,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
 
   render() {
     return (
-      <TouchableHighlight onPress={this._onPressRow.bind(this)}>
+      <TouchableHighlight onPress={this._onPressRow.bind(this)} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
             <Image source={placeHolderImage} style={style.contactImage}/>

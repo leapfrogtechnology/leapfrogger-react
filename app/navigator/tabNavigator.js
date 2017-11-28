@@ -1,7 +1,9 @@
 import { Navigation } from 'react-native-navigation';
 
-import screens from './../constants/screens';
-import colors from './../config/colors';
+import screens from 'App/constants/screens';
+import colors from 'App/config/colors';
+
+import profileIcon from './../../assets/images/profile.png';
 
 export const startTabScreen = () => {
   const options = {
@@ -9,12 +11,12 @@ export const startTabScreen = () => {
       {
         label: 'Contacts',
         screen: screens.CONTACT_SCREEN.id,
-        // icon: require('../img/one.png'),
+        icon: profileIcon,
         // selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
         iconInsets: { // add this to change icon position (optional, iOS only).
-          top: 6, // optional, default is 0.
+          top: 0, // optional, default is 0.
           left: 0, // optional, default is 0.
-          bottom: -6, // optional, default is 0.
+          bottom: 0, // optional, default is 0.
           right: 0 // optional, default is 0.
         },
         title: '',
@@ -25,8 +27,17 @@ export const startTabScreen = () => {
       {
         label: 'Profile',
         screen: screens.PROFILE_SCREEN.id,
-        // icon: require('../img/two.png'),
+        icon: profileIcon,
         // selectedIcon: require('../img/two_selected.png'),
+        iconInsets: { // add this to change icon position (optional, iOS only).
+          top: 0, // optional, default is 0.
+          left: 0, // optional, default is 0.
+          bottom: 0, // optional, default is 0.
+          right: 0 // optional, default is 0.
+        },
+        navigatorStyle: {
+          navBarTransparent: true,
+        },
         title: ''
       }
     ],

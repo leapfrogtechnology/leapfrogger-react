@@ -30,12 +30,13 @@ import splash from '../../../assets/images/splash-screen.png';
     this.state = { 
       email: '',
       password: '',
+      user: null,
       isEmailValid: false,
       errorMessage: '',
     }    
   }
 
-  _presetLogin = () => {
+  _presetLoginData = () => {
     this.setState({
       email: loginCredentials.email,
       password: loginCredentials.password,
@@ -43,14 +44,14 @@ import splash from '../../../assets/images/splash-screen.png';
   }
 
   componentDidMount() {  
-    this._presetLogin();
+    this._presetLoginData();
     this._setupGoogleSignin();
   }
 
   _login = () => {
     Keyboard.dismiss();
     this._setErrorMessage();    
-    if (this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) {
+    if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.state.user)) {
       startTabScreen();      
     } else {
       // incorrect email / password
@@ -67,9 +68,12 @@ import splash from '../../../assets/images/splash-screen.png';
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      console.log(user);
-      this.setState({user});
-      this.props.onLogin(user);      
+      this.setState({ })
+      if (user) {
+        this.setState({user: user});        
+        this._login()
+      }
+      // this.props.onLogin(user);
     }
     catch(err) {
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
