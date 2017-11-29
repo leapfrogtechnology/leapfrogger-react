@@ -15,11 +15,51 @@ import screens from 'App/constants/screens';
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
-const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
+const DEPARTMENT_LIST = [{
+                            name: 'iOS', 
+                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
+                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
+                            quote: '\"Stay hungry. Stay foolish\"'
+                          }, 
+                          {
+                            name: 'Android', 
+                            avatar: require('../../../assets/images/SundarPichai.jpg'), 
+                            wallpaper: require('../../../assets/images/SundarPichai.jpg'),
+                            quote: '\"Wear your failure as your badge of honour\"'
+                          }, 
+                          {
+                            name: 'Java', 
+                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
+                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
+                            quote: '\"Stay hungry. Stay foolish\"'
+                          }, 
+                          {
+                            name: 'php', 
+                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
+                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
+                            quote: '\"Stay hungry. Stay foolish\"'
+                          }, 
+                          {
+                            name: 'ReactNative', 
+                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
+                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
+                            quote: '\"Stay hungry. Stay foolish\"'
+                          }, 
+                          {
+                            name: 'PM', 
+                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
+                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
+                            quote: '\"Stay hungry. Stay foolish\"'
+                          }];
+
  class ContactScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentSwipeIndex: 0,
+    }
   }
 
   _onSearchBarTextChange = () => {
@@ -39,7 +79,6 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
   }
 
   _onCellSelection = () => {
-    console.log('xcxcxcx', this.props.navigator);
     this.props.navigator.push({
       screen: screens.CONTACT_DETAIL_SCREEN.id,
       animated: true,
@@ -49,19 +88,18 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
     });
   }
 
-  _renderParallaxTableHeaderView = () => {
+  _renderParallaxTableHeaderView = (data, index) => {
     return (
       <ParallaxScrollView
         onScroll={this.props.onScroll}
-
+        bounce={true}
         headerBackgroundColor="#333"
         stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
         parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
         backgroundSpeed={10}
-
         renderBackground={() => (
           <View key="background">
-            <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg'}} style={style.tableHeaderBackgroundImage}/>
+            <Image source={DEPARTMENT_LIST[0].wallpaper} style={style.tableHeaderBackgroundImage}/>
             <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
@@ -70,7 +108,9 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
           <View key="parallax-header" style={ style.parallaxHeader }>
             <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
-              iOS
+              {
+                DEPARTMENT_LIST[index].name
+              }
             </Text>
             <Text style={ style.sectionTitleText }>
               Leapfrog, Inc.
@@ -87,11 +127,12 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
     );
   }
 
-  _renderTableView = (key) => {
+  _renderTableView = (data, index) => {
+    console.log('xxxxxxxxx', this.refs.swiper)    
     return (
       <SectionList
         ref="ListView"
-        key={key}                  
+        key={data}                  
         sections={[
           {title: 'D', data: ['Devin']},
           {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
@@ -106,10 +147,17 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
           }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
         renderScrollComponent={props => (
-          this._renderParallaxTableHeaderView()
+          this._renderParallaxTableHeaderView(props, index)
         )}
       />
     );
+  }
+
+  _onMomentumScrollEnd = (index) => {
+    console.log('cxcxcxcxcxc',index);
+    this.setState({
+      currentSwipeIndex: index,
+    })
   }
 
   render() {
@@ -127,12 +175,14 @@ const DEPARTMENT_LIST = ["ios", "android", "java", "php", "reactnative", "pm"];
           blurOnSubmit={true}
         />
         <Swiper
+          ref='swiper'
           style={style.wrapper}
           loop={false} 
+          onIndexChanged ={this._onMomentumScrollEnd}          
           activeDotStyle={{marginBottom: DOT_MARGIN}} 
           dotStyle={{marginBottom: DOT_MARGIN}}>
             {
-              DEPARTMENT_LIST.map((key) => this._renderTableView(key))
+              DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
             }
         </Swiper>
       </View>
