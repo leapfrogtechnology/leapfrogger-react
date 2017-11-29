@@ -85,6 +85,11 @@ const DEPARTMENT_LIST = [{
       overrideBackPress: true,
       navigatorStyle: {},
       title: 'Detail Page',
+      passProps: {
+        data: {
+          department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
+        }
+      }        
     });
   }
 
@@ -128,7 +133,6 @@ const DEPARTMENT_LIST = [{
   }
 
   _renderTableView = (data, index) => {
-    console.log('xxxxxxxxx', this.refs.swiper)    
     return (
       <SectionList
         ref="ListView"
@@ -175,7 +179,6 @@ const DEPARTMENT_LIST = [{
           blurOnSubmit={true}
         />
         <Swiper
-          ref='swiper'
           style={style.wrapper}
           loop={false} 
           onIndexChanged ={this._onMomentumScrollEnd}          
