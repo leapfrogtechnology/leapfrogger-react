@@ -89,7 +89,7 @@ LOGOUT = 5
           <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall('0123456789', true)}>
             <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
           </TouchableOpacity>
-          <TouchableOpacity style={style.messageButton} onPress={() => Communications.text('0123456789')>
+          <TouchableOpacity style={style.messageButton} onPress={() => Communications.text('0123456789')}>
             <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
           </TouchableOpacity>
         </View>
