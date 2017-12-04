@@ -1,3 +1,3 @@
-import ProfileScreen from './profile';
+import ProfileContainer from './profileContainer';
 
-export default ProfileScreen;
+export default ProfileContainer;

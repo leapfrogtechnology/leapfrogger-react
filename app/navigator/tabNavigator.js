@@ -38,7 +38,12 @@ export const startTabScreen = () => {
         navigatorStyle: {
           navBarTransparent: true,
         },
-        title: 'My Profile'
+        title: 'My Profile',
+        passProps: {
+          data: {
+            fromProfileTab: true,
+          }
+        } 
       }
     ],
     tabsStyle: {

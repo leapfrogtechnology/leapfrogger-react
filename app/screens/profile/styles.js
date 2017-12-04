@@ -87,14 +87,19 @@ const style = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     paddingHorizontal: 16, 
-    paddingVertical: 8,    
+    paddingTop: 8,    
   },
   nameTextContainer: {
     flex: 0.9,
     justifyContent: 'center',
   },
-  text: {
+  titleText: {
+    flex: 0.5,    
     fontSize: 18,
+  },
+  dataText: {
+    flex: 0.5,
+    textAlign: 'right',
   },
   phoneMessageContainer: {
     flex: 0.1,
@@ -119,12 +124,14 @@ const style = StyleSheet.create({
   },
   simpleTextCell: {
     height: 44,
-    justifyContent: 'center',
-    paddingHorizontal: 16,     
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,  
   },
   logoutButtonContainer: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 25,
     alignItems: 'center',
     justifyContent: 'center', 
   },
