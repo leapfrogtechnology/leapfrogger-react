@@ -23,7 +23,6 @@ import splashImage from './../../../assets/images/splash-screen.png';
 
   componentDidMount() {
     this.timeout = setTimeout(() => {
-      console.log('Timer invoked'); 
       this.setState({ splashShowed: true });
     }, 1000);
   }

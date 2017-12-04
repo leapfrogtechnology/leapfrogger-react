@@ -3,14 +3,25 @@ import {
   View,
   Text,
   Image,
-  FlatList
+  FlatList,
+  TouchableOpacity
  } from 'react-native';
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
  
+import callImage from './../../../assets/images/call.png';
+import messageImage from './../../../assets/images/message.png';
+import placeHolderImage from './../../../assets/images/default.png';
+
 import { getWidth, getHeight } from 'App/utils/dimension';
-import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
- 
+import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles'; 
+
+const PHONE_NUMBER = 0
+const ADDRESS = 1
+const DEPARTMENT = 2
+DOB = 3
+LOGOUT = 4
+
  class ProfileScreen extends Component {
 
   constructor(props) {
@@ -54,20 +65,60 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
     );
   }
 
-  _renderItem = () => {
+  _renderItems = (item, index) => {
+    console.log('xxxx', item, index, 'xxxxx');
+    switch (index) {
+      case PHONE_NUMBER: return this._renderPhoneCell();
+      case ADDRESS: return this._renderTextCell('Address');
+      case DEPARTMENT: return this._renderTextCell('Department');
+      case DOB: return this._renderTextCell('Dob');
+      case LOGOUT: return this._renderLougoutCell();
+    }
+  }
+
+  _renderPhoneCell = () => {
     return (
-      <View>
-        <Text>hello</Text>
+      <View style={style.phoneCell}>
+        <View style={style.nameTextContainer}>
+          <Text style={style.text}>name</Text>
+        </View>
+        <View style={style.phoneMessageContainer}>
+          <TouchableOpacity style={style.phoneButton}>
+            <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={style.messageButton}>
+            <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
+          </TouchableOpacity>
+        </View>
       </View>
-    )
+    );
+  }
+
+  _renderTextCell = (text) => {
+    return (
+      <View style={style.simpleTextCell}>
+        <Text style={style.text}>{text}</Text>
+      </View>
+    );
+  }
+
+  _renderLougoutCell = () => {
+    return (
+      <View style={style.logoutButtonContainer}>
+        <TouchableOpacity style={style.logoutButton}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   _renderTableView = () => {
     return (
       <FlatList
         ref="ListView"
-        data={[{key: 'a'}, {key: 'b'}]}
-        renderItem={({item, section, index}) => this._renderItem() }
+        style={style.listView}
+        data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]}
+        renderItem={({item, index}) => this._renderItems(item, index) }
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView(props)
         )}

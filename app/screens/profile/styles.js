@@ -80,6 +80,61 @@ const style = StyleSheet.create({
     color: 'white',    
     paddingVertical: 5
   },
+  listView: {
+    // paddingHorizontal: 16,     
+  },
+  phoneCell: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingHorizontal: 16, 
+    paddingVertical: 8,    
+  },
+  nameTextContainer: {
+    flex: 0.9,
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 18,
+  },
+  phoneMessageContainer: {
+    flex: 0.1,
+    flexDirection: 'row',    
+    alignSelf: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+
+  phoneAndMessageButtonImage: {
+    width: 35,
+    height: 35,
+    marginHorizontal: 4,  
+    paddingHorizontal: 2,                
+    resizeMode: 'contain',    
+  },
+  messageButtonImage: {
+    width: 35,
+    height: 35,
+    marginHorizontal: 4,
+    paddingHorizontal: 2,            
+    resizeMode: 'contain',
+  },
+  simpleTextCell: {
+    height: 44,
+    justifyContent: 'center',
+    paddingHorizontal: 16,     
+  },
+  logoutButtonContainer: {
+    flex: 1,
+    paddingTop: 60,
+    alignItems: 'center',
+    justifyContent: 'center', 
+  },
+  logoutButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 150,
+    height: 44,
+    backgroundColor: 'gray',
+  }
 
 });
 
