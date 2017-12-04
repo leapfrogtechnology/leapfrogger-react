@@ -47,10 +47,10 @@ import placeHolderImage from './../../../../assets/images/default.png';
   _showCallMessageButtons = (event) => {
     return (
     <View style={style.callMessageButtonsContainer}>
-      <TouchableOpacity style={style.callButton} onPress={this._callButtonPressed.bind(this)}>
+      <TouchableOpacity style={style.callButton} onPress={() => this._callButtonPressed()}>
         <Image source={callImage} style={style.callImage}/>
       </TouchableOpacity>
-      <TouchableOpacity style={style.messageButton} onPress={this._messageButtonPressed.bind(this)}>
+      <TouchableOpacity style={style.messageButton} onPress={() => this._messageButtonPressed()}>
         <Image source={messageImage} style={style.messageImage}/>
       </TouchableOpacity>
     </View>
@@ -63,7 +63,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
 
   render() {
     return (
-      <TouchableHighlight onPress={this._onPressRow.bind(this)} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
+      <TouchableHighlight onPress={() => this._onPressRow()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
             <Image source={placeHolderImage} style={style.contactImage}/>
@@ -78,7 +78,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
             {
               this.state.isMoreButtonPressed ? this._showCallMessageButtons() : null
             }
-            <TouchableOpacity style={style.moreButton} onPress={this._moreButtonPressed.bind(this)}>
+            <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonPressed()}>
               <Image source={moreImage} style={style.moreImage}/>
             </TouchableOpacity>
           </View>

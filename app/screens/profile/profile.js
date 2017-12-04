@@ -7,6 +7,7 @@ import {
   TouchableOpacity
  } from 'react-native';
 
+import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
  
 import callImage from './../../../assets/images/call.png';
@@ -85,7 +86,7 @@ LOGOUT = 5
           <Text style={style.titleText}>Name</Text>
         </View>
         <View style={style.phoneMessageContainer}>
-          <TouchableOpacity style={style.phoneButton}>
+          <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall('0123456789', true)}>
             <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
           </TouchableOpacity>
           <TouchableOpacity style={style.messageButton}>

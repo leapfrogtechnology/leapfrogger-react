@@ -158,7 +158,7 @@ import splash from '../../../assets/images/splash-screen.png';
             <Button 
               style={style.loginButton}
               title={'Login'}
-              onPress={this._login.bind(this)}
+              onPress={() => this._login()}
             />
           </View>
         </View>
