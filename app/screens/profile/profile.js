@@ -20,7 +20,8 @@ const PHONE_NUMBER = 0
 const ADDRESS = 1
 const DEPARTMENT = 2
 DOB = 3
-LOGOUT = 4
+SKYPE = 4
+LOGOUT = 5
 
  class ProfileScreen extends Component {
 
@@ -72,6 +73,7 @@ LOGOUT = 4
       case ADDRESS: return this._renderTextCell('Address');
       case DEPARTMENT: return this._renderTextCell('Department');
       case DOB: return this._renderTextCell('Dob');
+      case SKYPE: return this._renderTextCell('Skype ID');
       case LOGOUT: return this._renderLougoutCell();
     }
   }
@@ -80,7 +82,7 @@ LOGOUT = 4
     return (
       <View style={style.phoneCell}>
         <View style={style.nameTextContainer}>
-          <Text style={style.text}>name</Text>
+          <Text style={style.titleText}>Name</Text>
         </View>
         <View style={style.phoneMessageContainer}>
           <TouchableOpacity style={style.phoneButton}>
@@ -97,7 +99,8 @@ LOGOUT = 4
   _renderTextCell = (text) => {
     return (
       <View style={style.simpleTextCell}>
-        <Text style={style.text}>{text}</Text>
+        <Text style={style.titleText}>{text}</Text>
+        <Text style={style.dataText}>N/A</Text>
       </View>
     );
   }
@@ -113,11 +116,13 @@ LOGOUT = 4
   }
 
   _renderTableView = () => {
+    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]
+    this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList
         ref="ListView"
         style={style.listView}
-        data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]}
+        data={data}
         renderItem={({item, index}) => this._renderItems(item, index) }
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView(props)

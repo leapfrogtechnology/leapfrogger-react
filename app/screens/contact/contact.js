@@ -80,7 +80,7 @@ const DEPARTMENT_LIST = [{
 
   _onCellSelection = () => {
     this.props.navigator.push({
-      screen: screens.CONTACT_DETAIL_SCREEN.id,
+      screen: screens.PROFILE_SCREEN.id,
       animated: true,
       overrideBackPress: true,
       navigatorStyle: {},
