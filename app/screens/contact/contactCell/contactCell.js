@@ -19,7 +19,6 @@ import placeHolderImage from './../../../../assets/images/default.png';
   constructor(props) {
     super(props);
 
-    console.log('xxxxx',this.props);
     this.state = {
       isMoreButtonPressed: false
     }
@@ -59,7 +58,6 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   _onPressRow = () => {
-    // console.log('zxzxzx', this.props);
     this.props.onPress();
   }
 
