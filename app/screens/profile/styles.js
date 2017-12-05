@@ -41,7 +41,7 @@ const style = StyleSheet.create({
   stickySection: {
     justifyContent: 'flex-end',    
     height: STICKY_HEADER_HEIGHT,
-    backgroundColor: colors.LIGHT_GRAY,
+    backgroundColor: colors.LF_DARK_GRREEN,
     marginBottom: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },

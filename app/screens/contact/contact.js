@@ -83,8 +83,17 @@ const DEPARTMENT_LIST = [{
       screen: screens.PROFILE_SCREEN.id,
       animated: true,
       overrideBackPress: true,
-      navigatorStyle: {},
-      title: 'Detail Page',
+      navigatorStyle: {
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true,
+        navBarTextColor: 'white',
+        navBarTransparency: 1,  
+        navBarButtonColor: 'white',                  
+        navBarLeftButtonColor: 'white',
+        navBarRightButtonColor: 'white',
+      },
+      title: '',
       passProps: {
         data: {
           department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
@@ -167,8 +176,7 @@ const DEPARTMENT_LIST = [{
   render() {
     return (
       <View style={ style.mainContainer }>
-        <View style={[style.statusBar, {height: 20}]}>
-        </View>
+        <View style={[style.statusBar, {height: 20}]}/>
         <View style={style.searchContainer}>
           <Search
             ref={component => this.searchBar = component}
