@@ -158,7 +158,6 @@ const DEPARTMENT_LIST = [{
   }
 
   _onMomentumScrollEnd = (index) => {
-    console.log('cxcxcxcxcxc',index);
     this.setState({
       currentSwipeIndex: index,
     })

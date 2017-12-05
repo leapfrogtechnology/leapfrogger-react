@@ -4,7 +4,8 @@ const colors = {
   LF_GRAY: '#6e6f72',
   LIGHT_GRAY: '#c8c8c8',
   SYSTEM_BLUE: '#007aff',
-  SYSTEM_LIGHT_GRAY: '#f7f7f7',  
+  GOOGLE_BLUE: '#4285f4',    
+  SYSTEM_LIGHT_GRAY: '#f7f7f7',
 };
 
 const TOUCH_OPACITY = 0.6;

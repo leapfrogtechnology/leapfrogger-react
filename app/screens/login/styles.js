@@ -74,7 +74,27 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   googleLoginButton: {
-    height: 44,    
+    height: 44,
+    backgroundColor: colors.GOOGLE_BLUE,
+    borderWidth: 0,
+    shadowColor: colors.LF_GRAY,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  googleTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "600",
+    flex: 0.8,
+  },
+  googleImage: {
+    width: 27,
+    height: 27,
+    flex: 0.2,
+    resizeMode: 'contain',
+    marginLeft: 5,
+    marginRight: 10,
   },
   errorLabelContainer: {
     position: 'absolute',

@@ -10,6 +10,7 @@ import {
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
  
+import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import placeHolderImage from './../../../assets/images/default.png';
@@ -28,6 +29,11 @@ LOGOUT = 5
 
   constructor(props) {
     super(props);
+  }
+
+  _logout = () => {
+    // TODO: Clear all data
+    startLoginScreen();
   }
 
   _renderParallaxTableHeaderView = (data) => {
@@ -108,7 +114,7 @@ LOGOUT = 5
   _renderLougoutCell = () => {
     return (
       <View style={style.logoutButtonContainer}>
-        <TouchableOpacity style={style.logoutButton}>
+        <TouchableOpacity style={style.logoutButton} onPress={() => this._logout()}>
           <Text>Logout</Text>
         </TouchableOpacity>
       </View>
