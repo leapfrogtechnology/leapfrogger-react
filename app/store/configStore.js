@@ -13,7 +13,7 @@ const config = {
 const reducer = persistCombineReducers(config, rootReducer)
 
 export default configureStore = () => {
-  let store = createStore(rootReducer, applyMiddleware(thunk));
+  let store = createStore(reducer, applyMiddleware(thunk));
   let persistor = persistStore(store);  
   return (persistor, store);
 }

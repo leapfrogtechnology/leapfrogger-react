@@ -71,9 +71,9 @@ import splash from '../../../assets/images/splash-screen.png';
       this.setState({ })
       if (user) {
         this.setState({user: user});        
-        this._login()
+        this._login();
       }
-      // this.props.onLogin(user);
+      this.props.onLogin(user);
     }
     catch(err) {
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);

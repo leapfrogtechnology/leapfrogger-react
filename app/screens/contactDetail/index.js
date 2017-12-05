@@ -1,3 +1,3 @@
-import ContactDetailScreen from './contactDetail';
+import ContactDetailContainer from './contactDetailContainer';
 
-export default ContactDetailScreen;
+export default ContactDetailContainer;

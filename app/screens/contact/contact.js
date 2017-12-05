@@ -165,6 +165,7 @@ const DEPARTMENT_LIST = [{
   }
 
   render() {
+    console.log('xxxxxxxxxx', this.props);
     return (
       <View style={ style.mainContainer }>
         <Search

@@ -1,6 +1,6 @@
-import { LOGIN } from './../constants/actionsType';
+import { LOGIN } from 'App/constants/actionsType';
 
-export const loginAction = (data) => ({
-  type: actionTypes.LOGIN,
-  data
+export const loginAction = (user) => ({
+  type: LOGIN,
+  user
 });

@@ -4,7 +4,7 @@ import InitialScreen from './initial';
 // import { loginAction } from './../../actions';
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.loggedIn,
+  isLoggedIn: state.rootReducer.auth.loggedIn,
 });
 
 export default connect(

@@ -68,7 +68,6 @@ LOGOUT = 5
   }
 
   _renderItems = (item, index) => {
-    console.log('xxxx', item, index, 'xxxxx');
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
       case ADDRESS: return this._renderTextCell('Address');
