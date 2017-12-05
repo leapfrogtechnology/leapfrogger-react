@@ -21,7 +21,14 @@ export const startTabScreen = () => {
         },
         title: 'Leapfroggers',
         // titleImage: require('../img/titleImage.png'), // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
-        navigatorStyle: {}, // override the navigator style for the tab screen, see "Styling the navigator" below (optional),
+        navigatorStyle: {
+          statusBarTextColorScheme: 'light',                  
+          navBarHidden: true,
+          navBarNoBorder: false,
+          drawUnderNavBar: true,
+          navBarTranslucent: true,
+          navBarBackgroundColor: colors.LF_DARK_GRREEN,           
+        }, // override the navigator style for the tab screen, see "Styling the navigator" below (optional),
         navigatorButtons: {} // override the nav buttons for the tab screen, see "Adding buttons to the navigator" below (optional)
       },
       {
@@ -36,7 +43,14 @@ export const startTabScreen = () => {
           right: 0
         },
         navigatorStyle: {
+          statusBarTextColorScheme: 'light',                  
+          navBarNoBorder: false,
+          drawUnderNavBar: true,
+          navBarTranslucent: true,
           navBarTransparent: true,
+          navBarBackgroundColor: colors.LF_DARK_GRREEN, 
+          navBarTextColor: 'white',
+          navBarTransparency: 1,                    
         },
         title: 'My Profile',
         passProps: {
@@ -47,8 +61,8 @@ export const startTabScreen = () => {
       }
     ],
     tabsStyle: {
-      tabBarButtonColor: colors.SYSTEM_SELECTED,
-      tabBarSelectedButtonColor: colors.SYSTEM_SELECTED,
+      tabBarButtonColor: colors.LIGHT_GRAY,
+      tabBarSelectedButtonColor: colors.LF_DARK_GRREEN,
       tabBarBackgroundColor: colors.SYSTEM_LIGHT_GRAY,
       initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
     },

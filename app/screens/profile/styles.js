@@ -140,9 +140,15 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     width: 150,
     height: 44,
-    backgroundColor: 'gray',
-  }
-
+  },
+  logoutTitle: {
+    color: colors.IOS_RED
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
 });
 
 export default style;

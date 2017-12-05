@@ -9,8 +9,10 @@ import {
 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
- 
+
+import Button from 'App/components/Button';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
+
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import placeHolderImage from './../../../assets/images/default.png';
@@ -114,9 +116,12 @@ LOGOUT = 5
   _renderLougoutCell = () => {
     return (
       <View style={style.logoutButtonContainer}>
-        <TouchableOpacity style={style.logoutButton} onPress={() => this._logout()}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+        <Button 
+        style={style.logoutButton}
+        title={'Logout'}
+        titleStyle={style.logoutTitle}
+        onPress={() => this._logout()}
+      />
       </View>
     );
   }
@@ -133,6 +138,7 @@ LOGOUT = 5
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView(props)
         )}
+        renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
       />
     );
   }

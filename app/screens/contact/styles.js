@@ -13,6 +13,27 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  statusBar: {
+    backgroundColor: colors.LF_DARK_GRREEN,
+  },
+  searchContainer: {
+    height: 50,
+    top: 20,
+    width: getWidth(),
+    zIndex: 10,        
+    position: 'absolute',
+    justifyContent: 'center',
+    marginBottom: -3,
+    backgroundColor: colors.LF_DARK_GRREEN,
+    shadowColor: colors.LF_GRAY,
+    shadowOffset: { width: 0, height: 2.5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  tableContainer: {
+    marginTop: 50,
+    flex: 1
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
@@ -41,7 +62,7 @@ const style = StyleSheet.create({
   stickySection: {
     justifyContent: 'flex-end',    
     height: STICKY_HEADER_HEIGHT,
-    backgroundColor: colors.LIGHT_GRAY,
+    backgroundColor: colors.LF_DARK_GRREEN,
     marginBottom: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
@@ -52,11 +73,6 @@ const style = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     margin: 10
-  },
-  fixedSection: {
-    position: 'absolute',
-    right: 10,    
-    bottom: 10,
   },
   parallaxHeader: {
     flex: 1,

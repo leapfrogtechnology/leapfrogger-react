@@ -10,7 +10,7 @@ import { Keyboard } from 'react-native';
 import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+import { GoogleSignin } from 'react-native-google-signin';
 
 import style from './styles';
 import Button from 'App/components/Button';
