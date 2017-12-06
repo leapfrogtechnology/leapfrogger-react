@@ -40,7 +40,7 @@ LOGOUT = 5
   }
 
   _moreButtonAction = () => {
-    console.log('asdas');
+    console.log('More Actions----');
   }
 
   _renderParallaxTableHeaderView = (data) => {

@@ -73,7 +73,6 @@ const GuestUser = {
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
         this.props.onLogin(user);
-        console.log('11111', this.props.isLoggedIn);
         this._login();
       }      
     }
@@ -83,11 +82,10 @@ const GuestUser = {
   }
 
   _googleSignIn = () => {
-    console.log('22222 kasld'); 
     GoogleSignin.signIn()
     .then((user) => {
       this.props.onLogin(user);
-      console.log('22222', this.props.isLoggedIn);      
+      console.log('isLoggedIn---', this.props.isLoggedIn);      
       this._login();      
     })
     .catch((err) => {
