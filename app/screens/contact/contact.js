@@ -83,8 +83,17 @@ const DEPARTMENT_LIST = [{
       screen: screens.PROFILE_SCREEN.id,
       animated: true,
       overrideBackPress: true,
-      navigatorStyle: {},
-      title: 'Detail Page',
+      navigatorStyle: {
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true,
+        navBarTextColor: 'white',
+        navBarTransparency: 1,  
+        navBarButtonColor: 'white',                  
+        navBarLeftButtonColor: 'white',
+        navBarRightButtonColor: 'white',
+      },
+      title: '',
       passProps: {
         data: {
           department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
@@ -125,7 +134,7 @@ const DEPARTMENT_LIST = [{
 
         renderStickyHeader={() => (
           <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>iOS</Text>
+            <Text style={style.stickySectionText}>{DEPARTMENT_LIST[index].name}</Text>
           </View>
         )}
       />
@@ -153,12 +162,12 @@ const DEPARTMENT_LIST = [{
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView(props, index)
         )}
+        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1}}></View>}
       />
     );
   }
 
   _onMomentumScrollEnd = (index) => {
-    console.log('cxcxcxcxcxc',index);
     this.setState({
       currentSwipeIndex: index,
     })
@@ -167,27 +176,34 @@ const DEPARTMENT_LIST = [{
   render() {
     return (
       <View style={ style.mainContainer }>
-        <Search
-          ref={component => this.searchBar = component}
-          backgroundColor={colors.LIGHT_GRAY}
-          titleCancelColor={colors.SYSTEM_BLUE}
-          onChangeText={this._onSearchBarTextChange}
-          onFocus={this._onSearchBarFocus}
-          afterSearch={this.onSearch}
-          afterCancel={this.onCancel}
-          keyboardDismissOnSubmit={true}
-          blurOnSubmit={true}
-        />
-        <Swiper
-          style={style.wrapper}
-          loop={false} 
-          onIndexChanged ={this._onMomentumScrollEnd}          
-          activeDotStyle={{marginBottom: DOT_MARGIN}} 
-          dotStyle={{marginBottom: DOT_MARGIN}}>
-            {
-              DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
-            }
-        </Swiper>
+        <View style={[style.statusBar, {height: 20}]}/>
+        <View style={style.searchContainer}>
+          <Search
+            ref={component => this.searchBar = component}
+            backgroundColor={colors.LF_DARK_GRREEN}
+            titleCancelColor={colors.SYSTEM_BLUE}
+            onChangeText={this._onSearchBarTextChange}
+            onFocus={this._onSearchBarFocus}
+            afterSearch={this.onSearch}
+            afterCancel={this.onCancel}
+            cancelButtonStyle={{color: 'white'}}
+            keyboardDismissOnSubmit={true}
+            blurOnSubmit={true}
+          />
+        </View>
+        <View style={style.tableContainer}>
+          <Swiper
+            style={style.wrapper}
+            loop={false} 
+            onIndexChanged ={this._onMomentumScrollEnd}          
+            activeDotStyle={{marginBottom: DOT_MARGIN}} 
+            activeDotColor={colors.LF_DARK_GRREEN}
+            dotStyle={{marginBottom: DOT_MARGIN}}>
+              {
+                DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
+              }
+          </Swiper>
+        </View>
       </View>
     );
   }

@@ -41,7 +41,7 @@ const style = StyleSheet.create({
   stickySection: {
     justifyContent: 'flex-end',    
     height: STICKY_HEADER_HEIGHT,
-    backgroundColor: colors.LIGHT_GRAY,
+    backgroundColor: colors.LF_DARK_GRREEN,
     marginBottom: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
@@ -140,9 +140,36 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     width: 150,
     height: 44,
-    backgroundColor: 'gray',
-  }
+  },
+  logoutTitle: {
+    color: colors.IOS_RED
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
+  moreButtonContainer: {
+    position: 'absolute',
+    zIndex: 50,
+    top: 26,
+    right: 8,
+    transform: [{ rotate: '90deg'}],
+  },
+  moreButton: {
 
+  },
+  moreButtonImage: {
+    width: 30,
+    height: 25,
+    margin: 5,
+    resizeMode: 'contain',
+    tintColor: 'white',
+    shadowRadius: 5,
+    shadowOpacity: 0.8,
+    shadowColor: 'blue',    
+    shadowOffset: { width: 0, height: 0 },    
+  }
 });
 
 export default style;

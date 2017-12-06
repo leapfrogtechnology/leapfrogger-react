@@ -1,6 +1,6 @@
 import {
   LOGIN,
-} from './../constants/actionsType';
+} from 'App/constants/actionsType';
 
 const initialState = {
   loggedIn: false,
@@ -11,7 +11,7 @@ const auth = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        data: action.data,
+        user: action.user,
         loggedIn: true,
       };
 

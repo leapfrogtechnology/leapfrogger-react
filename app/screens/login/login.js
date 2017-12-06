@@ -10,7 +10,7 @@ import { Keyboard } from 'react-native';
 import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+import { GoogleSignin } from 'react-native-google-signin';
 
 import style from './styles';
 import Button from 'App/components/Button';
@@ -19,9 +19,13 @@ import { startTabScreen } from 'App/navigator/tabNavigator';
 import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
 import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
+import googleLogo from '../../../assets/images/google.png';
 import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
 
+const GuestUser = {
+  guest: true
+}
  class LoginScreen extends Component {
 
   constructor(props) {
@@ -30,8 +34,6 @@ import splash from '../../../assets/images/splash-screen.png';
     this.state = { 
       email: '',
       password: '',
-      user: null,
-      isEmailValid: false,
       errorMessage: '',
     }    
   }
@@ -51,7 +53,8 @@ import splash from '../../../assets/images/splash-screen.png';
   _login = () => {
     Keyboard.dismiss();
     this._setErrorMessage();    
-    if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.state.user)) {
+    if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.props.isLoggedIn)) {
+      this.props.onLogin(GuestUser);
       startTabScreen();      
     } else {
       // incorrect email / password
@@ -68,23 +71,22 @@ import splash from '../../../assets/images/splash-screen.png';
       });
 
       const user = await GoogleSignin.currentUserAsync();
-      this.setState({ })
       if (user) {
-        this.setState({user: user});        
-        this._login()
-      }
-      // this.props.onLogin(user);
+        this.props.onLogin(user);
+        this._login();
+      }      
     }
     catch(err) {
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
     }
   }
 
-  _googleSignIn() {
+  _googleSignIn = () => {
     GoogleSignin.signIn()
     .then((user) => {
-      this.setState({user: user});
       this.props.onLogin(user);
+      console.log('isLoggedIn---', this.props.isLoggedIn);      
+      this._login();      
     })
     .catch((err) => {
       console.log(WRONG_SIGNIN.message, err);
@@ -163,14 +165,18 @@ import splash from '../../../assets/images/splash-screen.png';
           </View>
         </View>
         <View style={style.buttonContainer}>
-          <GoogleSigninButton
-            style={{width: 212, height: 48}}
-            size={GoogleSigninButton.Size.Wide}
-            color={GoogleSigninButton.Color.Dark}
-            onPress={this._googleSignIn}/>
+          <Button
+            style={style.googleLoginButton}
+            title={'Sign in with Google'}
+            titleStyle={style.googleTitle}
+            source={googleLogo}
+            imageStyle={style.googleImage}
+            onPress={() => this._googleSignIn()}
+          />
         </View>
       </View>
     );
+
   }
 
  }

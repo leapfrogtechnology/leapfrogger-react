@@ -10,6 +10,7 @@ export const startTabScreen = () => {
     tabs: [
       {
         label: 'Contacts',
+        title: '',        
         screen: screens.CONTACT_SCREEN.id,
         icon: profileIcon,
         // selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
@@ -19,13 +20,23 @@ export const startTabScreen = () => {
           bottom: 0,
           right: 0
         },
-        title: 'Leapfroggers',
         // titleImage: require('../img/titleImage.png'), // iOS only. navigation bar title image instead of the title text of the pushed screen (optional)
-        navigatorStyle: {}, // override the navigator style for the tab screen, see "Styling the navigator" below (optional),
+        navigatorStyle: {
+          statusBarTextColorScheme: 'light',                  
+          navBarHidden: true,
+          navBarNoBorder: false,
+          drawUnderNavBar: true,
+          navBarTranslucent: true,
+          navBarBackgroundColor: colors.LF_DARK_GRREEN,
+          navBarButtonColor: 'white',                  
+          navBarLeftButtonColor: 'white',
+          navBarRightButtonColor: 'white',  
+        }, // override the navigator style for the tab screen, see "Styling the navigator" below (optional),
         navigatorButtons: {} // override the nav buttons for the tab screen, see "Adding buttons to the navigator" below (optional)
       },
       {
-        label: 'Profile',
+        label: 'My Profile',
+        title: '',        
         screen: screens.PROFILE_SCREEN.id,
         icon: profileIcon,
         // selectedIcon: require('../img/two_selected.png'),
@@ -36,9 +47,19 @@ export const startTabScreen = () => {
           right: 0
         },
         navigatorStyle: {
+          statusBarTextColorScheme: 'light',                  
+          navBarNoBorder: false,
+          drawUnderNavBar: true,
+          navBarHidden: true,          
+          navBarTranslucent: true,
           navBarTransparent: true,
+          navBarBackgroundColor: colors.LF_DARK_GRREEN, 
+          navBarTextColor: 'white',
+          navBarTransparency: 1,  
+          navBarButtonColor: 'white',                  
+          navBarLeftButtonColor: 'white',
+          navBarRightButtonColor: 'white',
         },
-        title: 'My Profile',
         passProps: {
           data: {
             fromProfileTab: true,
@@ -47,8 +68,8 @@ export const startTabScreen = () => {
       }
     ],
     tabsStyle: {
-      tabBarButtonColor: colors.SYSTEM_SELECTED,
-      tabBarSelectedButtonColor: colors.SYSTEM_SELECTED,
+      tabBarButtonColor: colors.LIGHT_GRAY,
+      tabBarSelectedButtonColor: colors.LF_DARK_GRREEN,
       tabBarBackgroundColor: colors.SYSTEM_LIGHT_GRAY,
       initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
     },

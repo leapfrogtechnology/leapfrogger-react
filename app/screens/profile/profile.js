@@ -9,7 +9,11 @@ import {
 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
- 
+
+import Button from 'App/components/Button';
+import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
+
+import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import placeHolderImage from './../../../assets/images/default.png';
@@ -28,6 +32,15 @@ LOGOUT = 5
 
   constructor(props) {
     super(props);
+  }
+
+  _logout = () => {
+    // TODO: Clear all data
+    startLoginScreen();
+  }
+
+  _moreButtonAction = () => {
+    console.log('More Actions----');
   }
 
   _renderParallaxTableHeaderView = (data) => {
@@ -58,17 +71,16 @@ LOGOUT = 5
           </View>
         )}
 
-        renderStickyHeader={() => (
-          <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>iOS</Text>
-          </View>
-        )}
+        // renderStickyHeader={() => (
+        //   <View key="sticky-header" style={style.stickySection}>
+        //     <Text style={style.stickySectionText}>iOS</Text>
+        //   </View>
+        // )}
       />
     );
   }
 
   _renderItems = (item, index) => {
-    console.log('xxxx', item, index, 'xxxxx');
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
       case ADDRESS: return this._renderTextCell('Address');
@@ -109,16 +121,19 @@ LOGOUT = 5
   _renderLougoutCell = () => {
     return (
       <View style={style.logoutButtonContainer}>
-        <TouchableOpacity style={style.logoutButton}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+        <Button 
+        style={style.logoutButton}
+        title={'Logout'}
+        titleStyle={style.logoutTitle}
+        onPress={() => this._logout()}
+      />
       </View>
     );
   }
 
   _renderTableView = () => {
     var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]
-    this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
+    // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList
         ref="ListView"
@@ -128,13 +143,28 @@ LOGOUT = 5
         renderScrollComponent={props => (
           this._renderParallaxTableHeaderView(props)
         )}
+        renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
       />
+    );
+  }
+
+  _renderMoreButton = () => {
+    return (
+      <View style={style.moreButtonContainer}>
+        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
+          <Image source={moreImage} style={style.moreButtonImage}/>
+        </TouchableOpacity>
+      </View>
     );
   }
 
   render() {
     return (
       <View style={ style.mainContainer }>
+        {
+          this.props.data.fromProfileTab &&                    
+          this._renderMoreButton()
+        }
         {
           this._renderTableView()
         }

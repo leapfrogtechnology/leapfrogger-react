@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 
 import LoginScreen from './login';
-import { loginAction } from './../../actions';
+import { loginAction } from 'App/actions';
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.loggedIn,
-  user: state.auth.data,
+  isLoggedIn: state.rootReducer.auth.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
