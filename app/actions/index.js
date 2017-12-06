@@ -1,6 +1,10 @@
-import { LOGIN } from 'App/constants/actionsType';
+import * as ActionType from 'App/constants/actionsType';
 
 export const loginAction = (user) => ({
-  type: LOGIN,
+  type: ActionType.LOGIN,
   user
+});
+
+export const logoutAction = () => ({
+  type: ActionType.LOGOUT,
 });

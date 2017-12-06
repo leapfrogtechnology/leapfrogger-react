@@ -7,6 +7,7 @@ import {
   TouchableOpacity
  } from 'react-native';
 
+import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
@@ -24,11 +25,13 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
 const PHONE_NUMBER = 0
 const ADDRESS = 1
 const DEPARTMENT = 2
-DOB = 3
-SKYPE = 4
-LOGOUT = 5
+const DOB = 3
+const SKYPE = 4
 
- class ProfileScreen extends Component {
+const CANCEL_INDEX = 0
+const DESTRUCTIVE_INDEX = 2
+const options = ['Cancel', 'Update', 'Logout']
+class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -36,11 +39,25 @@ LOGOUT = 5
 
   _logout = () => {
     // TODO: Clear all data
+    this.props.logout();
     startLoginScreen();
   }
 
   _moreButtonAction = () => {
-    console.log('More Actions----');
+    this.actionSheet.show();
+  }
+
+  _actionSheetSelection = (index) => {
+    switch (index) {
+      case 0:
+      break
+      case 1: // Update
+      break
+      case 2: // logout
+      this._logout();
+      default:
+      break
+    }
   }
 
   _renderParallaxTableHeaderView = (data) => {
@@ -71,11 +88,6 @@ LOGOUT = 5
           </View>
         )}
 
-        // renderStickyHeader={() => (
-        //   <View key="sticky-header" style={style.stickySection}>
-        //     <Text style={style.stickySectionText}>iOS</Text>
-        //   </View>
-        // )}
       />
     );
   }
@@ -158,6 +170,20 @@ LOGOUT = 5
     );
   }
 
+  _renderActionSheet = () => {
+    return (
+      <View>
+        <ActionSheet
+          ref={component => this.actionSheet = component}
+          options={options}
+          cancelButtonIndex={CANCEL_INDEX}
+          destructiveButtonIndex={DESTRUCTIVE_INDEX}
+          onPress={(index) => this._actionSheetSelection(index)}
+        />
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={ style.mainContainer }>
@@ -167,6 +193,9 @@ LOGOUT = 5
         }
         {
           this._renderTableView()
+        }
+        {
+          this._renderActionSheet()
         }
       </View>
     );
