@@ -72,6 +72,7 @@ const GuestUser = {
 
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
+        this.props.validateEmail(user.accessToken);
         this.props.onLogin(user);
         // this._login();
       }      
