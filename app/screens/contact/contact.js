@@ -181,12 +181,11 @@ const DEPARTMENT_LIST = [{
           <Search
             ref={component => this.searchBar = component}
             backgroundColor={colors.LF_DARK_GRREEN}
-            titleCancelColor={colors.SYSTEM_BLUE}
+            titleCancelColor='white'
             onChangeText={this._onSearchBarTextChange}
             onFocus={this._onSearchBarFocus}
             afterSearch={this.onSearch}
             afterCancel={this.onCancel}
-            cancelButtonStyle={{color: 'white'}}
             keyboardDismissOnSubmit={true}
             blurOnSubmit={true}
           />

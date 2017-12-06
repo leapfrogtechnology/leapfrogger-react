@@ -67,13 +67,13 @@ const GuestUser = {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
         iosClientId: IOS_GOOGLE_CLIENT_ID,
-        offlineAccess: false
+        offlineAccess: true
       });
 
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
         this.props.onLogin(user);
-        this._login();
+        // this._login();
       }      
     }
     catch(err) {
