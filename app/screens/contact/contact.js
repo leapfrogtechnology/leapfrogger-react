@@ -186,6 +186,7 @@ const DEPARTMENT_LIST = [{
             onFocus={this._onSearchBarFocus}
             afterSearch={this.onSearch}
             afterCancel={this.onCancel}
+            cancelButtonStyle={{color: 'white'}}
             keyboardDismissOnSubmit={true}
             blurOnSubmit={true}
           />

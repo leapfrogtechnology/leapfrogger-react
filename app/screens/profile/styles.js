@@ -149,6 +149,27 @@ const style = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
   },
+  moreButtonContainer: {
+    position: 'absolute',
+    zIndex: 50,
+    top: 26,
+    right: 8,
+    transform: [{ rotate: '90deg'}],
+  },
+  moreButton: {
+
+  },
+  moreButtonImage: {
+    width: 30,
+    height: 25,
+    margin: 5,
+    resizeMode: 'contain',
+    tintColor: 'white',
+    shadowRadius: 5,
+    shadowOpacity: 0.8,
+    shadowColor: 'blue',    
+    shadowOffset: { width: 0, height: 0 },    
+  }
 });
 
 export default style;

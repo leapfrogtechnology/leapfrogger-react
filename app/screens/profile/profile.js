@@ -13,6 +13,7 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Button from 'App/components/Button';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
+import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import placeHolderImage from './../../../assets/images/default.png';
@@ -36,6 +37,10 @@ LOGOUT = 5
   _logout = () => {
     // TODO: Clear all data
     startLoginScreen();
+  }
+
+  _moreButtonAction = () => {
+    console.log('asdas');
   }
 
   _renderParallaxTableHeaderView = (data) => {
@@ -66,11 +71,11 @@ LOGOUT = 5
           </View>
         )}
 
-        renderStickyHeader={() => (
-          <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>iOS</Text>
-          </View>
-        )}
+        // renderStickyHeader={() => (
+        //   <View key="sticky-header" style={style.stickySection}>
+        //     <Text style={style.stickySectionText}>iOS</Text>
+        //   </View>
+        // )}
       />
     );
   }
@@ -128,7 +133,7 @@ LOGOUT = 5
 
   _renderTableView = () => {
     var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]
-    this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
+    // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList
         ref="ListView"
@@ -143,9 +148,23 @@ LOGOUT = 5
     );
   }
 
+  _renderMoreButton = () => {
+    return (
+      <View style={style.moreButtonContainer}>
+        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
+          <Image source={moreImage} style={style.moreButtonImage}/>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={ style.mainContainer }>
+        {
+          this.props.data.fromProfileTab &&                    
+          this._renderMoreButton()
+        }
         {
           this._renderTableView()
         }
