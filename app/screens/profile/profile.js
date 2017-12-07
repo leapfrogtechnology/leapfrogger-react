@@ -187,7 +187,6 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    console.log('---111',this.props.me);    
     return (
       <View style={ style.mainContainer }>
         {

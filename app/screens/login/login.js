@@ -86,7 +86,6 @@ const GuestUser = {
     GoogleSignin.signIn()
     .then((user) => {
       this.props.validateEmail(user.accessToken);
-      console.log('isLoggedIn---', this.props.isEmailValid);            
       this.props.onLogin(user);
       this._login();      
     })
