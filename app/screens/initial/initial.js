@@ -12,8 +12,8 @@ class Initial extends Component  {
   componentWillMount() {}
 
   componentDidMount() {
-    // this.props.isLoggedIn ? startTabScreen() : startLoginScreen()    
-    startLoginScreen()    
+    this.props.isLoggedIn ? startTabScreen() : startLoginScreen()    
+    // startLoginScreen()    
   }
 
   render() {

@@ -39,6 +39,7 @@ const GuestUser = {
   }
 
   _presetLoginData = () => {
+    this.props.onLogin(GuestUser);    
     this.setState({
       email: loginCredentials.email,
       password: loginCredentials.password,
@@ -54,7 +55,6 @@ const GuestUser = {
     Keyboard.dismiss();
     this._setErrorMessage();    
     if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.props.isLoggedIn)) {
-      this.props.onLogin(GuestUser);
       startTabScreen();      
     } else {
       // incorrect email / password

@@ -6,6 +6,7 @@ import * as fetchActions from 'App/actions/fetchActions';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.rootReducer.auth.loggedIn,
+  user: state.rootReducer.auth.user,
   isEmailValid: state.rootReducer.user.isValid,
 });
 

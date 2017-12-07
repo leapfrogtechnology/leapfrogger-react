@@ -1,5 +1,6 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const MY_PROFILE = 'MY_PROFILE';
 export const VALIDATE_EMAIL = 'VALIDATE_EMAIL';
 export const EMPLOYEES_LIST = 'EMPLOYEES_LIST';
 export const NETWORK_FETCHING = 'NETWORK_FETCHING'; 

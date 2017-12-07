@@ -10,6 +10,7 @@ import Swiper from 'react-native-swiper';
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import * as util from 'App/utils/dataNormalization';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
@@ -64,7 +65,7 @@ const DEPARTMENT_LIST = [{
   }
 
   componentDidMount() {
-    this.props.fetchEmployees()
+    this.props.employees ? null : this.props.fetchEmployees()
   }
 
   _onSearchBarTextChange = () => {
@@ -210,7 +211,7 @@ const DEPARTMENT_LIST = [{
         activeDotColor={colors.LF_DARK_GRREEN}
         dotStyle={{marginBottom: DOT_MARGIN}}>
           {
-            this.props.employees.map((data, index) => this._renderTableView(data, index))
+            DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
           }
       </Swiper>
     )
@@ -225,7 +226,6 @@ const DEPARTMENT_LIST = [{
   }
 
   render() {
-    console.log('xxx', this.props)
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }

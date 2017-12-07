@@ -24,9 +24,10 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
 
 const PHONE_NUMBER = 0
 const ADDRESS = 1
-const DEPARTMENT = 2
-const DOB = 3
-const SKYPE = 4
+const EMAIL = 2
+const DEPARTMENT = 3
+const DOB = 4
+const SKYPE = 5
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 2
@@ -95,10 +96,11 @@ class ProfileScreen extends Component {
   _renderItems = (item, index) => {
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
-      case ADDRESS: return this._renderTextCell('Address');
-      case DEPARTMENT: return this._renderTextCell('Department');
-      case DOB: return this._renderTextCell('Dob');
-      case SKYPE: return this._renderTextCell('Skype ID');
+      case ADDRESS: return this._renderTextCell('Address', '');
+      case EMAIL: return this._renderTextCell('Email', this.props.me.username);
+      case DEPARTMENT: return this._renderTextCell('Department', '');
+      case DOB: return this._renderTextCell('Dob', '');
+      case SKYPE: return this._renderTextCell('Skype ID', '');
       case LOGOUT: return this._renderLougoutCell();
     }
   }
@@ -107,7 +109,7 @@ class ProfileScreen extends Component {
     return (
       <View style={style.phoneCell}>
         <View style={style.nameTextContainer}>
-          <Text style={style.titleText}>Name</Text>
+          <Text style={style.titleText}>{ this.props.me.firstName } {this.props.me.lastName}</Text>
         </View>
         <View style={style.phoneMessageContainer}>
           <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall('0123456789', true)}>
@@ -121,11 +123,11 @@ class ProfileScreen extends Component {
     );
   }
 
-  _renderTextCell = (text) => {
+  _renderTextCell = (text, data) => {
     return (
       <View style={style.simpleTextCell}>
         <Text style={style.titleText}>{text}</Text>
-        <Text style={style.dataText}>N/A</Text>
+        <Text style={style.dataText}>{data}</Text>
       </View>
     );
   }
@@ -144,7 +146,7 @@ class ProfileScreen extends Component {
   }
 
   _renderTableView = () => {
-    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]
+    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]
     // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList
@@ -185,6 +187,7 @@ class ProfileScreen extends Component {
   }
 
   render() {
+    console.log('---111',this.props.me);    
     return (
       <View style={ style.mainContainer }>
         {
@@ -203,4 +206,4 @@ class ProfileScreen extends Component {
 
  }
 
- export default ProfileScreen
+ export default ProfileScreen;

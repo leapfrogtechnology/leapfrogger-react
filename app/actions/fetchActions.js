@@ -1,6 +1,8 @@
 import { uri } from 'App/config/uri';
-import * as ActionType from 'App/constants/actionsType';
+import * as util from 'App/utils/dataNormalization';
 import * as Resource from 'App/utils/networkResource';
+import * as ActionType from 'App/constants/actionsType';
+import { store } from './../../App';
 
 export const validateEmail = (token) => {
   console.log('11111', Resource.emailValidation(token));  
@@ -23,8 +25,10 @@ export const fetchEmployeeFromAPI = (apiKey) => {
     fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
     .then(data => data.json())
     .then(jsonResponse => {
-      console.log('json:', jsonResponse)
-      dispatch(getEmployeeList(jsonResponse))
+      console.log('json:', jsonResponse);
+      var myProfile = util.myInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
+      dispatch(myProfileInfo(myProfile));
+      dispatch(getEmployeeList(jsonResponse));
     })
     .catch(err => {dispatch(networkFetchError(err))
     console.log("9999", err)
@@ -71,5 +75,12 @@ getEmployeeList = (employees) => {
   return {
     type: ActionType.EMPLOYEES_LIST,
     employees
+  }
+}
+
+myProfileInfo = (myProfile) => {
+  return {
+    type: ActionType.MY_PROFILE,
+    myProfile
   }
 }

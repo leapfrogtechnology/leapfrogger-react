@@ -20,6 +20,12 @@ const user = (state = initialState, action) => {
         employees: action.employees
       };
     
+    case actionType.MY_PROFILE:
+    console.log('MY_PROFILE', action.myProfile);    
+    return {
+      ...state,
+      myProfile: action.myProfile
+    }
     default:
       return state;
   }
