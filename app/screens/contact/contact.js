@@ -148,14 +148,12 @@ const DEPARTMENT_LIST = [{
   }
 
   _renderTableView = (data, index) => {
+    // console.log('-----', data, index);
     return (
       <SectionList
         ref="ListView"
-        key={data}                  
-        sections={[
-          {title: 'D', data: ['Devin']},
-          {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-        ]}
+        key={index}                  
+        sections={util.groupByAlphabets(this.props.employees)}
         keyExtractor={(item, index) => index}
         renderItem={({item, section, index}) => 
           <ContactCell 
@@ -211,7 +209,7 @@ const DEPARTMENT_LIST = [{
         activeDotColor={colors.LF_DARK_GRREEN}
         dotStyle={{marginBottom: DOT_MARGIN}}>
           {
-            DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
+            util.groupByDepartment(this.props.employees).map((data, index) => this._renderTableView(data, index))
           }
       </Swiper>
     )
@@ -226,6 +224,7 @@ const DEPARTMENT_LIST = [{
   }
 
   render() {
+    console.log('-----', util.groupByDepartment(this.props.employees));
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }
