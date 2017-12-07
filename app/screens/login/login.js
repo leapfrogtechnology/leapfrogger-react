@@ -67,7 +67,7 @@ const GuestUser = {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
         iosClientId: IOS_GOOGLE_CLIENT_ID,
-        offlineAccess: true
+        offlineAccess: false
       });
 
       const user = await GoogleSignin.currentUserAsync();
@@ -84,8 +84,9 @@ const GuestUser = {
   _googleSignIn = () => {
     GoogleSignin.signIn()
     .then((user) => {
+      this.props.validateEmail(user.accessToken);
+      console.log('isLoggedIn---', this.props.isEmailValid);            
       this.props.onLogin(user);
-      console.log('isLoggedIn---', this.props.isLoggedIn);      
       this._login();      
     })
     .catch((err) => {

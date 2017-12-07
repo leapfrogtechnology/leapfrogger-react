@@ -1,3 +1,6 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const VALIDATE_EMAIL = 'VALIDATE_EMAIL';
+export const EMPLOYEES_LIST = 'EMPLOYEES_LIST';
+export const NETWORK_FETCHING = 'NETWORK_FETCHING'; 
+export const NETWORK_FETCH_ERROR = 'NETWORK_FETCH_ERROR';
