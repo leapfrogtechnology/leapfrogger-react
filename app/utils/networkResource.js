@@ -4,7 +4,9 @@ const GET = "GET"
 export const emailValidation = (token) => {
   return (
     {
-      method: POST,
+      method: POST
+    },
+    {
       body: JSON.stringify({
         token: token
       })
@@ -13,13 +15,10 @@ export const emailValidation = (token) => {
 }
 
 export const employeesList = (apiKey) => {
-  return (
-    {
+  return ({
       method: GET,
       headers: {
         apiKey: apiKey
       }
-    }
-  )
+    })
 }
-  

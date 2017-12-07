@@ -5,5 +5,3 @@ export const uri = {
   EMAIL_VALIDATION: `${BASE_URI}${api}/emailvalidation`,
   EMPLOYEES_LIST: `${BASE_URI}${api}/employeelist`,
 };
-
-export default uri;

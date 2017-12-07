@@ -6,7 +6,6 @@ export const validateEmail = (token) => {
   console.log('11111', Resource.emailValidation(token));  
   return (dispatch) => {
     dispatch(networkFetching())
-    dispatch(fetchEmployeeFromAPI("KwFCd240ziWFHM-FvpCT6xx34NY9C3o3gtvaSEuh"))
     fetch(uri.EMAIL_VALIDATION, Resource.emailValidation(token))
     .then(data => data.json())
     .then(json => {
@@ -23,11 +22,13 @@ export const fetchEmployeeFromAPI = (apiKey) => {
     dispatch(networkFetching())
     fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
     .then(data => data.json())
-    .then(json => {
-      console.log('json:', json)
-      dispatch(getEmployeeList(json.results))
+    .then(jsonResponse => {
+      console.log('json:', jsonResponse)
+      dispatch(getEmployeeList(jsonResponse))
     })
-    .catch(err => dispatch(networkFetchError(err)))
+    .catch(err => {dispatch(networkFetchError(err))
+    console.log("9999", err)
+    })
   }
 }
 
@@ -65,10 +66,10 @@ validateLFEmail = () => {
   }
 }
 
-getEmployeeList = () => {
+getEmployeeList = (employees) => {
   console.log('88888');
   return {
     type: ActionType.EMPLOYEES_LIST,
-    data
+    employees
   }
 }
