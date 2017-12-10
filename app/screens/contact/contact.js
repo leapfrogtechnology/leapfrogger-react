@@ -103,27 +103,27 @@ const DEPARTMENT_LIST = [{
   }
 
   _onCellSelection = () => {
-    this.props.navigator.push({
-      screen: screens.PROFILE_SCREEN.id,
-      animated: true,
-      overrideBackPress: true,
-      navigatorStyle: {
-        drawUnderNavBar: true,
-        navBarTranslucent: true,
-        navBarTransparent: true,
-        navBarTextColor: 'white',
-        navBarTransparency: 1,  
-        navBarButtonColor: 'white',                  
-        navBarLeftButtonColor: 'white',
-        navBarRightButtonColor: 'white',
-      },
-      title: '',
-      passProps: {
-        data: {
-          department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
-        }
-      }        
-    });
+    // this.props.navigator.push({
+    //   screen: screens.PROFILE_SCREEN.id,
+    //   animated: true,
+    //   overrideBackPress: true,
+    //   navigatorStyle: {
+    //     drawUnderNavBar: true,
+    //     navBarTranslucent: true,
+    //     navBarTransparent: true,
+    //     navBarTextColor: 'white',
+    //     navBarTransparency: 1,  
+    //     navBarButtonColor: 'white',                  
+    //     navBarLeftButtonColor: 'white',
+    //     navBarRightButtonColor: 'white',
+    //   },
+    //   title: '',
+    //   passProps: {
+    //     data: {
+    //       department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
+    //     }
+    //   }        
+    // });
   }
 
   _renderParallaxTableHeaderView = (data, index) => {
@@ -176,6 +176,7 @@ const DEPARTMENT_LIST = [{
         keyExtractor={(item, index) => index}
         renderItem={({item}) => 
           <ContactCell 
+            {...this.props}          
             data={item} 
             onPress={this._onCellSelection}/>
           }

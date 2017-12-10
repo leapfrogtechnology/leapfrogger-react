@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 
+import { store } from './../../App';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 
@@ -62,6 +63,7 @@ export const startTabScreen = () => {
         },
         passProps: {
           data: {
+            ...store.getState().rootReducer.user.myProfile,
             fromProfileTab: true,
           }
         } 

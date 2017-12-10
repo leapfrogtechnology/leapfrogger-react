@@ -11,6 +11,7 @@ import Communications from 'react-native-communications';
  
 import style from './styles';
 import colors from 'App/config/colors';
+import screens from 'App/constants/screens';
 import ProgressiveImage from 'App/components/progressiveImage';
 
 import moreImage from './../../../../assets/images/more.png';
@@ -26,6 +27,30 @@ import placeHolderImage from './../../../../assets/images/default.png';
     this.state = {
       isMoreButtonPressed: false
     }
+  }
+
+  _onCellSelection = () => {
+    this.props.navigator.push({
+      screen: screens.PROFILE_SCREEN.id,
+      animated: true,
+      overrideBackPress: true,
+      navigatorStyle: {
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true,
+        navBarTextColor: 'white',
+        navBarTransparency: 1,  
+        navBarButtonColor: 'white',                  
+        navBarLeftButtonColor: 'white',
+        navBarRightButtonColor: 'white',
+      },
+      title: '',
+      passProps: {
+        data: {
+          ...this.props.data
+        }
+      }        
+    });
   }
 
   _toggleButtonState = () => {
@@ -63,13 +88,9 @@ import placeHolderImage from './../../../../assets/images/default.png';
     )
   }
 
-  _onPressRow = () => {
-    this.props.onPress();
-  }
-
   render() {
     return (
-      <TouchableHighlight onPress={() => this._onPressRow()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
+      <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
             <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
