@@ -8,6 +8,7 @@ import {
  } from 'react-native';
 import style from './styles';
 import colors from 'App/config/colors';
+import ProgressiveImage from 'App/components/progressiveImage';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -66,12 +67,13 @@ import placeHolderImage from './../../../../assets/images/default.png';
       <TouchableHighlight onPress={() => this._onPressRow()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
-            <Image source={placeHolderImage} style={style.contactImage}/>
+            <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
+            {/* <Image source={placeHolderImage} style={style.contactImage}/> */}
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>
-              <Text style={style.titleLabel}>Name</Text>
-              <Text style={style.subTitleLabel}>work</Text>
+              <Text style={style.titleLabel}>{this.props.data.firstName} {this.props.data.lastName}</Text>
+              <Text style={style.subTitleLabel}>{this.props.data.contact.mobilePhone}</Text>
             </View>
           </View>
           <View style={style.buttonContainer}>

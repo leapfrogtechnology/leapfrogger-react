@@ -24,10 +24,12 @@ export const fetchEmployeeFromAPI = (apiKey) => {
     fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
     .then(data => data.json())
     .then(jsonResponse => {
-      console.log('json:', jsonResponse);
-      var myProfile = util.myInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
+      // console.log('json:', jsonResponse);
+      var myProfile = util.getMyInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
       dispatch(myProfileInfo(myProfile));
       dispatch(getEmployeeList(jsonResponse));
+      console.log('ooooo', groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
+      dispatch(groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
     })
     .catch(err => {dispatch(networkFetchError(err))})
   }
@@ -71,6 +73,14 @@ getEmployeeList = (employees) => {
   return {
     type: ActionType.EMPLOYEES_LIST,
     employees
+  }
+}
+
+groupEmployeesOnDepartmentBasis = (groupedEmployees) => {
+  console.log('55555xxx', groupedEmployees);  
+  return {
+    type: ActionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS,
+    groupedEmployees
   }
 }
 

@@ -4,13 +4,15 @@ import {
   Text,
   Image,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
  } from 'react-native';
 
 import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
@@ -186,7 +188,7 @@ class ProfileScreen extends Component {
     )
   }
 
-  render() {
+  _renderProfileScreen = () => {
     return (
       <View style={ style.mainContainer }>
         {
@@ -201,6 +203,24 @@ class ProfileScreen extends Component {
         }
       </View>
     );
+  }
+
+  _renderActivityIndicator = () => {
+    return (
+      <View style={ style.mainContainer }>
+        <View style={[style.container, style.horizontal]}>
+          <ActivityIndicator size="large" color={colors.GRAY} />
+        </View>
+      </View>
+    )
+  }
+
+  render() {
+    if (this.props.me) {
+      return this._renderProfileScreen()
+    } else {
+      return this._renderActivityIndicator()
+    }
   }
 
  }

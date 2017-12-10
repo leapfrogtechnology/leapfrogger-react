@@ -39,7 +39,6 @@ const GuestUser = {
   }
 
   _presetLoginData = () => {
-    this.props.onLogin(GuestUser);    
     this.setState({
       email: loginCredentials.email,
       password: loginCredentials.password,
@@ -49,6 +48,11 @@ const GuestUser = {
   componentDidMount() {  
     this._presetLoginData();
     this._setupGoogleSignin();
+  }
+
+  _guestLogin = () => {
+    this.props.onLogin(GuestUser);    
+    this._login();    
   }
 
   _login = () => {
@@ -73,7 +77,7 @@ const GuestUser = {
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
         this.props.validateEmail(user.accessToken);
-        this.props.onLogin(user);
+        // this.props.onLogin(user);
         // this._login();
       }      
     }
@@ -161,7 +165,7 @@ const GuestUser = {
             <Button 
               style={style.loginButton}
               title={'Login'}
-              onPress={() => this._login()}
+              onPress={() => this._guestLogin()}
             />
           </View>
         </View>

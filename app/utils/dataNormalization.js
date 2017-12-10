@@ -92,7 +92,7 @@ export const getUniqueArrayOfDepartmrnt = (employeesList) => {
   return uniquedepartment;
 }
 
-export const groupByDepartment = (employeesList) => {
+export const groupByDepartment = (employeesList = []) => {
   var uniqueDepartmentList = getUniqueArrayOfDepartmrnt(employeesList)
   var finalList = [];
   uniqueDepartmentList.forEach(department => {
@@ -110,7 +110,7 @@ export const groupByDepartment = (employeesList) => {
   return finalList;
 }
 
-export const myInformation = (employeesList, email) => {
+export const getMyInformation = (employeesList, email) => {
   return employeesList.filter((employee) => {
     if (employee.username === email) { return employee }
   })

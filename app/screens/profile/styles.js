@@ -13,6 +13,15 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,

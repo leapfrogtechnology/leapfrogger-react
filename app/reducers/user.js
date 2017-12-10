@@ -19,10 +19,17 @@ const user = (state = initialState, action) => {
       };
     
     case actionType.MY_PROFILE:
-    return {
-      ...state,
-      myProfile: action.myProfile
-    }
+      return {
+        ...state,
+        myProfile: action.myProfile
+      }
+
+    case actionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS:
+      return {
+        ...state,
+        groupedEmployees: 'xxx'
+      }
+
     default:
       return state;
   }
