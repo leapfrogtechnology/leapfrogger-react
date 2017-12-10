@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   TouchableHighlight
  } from 'react-native';
+
+import Communications from 'react-native-communications'; 
+ 
 import style from './styles';
 import colors from 'App/config/colors';
 import ProgressiveImage from 'App/components/progressiveImage';
@@ -36,12 +39,14 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   _callButtonPressed = (event) => {
-    console.log('call'); 
+    console.log('call');
+    Communications.phonecall(this.props.data.contact.mobilePhone, true)
     this._toggleButtonState();    
   }
 
   _messageButtonPressed = (event) => {
     console.log('message');
+    Communications.text(this.props.data.contact.mobilePhone)    
     this._toggleButtonState();    
   }
 
