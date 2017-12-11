@@ -5,34 +5,35 @@ import * as ActionType from 'App/constants/actionsType';
 import { store } from './../../App';
 
 export const validateEmail = (token) => {
-  console.log('11111', Resource.emailValidation(token));  
+  // console.log('11111', Resource.emailValidation(token));  
   return (dispatch) => {
     dispatch(networkFetching())
-    fetch(uri.EMAIL_VALIDATION, Resource.emailValidation(token))
+    fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
     .then(data => data.json())
     .then(json => {
-      console.log('json:', json)
+      // console.log('loginjson:', json)
       dispatch(validateLFEmail())
     })
-    .catch(err => dispatch(networkFetchError(err)))
+    .catch(err => {
+      console.log('errrrrrrr', err);
+      dispatch(networkFetchError(err))
+    })
   }
 }
 
 export const fetchEmployeeFromAPI = (apiKey) => {
-  console.log('77777');    
   return (dispatch) => {
     dispatch(networkFetching())
     fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
     .then(data => data.json())
     .then(jsonResponse => {
-      console.log('json:', jsonResponse);
-      var myProfile = util.myInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
+      // console.log('json:', jsonResponse);
+      var myProfile = util.getMyInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
       dispatch(myProfileInfo(myProfile));
       dispatch(getEmployeeList(jsonResponse));
+      dispatch(groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
     })
-    .catch(err => {dispatch(networkFetchError(err))
-    console.log("9999", err)
-    })
+    .catch(err => {dispatch(networkFetchError(err))})
   }
 }
 
@@ -71,10 +72,17 @@ validateLFEmail = () => {
 }
 
 getEmployeeList = (employees) => {
-  console.log('88888');
   return {
     type: ActionType.EMPLOYEES_LIST,
     employees
+  }
+}
+
+groupEmployeesOnDepartmentBasis = (groupedEmployees) => {
+  console.log('55555xxx', groupedEmployees);  
+  return {
+    type: ActionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS,
+    groupedEmployees
   }
 }
 

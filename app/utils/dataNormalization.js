@@ -46,38 +46,69 @@
 //     {'B': ['Bob', 'Bunny']},    
 //   ]
 // }
+const getFirstLetterOfEmployee = (employee) => {
+  return employee.firstName.substring(0, 1);
+}
 
-const getVarNameFromObject = (nameObject) => {
-  for(let varName in nameObject) {
-    return varName;
-  }
+export const getUniqueArrayOfFirstCharOfName = (employeesList) => {
+  var firstLettersOfNames = employeesList.map((employee) => {
+    return employee.firstName.substring(0, 1);
+  });
+  var uniqueArray = firstLettersOfNames.filter((value, index, array) => {
+    return index == array.indexOf(value);
+  });
+  return uniqueArray;
 }
 
 export const groupByAlphabets = (employeesList) => {
-  var A = B = C = D = E = F = G = H = I = J = K = L = M = N = O = P = Q = R = S = T = U = V = W = X = Y = Z = [];
-  var alphabets = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
-  employeesList.forEach(employee => {
-    
-    for (i = 65; i < (26 + 65); i++) { // 'A' ascii => 65 and 26 alphabets
-      if (employee.firstName.substring(0,1).toUpperCase().charCodeAt(0) == i) {
-        alphabets[i - 65].push(employee)
+  var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
+  var finalList = [];
+  uniqueLetterList.forEach(letter => {
+    var group = {};    
+    var list = [];
+    employeesList.forEach(employee => {
+      if (letter === getFirstLetterOfEmployee(employee)) {
+        list.push(employee); 
       }
-    }
+    });
+    group.title = letter;
+    group.data = list;
+    finalList.push(group);
   });
-    
-  var finalData = []
-  alphabets.forEach(data => {
-    var key = getVarNameFromObject(data);
-    var value = data;
-    var singularData = {};
-    singularData.key = key;
-    singularData.value = data;
-    finalData.push(singularData)
-  })
-  return finalData;
+  return finalList;
 }
 
-export const myInformation = (employeesList, email) => {
+//-----------------------------------
+
+export const getUniqueArrayOfDepartmrnt = (employeesList) => {
+  var departments = employeesList.map((employee) => {
+    return employee.department.id;
+  });
+  var uniquedepartment = departments.filter((value, index, array) => {
+    return index == array.indexOf(value);
+  });
+  return uniquedepartment;
+}
+
+export const groupByDepartment = (employeesList = []) => {
+  var uniqueDepartmentList = getUniqueArrayOfDepartmrnt(employeesList)
+  var finalList = [];
+  uniqueDepartmentList.forEach(department => {
+    var group = {};    
+    var list = [];
+    employeesList.forEach(employee => {
+      if (department === employee.department.id) {
+        list.push(employee); 
+      }
+    });
+    group.title = department;
+    group.data = list;
+    finalList.push(group);
+  });
+  return finalList;
+}
+
+export const getMyInformation = (employeesList, email) => {
   return employeesList.filter((employee) => {
     if (employee.username === email) { return employee }
   })

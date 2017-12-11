@@ -5,7 +5,8 @@ import { LF_API_KEY } from 'App/constants/credentials';
 import * as fetchActions from 'App/actions/fetchActions'; 
 
 const mapStateToProps = (state) => ({
-  employees: state.rootReducer.user.employees,   
+  employees: state.rootReducer.user.employees,
+  groupedEmp: state.rootReducer.user.groupedEmployees,   
 });
 
 const mapDispatchToProps = (dispatch) => ({

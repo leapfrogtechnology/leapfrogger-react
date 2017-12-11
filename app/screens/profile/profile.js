@@ -4,13 +4,15 @@ import {
   Text,
   Image,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator,
  } from 'react-native';
 
 import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
@@ -72,7 +74,7 @@ class ProfileScreen extends Component {
         backgroundSpeed={10}
         renderBackground={() => (
           <View key="background">
-            <Image source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/>
+            <Image source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/>
             <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
@@ -81,10 +83,10 @@ class ProfileScreen extends Component {
           <View key="parallax-header" style={ style.parallaxHeader }>
             <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
-              {/* { this.props.data.department.name } */}
+              { this.data.department.name || '' }
             </Text>
             <Text style={ style.sectionTitleText }>
-              {/* { this.props.data.department.name } */}
+              { this.data.department.name || '' }
             </Text>
           </View>
         )}
@@ -97,7 +99,7 @@ class ProfileScreen extends Component {
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
       case ADDRESS: return this._renderTextCell('Address', '');
-      case EMAIL: return this._renderTextCell('Email', this.props.me.username);
+      case EMAIL: return this._renderTextCell('Email', this.data.username || '');
       case DEPARTMENT: return this._renderTextCell('Department', '');
       case DOB: return this._renderTextCell('Dob', '');
       case SKYPE: return this._renderTextCell('Skype ID', '');
@@ -109,7 +111,7 @@ class ProfileScreen extends Component {
     return (
       <View style={style.phoneCell}>
         <View style={style.nameTextContainer}>
-          <Text style={style.titleText}>{ this.props.me.firstName } {this.props.me.lastName}</Text>
+          <Text style={style.titleText}>{ this.data.firstName || '' } {this.data.lastName || ''}</Text>
         </View>
         <View style={style.phoneMessageContainer}>
           <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall('0123456789', true)}>
@@ -186,8 +188,7 @@ class ProfileScreen extends Component {
     )
   }
 
-  render() {
-    console.log('---111',this.props.me);    
+  _renderProfileScreen = () => {
     return (
       <View style={ style.mainContainer }>
         {
@@ -202,6 +203,25 @@ class ProfileScreen extends Component {
         }
       </View>
     );
+  }
+
+  _renderActivityIndicator = () => {
+    return (
+      <View style={ style.mainContainer }>
+        <View style={[style.container, style.horizontal]}>
+          <ActivityIndicator size="large" color={colors.GRAY} />
+        </View>
+      </View>
+    )
+  }
+
+  render() {
+    this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile
+    if (this.data) {
+      return this._renderProfileScreen()
+    } else {
+      return this._renderActivityIndicator()
+    }
   }
 
  }

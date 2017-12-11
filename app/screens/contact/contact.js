@@ -5,6 +5,7 @@ import {
   Image,
   SectionList,
   ActivityIndicator,
+  LayoutAnimation,
  } from 'react-native';
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
@@ -16,6 +17,7 @@ import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
+import { setInterval } from 'core-js/library/web/timers';
 
 const DEPARTMENT_LIST = [{
                             name: 'iOS', 
@@ -64,7 +66,24 @@ const DEPARTMENT_LIST = [{
     }
   }
 
+  // _animateOnMount = () => {
+  //   LayoutAnimation.configureNext({
+  //     duration: 700,
+  //     create: {
+  //       type: LayoutAnimation.Types.linear,
+  //       property: LayoutAnimation.Properties.opacity,
+  //     },
+  //     update: {
+  //       type: LayoutAnimation.Types.spring,
+  //       springDamping: 0.75,
+  //     },
+  //   });
+  // }
+
   componentDidMount() {
+    // this._animateOnMount();
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    
     this.props.employees ? null : this.props.fetchEmployees()
   }
 
@@ -85,30 +104,31 @@ const DEPARTMENT_LIST = [{
   }
 
   _onCellSelection = () => {
-    this.props.navigator.push({
-      screen: screens.PROFILE_SCREEN.id,
-      animated: true,
-      overrideBackPress: true,
-      navigatorStyle: {
-        drawUnderNavBar: true,
-        navBarTranslucent: true,
-        navBarTransparent: true,
-        navBarTextColor: 'white',
-        navBarTransparency: 1,  
-        navBarButtonColor: 'white',                  
-        navBarLeftButtonColor: 'white',
-        navBarRightButtonColor: 'white',
-      },
-      title: '',
-      passProps: {
-        data: {
-          department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
-        }
-      }        
-    });
+    // this.props.navigator.push({
+    //   screen: screens.PROFILE_SCREEN.id,
+    //   animated: true,
+    //   overrideBackPress: true,
+    //   navigatorStyle: {
+    //     drawUnderNavBar: true,
+    //     navBarTranslucent: true,
+    //     navBarTransparent: true,
+    //     navBarTextColor: 'white',
+    //     navBarTransparency: 1,  
+    //     navBarButtonColor: 'white',                  
+    //     navBarLeftButtonColor: 'white',
+    //     navBarRightButtonColor: 'white',
+    //   },
+    //   title: '',
+    //   passProps: {
+    //     data: {
+    //       department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
+    //     }
+    //   }        
+    // });
   }
 
   _renderParallaxTableHeaderView = (data, index) => {
+    // return (<View style={{width: 200, height: 200}}>asd</View>)
     return (
       <ParallaxScrollView
         onScroll={this.props.onScroll}
@@ -129,7 +149,7 @@ const DEPARTMENT_LIST = [{
             <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
               {
-                DEPARTMENT_LIST[index].name
+                // DEPARTMENT_LIST[index].name
               }
             </Text>
             <Text style={ style.sectionTitleText }>
@@ -140,34 +160,31 @@ const DEPARTMENT_LIST = [{
 
         renderStickyHeader={() => (
           <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>{DEPARTMENT_LIST[index].name}</Text>
+            <Text style={style.stickySectionText}>aaa</Text>
           </View>
         )}
       />
     );
   }
 
-  _renderTableView = (data, index) => {
+  _renderTableView = (employees, index) => {
+    const { onScroll = () => {} } = this.props;    
     return (
       <SectionList
         ref="ListView"
-        key={data}                  
-        sections={[
-          {title: 'D', data: ['Devin']},
-          {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-        ]}
+        key={index}                  
+        sections={util.groupByAlphabets(employees.data)}
         keyExtractor={(item, index) => index}
-        renderItem={({item, section, index}) => 
+        renderItem={({item}) => 
           <ContactCell 
-            index={index} 
-            section={section} 
+            {...this.props}          
             data={item} 
             onPress={this._onCellSelection}/>
           }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        renderScrollComponent={props => (
-          this._renderParallaxTableHeaderView(props, index)
-        )}
+        // renderScrollComponent={props => (
+        //   this._renderParallaxTableHeaderView(props, index)
+        // )}
         renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1}}></View>}
       />
     );
@@ -211,7 +228,7 @@ const DEPARTMENT_LIST = [{
         activeDotColor={colors.LF_DARK_GRREEN}
         dotStyle={{marginBottom: DOT_MARGIN}}>
           {
-            DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
+            this.props.groupedEmp.map((data, index) => this._renderTableView(data, index))
           }
       </Swiper>
     )
@@ -226,6 +243,10 @@ const DEPARTMENT_LIST = [{
   }
 
   render() {
+    // setInterval(() => {
+    //   console.log('----_CONTACT', this.props.groupedEmp);      
+    // }, 1000);
+    // console.log('----_CONTACT', this.props.groupedEmp);
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }

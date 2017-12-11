@@ -2,30 +2,36 @@ import * as actionType from 'App/constants/actionsType';
 
 const initialState = {
   isValid: false,
+  groupedEmployees: [],
 }
 
 const user = (state = initialState, action) => {
   switch (action.type) {
     case actionType.VALIDATE_EMAIL:
-    console.log('VALIDATE_EMAIL');    
       return {
         ...state,
         isValid: true,
       };
     
     case actionType.EMPLOYEES_LIST:
-    console.log('EMPLOYEES_LIST', action.employees);    
       return {
         ...state,
         employees: action.employees
       };
     
     case actionType.MY_PROFILE:
-    console.log('MY_PROFILE', action.myProfile);    
-    return {
-      ...state,
-      myProfile: action.myProfile
-    }
+      return {
+        ...state,
+        myProfile: action.myProfile
+      }
+
+    case actionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS:
+      // console.log('11111_GROUP', action.groupedEmployees)
+      return {
+        ...state,
+        groupedEmployees: action.groupedEmployees
+      }
+
     default:
       return state;
   }
