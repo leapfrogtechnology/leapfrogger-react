@@ -5,16 +5,19 @@ import * as ActionType from 'App/constants/actionsType';
 import { store } from './../../App';
 
 export const validateEmail = (token) => {
-  console.log('11111', Resource.emailValidation(token));  
+  // console.log('11111', Resource.emailValidation(token));  
   return (dispatch) => {
     dispatch(networkFetching())
-    fetch(uri.EMAIL_VALIDATION, Resource.emailValidation(token))
+    fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
     .then(data => data.json())
     .then(json => {
-      console.log('json:', json)
+      // console.log('loginjson:', json)
       dispatch(validateLFEmail())
     })
-    .catch(err => dispatch(networkFetchError(err)))
+    .catch(err => {
+      console.log('errrrrrrr', err);
+      dispatch(networkFetchError(err))
+    })
   }
 }
 
@@ -28,7 +31,6 @@ export const fetchEmployeeFromAPI = (apiKey) => {
       var myProfile = util.getMyInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
       dispatch(myProfileInfo(myProfile));
       dispatch(getEmployeeList(jsonResponse));
-      console.log('ooooo', groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
       dispatch(groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
     })
     .catch(err => {dispatch(networkFetchError(err))})

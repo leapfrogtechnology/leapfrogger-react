@@ -57,7 +57,6 @@ export const getUniqueArrayOfFirstCharOfName = (employeesList) => {
   var uniqueArray = firstLettersOfNames.filter((value, index, array) => {
     return index == array.indexOf(value);
   });
-  console.log('00000uniqueArrayPerson', uniqueArray)
   return uniqueArray;
 }
 
@@ -88,7 +87,6 @@ export const getUniqueArrayOfDepartmrnt = (employeesList) => {
   var uniquedepartment = departments.filter((value, index, array) => {
     return index == array.indexOf(value);
   });
-  console.log('00000uniqueArrayDepartment', uniquedepartment)
   return uniquedepartment;
 }
 

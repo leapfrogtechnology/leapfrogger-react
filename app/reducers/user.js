@@ -2,6 +2,7 @@ import * as actionType from 'App/constants/actionsType';
 
 const initialState = {
   isValid: false,
+  groupedEmployees: [],
 }
 
 const user = (state = initialState, action) => {
@@ -25,9 +26,10 @@ const user = (state = initialState, action) => {
       }
 
     case actionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS:
+      // console.log('11111_GROUP', action.groupedEmployees)
       return {
         ...state,
-        groupedEmployees: 'xxx'
+        groupedEmployees: action.groupedEmployees
       }
 
     default:

@@ -17,6 +17,7 @@ import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
+import { setInterval } from 'core-js/library/web/timers';
 
 const DEPARTMENT_LIST = [{
                             name: 'iOS', 
@@ -127,6 +128,7 @@ const DEPARTMENT_LIST = [{
   }
 
   _renderParallaxTableHeaderView = (data, index) => {
+    // return (<View style={{width: 200, height: 200}}>asd</View>)
     return (
       <ParallaxScrollView
         onScroll={this.props.onScroll}
@@ -166,7 +168,6 @@ const DEPARTMENT_LIST = [{
   }
 
   _renderTableView = (employees, index) => {
-    console.log('-----', employees, index);
     const { onScroll = () => {} } = this.props;    
     return (
       <SectionList
@@ -227,7 +228,7 @@ const DEPARTMENT_LIST = [{
         activeDotColor={colors.LF_DARK_GRREEN}
         dotStyle={{marginBottom: DOT_MARGIN}}>
           {
-            util.groupByDepartment(this.props.employees).map((data, index) => this._renderTableView(data, index))
+            this.props.groupedEmp.map((data, index) => this._renderTableView(data, index))
           }
       </Swiper>
     )
@@ -242,7 +243,10 @@ const DEPARTMENT_LIST = [{
   }
 
   render() {
-    // console.log('-----', this.props.groupedEmp);
+    // setInterval(() => {
+    //   console.log('----_CONTACT', this.props.groupedEmp);      
+    // }, 1000);
+    // console.log('----_CONTACT', this.props.groupedEmp);
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }

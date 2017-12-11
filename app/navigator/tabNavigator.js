@@ -63,7 +63,6 @@ export const startTabScreen = () => {
         },
         passProps: {
           data: {
-            ...store.getState().rootReducer.user.myProfile,
             fromProfileTab: true,
           }
         } 

@@ -1,15 +1,10 @@
 const POST = "POST"
 const GET = "GET"
 
-export const emailValidation = (token) => {
+export const emailValidation = () => {
   return (
     {
       method: POST
-    },
-    {
-      body: JSON.stringify({
-        token: token
-      })
     }
   )
 }

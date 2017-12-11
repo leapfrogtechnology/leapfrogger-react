@@ -47,7 +47,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
       title: '',
       passProps: {
         data: {
-          ...this.props.data
+          profile: this.props.data
         }
       }        
     });
