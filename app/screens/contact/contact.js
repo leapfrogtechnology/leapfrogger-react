@@ -3,12 +3,14 @@ import {
   View,
   Text,
   Image,
-  SectionList
+  SectionList,
+  ActivityIndicator,
  } from 'react-native';
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import * as util from 'App/utils/dataNormalization';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
@@ -60,6 +62,10 @@ const DEPARTMENT_LIST = [{
     this.state = {
       currentSwipeIndex: 0,
     }
+  }
+
+  componentDidMount() {
+    this.props.employees ? null : this.props.fetchEmployees()
   }
 
   _onSearchBarTextChange = () => {
@@ -173,35 +179,61 @@ const DEPARTMENT_LIST = [{
     })
   }
 
+  _renderStatusBar = () => {
+    return (
+      <View style={[style.statusBar, {height: 20}]}/>
+    )
+  }
+
+  _renderSearchBar = () => {
+    return (
+      <Search
+        ref={component => this.searchBar = component}
+        backgroundColor={colors.LF_DARK_GRREEN}
+        titleCancelColor='white'
+        onChangeText={this._onSearchBarTextChange}
+        onFocus={this._onSearchBarFocus}
+        afterSearch={this.onSearch}
+        afterCancel={this.onCancel}
+        keyboardDismissOnSubmit={true}
+        blurOnSubmit={true}
+      />
+    )
+  }
+
+  _renderSwiper = () => {
+    return (
+      <Swiper
+        style={style.wrapper}
+        loop={false} 
+        onIndexChanged ={this._onMomentumScrollEnd}          
+        activeDotStyle={{marginBottom: DOT_MARGIN}} 
+        activeDotColor={colors.LF_DARK_GRREEN}
+        dotStyle={{marginBottom: DOT_MARGIN}}>
+          {
+            DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
+          }
+      </Swiper>
+    )
+  }
+
+  _renderActivityIndicator = () => {
+    return (
+      <View style={[style.container, style.horizontal]}>
+        <ActivityIndicator size="large" color={colors.GRAY} />
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={ style.mainContainer }>
-        <View style={[style.statusBar, {height: 20}]}/>
+        { this._renderStatusBar() }
         <View style={style.searchContainer}>
-          <Search
-            ref={component => this.searchBar = component}
-            backgroundColor={colors.LF_DARK_GRREEN}
-            titleCancelColor='white'
-            onChangeText={this._onSearchBarTextChange}
-            onFocus={this._onSearchBarFocus}
-            afterSearch={this.onSearch}
-            afterCancel={this.onCancel}
-            keyboardDismissOnSubmit={true}
-            blurOnSubmit={true}
-          />
+          { this._renderSearchBar() }
         </View>
         <View style={style.tableContainer}>
-          <Swiper
-            style={style.wrapper}
-            loop={false} 
-            onIndexChanged ={this._onMomentumScrollEnd}          
-            activeDotStyle={{marginBottom: DOT_MARGIN}} 
-            activeDotColor={colors.LF_DARK_GRREEN}
-            dotStyle={{marginBottom: DOT_MARGIN}}>
-              {
-                DEPARTMENT_LIST.map((data, index) => this._renderTableView(data, index))
-              }
-          </Swiper>
+          { this.props.employees ? this._renderSwiper() : this._renderActivityIndicator() }
         </View>
       </View>
     );

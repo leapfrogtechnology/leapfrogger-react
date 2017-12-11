@@ -1,5 +1,4 @@
 import * as ActionType from 'App/constants/actionsType';
-import { ActionSheetCustom } from 'react-native-actionsheet';
 
 const initialState = {
   user: null,

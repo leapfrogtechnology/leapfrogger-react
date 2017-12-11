@@ -39,6 +39,7 @@ const GuestUser = {
   }
 
   _presetLoginData = () => {
+    this.props.onLogin(GuestUser);    
     this.setState({
       email: loginCredentials.email,
       password: loginCredentials.password,
@@ -54,7 +55,6 @@ const GuestUser = {
     Keyboard.dismiss();
     this._setErrorMessage();    
     if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.props.isLoggedIn)) {
-      this.props.onLogin(GuestUser);
       startTabScreen();      
     } else {
       // incorrect email / password
@@ -67,11 +67,12 @@ const GuestUser = {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
         iosClientId: IOS_GOOGLE_CLIENT_ID,
-        offlineAccess: true
+        offlineAccess: false
       });
 
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
+        this.props.validateEmail(user.accessToken);
         this.props.onLogin(user);
         // this._login();
       }      
@@ -84,8 +85,9 @@ const GuestUser = {
   _googleSignIn = () => {
     GoogleSignin.signIn()
     .then((user) => {
+      this.props.validateEmail(user.accessToken);
+      console.log('isLoggedIn---', this.props.isEmailValid);            
       this.props.onLogin(user);
-      console.log('isLoggedIn---', this.props.isLoggedIn);      
       this._login();      
     })
     .catch((err) => {

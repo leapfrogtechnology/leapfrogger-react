@@ -15,7 +15,7 @@ import { startSplashScreen } from './app/navigator/splashScreenNavigator';
 import screens from 'App/constants/screens';
 import { registerScreens, registerScreenVisibilityListener } from './screenRegistry';
 
-const store = configureStore();
+export const store = configureStore();
 
 registerScreens(store, Provider);
 registerScreenVisibilityListener()
