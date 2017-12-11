@@ -5,9 +5,10 @@ import {
   Image,
   FlatList
  } from 'react-native';
- 
+
+import style from './styles'; 
 import { getWidth, getHeight } from 'App/utils/dimension';
-import style from './styles';
+import ContactCell from './../contact/contactCell';
  
  class SearchContactView extends Component {
 
@@ -15,14 +16,28 @@ import style from './styles';
     super(props);
   }
 
+  _onCellSelection = (data) => {
+    this.props.onPress(data)
+  }
 
+  _renderCell = (item) => {
+    return (
+      <ContactCell
+        data={item}
+        onPress={this._onCellSelection}       
+      />
+    )
+  }
 
+  _keyExtractor = (item, index) => item.empId;
+  
   _renderTableView = () => {
     return (
       <FlatList
         ref="ListView"
-        data={[{key: 'a'}, {key: 'b'}]}
-        renderItem={({item, section, index}) => this._renderItem() }
+        data={this.props.data}
+        keyExtractor={this._keyExtractor}        
+        renderItem={({item, section, index}) => this._renderCell(item) }
       />
     );
   }

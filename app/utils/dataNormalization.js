@@ -113,3 +113,15 @@ export const getMyInformation = (employeesList, email) => {
     if (employee.username === email) { return employee }
   })
 }
+
+//-------------------search----------
+
+export const searchEmployeesOfName = (employeesList, characters) => {
+  return employeesList.filter((employee) => {
+    var name = employee.firstName + " " + employee.lastName;
+    if (name.search(characters) !== -1) { //This method returns -1 if no match is found.
+      // console.log('employee---', employee)
+      return employee 
+    }
+  })
+}

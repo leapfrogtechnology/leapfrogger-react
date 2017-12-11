@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 
-import ContactDetailScreen from './contactDetail';
-// import { loginAction } from './../../actions';
+import SearchContactView from './searchContact';
 
 const mapStateToProps = (state) => ({
-
+  employees: state.rootReducer.user.employees,  
 });
 
 export default connect(
   mapStateToProps,
-)(ContactDetailScreen);
+)(SearchContactView);

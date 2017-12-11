@@ -105,6 +105,13 @@ const style = StyleSheet.create({
     color: 'white',    
     paddingVertical: 5
   },
+  searchViewContainer: {
+    position: 'absolute',
+    zIndex: 100,
+    width: getWidth(),
+    height: getHeight(),
+    backgroundColor: 'white'
+  }
 
 });
 
