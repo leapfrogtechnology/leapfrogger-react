@@ -100,6 +100,7 @@ const style = StyleSheet.create({
     paddingTop: 8,           
   },
   phoneCell: {
+    marginTop: 8,
     flexDirection: 'row',
   },
   numberTextContainer: {

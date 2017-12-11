@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   FlatList,
+  LayoutAnimation,
   TouchableOpacity,
   ActivityIndicator,
  } from 'react-native';
@@ -27,8 +28,8 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
 const PHONE_NUMBER = 0
 const ADDRESS = 1
 const EMAIL = 2
-const DEPARTMENT = 3
-const DOB = 4
+const DOB = 3
+const GITHUB = 4
 const SKYPE = 5
 
 const CANCEL_INDEX = 0
@@ -38,6 +39,10 @@ class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);    
   }
 
   _logout = () => {
@@ -99,9 +104,9 @@ class ProfileScreen extends Component {
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
       case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-');
-      case EMAIL: return this._renderTextCell('Email', this.data.username || '-');
-      case DEPARTMENT: return this._renderTextCell('Department', this.data.department.name || '-');
-      case DOB: return this._renderTextCell('Dob', this.data.dateofBirth || '-');
+      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');
+      case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
+      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-');
       case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-');
       case LOGOUT: return this._renderLougoutCell();
     }
