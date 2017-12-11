@@ -122,7 +122,6 @@ export const searchEmployeesOfName = (employeesList, characters) => {
     var name = (employee.firstName + " " + employee.lastName).toLowerCase();
     var department = employee.department.name.toLowerCase();
     var mobilePhone = employee.contact.mobilePhone;
-    console.log(name, department, chars)
     if (parseInt(chars.substring(0, 1))) {
       // first character number
       if ((mobilePhone.search(chars)) !== -1) { //This method returns -1 if no match is found.
@@ -130,7 +129,6 @@ export const searchEmployeesOfName = (employeesList, characters) => {
       }
     } else {
       if ((name.search(chars) !== -1) || (department.search(chars)) !== -1) { //This method returns -1 if no match is found.
-        // console.log('employee---', employee)
         return employee 
       }
     }
