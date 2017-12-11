@@ -109,7 +109,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     zIndex: 100,
     width: getWidth(),
-    height: getHeight(),
+    height: getHeight() - 120,
     backgroundColor: 'white'
   }
 
