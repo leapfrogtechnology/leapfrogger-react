@@ -107,11 +107,11 @@ const style = StyleSheet.create({
   },
   searchViewContainer: {
     position: 'absolute',
-    zIndex: 90,
+    zIndex: 100,
     width: getWidth(),
-    height: getHeight() - 115,
+    height: getHeight() - 120,
     backgroundColor: 'white'
-  },
+  }
 
 });
 

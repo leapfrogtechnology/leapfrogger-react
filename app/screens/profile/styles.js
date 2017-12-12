@@ -126,7 +126,7 @@ const style = StyleSheet.create({
   phoneAndMessageButtonImage: {
     width: 35,
     height: 35,
-    marginHorizontal: 4,  
+    marginHorizontal: 6,  
     paddingHorizontal: 2,                
     resizeMode: 'contain',    
   },

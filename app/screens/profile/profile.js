@@ -15,6 +15,7 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import colors from 'App/config/colors';
 import Button from 'App/components/Button';
+import StateFullScreen from 'App/components/stateFullScreen';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
 import moreImage from './../../../assets/images/more.png';
@@ -28,9 +29,9 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
 const PHONE_NUMBER = 0
 const ADDRESS = 1
 const EMAIL = 2
-const DOB = 3
-const GITHUB = 4
-const SKYPE = 5
+// const DOB = 3
+const GITHUB = 3
+const SKYPE = 4
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 2
@@ -60,9 +61,11 @@ class ProfileScreen extends Component {
       case 0:
       break
       case 1: // Update
+      this.props.fetchEmployeesAndDepartments();
       break
       case 2: // logout
       this._logout();
+      break
       default:
       break
     }
@@ -86,7 +89,7 @@ class ProfileScreen extends Component {
 
         renderForeground={() => (
           <View key="parallax-header" style={ style.parallaxHeader }>
-            <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
+            <Image style={ style.avatar } source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
             { this.data.firstName } { this.data.lastName }
             </Text>
@@ -105,10 +108,9 @@ class ProfileScreen extends Component {
       case PHONE_NUMBER: return this._renderPhoneCell();
       case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-');
       case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');
-      case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
+      // case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
       case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-');
       case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-');
-      case LOGOUT: return this._renderLougoutCell();
     }
   }
 
@@ -142,22 +144,8 @@ class ProfileScreen extends Component {
     );
   }
 
-  _renderLougoutCell = () => {
-    return (
-      <View style={style.logoutButtonContainer}>
-        <Button 
-        style={style.logoutButton}
-        title={'Logout'}
-        titleStyle={style.logoutTitle}
-        onPress={() => this._logout()}
-      />
-      </View>
-    );
-  }
-
   _renderTableView = () => {
-    var data = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}, {key: '6'}]
-    // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
+    var data = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}]
     return (
       <FlatList
         ref="ListView"
@@ -169,16 +157,6 @@ class ProfileScreen extends Component {
         )}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
       />
-    );
-  }
-
-  _renderMoreButton = () => {
-    return (
-      <View style={style.moreButtonContainer}>
-        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
-          <Image source={moreImage} style={style.moreButtonImage}/>
-        </TouchableOpacity>
-      </View>
     );
   }
 
@@ -196,40 +174,47 @@ class ProfileScreen extends Component {
     )
   }
 
-  _renderProfileScreen = () => {
+  _renderMoreButtonWithActionSheet = () => {
     return (
-      <View style={ style.mainContainer }>
-        {
-          this.props.data.fromProfileTab &&                    
-          this._renderMoreButton()
-        }
-        {
-          this._renderTableView()
-        }
+      <View style={style.moreButtonContainer}>
         {
           this._renderActionSheet()
         }
+        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
+          <Image source={moreImage} style={style.moreButtonImage}/>
+        </TouchableOpacity>
       </View>
     );
   }
 
-  _renderActivityIndicator = () => {
-    return (
-      <View style={ style.mainContainer }>
-        <View style={[style.container, style.horizontal]}>
-          <ActivityIndicator size="large" color={colors.GRAY} />
-        </View>
-      </View>
-    )
+  _getScreenState = () => {
+    if (this.props.isFetching) {
+      return 'fetch';
+    }
+    if (!this.data) {
+      return 'error';
+    }
+    return 'normal';
   }
 
   render() {
-    this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile
-    if (this.data) {
-      return this._renderProfileScreen()
-    } else {
-      return this._renderActivityIndicator()
-    }
+    this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile;
+    return (
+      <View style={ style.mainContainer }>
+        {
+          this.props.data.fromProfileTab &&                    
+          this._renderMoreButtonWithActionSheet()
+        }
+        {
+          <StateFullScreen
+            style={style.mainContainer}
+            state={this._getScreenState()} // fetch, normal and error
+            contentView={this._renderTableView()}
+            reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}            
+          />
+        }
+      </View>      
+    )
   }
 
  }

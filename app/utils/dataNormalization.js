@@ -90,21 +90,39 @@ export const getUniqueArrayOfDepartmrnt = (employeesList) => {
   return uniquedepartment;
 }
 
-export const groupByDepartment = (employeesList = []) => {
-  var uniqueDepartmentList = getUniqueArrayOfDepartmrnt(employeesList)
-  var finalList = [];
-  uniqueDepartmentList.forEach(department => {
-    var group = {};    
-    var list = [];
-    employeesList.forEach(employee => {
-      if (department === employee.department.id) {
-        list.push(employee); 
-      }
-    });
-    group.title = department;
-    group.data = list;
-    finalList.push(group);
-  });
+export const groupByDepartment = (employeesList = [], departmentList = []) => {
+  // var finalList = [];
+  // departmentList.forEach(department => {
+  //   var group = {};    
+  //   var list = [];
+  //   employeesList.forEach(employee => {
+  //     if (department.id === employee.department.id) {
+  //       list.push(employee); 
+  //     }
+  //   });
+  //   group.title = department;
+  //   group.data = list;
+  //   finalList.push(group);
+  // });
+
+  console.log('xxxx', departmentList)
+  
+  return departmentList.map(department => {
+    var employees = employeesList.filter(emp => emp.department.id === department.id)
+    return {
+      title: department.name,
+      data: employees
+    }
+  })
+
+  // return departmentList.map(department => {
+  //   var employees = employeesList.filter(emp => department.id === emp.department.id)
+  //   return {
+  //     title: department.name,
+  //     data: employees
+  //   }
+  // })
+
   return finalList;
 }
 

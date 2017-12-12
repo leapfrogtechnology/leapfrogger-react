@@ -6,11 +6,13 @@ import * as fetchActions from 'App/actions/fetchActions';
 
 const mapStateToProps = (state) => ({
   employees: state.rootReducer.user.employees,
-  groupedEmp: state.rootReducer.user.groupedEmployees,   
+  departments: state.rootReducer.department.departments,
+  groupedEmp: state.rootReducer.employee.groupedEmployees,
+  isFetching: state.rootReducer.user.isFetching,   
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchEmployees: () => { dispatch(fetchActions.fetchEmployeeFromAPI(LF_API_KEY)) }  
+  fetchEmployeesAndDepartments: () => { dispatch(fetchActions.fetchEmployeesAndDepartmentsFromAPI(LF_API_KEY)) },
 });
 
 export default connect(
