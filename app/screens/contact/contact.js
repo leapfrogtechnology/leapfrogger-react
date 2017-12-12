@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   LayoutAnimation,
  } from 'react-native';
+ 
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';

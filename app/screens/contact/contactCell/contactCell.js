@@ -94,7 +94,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
             <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
-            {/* <Image source={placeHolderImage} style={style.contactImage}/> */}
+            {/* <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/> */}
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>
