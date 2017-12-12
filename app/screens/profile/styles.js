@@ -13,6 +13,15 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
@@ -61,7 +70,8 @@ const style = StyleSheet.create({
   parallaxHeader: {
     flex: 1,
     paddingTop: 80,    
-    alignItems: 'center',    
+    paddingHorizontal: 16,
+    alignItems: 'flex-start',    
     flexDirection: 'column',
   },
   avatar: {
@@ -83,31 +93,36 @@ const style = StyleSheet.create({
   listView: {
     // paddingHorizontal: 16,     
   },
-  phoneCell: {
-    flex: 1,
-    flexDirection: 'row',
+  cell: {
+    flex: 1,    
+    height: 60, 
     paddingHorizontal: 16, 
-    paddingTop: 8,    
+    paddingTop: 8,           
   },
-  nameTextContainer: {
+  phoneCell: {
+    marginTop: 8,
+    flexDirection: 'row',
+  },
+  numberTextContainer: {
     flex: 0.9,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   titleText: {
-    flex: 0.5,    
-    fontSize: 18,
+    flex: 1,
+    marginVertical: 4,    
   },
   dataText: {
-    flex: 0.5,
-    textAlign: 'right',
+    flex: 1,
+    height: 40,
+    fontSize: 18,
   },
   phoneMessageContainer: {
     flex: 0.1,
     flexDirection: 'row',    
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     justifyContent: 'flex-end',
   },
-
   phoneAndMessageButtonImage: {
     width: 35,
     height: 35,
@@ -123,11 +138,8 @@ const style = StyleSheet.create({
     resizeMode: 'contain',
   },
   simpleTextCell: {
-    height: 44,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,  
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   logoutButtonContainer: {
     flex: 1,

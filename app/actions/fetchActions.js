@@ -1,14 +1,94 @@
-import uri from 'App/config/uri';
-import {VALIDATE_EMAIL} from 'App/constants/actionsType';
+import { uri } from 'App/config/uri';
+import * as util from 'App/utils/dataNormalization';
+import * as Resource from 'App/utils/networkResource';
+import * as ActionType from 'App/constants/actionsType';
+import { store } from './../../App';
 
-validateLeapfrogEmail = (dispatch) => {
-  return {
-    
+export const validateEmail = (token) => {
+  // console.log('11111', Resource.emailValidation(token));  
+  return (dispatch) => {
+    dispatch(networkFetching())
+    fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
+    .then(data => data.json())
+    .then(json => {
+      // console.log('loginjson:', json)
+      dispatch(validateLFEmail())
+    })
+    .catch(err => {
+      console.log('errrrrrrr', err);
+      dispatch(networkFetchError(err))
+    })
   }
 }
 
-validateEmail = () => {
+export const fetchEmployeeFromAPI = (apiKey) => {
+  return (dispatch) => {
+    dispatch(networkFetching())
+    fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
+    .then(data => data.json())
+    .then(jsonResponse => {
+      // console.log('json:', jsonResponse);
+      var myProfile = util.getMyInformation(jsonResponse, store.getState().rootReducer.auth.user.email)[0];
+      dispatch(myProfileInfo(myProfile));
+      dispatch(getEmployeeList(jsonResponse));
+      dispatch(groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse)))
+    })
+    .catch(err => {dispatch(networkFetchError(err))})
+  }
+}
+
+fetchAction = (uri, completion) => {
+  console.log('22222');
+  return 
+  dispatch(networkFetching())  
+  fetch(uri)
+    .then(data => data.json())
+    .then(data => dispatch(completion(data)))
+    .catch(error => dispatch(networkFetchError()));
+}
+
+networkFetching = () => {
+  console.log('33333');  
   return {
-    type: VALIDATE_EMAIL,
+    type: ActionType.NETWORK_FETCHING,
+  }
+}
+
+networkFetchError = () => {
+  console.log('44444');  
+  return {
+    type: ActionType.NETWORK_FETCH_ERROR,    
+  }
+}
+
+validateLFEmail = () => {
+  console.log('55555');
+  return {
+    type: ActionType.VALIDATE_EMAIL,
+    payload: {
+      valid: true,
+    }
+  }
+}
+
+getEmployeeList = (employees) => {
+  return {
+    type: ActionType.EMPLOYEES_LIST,
+    employees
+  }
+}
+
+groupEmployeesOnDepartmentBasis = (groupedEmployees) => {
+  console.log('55555xxx', groupedEmployees);  
+  return {
+    type: ActionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS,
+    groupedEmployees
+  }
+}
+
+myProfileInfo = (myProfile) => {
+  return {
+    type: ActionType.MY_PROFILE,
+    myProfile
   }
 }

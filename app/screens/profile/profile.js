@@ -4,13 +4,16 @@ import {
   Text,
   Image,
   FlatList,
-  TouchableOpacity
+  LayoutAnimation,
+  TouchableOpacity,
+  ActivityIndicator,
  } from 'react-native';
 
 import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
+import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
@@ -24,9 +27,10 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
 
 const PHONE_NUMBER = 0
 const ADDRESS = 1
-const DEPARTMENT = 2
+const EMAIL = 2
 const DOB = 3
-const SKYPE = 4
+const GITHUB = 4
+const SKYPE = 5
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 2
@@ -35,6 +39,10 @@ class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);    
   }
 
   _logout = () => {
@@ -71,7 +79,7 @@ class ProfileScreen extends Component {
         backgroundSpeed={10}
         renderBackground={() => (
           <View key="background">
-            <Image source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/>
+            <Image source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/>
             <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
@@ -80,10 +88,10 @@ class ProfileScreen extends Component {
           <View key="parallax-header" style={ style.parallaxHeader }>
             <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
-              {/* { this.props.data.department.name } */}
+            { this.data.firstName } { this.data.lastName }
             </Text>
             <Text style={ style.sectionTitleText }>
-              {/* { this.props.data.department.name } */}
+              { this.data.department.name }
             </Text>
           </View>
         )}
@@ -95,37 +103,41 @@ class ProfileScreen extends Component {
   _renderItems = (item, index) => {
     switch (index) {
       case PHONE_NUMBER: return this._renderPhoneCell();
-      case ADDRESS: return this._renderTextCell('Address');
-      case DEPARTMENT: return this._renderTextCell('Department');
-      case DOB: return this._renderTextCell('Dob');
-      case SKYPE: return this._renderTextCell('Skype ID');
+      case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-');
+      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');
+      case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
+      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-');
+      case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-');
       case LOGOUT: return this._renderLougoutCell();
     }
   }
 
   _renderPhoneCell = () => {
     return (
-      <View style={style.phoneCell}>
-        <View style={style.nameTextContainer}>
-          <Text style={style.titleText}>Name</Text>
+      <View style={[style.phoneCell, style.cell]}>
+        <View style={style.numberTextContainer}>
+          <Text style={style.dataText}>{ this.data.contact.mobilePhone }</Text>
+          <Text style={style.titleText}>Phone Number</Text>
         </View>
-        <View style={style.phoneMessageContainer}>
-          <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall('0123456789', true)}>
-            <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.messageButton} onPress={() => Communications.text('0123456789')}>
-            <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
-          </TouchableOpacity>
-        </View>
+        { !this.props.data.fromProfileTab &&
+          <View style={style.phoneMessageContainer}>
+            <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall(this.data.contact.mobilePhone, true)}>
+              <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={style.messageButton} onPress={() => Communications.text(this.data.contact.mobilePhone)}>
+              <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
+            </TouchableOpacity>
+          </View>
+        }
       </View>
     );
   }
 
-  _renderTextCell = (text) => {
+  _renderTextCell = (text, data) => {
     return (
-      <View style={style.simpleTextCell}>
+      <View style={[style.simpleTextCell, style.cell]}>
+        <Text style={style.dataText}>{data}</Text>
         <Text style={style.titleText}>{text}</Text>
-        <Text style={style.dataText}>N/A</Text>
       </View>
     );
   }
@@ -144,7 +156,7 @@ class ProfileScreen extends Component {
   }
 
   _renderTableView = () => {
-    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}]
+    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]
     // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList
@@ -184,7 +196,7 @@ class ProfileScreen extends Component {
     )
   }
 
-  render() {
+  _renderProfileScreen = () => {
     return (
       <View style={ style.mainContainer }>
         {
@@ -201,6 +213,25 @@ class ProfileScreen extends Component {
     );
   }
 
+  _renderActivityIndicator = () => {
+    return (
+      <View style={ style.mainContainer }>
+        <View style={[style.container, style.horizontal]}>
+          <ActivityIndicator size="large" color={colors.GRAY} />
+        </View>
+      </View>
+    )
+  }
+
+  render() {
+    this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile
+    if (this.data) {
+      return this._renderProfileScreen()
+    } else {
+      return this._renderActivityIndicator()
+    }
+  }
+
  }
 
- export default ProfileScreen
+ export default ProfileScreen;

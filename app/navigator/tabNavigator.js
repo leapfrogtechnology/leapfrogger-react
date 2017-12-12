@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 
+import { store } from './../../App';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 

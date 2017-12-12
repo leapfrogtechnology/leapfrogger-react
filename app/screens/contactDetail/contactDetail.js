@@ -37,10 +37,10 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
           <View key="parallax-header" style={ style.parallaxHeader }>
             <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
             <Text style={ style.sectionSpeakerText }>
-              { this.props.data.department.name }
+              { this.props.data.department.name || '' }
             </Text>
             <Text style={ style.sectionTitleText }>
-              { this.props.data.department.name }
+              { this.props.data.department.name || '' }
             </Text>
           </View>
         )}
