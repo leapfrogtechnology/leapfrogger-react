@@ -80,56 +80,19 @@ export const groupByAlphabets = (employeesList) => {
 
 //-----------------------------------
 
-export const getUniqueArrayOfDepartmrnt = (employeesList) => {
-  var departments = employeesList.map((employee) => {
-    return employee.department.id;
-  });
-  var uniquedepartment = departments.filter((value, index, array) => {
-    return index == array.indexOf(value);
-  });
-  return uniquedepartment;
-}
-
-export const groupByDepartment = (employeesList = [], departmentList = []) => {
-  // var finalList = [];
-  // departmentList.forEach(department => {
-  //   var group = {};    
-  //   var list = [];
-  //   employeesList.forEach(employee => {
-  //     if (department.id === employee.department.id) {
-  //       list.push(employee); 
-  //     }
-  //   });
-  //   group.title = department;
-  //   group.data = list;
-  //   finalList.push(group);
-  // });
-
-  console.log('xxxx', departmentList)
-  
-  return departmentList.map(department => {
+export const groupByDepartment = (employeesList = [], departmentList = []) => {  
+  var finalList = departmentList.map(department => {
     var employees = employeesList.filter(emp => emp.department.id === department.id)
     return {
       title: department.name,
       data: employees
     }
   })
-
-  // return departmentList.map(department => {
-  //   var employees = employeesList.filter(emp => department.id === emp.department.id)
-  //   return {
-  //     title: department.name,
-  //     data: employees
-  //   }
-  // })
-
   return finalList;
 }
 
 export const getMyInformation = (employeesList, email) => {
-  return employeesList.filter((employee) => {
-    if (employee.username === email) { return employee }
-  })
+  return employeesList.filter((employee) => employee.username === email)
 }
 
 //-------------------search----------

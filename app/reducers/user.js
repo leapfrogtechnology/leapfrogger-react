@@ -15,7 +15,6 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         isValid: true,
-        isFetching: false,        
       };
     
     case actionType.MY_PROFILE:

@@ -7,7 +7,6 @@ import { store } from './../../App';
 
 export const validateEmail = (token) => {
   return (dispatch) => {
-    dispatch(networkFetching())
     fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
     .then(data => data.json())
     .then(json => {
@@ -42,36 +41,32 @@ export const validateEmail = (token) => {
 // }
 
 export const fetchEmployeesAndDepartmentsFromAPI = (apiKey) => {
-  var departResponse = [];
+  // var departResponse = [];
   return (dispatch) => {
     dispatch(networkFetching(true))
-    //---------------------FETCH DEPARTMENT LIST-------------------
-    fetch(uri.DEPARTMENT_LIST, Resource.employeesList(apiKey))
-    .then(data => data.json())
-    .then(departmentResponse => {
-      departResponse = departmentResponse
-      dispatch(departmentList(departmentResponse));
-    })
-    .catch(err => {
-      dispatch(networkFetchError(err))
-    })
-    //---------------------FETCH EMPLOYEES LIST-------------------
-    .then(() => { 
-      fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
-      .then(data => data.json())
-      .then(empResponse => {
-        var state = store.getState();
-        var myProfile = util.getMyInformation(empResponse, state.rootReducer.auth.user.email)[0];
-        dispatch(employeeList(empResponse));                
-        dispatch(employeeAction.myProfileInfo(myProfile));
-        dispatch(employeeAction.groupEmployeesOnDepartmentBasis(util.groupByDepartment(empResponse, departResponse)))
-        dispatch(networkFetching(false));
-      })
-      .catch(err => {
-        dispatch(networkFetchError(err))
-      })
-    })
-  }    
+    var requests = [uri.DEPARTMENT_LIST, uri.EMPLOYEES_LIST];
+    
+    Promise.all(requests.map(request => {
+      return fetch(request, Resource.employeesList(apiKey)).then((response) => {
+        return response.json();
+      }).then((data) => {
+          return data;
+      });
+    })).then((values) => {
+      let departments = values[0]
+      let employees = values[1]
+      let state = store.getState();
+      let myProfile = util.getMyInformation(employees, state.rootReducer.auth.user.email)[0];
+      
+      Promise.all([
+        dispatch(employeeAction.groupEmployeesOnDepartmentBasis(util.groupByDepartment(employees, departments))),          
+        dispatch(departmentList(departments)),
+        dispatch(employeeList(employees)),
+        dispatch(employeeAction.myProfileInfo(myProfile))
+      ])
+      .then(() => dispatch(networkFetching(false)))
+    }).catch(err => dispatch(networkFetchError(err)));
+  }
 }
 
 networkFetching = (isFetching) => {
@@ -82,7 +77,7 @@ networkFetching = (isFetching) => {
 }
 
 networkFetchError = () => {
-=  return {
+  return {
     type: ActionType.NETWORK_FETCH_ERROR,    
   }
 }

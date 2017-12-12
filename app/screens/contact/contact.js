@@ -216,10 +216,10 @@ const DEPARTMENT_LIST = [{
     if (this.props.isFetching) {
       return 'fetch';
     }
-    if (this.props.employees.length === 0) {
-      return 'error';
+    if (this.props.employees.length > 0 || this.props.departments.length > 0) {
+      return 'normal'
     }
-    return 'normal';
+    return 'error'; // error or empty
   }
 
   render() {
