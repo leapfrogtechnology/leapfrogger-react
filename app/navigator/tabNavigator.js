@@ -10,6 +10,29 @@ export const startTabScreen = () => {
   const options = {
     tabs: [
       {
+        label: 'Favorites',
+        title: 'Favorites',        
+        screen: screens.FAVORITE_SCREEN.id,
+        icon: profileIcon,
+        // selectedIcon: require('../img/two_selected.png'),
+        iconInsets: { 
+          top: 0, 
+          left: 0,
+          bottom: 0,
+          right: 0
+        },
+        navigatorStyle: {
+          statusBarTextColorScheme: 'light',                  
+          navBarNoBorder: false,
+          drawUnderNavBar: true,
+          navBarBackgroundColor: colors.LF_DARK_GRREEN, 
+          navBarTextColor: 'white',
+          navBarButtonColor: 'white',                  
+          navBarLeftButtonColor: 'white',
+          navBarRightButtonColor: 'white',
+        }, 
+      },
+      {
         label: 'Contacts',
         title: '',        
         screen: screens.CONTACT_SCREEN.id,
@@ -72,11 +95,16 @@ export const startTabScreen = () => {
       tabBarButtonColor: colors.LIGHT_GRAY,
       tabBarSelectedButtonColor: colors.LF_DARK_GRREEN,
       tabBarBackgroundColor: colors.SYSTEM_LIGHT_GRAY,
-      initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
+      initialTabIndex: 1, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
+    },
+    appStyle: {
+      orientation: 'portrait', 
+      // backButtonImage: require('./pathToImage.png'),
+      hideBackButtonTitle: true,
     },
     passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
-    animationType: 'slide-down' // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
-  
+    animationType: 'fade', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
+    portraitOnlyMode: true,    
   };
 
   Navigation.startTabBasedApp(options);

@@ -49,7 +49,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   _messageButtonPressed = (event) => {
-    console.log('message');
+    // console.log('message');
     if (this.props.data.contact.mobilePhone) {      
       Communications.text(this.props.data.contact.mobilePhone);    
     } else {

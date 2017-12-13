@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { 
   Animated,
   View,
+  Text,
   Image,
   ActivityIndicator
   } from 'react-native';
@@ -12,6 +13,7 @@ import Button from 'App/components/Button';
 
 const FETCH_STATE = "fetch";
 const NORMAL_STATE = "normal";
+const EMPTY_STATE = "empty";
 const ERROR_STATE = "error";
 
 class StateFullScreen extends Component {
@@ -21,7 +23,7 @@ class StateFullScreen extends Component {
 
   }
 
-  _renderEmptyScreen = () => {
+  _renderErrorScreen = () => {
     return (
       <View style={style.emptyView}>
           <Button 
@@ -33,10 +35,18 @@ class StateFullScreen extends Component {
     )
   }
 
+  _renderEmptyScreen = () => {
+    return (
+      <View style={[style.emptyView, {justifyContent: 'center'}]}>
+        <Text>NO DATA</Text>
+      </View>
+    )
+  }
+
   _renderActivityIndicator = () => {
     return (
       <View style={[style.activityContainer, style.container, style.horizontal]}>
-        <ActivityIndicator size="large" color={colors.GRAY} />
+        <ActivityIndicator size="large" color={colors.LF_DARK_GRREEN} style={[style.activityIndicator, {marginBottom: this.props.bottomMargin}]} />
       </View>
     )
   }
@@ -50,9 +60,10 @@ class StateFullScreen extends Component {
         return this._renderActivityIndicator();
         break
       case ERROR_STATE:
-        return this._renderEmptyScreen();
+        return this._renderErrorScreen();
         break
-      default:
+      default: // emptyState
+        return this._renderEmptyScreen();      
         break
     }
   }
@@ -72,7 +83,8 @@ class StateFullScreen extends Component {
 StateFullScreen.defaultProps = {
   state: NORMAL_STATE,
   style: {},
-  onPress: {}
+  onPress: {},
+  bottomMargin: 0
 }
 
 export default StateFullScreen;

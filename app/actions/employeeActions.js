@@ -17,9 +17,9 @@ export const myProfileInfo = (myProfile) => {
   }
 }
 
-export const favoriteEmployees = (favoriteEmployees) => {
+export const favoriteTheEmployee = (favoriteEmployee) => {
   return {
-    type: ActionType.FAVORITE_EMPLOEES,
-    favoriteEmployees
+    type: ActionType.FAVORITE_EMPLOYEE,
+    favoriteEmployee: favoriteEmployee
   }
 }

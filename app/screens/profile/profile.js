@@ -22,16 +22,16 @@ import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import placeHolderImage from './../../../assets/images/default.png';
+import favouriteImage from './../../../assets/images/favorite.png';
 
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles'; 
 
-const PHONE_NUMBER = 0
+// const PHONE_NUMBER = 0
+const EMAIL = 0
 const ADDRESS = 1
-const EMAIL = 2
-// const DOB = 3
+const SKYPE = 2
 const GITHUB = 3
-const SKYPE = 4
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 2
@@ -40,10 +40,16 @@ class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      isFav: false
+    }
   }
 
   componentDidMount() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);    
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);  
+    let fav = this.props.favEmployees.filter(emp => emp.empId === this.data.empId).length > 0 ? true : false
+    this.setState({ isFav: fav })  
   }
 
   _logout = () => {
@@ -54,6 +60,20 @@ class ProfileScreen extends Component {
 
   _moreButtonAction = () => {
     this.actionSheet.show();
+  }
+
+  _favAction = () => {
+    if (this.state.isFav) {
+      // remove
+      let newArr = this.props.favEmployees.filter(emp => emp.empId !== this.data.empId )
+      this.props.setFavEmployees(newArr)
+    } else {
+      // add
+      let newArr = []
+      newArr.push(this.data)      
+      this.props.setFavEmployees(newArr.concat(this.props.favEmployees))      
+    }
+    this.setState(oldState => { return { isFav: !oldState.isFav }})
   }
 
   _actionSheetSelection = (index) => {
@@ -82,20 +102,48 @@ class ProfileScreen extends Component {
         backgroundSpeed={10}
         renderBackground={() => (
           <View key="background">
-            <Image source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/>
+            {/* <Image source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/> */}
             <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
 
         renderForeground={() => (
-          <View key="parallax-header" style={ style.parallaxHeader }>
-            <Image style={ style.avatar } source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
-            <Text style={ style.sectionSpeakerText }>
-            { this.data.firstName } { this.data.lastName }
-            </Text>
-            <Text style={ style.sectionTitleText }>
-              { this.data.department.name }
-            </Text>
+          <View style={style.profileContainer}>
+            <View style={style.imageNumberContainer}>
+              { !this.props.data.fromProfileTab &&
+              <View style={[style.messageContainer, style.buttonContainer]}>
+                <TouchableOpacity style={style.messageButton} onPress={() => Communications.text(this.data.contact.mobilePhone)}>
+                  <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
+                </TouchableOpacity>
+              </View>
+              }
+              <View style={ style.photoContainer }>
+                <Image style={ style.avatar } source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
+              </View>
+              { !this.props.data.fromProfileTab &&
+              <View style={[style.phoneContainer, style.buttonContainer]}>
+                <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall(this.data.contact.mobilePhone, true)}>
+                  <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
+                </TouchableOpacity>
+              </View>
+              }
+            </View>
+            <View style={style.nameNumberFavContainer}>
+              <View style={style.nameNumberContainer}>
+                <Text style={ style.sectionSpeakerText }>
+                  { this.data.firstName } { this.data.lastName }
+                </Text>
+                <Text style={ style.sectionTitleText }>
+                  { this.data.contact.mobilePhone }
+                </Text>
+              </View>
+              <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>
+                {
+                  !this.props.data.fromProfileTab &&
+                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.IOS_RED}: {tintColor: 'white'}]}/>
+                }
+              </TouchableOpacity>
+            </View>
           </View>
         )}
 
@@ -105,12 +153,11 @@ class ProfileScreen extends Component {
 
   _renderItems = (item, index) => {
     switch (index) {
-      case PHONE_NUMBER: return this._renderPhoneCell();
+      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');      
       case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-');
-      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');
-      // case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
       case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-');
       case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-');
+      // case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
     }
   }
 
@@ -138,8 +185,8 @@ class ProfileScreen extends Component {
   _renderTextCell = (text, data) => {
     return (
       <View style={[style.simpleTextCell, style.cell]}>
-        <Text style={style.dataText}>{data}</Text>
-        <Text style={style.titleText}>{text}</Text>
+          <Text style={style.titleText}>{text}</Text>
+          <Text style={style.dataText}>{data}</Text>
       </View>
     );
   }
@@ -210,6 +257,7 @@ class ProfileScreen extends Component {
             style={style.mainContainer}
             state={this._getScreenState()} // fetch, normal and error
             contentView={this._renderTableView()}
+            bottomMargin={-145}
             reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}            
           />
         }

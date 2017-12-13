@@ -83,29 +83,23 @@ const style = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain', 
-    shadowColor: 'black',
-    shadowRadius: 1,
-    shadowOpacity: 0.8,  
-    shadowOffset: { width: 0, height: 0 },    
   },
   callButton: {
-    padding: 6,    
+    width: 38,
+    height: 38,
     alignItems: 'center',
-    // backgroundColor: 'red',
+    justifyContent: 'center',
   },
   messageImage: {
     width: 30,
     height: 30,
     resizeMode: 'contain', 
-    shadowColor: 'black',
-    shadowRadius: 1,
-    shadowOpacity: 0.8,
-    shadowOffset: { width: 0, height: 0 },    
   },
   messageButton: {
-    padding: 6,    
+    width: 38,
+    height: 38,
     alignItems: 'center',
-    // backgroundColor: 'blue',
+    justifyContent: 'center',
   }
 
 });

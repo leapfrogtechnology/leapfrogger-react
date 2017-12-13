@@ -14,10 +14,10 @@ const employee = (state = initialState, action) => {
         groupedEmployees: action.groupedEmployees
       }
 
-    case actionType.FAVORITE_EMPLOEES:
+    case actionType.FAVORITE_EMPLOYEE:
       return {
         ...state,
-        favoriteEmployees: action.favoriteEmployees
+        favoriteEmployees: action.favoriteEmployee
       }
 
     default:

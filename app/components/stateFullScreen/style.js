@@ -34,9 +34,11 @@ const style = StyleSheet.create({
     position: 'absolute',
     zIndex: 100,
     width: getWidth(),
-    height: getHeight() - 115,
-    backgroundColor: 'white'
+    height: getHeight() - 118,
+    backgroundColor: 'white',
   },
+  activityIndicator: {
+  }
 });
 
 export default style;
