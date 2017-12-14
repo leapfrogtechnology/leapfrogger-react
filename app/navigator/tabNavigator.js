@@ -4,7 +4,9 @@ import { store } from './../../App';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 
+import favIcon from './../../assets/images/fav-tab.png';
 import profileIcon from './../../assets/images/profile.png';
+import contactIcon from './../../assets/images/contact.png';
 
 export const startTabScreen = () => {
   const options = {
@@ -13,7 +15,7 @@ export const startTabScreen = () => {
         label: 'Favorites',
         title: 'Favorites',        
         screen: screens.FAVORITE_SCREEN.id,
-        icon: profileIcon,
+        icon: favIcon,
         // selectedIcon: require('../img/two_selected.png'),
         iconInsets: { 
           top: 0, 
@@ -36,7 +38,7 @@ export const startTabScreen = () => {
         label: 'Contacts',
         title: '',        
         screen: screens.CONTACT_SCREEN.id,
-        icon: profileIcon,
+        icon: contactIcon,
         // selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
         iconInsets: {
           top: 0,
