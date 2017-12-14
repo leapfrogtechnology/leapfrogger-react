@@ -6,13 +6,13 @@ import * as fetchActions from 'App/actions/fetchActions';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.rootReducer.auth.loggedIn,
-  user: state.rootReducer.auth.user,
-  isEmailValid: state.rootReducer.user.isValid,
+  isValidating: state.rootReducer.user.isFetching,
+  validationResponse: state.rootReducer.user.validationResponse,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLogin: (user) => { dispatch(actions.loginAction(user)) },
-  validateEmail: (token) => { dispatch(fetchActions.validateEmail(token)) }
+  validateEmail: (token) => { return dispatch(fetchActions.validateEmail(token)) }
 });
 
 export default connect(

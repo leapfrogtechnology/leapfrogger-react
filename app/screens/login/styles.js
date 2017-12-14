@@ -103,6 +103,12 @@ const style = StyleSheet.create({
   },
   errorLabel: {
     color: 'red',
+  },
+  activityIndicator: {
+    position: 'absolute',
+    alignItems: 'center',
+    top: 0,
+    paddingTop: 8,
   }
 
 });

@@ -11,6 +11,7 @@ import {
 
 import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
+import { GoogleSignin } from 'react-native-google-signin';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import colors from 'App/config/colors';
@@ -54,8 +55,21 @@ class ProfileScreen extends Component {
 
   _logout = () => {
     // TODO: Clear all data
-    this.props.logout();
-    startLoginScreen();
+    GoogleSignin.signOut()
+    .then(() => {
+      this.props.logout();      
+      startLoginScreen()
+    })
+    .catch(err => {
+      this.props.logout();      
+      startLoginScreen()
+    })
+
+    GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
+      this.props.logout(); 
+      startLoginScreen();      
+    })
+    .done();
   }
 
   _moreButtonAction = () => {
@@ -140,7 +154,7 @@ class ProfileScreen extends Component {
               <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>
                 {
                   !this.props.data.fromProfileTab &&
-                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.IOS_RED}: {tintColor: 'white'}]}/>
+                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.IOS_RED}: {tintColor: colors.LIGHT_GRAY}]}/>
                 }
               </TouchableOpacity>
             </View>

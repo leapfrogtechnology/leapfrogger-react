@@ -1403,6 +1403,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1432,6 +1433,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -15,7 +15,7 @@ class Button extends Component {
   render() {
     return (
       <View style={style.mainContainer}>
-        <TouchableOpacity style={[style.button, this.props.style]} onPress={this.props.onPress}>  
+        <TouchableOpacity style={[style.button, this.props.style]} onPress={this.props.onPress} disabled={this.props.disabled}>  
           <View style={ [style.buttonContainer] }>
             {
               this.props.source &&
@@ -32,6 +32,7 @@ class Button extends Component {
 
 Button.defaultProps = {
   title: 'Button',
+  disabled: false,
   onPress: () => { }
 };
 

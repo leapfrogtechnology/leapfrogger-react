@@ -1,7 +1,7 @@
 import * as actionType from 'App/constants/actionsType';
 
 const initialState = {
-  isValid: false,
+  validationResponse: null,
   myProfile: null,
   employees: [],
   isFetching: false,
@@ -9,12 +9,11 @@ const initialState = {
 }
 
 const user = (state = initialState, action) => {
-  // console.log('========111', action.type)    
   switch (action.type) {
     case actionType.VALIDATE_EMAIL:
       return {
         ...state,
-        isValid: true,
+        validationResponse: action.validationResponse,
       };
     
     case actionType.MY_PROFILE:

@@ -5,17 +5,24 @@ import * as ActionType from 'App/constants/actionsType';
 import * as employeeAction from './employeeActions';
 import { store } from './../../App';
 
-export const validateEmail = (token) => {
-  return (dispatch) => {
-    fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
-    .then(data => data.json())
-    .then(json => {
-      dispatch(validateLFEmail())
-    })
-    .catch(err => {
-      dispatch(networkFetchError(err))
-    })
-  }
+export const validateEmail = (token) => (dispatch) => {
+  console.log('===111')  
+  return new Promise((resolve, reject) => {
+      dispatch(networkFetching(true));    
+      fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
+      .then(data => data.json())
+      .then(json => {
+        console.log('===', json)
+        dispatch(validateLFEmail(json))
+        dispatch(networkFetching(false));
+        resolve();      
+      })
+      .catch(err => {
+        reject();
+        dispatch(networkFetchError(err))
+      })
+    }
+  )
 }
 
 // export const fetchEmployeeFromAPI = (apiKey) => {
@@ -82,12 +89,10 @@ networkFetchError = () => {
   }
 }
 
-validateLFEmail = () => {
+validateLFEmail = (validationResponse) => {
   return {
     type: ActionType.VALIDATE_EMAIL,
-    payload: {
-      valid: true,
-    }
+    validationResponse
   }
 }
 
