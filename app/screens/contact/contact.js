@@ -23,43 +23,6 @@ import StateFullScreen from 'App/components/stateFullScreen';
 import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
-const DEPARTMENT_LIST = [{
-                            name: 'iOS', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'Android', 
-                            avatar: require('../../../assets/images/SundarPichai.jpg'), 
-                            wallpaper: require('../../../assets/images/SundarPichai.jpg'),
-                            quote: '\"Wear your failure as your badge of honour\"'
-                          }, 
-                          {
-                            name: 'Java', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'php', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'ReactNative', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'PM', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }];
-
  class ContactScreen extends Component {
 
   constructor(props) {
