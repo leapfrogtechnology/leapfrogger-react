@@ -3,7 +3,6 @@ import * as actionType from 'App/constants/actionsType';
 const initialState = {
   validationResponse: null,
   myProfile: null,
-  employees: [],
   isFetching: false,
   error: null,
 }
@@ -22,12 +21,6 @@ const user = (state = initialState, action) => {
         myProfile: action.myProfile,
       }
 
-    case actionType.EMPLOYEES_LIST:
-      return {
-        ...state,
-        employees: action.employees,
-      };
-
     case actionType.NETWORK_FETCHING:
       return {
         ...state,
@@ -39,6 +32,13 @@ const user = (state = initialState, action) => {
         ...state,
         isFetching: false,        
         error: true,
+      }
+
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        myProfile: null,
+        validationResponse: null,
       }
 
     default:

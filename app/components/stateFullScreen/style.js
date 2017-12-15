@@ -38,7 +38,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
   },
   activityIndicator: {
-  }
+  },
 });
 
 export default style;

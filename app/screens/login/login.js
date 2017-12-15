@@ -27,7 +27,8 @@ import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
 
 const GuestUser = {
-  guest: true
+  email: loginCredentials.email,
+  password: loginCredentials.password,
 }
  class LoginScreen extends Component {
 
@@ -43,10 +44,7 @@ const GuestUser = {
   }
 
   _presetLoginData = () => {
-    this.setState({
-      email: loginCredentials.email,
-      password: loginCredentials.password,
-    });
+    this.setState(GuestUser);
   }
 
   componentDidMount() {  
@@ -90,7 +88,6 @@ const GuestUser = {
 
   _afterValidation = (user) => {
     if (this.props.validationResponse) {
-      console.log('====', this.props.validationResponse.hasOwnProperty('success'), user.email)      
       if (this.props.validationResponse.hasOwnProperty('success')) {
         this.props.onLogin(user);
         this._login();        
@@ -129,6 +126,10 @@ const GuestUser = {
       this.props.validateEmail(user.accessToken)
       .then(() => {
         this._afterValidation(user);        
+      })
+      .catch((err) => {
+        console.log('errrrrr', err);
+        this._showAlertWithMessage('Error Occured')
       })
       // if (!this.props.isValidating) {
       // }

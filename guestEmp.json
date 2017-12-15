@@ -1,0 +1,38 @@
+[{
+  "address": {
+      "permanentAddress": "4th Square",
+      "temporaryAddress": "Brooklyn"
+  },
+  "avatarUrl": "https://pbs.twimg.com/profile_images/605082381528096769/gt_sJRot.png",
+  "contact": {
+      "githubId": "steve_rogers",
+      "homePhone": null,
+      "mobilePhone": "+9779861926016",
+      "skypeId": "steve_rogers"
+  },
+  "dateCreated": "2017-12-06",
+  "dateofBirth": "1992-10-16",
+  "department": {
+      "id": 1,
+      "name": "Avengers"
+  },
+  "designation": "Associate Software Engineer",
+  "empId": "342",
+  "empStatus": "Probation",
+  "firstName": "Chris",
+  "gender": "MALE",
+  "id": 231,
+  "isHod": false,
+  "isHr": false,
+  "isRaffleEligible": true,
+  "isSupervisor": false,
+  "joinDate": "2017-12-06",
+  "lastName": "Evans",
+  "lastUpdated": "2017-12-06",
+  "maritialStatus": "Married",
+  "middleName": null,
+  "projects": null,
+  "role": "USER",
+  "supervisor": null,
+  "username": "guest@lftechnology.com"
+}]

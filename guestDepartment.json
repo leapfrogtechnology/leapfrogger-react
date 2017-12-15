@@ -1,0 +1,22 @@
+[
+  {
+      "dateCreated": "2015-07-06",
+      "description": "Android Application Department",
+      "hod": {
+          "avatarUrl": "https://pbs.twimg.com/profile_images/605082381528096769/gt_sJRot.png",
+          "department": {
+              "id": 1,
+              "name": "Avengers"
+          },
+          "empId": "12",
+          "firstName": "Tony",
+          "id": 24,
+          "lastName": "Bahadur",
+          "middleName": "Stark"
+      },
+      "id": 1,
+      "isActive": true,
+      "lastUpdated": "2015-07-06",
+      "name": "Avengers"
+  }
+]

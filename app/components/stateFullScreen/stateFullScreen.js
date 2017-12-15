@@ -35,14 +35,6 @@ class StateFullScreen extends Component {
     )
   }
 
-  _renderEmptyScreen = () => {
-    return (
-      <View style={[style.emptyView, {justifyContent: 'center'}]}>
-        <Text>NO DATA</Text>
-      </View>
-    )
-  }
-
   _renderActivityIndicator = () => {
     return (
       <View style={[style.activityContainer, style.container, style.horizontal]}>
@@ -63,7 +55,7 @@ class StateFullScreen extends Component {
         return this._renderErrorScreen();
         break
       default: // emptyState
-        return this._renderEmptyScreen();      
+        return this.props.emptyScreen;      
         break
     }
   }
@@ -84,7 +76,8 @@ StateFullScreen.defaultProps = {
   state: NORMAL_STATE,
   style: {},
   onPress: {},
-  bottomMargin: 0
+  bottomMargin: 0,
+  emptyScreen: null,
 }
 
 export default StateFullScreen;

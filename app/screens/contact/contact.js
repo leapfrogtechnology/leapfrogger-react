@@ -10,6 +10,7 @@ import {
  
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import colors from 'App/config/colors';
@@ -21,7 +22,10 @@ import SearchContactView from 'App/screens/searchContact';
 import { getWidth, getHeight } from 'App/utils/dimension';
 import StateFullScreen from 'App/components/stateFullScreen';
 import { searchEmployeesOfName } from 'App/utils/dataNormalization';
+
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
+
+const GUEST_EMAIL = 'guest@lftechnology.com'
 
  class ContactScreen extends Component {
 
@@ -53,7 +57,13 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { this.props.fetchEmployeesAndDepartments() }
+    if (this.props.user.email === GUEST_EMAIL) {      
+      var empjson = require('./../../../guestEmp.json'); //(with path)
+      var departmentjson = require('./../../../guestDepartment.json'); //(with path)
+      this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
+    } else {
+      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { this.props.fetchEmployeesAndDepartments() }      
+    }
   }
 
   _onSearchBarTextChange = (text) => {
@@ -114,7 +124,7 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
             onPress={this._onCellSelection}/>
           }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1}}></View>}
+        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );
   }
@@ -171,6 +181,7 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
+        <KeyboardSpacer/>
       </View>
     )
   }
@@ -193,7 +204,12 @@ import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_H
           { this._renderSearchBar() }
         </View>
         <View style={style.tableContainer}>
-          {
+          {/* {
+            <View style={style.stickyDepartmentSection}>
+              <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>
+            </View> 
+          } */}
+          {                         
             <StateFullScreen
               style={style.mainContainer}
               state={this._getScreenState()} // fetch, normal and error

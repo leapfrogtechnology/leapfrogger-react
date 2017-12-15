@@ -10,8 +10,14 @@ const department = (state = initialState, action) => {
       return {
         ...state,
         departments: action.departments,
+      }   
+    
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        departments: [],
       }
-
+      
     default:
       return state;
   }

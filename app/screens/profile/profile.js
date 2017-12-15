@@ -17,6 +17,7 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import StateFullScreen from 'App/components/stateFullScreen';
+import EmptyProfileImage from 'App/components/emptyProfileImage';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 
 import moreImage from './../../../assets/images/more.png';
@@ -35,8 +36,11 @@ const SKYPE = 2
 const GITHUB = 3
 
 const CANCEL_INDEX = 0
+const GUEST_DESTRUCTIVE_INDEX = 1
 const DESTRUCTIVE_INDEX = 2
-const options = ['Cancel', 'Update', 'Logout']
+const GUEST_EMAIL = 'guest@lftechnology.com'
+const options = ['Cancel', 'Sync with LMS', 'Logout']
+const guestOptions = ['Cancel', 'Logout']
 class ProfileScreen extends Component {
 
   constructor(props) {
@@ -50,26 +54,23 @@ class ProfileScreen extends Component {
   componentDidMount() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);  
     let fav = this.props.favEmployees.filter(emp => emp.empId === this.data.empId).length > 0 ? true : false
-    this.setState({ isFav: fav })  
+    this.setState({ isFav: fav });
+  }
+
+  _startLogin = () => {
+    this.props.logout(); 
+    startLoginScreen();      
   }
 
   _logout = () => {
-    // TODO: Clear all data
-    GoogleSignin.signOut()
-    .then(() => {
-      this.props.logout();      
-      startLoginScreen()
-    })
-    .catch(err => {
-      this.props.logout();      
-      startLoginScreen()
-    })
-
-    GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
-      this.props.logout(); 
-      startLoginScreen();      
-    })
-    .done();
+    if (!this.isGuest) {
+      GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
+        this._startLogin()
+      })
+      .done();
+    } else {
+      this._startLogin()
+    }
   }
 
   _moreButtonAction = () => {
@@ -95,7 +96,7 @@ class ProfileScreen extends Component {
       case 0:
       break
       case 1: // Update
-      this.props.fetchEmployeesAndDepartments();
+      this.isGuest ? this._logout() : this.props.fetchEmployeesAndDepartments();
       break
       case 2: // logout
       this._logout();
@@ -132,7 +133,17 @@ class ProfileScreen extends Component {
               </View>
               }
               <View style={ style.photoContainer }>
-                <Image style={ style.avatar } source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
+                {
+                  this.data.avatarUrl ?
+                  <Image style={[style.avatar, {resizeMode: 'contain'}]} source={{uri: this.data.avatarUrl}}/>
+                  :
+                  <EmptyProfileImage
+                    firstName={this.data.firstName}
+                    lastName={this.data.lastName}
+                    textSize={45}
+                    style={style.avatar}
+                  />
+                }
               </View>
               { !this.props.data.fromProfileTab &&
               <View style={[style.phoneContainer, style.buttonContainer]}>
@@ -146,6 +157,9 @@ class ProfileScreen extends Component {
               <View style={style.nameNumberContainer}>
                 <Text style={ style.sectionSpeakerText }>
                   { this.data.firstName } { this.data.lastName }
+                </Text>
+                <Text style={ style.designationText }>
+                  { this.data.designation }
                 </Text>
                 <Text style={ style.sectionTitleText }>
                   { this.data.contact.mobilePhone }
@@ -226,9 +240,9 @@ class ProfileScreen extends Component {
       <View>
         <ActionSheet
           ref={component => this.actionSheet = component}
-          options={options}
+          options={this.isGuest ? guestOptions : options}
           cancelButtonIndex={CANCEL_INDEX}
-          destructiveButtonIndex={DESTRUCTIVE_INDEX}
+          destructiveButtonIndex={this.isGuest ? GUEST_DESTRUCTIVE_INDEX : DESTRUCTIVE_INDEX}
           onPress={(index) => this._actionSheetSelection(index)}
         />
       </View>
@@ -260,6 +274,7 @@ class ProfileScreen extends Component {
 
   render() {
     this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile;
+    this.isGuest = (this.data && this.data.username === GUEST_EMAIL);    
     return (
       <View style={ style.mainContainer }>
         {

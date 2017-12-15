@@ -12,6 +12,9 @@ import style from './style';
 import screens from 'App/constants/screens';
 import ContactCell from './../contact/contactCell';
 import StateFullScreen from 'App/components/stateFullScreen';
+
+import emptyFav from './../../../assets/images/favorite.png';
+
 class FavoriteScreen extends Component {
 
   constructor(props) {
@@ -41,6 +44,15 @@ class FavoriteScreen extends Component {
         }
       }        
     });
+  }
+
+  _renderEmptyScreen = () => {
+    return (
+      <View style={[style.emptyView, {justifyContent: 'center'}]}>
+        <Image source={emptyFav} style={style.emptyFavImage}/>
+        <Text style={style.emptyText}>Your Favorite Frogs will {'\n'} Live Here.</Text>
+      </View>
+    )
   }
 
   _renderTableView = (items) => {
@@ -77,6 +89,7 @@ class FavoriteScreen extends Component {
           state={this._getScreenState()} // fetch, normal and error
           contentView={this._renderTableView(this.props.favEmployees)}
           reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}
+          emptyScreen={this._renderEmptyScreen()}
         />
       </View>
     )

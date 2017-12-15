@@ -111,7 +111,25 @@ const style = StyleSheet.create({
     width: getWidth(),
     height: getHeight() - 120,
     backgroundColor: 'white'
-  }
+  },
+  emptyView: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  emptyFavImage: {
+    tintColor: colors.MID_GRAY,
+    width: 80,
+    height: 80,
+    resizeMode: 'contain' 
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: '500',
+    marginTop: 20,
+    fontFamily: 'AvenirNext-Regular',    
+    color: colors.MID_GRAY,
+    textAlign: 'center',
+  },
 
 });
 

@@ -8,6 +8,12 @@ const initialState = {
 
 const employee = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.EMPLOYEES_LIST:
+      return {
+        ...state,
+        employees: action.employees,
+      }
+
     case actionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS:
       return {
         ...state,
@@ -18,6 +24,14 @@ const employee = (state = initialState, action) => {
       return {
         ...state,
         favoriteEmployees: action.favoriteEmployee
+      }
+
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        employees: [],
+        groupedEmployees: [],
+        favoriteEmployees: [],
       }
 
     default:

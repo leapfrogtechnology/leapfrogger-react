@@ -6,7 +6,7 @@ import { getWidth, getHeight } from 'App/utils/dimension';
 export const DOT_MARGIN = -28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
-export const PARALLAX_HEADER_HEIGHT = 250;
+export const PARALLAX_HEADER_HEIGHT = 260;
 
 const style = StyleSheet.create({
   
@@ -73,10 +73,9 @@ const style = StyleSheet.create({
     bottom: 10,
   },
   photoContainer: {
-    flex: 0.33,
-    paddingTop: 80,  
-    marginTop:-8,  
-    paddingHorizontal: 16,
+    flex: 0.25,
+    paddingTop: 66,  
+    paddingHorizontal: 25,
     alignItems: 'center',    
     flexDirection: 'column',
   },
@@ -86,18 +85,21 @@ const style = StyleSheet.create({
     height: AVATAR_SIZE,
     borderRadius: AVATAR_SIZE / 2,
     borderWidth: 2,    
-    borderRadius: 30,
+    borderRadius: AVATAR_SIZE / 3,
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOpacity: 0.6,
-    resizeMode: 'contain',
-    // backgroundColor: 'blue',
     borderColor: colors.LIGHT_GRAY,
-    shadowOffset: { width: 0, height: 0 }  },
+    shadowOffset: { width: 0, height: 0 }  
+  },
   sectionSpeakerText: {
     fontSize: 20,    
     color: 'white',
-    paddingVertical: 5
+    paddingVertical: 4
+  },
+  designationText: {
+    fontSize: 12, 
+    color: colors.SYSTEM_LIGHT_GRAY,    
   },
   sectionTitleText: {
     fontSize: 15,
@@ -154,7 +156,7 @@ const style = StyleSheet.create({
     height: 50,
     tintColor: 'white',
     marginHorizontal: 4,
-    paddingHorizontal: 2,            
+    paddingHorizontal: 6,            
     resizeMode: 'contain',
   },
   simpleTextCell: {
@@ -217,7 +219,8 @@ const style = StyleSheet.create({
   buttonContainer: {
     flex: 0.33,
     justifyContent: 'flex-end',
-    paddingBottom: 8,
+    paddingBottom: 20,
+    paddingHorizontal: 8,
   },
   phoneContainer: {
     alignItems: 'flex-start',
@@ -226,7 +229,7 @@ const style = StyleSheet.create({
     alignItems: 'flex-end',
   },
   nameNumberFavContainer: {
-    flex: 0.4,
+    flex: 0.45,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -236,7 +239,7 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: -35,
+    marginRight: -48,
   },
   favButton: {
     width: 44,

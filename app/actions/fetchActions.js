@@ -3,22 +3,22 @@ import * as util from 'App/utils/dataNormalization';
 import * as Resource from 'App/utils/networkResource';
 import * as ActionType from 'App/constants/actionsType';
 import * as employeeAction from './employeeActions';
+import * as userAction from './userActions';
+import * as departmentAction from './departmentActions';
 import { store } from './../../App';
 
 export const validateEmail = (token) => (dispatch) => {
-  console.log('===111')  
   return new Promise((resolve, reject) => {
       dispatch(networkFetching(true));    
       fetch(`${uri.EMAIL_VALIDATION}?token=${token}`, Resource.emailValidation())
       .then(data => data.json())
       .then(json => {
-        console.log('===', json)
-        dispatch(validateLFEmail(json))
+        dispatch(userAction.validateLFEmail(json))
         dispatch(networkFetching(false));
-        resolve();      
+        resolve(json);      
       })
       .catch(err => {
-        reject();
+        reject(err);
         dispatch(networkFetchError(err))
       })
     }
@@ -67,9 +67,9 @@ export const fetchEmployeesAndDepartmentsFromAPI = (apiKey) => {
       
       Promise.all([
         dispatch(employeeAction.groupEmployeesOnDepartmentBasis(util.groupByDepartment(employees, departments))),          
-        dispatch(departmentList(departments)),
-        dispatch(employeeList(employees)),
-        dispatch(employeeAction.myProfileInfo(myProfile))
+        dispatch(departmentAction.departmentList(departments)),
+        dispatch(employeeAction.employeeList(employees)),
+        dispatch(userAction.myProfileInfo(myProfile))
       ])
       .then(() => dispatch(networkFetching(false)))
     }).catch(err => dispatch(networkFetchError(err)));
@@ -89,23 +89,33 @@ networkFetchError = () => {
   }
 }
 
-validateLFEmail = (validationResponse) => {
-  return {
-    type: ActionType.VALIDATE_EMAIL,
-    validationResponse
-  }
-}
+// validateLFEmail = (validationResponse) => {
+//   return {
+//     type: ActionType.VALIDATE_EMAIL,
+//     validationResponse
+//   }
+// }
 
-employeeList = (employees) => {
-  return {
-    type: ActionType.EMPLOYEES_LIST,
-    employees
-  }
-}
+// employeeList = (employees) => {
+//   return {
+//     type: ActionType.EMPLOYEES_LIST,
+//     employees
+//   }
+// }
 
-departmentList = (departments) => {
-  return {
-    type: ActionType.DEPARTMENT_LIST,
-    departments
-  }    
+// departmentList = (departments) => {
+//   return {
+//     type: ActionType.DEPARTMENT_LIST,
+//     departments
+//   }    
+// }
+
+// For local guest
+export const setGuestEmployeeAndDepartmentLocal = (employees, departments) => {
+  return (dispatch) => {
+    dispatch(employeeAction.groupEmployeesOnDepartmentBasis(util.groupByDepartment(employees, departments))),          
+    dispatch(departmentAction.departmentList(departments)),
+    dispatch(employeeAction.employeeList(employees)),
+    dispatch(userAction.myProfileInfo(employees[0]))
+  }
 }

@@ -2,6 +2,7 @@ const colors = {
   LF_DARK_GRREEN: '#17a555',
   LF_LIGHT_GREEN: '#6cc067',
   GRAY: '#6e6f72',
+  MID_GRAY: '#9E9E9E',
   LIGHT_GRAY: '#c8c8c8',
   SYSTEM_BLUE: '#007aff',
   GOOGLE_BLUE: '#4285f4',
