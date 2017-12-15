@@ -24,8 +24,8 @@ export default {
     id: 'ProfileScreen',
     name: 'Profile'
   },
-  CONTACT_DETAIL_SCREEN: {
-    id: 'ContactDetailScreen',
-    name: 'Detail'
+  FAVORITE_SCREEN: {
+    id: 'FavoriteScreen',
+    name: 'Favorites'
   }
 };

@@ -3,7 +3,9 @@ import {
   View, 
   Text,
   Image,  
+  Alert,
   TextInput,
+  ActivityIndicator
  } from 'react-native';
 
 import { Keyboard } from 'react-native'; 
@@ -13,6 +15,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GoogleSignin } from 'react-native-google-signin';
 
 import style from './styles';
+import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { validateEmail } from 'App/utils/validator';
 import { startTabScreen } from 'App/navigator/tabNavigator';
@@ -24,7 +27,8 @@ import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
 
 const GuestUser = {
-  guest: true
+  email: loginCredentials.email,
+  password: loginCredentials.password,
 }
  class LoginScreen extends Component {
 
@@ -35,14 +39,12 @@ const GuestUser = {
       email: '',
       password: '',
       errorMessage: '',
+      revokingAccess: false,
     }    
   }
 
   _presetLoginData = () => {
-    this.setState({
-      email: loginCredentials.email,
-      password: loginCredentials.password,
-    });
+    this.setState(GuestUser);
   }
 
   componentDidMount() {  
@@ -66,6 +68,37 @@ const GuestUser = {
     }
   }
 
+  _revokeGoogleSigninAccess = () => {
+    this.setState({revokingAccess: true})
+    GoogleSignin.revokeAccess()
+    .then(() => this.setState({revokingAccess: false}))
+    .catch(err => this.setState({revokingAccess: false}))
+  }
+
+  _showAlertWithMessage = (msg) => {
+    Alert.alert(
+      'Unauthorized\n',
+      msg,
+      [
+        {text: 'OK', onPress: () => this._revokeGoogleSigninAccess()},
+      ],
+      { cancelable: false }
+    )
+  }
+
+  _afterValidation = (user) => {
+    if (this.props.validationResponse) {
+      if (this.props.validationResponse.hasOwnProperty('success')) {
+        this.props.onLogin(user);
+        this._login();        
+      } else {        
+        this._showAlertWithMessage(this.props.validationResponse.error)
+      }
+    } else {
+      throw 'err'
+    }
+  }
+
   async _setupGoogleSignin() {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
@@ -76,7 +109,7 @@ const GuestUser = {
 
       const user = await GoogleSignin.currentUserAsync();
       if (user) {
-        this.props.validateEmail(user.accessToken);
+        // this.props.validateEmail(user.accessToken);
         // this.props.onLogin(user);
         // this._login();
       }      
@@ -89,12 +122,19 @@ const GuestUser = {
   _googleSignIn = () => {
     GoogleSignin.signIn()
     .then((user) => {
-      this.props.validateEmail(user.accessToken);
-      this.props.onLogin(user);
-      this._login();      
+      // console.log('xxxxx', user.email)
+      this.props.validateEmail(user.accessToken)
+      .then(() => {
+        this._afterValidation(user);        
+      })
+      .catch((err) => {
+        // console.log('errrrrr', err);
+        this._showAlertWithMessage('Error Occured')
+      })
     })
     .catch((err) => {
-      console.log(WRONG_SIGNIN.message, err);
+      this._revokeGoogleSigninAccess()
+      // console.log(WRONG_SIGNIN.message, err);
     })
     .done();
   }
@@ -170,11 +210,17 @@ const GuestUser = {
           </View>
         </View>
         <View style={style.buttonContainer}>
+          {
+            this.props.isValidating &&
+            <ActivityIndicator size="large" color={colors.LF_DARK_GRREEN} style={[style.activityIndicator]} />                          
+          }
           <Button
+            ref={component => this.googleSigninButton = component}
             style={style.googleLoginButton}
             title={'Sign in with Google'}
             titleStyle={style.googleTitle}
             source={googleLogo}
+            disabled={this.state.revokingAccess}
             imageStyle={style.googleImage}
             onPress={() => this._googleSignIn()}
           />

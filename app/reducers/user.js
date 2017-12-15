@@ -1,8 +1,10 @@
 import * as actionType from 'App/constants/actionsType';
 
 const initialState = {
-  isValid: false,
-  groupedEmployees: [],
+  validationResponse: null,
+  myProfile: null,
+  isFetching: false,
+  error: null,
 }
 
 const user = (state = initialState, action) => {
@@ -10,26 +12,33 @@ const user = (state = initialState, action) => {
     case actionType.VALIDATE_EMAIL:
       return {
         ...state,
-        isValid: true,
-      };
-    
-    case actionType.EMPLOYEES_LIST:
-      return {
-        ...state,
-        employees: action.employees
+        validationResponse: action.validationResponse,
       };
     
     case actionType.MY_PROFILE:
       return {
         ...state,
-        myProfile: action.myProfile
+        myProfile: action.myProfile,
       }
 
-    case actionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS:
-      // console.log('11111_GROUP', action.groupedEmployees)
+    case actionType.NETWORK_FETCHING:
       return {
         ...state,
-        groupedEmployees: action.groupedEmployees
+        isFetching: action.isFetching,
+      }
+
+    case actionType.NETWORK_FETCH_ERROR:
+      return {
+        ...state,
+        isFetching: false,        
+        error: true,
+      }
+
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        myProfile: null,
+        validationResponse: null,
       }
 
     default:

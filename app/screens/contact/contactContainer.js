@@ -5,12 +5,16 @@ import { LF_API_KEY } from 'App/constants/credentials';
 import * as fetchActions from 'App/actions/fetchActions'; 
 
 const mapStateToProps = (state) => ({
-  employees: state.rootReducer.user.employees,
-  groupedEmp: state.rootReducer.user.groupedEmployees,   
+  user: state.rootReducer.auth.user, // for guest login
+  employees: state.rootReducer.employee.employees,
+  departments: state.rootReducer.department.departments,
+  groupedEmp: state.rootReducer.employee.groupedEmployees,
+  isFetching: state.rootReducer.user.isFetching,   
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchEmployees: () => { dispatch(fetchActions.fetchEmployeeFromAPI(LF_API_KEY)) }  
+  fetchEmployeesAndDepartments: () => { dispatch(fetchActions.fetchEmployeesAndDepartmentsFromAPI(LF_API_KEY)) },
+  setGuestEmployeeAndDepartment: (emp, department) => {  dispatch(fetchActions.setGuestEmployeeAndDepartmentLocal(emp, department)) }
 });
 
 export default connect(

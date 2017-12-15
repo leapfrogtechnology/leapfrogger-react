@@ -5,6 +5,7 @@ import SplashScreen from './app/screens/splash';
 import InitialScreen from './app/screens/initial';
 import ContactScreen from './app/screens/contact';
 import ProfileScreen from './app/screens/profile';
+import FavoriteScreen from './app/screens/Favorite';
 
 import screens from './app/constants/screens';
 
@@ -16,6 +17,7 @@ export const registerScreens = (store, provider) => {
   registerComponent(screens.SPLASH_SCREEN.id, () => SplashScreen, store, provider);
   registerComponent(screens.CONTACT_SCREEN.id, () => ContactScreen, store, provider);
   registerComponent(screens.PROFILE_SCREEN.id, () => ProfileScreen, store, provider);
+  registerComponent(screens.FAVORITE_SCREEN.id, () => FavoriteScreen, store, provider);
 };
 
 export const registerScreenVisibilityListener = () => {

@@ -6,7 +6,7 @@ import { getWidth, getHeight } from 'App/utils/dimension';
 export const DOT_MARGIN = -28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
-export const PARALLAX_HEADER_HEIGHT = 250;
+export const PARALLAX_HEADER_HEIGHT = 260;
 
 const style = StyleSheet.create({
   
@@ -44,8 +44,13 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: getWidth(),
-    backgroundColor: 'rgba(0,0,0,.4)',
-    height: PARALLAX_HEADER_HEIGHT
+    backgroundColor: 'red',//'rgba(0,0,0,.4)',
+    height: PARALLAX_HEADER_HEIGHT,
+    backgroundColor: colors.LF_DARK_GRREEN,
+    shadowColor: colors.LF_GRAY,
+    shadowOffset: { width: 0, height: 2.5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   stickySection: {
     justifyContent: 'flex-end',    
@@ -67,37 +72,62 @@ const style = StyleSheet.create({
     right: 10,    
     bottom: 10,
   },
-  parallaxHeader: {
-    flex: 1,
-    paddingTop: 80,    
-    paddingHorizontal: 16,
-    alignItems: 'flex-start',    
+  photoContainer: {
+    flex: 0.25,
+    paddingTop: 66,  
+    paddingHorizontal: 25,
+    alignItems: 'center',    
     flexDirection: 'column',
   },
   avatar: {
     marginBottom: 5,
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
-    borderRadius: AVATAR_SIZE / 2
+    borderRadius: AVATAR_SIZE / 2,
+    borderWidth: 2,    
+    borderRadius: AVATAR_SIZE / 3,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOpacity: 0.6,
+    borderColor: colors.LIGHT_GRAY,
+    shadowOffset: { width: 0, height: 0 }  
+  },
+  placeHolder: {
+    marginBottom: 5,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE / 2,
+    borderWidth: 2,    
+    borderRadius: AVATAR_SIZE / 3,
+    // shadowRadius: 5,
+    // shadowColor: 'black',
+    // shadowOpacity: 0.6,
+    borderColor: colors.LIGHT_GRAY,
+    // shadowOffset: { width: 0, height: 0 }  
   },
   sectionSpeakerText: {
     fontSize: 20,    
     color: 'white',
-    paddingVertical: 5
+    paddingVertical: 4
+  },
+  designationText: {
+    fontSize: 12, 
+    color: colors.SYSTEM_LIGHT_GRAY,    
   },
   sectionTitleText: {
-    fontSize: 14,
+    fontSize: 15,
+    fontWeight: '800',
     color: 'white',    
     paddingVertical: 5
   },
   listView: {
-    // paddingHorizontal: 16,     
+
   },
   cell: {
     flex: 1,    
-    height: 60, 
+    height: 66, 
     paddingHorizontal: 16, 
-    paddingTop: 8,           
+    paddingTop: 10,           
   },
   phoneCell: {
     marginTop: 8,
@@ -110,11 +140,14 @@ const style = StyleSheet.create({
   },
   titleText: {
     flex: 1,
-    marginVertical: 4,    
+    fontWeight: '500',
+    paddingTop: 8,
+    color: colors.LF_DARK_GRREEN,
   },
   dataText: {
     flex: 1,
     height: 40,
+    marginTop: -4,    
     fontSize: 18,
   },
   phoneMessageContainer: {
@@ -124,22 +157,25 @@ const style = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   phoneAndMessageButtonImage: {
-    width: 35,
-    height: 35,
-    marginHorizontal: 4,  
+    width: 50,
+    height: 50,
+    tintColor: 'white',    
+    marginHorizontal: 6,  
     paddingHorizontal: 2,                
     resizeMode: 'contain',    
   },
   messageButtonImage: {
-    width: 35,
-    height: 35,
+    width: 50,
+    height: 50,
+    tintColor: 'white',
     marginHorizontal: 4,
-    paddingHorizontal: 2,            
+    paddingHorizontal: 6,            
     resizeMode: 'contain',
   },
   simpleTextCell: {
     flexDirection: 'column',
     alignItems: 'flex-start',
+    justifyContent: 'flex-end',
   },
   logoutButtonContainer: {
     flex: 1,
@@ -165,22 +201,69 @@ const style = StyleSheet.create({
     position: 'absolute',
     zIndex: 50,
     top: 26,
-    right: 8,
+    right: 4,
     transform: [{ rotate: '90deg'}],
   },
   moreButton: {
 
   },
   moreButtonImage: {
-    width: 30,
-    height: 25,
-    margin: 5,
+    width: 27,
+    height: 23,
+    marginTop: 5,
     resizeMode: 'contain',
     tintColor: 'white',
     shadowRadius: 5,
     shadowOpacity: 0.8,
     shadowColor: 'blue',    
     shadowOffset: { width: 0, height: 0 },    
+  },
+  profileContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  imageNumberContainer: {
+    flex: 0.8,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    flex: 0.33,
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
+    paddingHorizontal: 8,
+  },
+  phoneContainer: {
+    alignItems: 'flex-start',
+  },
+  messageContainer: {
+    alignItems: 'flex-end',
+  },
+  nameNumberFavContainer: {
+    flex: 0.45,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nameNumberContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: -48,
+  },
+  favButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
+  favImage: {
+    width: 27,
+    height: 27,
+    resizeMode: 'contain',
   }
 });
 

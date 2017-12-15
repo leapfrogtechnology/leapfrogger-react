@@ -12,6 +12,7 @@ import Communications from 'react-native-communications';
 import style from './styles';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
+import EmptyProfileImage from 'App/components/emptyProfileImage';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -38,22 +39,31 @@ import placeHolderImage from './../../../../assets/images/default.png';
     this._toggleButtonState();
   }
 
+  _showAlertWithMessage = (msg) => {
+    Alert.alert(
+      'Unauthorized\n',
+      msg,
+      [
+        {text: 'OK'},
+      ],
+      { cancelable: false }
+    )
+  }
+
   _callButtonPressed = (event) => {
-    // console.log('call');
     if (this.props.data.contact.mobilePhone) {
       Communications.phonecall(this.props.data.contact.mobilePhone, true)
     } else {
-      //show alert
+      this._showAlertWithMessage('Cannot Call')
     }
     this._toggleButtonState();    
   }
 
   _messageButtonPressed = (event) => {
-    console.log('message');
     if (this.props.data.contact.mobilePhone) {      
       Communications.text(this.props.data.contact.mobilePhone);    
     } else {
-      //show alert
+      this._showAlertWithMessage('Cannot Message')
     }
     this._toggleButtonState();    
   }
@@ -79,9 +89,14 @@ import placeHolderImage from './../../../../assets/images/default.png';
           <View style={style.imageContainer}>
             {
               this.props.data.avatarUrl ? 
-              <Image source={{uri: this.props.data.avatarUrl}} style={style.contactImage}/>
+              <Image source={{uri: this.props.data.avatarUrl}} style={[style.contactImage, {resizeMode: 'contain'}]}/>
               :
-              <Image source={placeHolderImage} style={style.contactImage}/>
+              <EmptyProfileImage
+                firstName={this.props.data.firstName}
+                lastName={this.props.data.lastName}
+                textSize={18}
+                style={style.contactImage}
+              />
             }
           </View>
           <View style={style.titleContainer}>

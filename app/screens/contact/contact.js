@@ -10,53 +10,22 @@ import {
  
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
+import Button from 'App/components/Button';
 import screens from 'App/constants/screens';
 import * as util from 'App/utils/dataNormalization';
 import SearchContactView from 'App/screens/searchContact';
 import { getWidth, getHeight } from 'App/utils/dimension';
+import StateFullScreen from 'App/components/stateFullScreen';
 import { searchEmployeesOfName } from 'App/utils/dataNormalization';
+
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
-const DEPARTMENT_LIST = [{
-                            name: 'iOS', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'Android', 
-                            avatar: require('../../../assets/images/SundarPichai.jpg'), 
-                            wallpaper: require('../../../assets/images/SundarPichai.jpg'),
-                            quote: '\"Wear your failure as your badge of honour\"'
-                          }, 
-                          {
-                            name: 'Java', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'php', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'ReactNative', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'PM', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }];
+const GUEST_EMAIL = 'guest@lftechnology.com'
 
  class ContactScreen extends Component {
 
@@ -67,6 +36,7 @@ const DEPARTMENT_LIST = [{
       isSearching: false,      
       currentSwipeIndex: 0,
       searchedEmployees: [],
+      screenState: 'normal',
     }
   }
 
@@ -87,7 +57,16 @@ const DEPARTMENT_LIST = [{
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    if (!this.props.employees) { this.props.fetchEmployees() }
+    if (this.props.user.email === GUEST_EMAIL) {      
+      var empjson = require('./../../../guestEmp.json'); //(with path)
+      var departmentjson = require('./../../../guestDepartment.json'); //(with path)
+      this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
+    } else {
+      console.log('=====', this.props.employees, this.props.departments)
+      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
+        this.props.fetchEmployeesAndDepartments() 
+      }      
+    }
   }
 
   _onSearchBarTextChange = (text) => {
@@ -133,48 +112,6 @@ const DEPARTMENT_LIST = [{
     });
   }
 
-  /*
-  _renderParallaxTableHeaderView = (data, index) => {
-    // return (<View style={{width: 200, height: 200}}>asd</View>)
-    return (
-      <ParallaxScrollView
-        onScroll={this.props.onScroll}
-        bounce={true}
-        headerBackgroundColor="#333"
-        stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
-        parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
-        backgroundSpeed={10}
-        renderBackground={() => (
-          <View key="background">
-            <Image source={DEPARTMENT_LIST[0].wallpaper} style={style.tableHeaderBackgroundImage}/>
-            <View style={style.tableHeaderBackgroundOverlay}/>
-          </View>
-        )}
-
-        renderForeground={() => (
-          <View key="parallax-header" style={ style.parallaxHeader }>
-            <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
-            <Text style={ style.sectionSpeakerText }>
-              {
-                // DEPARTMENT_LIST[index].name
-              }
-            </Text>
-            <Text style={ style.sectionTitleText }>
-              Leapfrog, Inc.
-            </Text>
-          </View>
-        )}
-
-        renderStickyHeader={() => (
-          <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>aaa</Text>
-          </View>
-        )}
-      />
-    );
-  }
-  */
-
   _renderTableView = (employees, index) => {
     const { onScroll = () => {} } = this.props;    
     return (
@@ -190,10 +127,7 @@ const DEPARTMENT_LIST = [{
             onPress={this._onCellSelection}/>
           }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        // renderScrollComponent={props => (
-        //   this._renderParallaxTableHeaderView(props, index)
-        // )}
-        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1}}></View>}
+        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );
   }
@@ -243,31 +177,29 @@ const DEPARTMENT_LIST = [{
     )
   }
 
-  _renderActivityIndicator = () => {
-    return (
-      <View style={[style.container, style.horizontal]}>
-        <ActivityIndicator size="large" color={colors.GRAY} />
-      </View>
-    )
-  }
-
   _renderSearchView = () => {
-    console.log('_renderSearchView')
     return (
       <View style={style.searchViewContainer}>
         <SearchContactView
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
+        <KeyboardSpacer/>
       </View>
     )
   }
 
+  _getScreenState = () => {
+    if (this.props.isFetching) {
+      return 'fetch';
+    }
+    if (this.props.employees.length > 0 || this.props.departments.length > 0) {
+      return 'normal'
+    }
+    return 'error'; // error or empty
+  }
+
   render() {
-    // setInterval(() => {
-    //   console.log('----_CONTACT', this.props.groupedEmp);      
-    // }, 1000);
-    // console.log('----_CONTACT', this.props.groupedEmp);
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }
@@ -275,9 +207,23 @@ const DEPARTMENT_LIST = [{
           { this._renderSearchBar() }
         </View>
         <View style={style.tableContainer}>
-          { (!this.props.employees) && this._renderActivityIndicator() }
-          { (this.props.employees) && this._renderSwiper() }
-          { (this.state.isSearching) && this._renderSearchView() }
+          {/* {
+            <View style={style.stickyDepartmentSection}>
+              <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>
+            </View> 
+          } */}
+          {                         
+            <StateFullScreen
+              style={style.mainContainer}
+              state={this._getScreenState()} // fetch, normal and error
+              contentView={this._renderSwiper()}
+              reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}
+            />
+          }
+          {
+            ((this._getScreenState() === 'normal') && (this.state.isSearching)) &&
+            this._renderSearchView()
+          }
         </View>
       </View>
     );

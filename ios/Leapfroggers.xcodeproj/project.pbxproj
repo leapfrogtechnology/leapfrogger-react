@@ -51,6 +51,8 @@
 		94669E051FC558AA00703528 /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94669E031FC5587500703528 /* libRNGoogleSignin.a */; };
 		94669E0D1FC559FB00703528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94669E0C1FC559FB00703528 /* GoogleService-Info.plist */; };
 		9466D5881FD6A0D700D8738E /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 945166841FC44DBB008BBF44 /* libRNBlur.a */; };
+		9473A0D01FE29EF000B26FCE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0CF1FE29EF000B26FCE /* GameKit.framework */; };
+		9473A0D21FE29EFE00B26FCE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0D11FE29EFE00B26FCE /* StoreKit.framework */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		E54D39F25735484C8A1209DD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACC65178AB344D2A8E8F052 /* libz.tbd */; };
 /* End PBXBuildFile section */
@@ -386,6 +388,8 @@
 		945149DA1FD6B75000D4FD5A /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
 		945149DB1FD6B75000D4FD5A /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
 		94669E0C1FC559FB00703528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9473A0CF1FE29EF000B26FCE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		9473A0D11FE29EFE00B26FCE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AC119F41278D4AACBB41298A /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BA679A7769464743BC1A25F0 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				945149E11FD6B75000D4FD5A /* GoogleNetworkingUtilities.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
+				9473A0D21FE29EFE00B26FCE /* StoreKit.framework in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
@@ -428,6 +433,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				9473A0D01FE29EF000B26FCE /* GameKit.framework in Frameworks */,
 				E54D39F25735484C8A1209DD /* libz.tbd in Frameworks */,
 				91093642F08F4AA8AB6BE958 /* SafariServices.framework in Frameworks */,
 				4BAB7990795F4A1BB9433738 /* SystemConfiguration.framework in Frameworks */,
@@ -578,6 +584,8 @@
 		171DB6C80C674C9CB946E394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9473A0D11FE29EFE00B26FCE /* StoreKit.framework */,
+				9473A0CF1FE29EF000B26FCE /* GameKit.framework */,
 				8ACC65178AB344D2A8E8F052 /* libz.tbd */,
 				75C3C27D2ADC4C5BA2A53C6A /* SafariServices.framework */,
 				AC119F41278D4AACBB41298A /* SystemConfiguration.framework */,
@@ -807,20 +815,28 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = N7DN9W93BF;
+						DevelopmentTeam = 446V7WHT8W;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = N7DN9W93BF;
+						DevelopmentTeam = 446V7WHT8W;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = N7DN9W93BF;
+						DevelopmentTeam = 446V7WHT8W;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = N7DN9W93BF;
+						DevelopmentTeam = 446V7WHT8W;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -1319,7 +1335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1353,7 +1369,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
@@ -1384,7 +1400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1403,6 +1419,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1413,7 +1430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1432,6 +1449,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1447,7 +1465,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1487,7 +1505,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1524,7 +1542,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Leapfroggers-tvOSTests/Info.plist";
@@ -1553,7 +1571,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = N7DN9W93BF;
+				DEVELOPMENT_TEAM = 446V7WHT8W;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Leapfroggers-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

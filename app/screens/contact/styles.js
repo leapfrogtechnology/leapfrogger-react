@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import colors from 'App/config/colors';
 import { getWidth, getHeight } from 'App/utils/dimension';
 
-export const DOT_MARGIN = -28;
+export const DOT_MARGIN = -28//getHeight() - 158//-28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
 export const PARALLAX_HEADER_HEIGHT = 250;
@@ -107,12 +107,25 @@ const style = StyleSheet.create({
   },
   searchViewContainer: {
     position: 'absolute',
-    zIndex: 100,
+    zIndex: 90,
     width: getWidth(),
-    height: getHeight() - 120,
+    height: getHeight() - 115,
     backgroundColor: 'white'
+  },
+  stickyDepartmentSection: {
+    position: 'absolute',
+    top: 2,
+    left: 50,
+    height: 10,
+    zIndex: 100,
+    width: getWidth() - 60,
+    backgroundColor: 'transparent',
+    // backgroundColor: 'red',
+  },
+  departmentNameText: {
+    textAlign: 'right',
+    color: colors.MID_GRAY,    
   }
-
 });
 
 export default style;
