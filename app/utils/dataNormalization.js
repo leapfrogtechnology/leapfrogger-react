@@ -113,3 +113,24 @@ export const getMyInformation = (employeesList, email) => {
     if (employee.username === email) { return employee }
   })
 }
+
+//-------------------search----------
+
+export const searchEmployeesOfName = (employeesList, characters) => {
+  var chars = characters.toLowerCase()
+  return employeesList.filter((employee) => {
+    var name = (employee.firstName + " " + employee.lastName).toLowerCase();
+    var department = employee.department.name.toLowerCase();
+    var mobilePhone = employee.contact.mobilePhone;
+    if (parseInt(chars.substring(0, 1))) {
+      // first character number
+      if ((mobilePhone.search(chars)) !== -1) { //This method returns -1 if no match is found.
+        return employee 
+      }
+    } else {
+      if ((name.search(chars) !== -1) || (department.search(chars)) !== -1) { //This method returns -1 if no match is found.
+        return employee 
+      }
+    }
+  })
+}

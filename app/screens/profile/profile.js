@@ -156,7 +156,7 @@ class ProfileScreen extends Component {
   }
 
   _renderTableView = () => {
-    var data = [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]
+    var data = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}, {key: '6'}]
     // this.props.data.fromProfileTab ? data.push({key: 'f'}) : null
     return (
       <FlatList

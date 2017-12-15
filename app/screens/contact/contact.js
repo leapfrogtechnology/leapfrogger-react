@@ -12,13 +12,14 @@ import Swiper from 'react-native-swiper';
 import Search from 'react-native-search-box';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-import * as util from 'App/utils/dataNormalization';
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
 import screens from 'App/constants/screens';
+import * as util from 'App/utils/dataNormalization';
+import SearchContactView from 'App/screens/searchContact';
 import { getWidth, getHeight } from 'App/utils/dimension';
+import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
-import { setInterval } from 'core-js/library/web/timers';
 
 const DEPARTMENT_LIST = [{
                             name: 'iOS', 
@@ -63,7 +64,9 @@ const DEPARTMENT_LIST = [{
     super(props);
 
     this.state = {
+      isSearching: false,      
       currentSwipeIndex: 0,
+      searchedEmployees: [],
     }
   }
 
@@ -84,50 +87,53 @@ const DEPARTMENT_LIST = [{
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    
-    this.props.employees ? null : this.props.fetchEmployees()
+    if (!this.props.employees) { this.props.fetchEmployees() }
   }
 
-  _onSearchBarTextChange = () => {
-    console.log('bigno');
+  _onSearchBarTextChange = (text) => {
+    var employees = searchEmployeesOfName(this.props.employees, text);    
+    this.setState({ searchedEmployees: employees });    
   }
 
   _onSearchBarFocus = () => {
-    console.log('focus');    
+    this.setState({ isSearching: true });    
   }
 
-  _onSearch = () => {
-    console.log('search');        
+  _onReturnAction = () => {
+    // also cancels on done button action 
+    this._onSearchCancel();     
   }
 
   _onSearchCancel = () => {
-    console.log('cancel');
+    this.setState({ searchedEmployees: [] });
+    this.setState({ isSearching: false });    
   }
 
-  _onCellSelection = () => {
-    // this.props.navigator.push({
-    //   screen: screens.PROFILE_SCREEN.id,
-    //   animated: true,
-    //   overrideBackPress: true,
-    //   navigatorStyle: {
-    //     drawUnderNavBar: true,
-    //     navBarTranslucent: true,
-    //     navBarTransparent: true,
-    //     navBarTextColor: 'white',
-    //     navBarTransparency: 1,  
-    //     navBarButtonColor: 'white',                  
-    //     navBarLeftButtonColor: 'white',
-    //     navBarRightButtonColor: 'white',
-    //   },
-    //   title: '',
-    //   passProps: {
-    //     data: {
-    //       department: DEPARTMENT_LIST[this.state.currentSwipeIndex]          
-    //     }
-    //   }        
-    // });
+  _onCellSelection = (data) => {
+    this.props.navigator.push({
+      screen: screens.PROFILE_SCREEN.id,
+      animated: true,
+      overrideBackPress: true,
+      navigatorStyle: {
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        navBarTransparent: true,
+        navBarTextColor: 'white',
+        navBarTransparency: 1,  
+        navBarButtonColor: 'white',                  
+        navBarLeftButtonColor: 'white',
+        navBarRightButtonColor: 'white',
+      },
+      title: '',
+      passProps: {
+        data: {
+          profile: data
+        }
+      }        
+    });
   }
 
+  /*
   _renderParallaxTableHeaderView = (data, index) => {
     // return (<View style={{width: 200, height: 200}}>asd</View>)
     return (
@@ -167,6 +173,7 @@ const DEPARTMENT_LIST = [{
       />
     );
   }
+  */
 
   _renderTableView = (employees, index) => {
     const { onScroll = () => {} } = this.props;    
@@ -209,11 +216,12 @@ const DEPARTMENT_LIST = [{
         ref={component => this.searchBar = component}
         backgroundColor={colors.LF_DARK_GRREEN}
         titleCancelColor='white'
-        onChangeText={this._onSearchBarTextChange}
-        onFocus={this._onSearchBarFocus}
-        afterSearch={this.onSearch}
-        afterCancel={this.onCancel}
+        onChangeText={(text) => this._onSearchBarTextChange(text)}
+        onFocus={() => this._onSearchBarFocus()}
+        afterSearch={() => this._onReturnAction()}
+        afterCancel={() => this._onSearchCancel()}
         keyboardDismissOnSubmit={true}
+        returnKeyType={'done'}
         blurOnSubmit={true}
       />
     )
@@ -243,6 +251,18 @@ const DEPARTMENT_LIST = [{
     )
   }
 
+  _renderSearchView = () => {
+    console.log('_renderSearchView')
+    return (
+      <View style={style.searchViewContainer}>
+        <SearchContactView
+          data={this.state.searchedEmployees}
+          onPress={this._onCellSelection}
+        />
+      </View>
+    )
+  }
+
   render() {
     // setInterval(() => {
     //   console.log('----_CONTACT', this.props.groupedEmp);      
@@ -255,7 +275,9 @@ const DEPARTMENT_LIST = [{
           { this._renderSearchBar() }
         </View>
         <View style={style.tableContainer}>
-          { this.props.employees ? this._renderSwiper() : this._renderActivityIndicator() }
+          { (!this.props.employees) && this._renderActivityIndicator() }
+          { (this.props.employees) && this._renderSwiper() }
+          { (this.state.isSearching) && this._renderSearchView() }
         </View>
       </View>
     );
