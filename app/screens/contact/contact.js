@@ -92,7 +92,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     this.props.navigator.push({
       screen: screens.PROFILE_SCREEN.id,
       animated: true,
-      overrideBackPress: true,
       navigatorStyle: {
         drawUnderNavBar: true,
         navBarTranslucent: true,

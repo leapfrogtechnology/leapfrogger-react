@@ -12,7 +12,7 @@ import Communications from 'react-native-communications';
 import style from './styles';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
-import EmptyProfileImage from 'App/components/emptyProfileImage';
+import ProgressiveImage from 'App/components/progressiveImage';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -29,6 +29,30 @@ import placeHolderImage from './../../../../assets/images/default.png';
     }
   }
 
+  _onCellSelection = () => {
+    this.props.navigator.push({
+      screen: screens.PROFILE_SCREEN.id,
+      animated: true,
+      overrideBackPress: true,
+      navigatorStyle: {
+        drawUnderNavBar: true,
+        navBarTranslucent: true,
+        // navBarTransparent: true,
+        navBarTextColor: 'white',
+        navBarTransparency: 1,  
+        navBarButtonColor: 'white',                  
+        navBarLeftButtonColor: 'white',
+        navBarRightButtonColor: 'white',
+      },
+      title: '',
+      passProps: {
+        data: {
+          profile: this.props.data
+        }
+      }        
+    });
+  }
+
   _toggleButtonState = () => {
     this.setState((oldState) => {
       return { isMoreButtonPressed: !oldState.isMoreButtonPressed }
@@ -39,32 +63,15 @@ import placeHolderImage from './../../../../assets/images/default.png';
     this._toggleButtonState();
   }
 
-  _showAlertWithMessage = (msg) => {
-    Alert.alert(
-      'Unauthorized\n',
-      msg,
-      [
-        {text: 'OK'},
-      ],
-      { cancelable: false }
-    )
-  }
-
   _callButtonPressed = (event) => {
-    if (this.props.data.contact.mobilePhone) {
-      Communications.phonecall(this.props.data.contact.mobilePhone, true)
-    } else {
-      this._showAlertWithMessage('Cannot Call')
-    }
+    console.log('call');
+    Communications.phonecall(this.props.data.contact.mobilePhone, true)
     this._toggleButtonState();    
   }
 
   _messageButtonPressed = (event) => {
-    if (this.props.data.contact.mobilePhone) {      
-      Communications.text(this.props.data.contact.mobilePhone);    
-    } else {
-      this._showAlertWithMessage('Cannot Message')
-    }
+    console.log('message');
+    Communications.text(this.props.data.contact.mobilePhone)    
     this._toggleButtonState();    
   }
 
@@ -82,27 +89,17 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   render() {
-  if (this.props.data === null) { return <View/> }
     return (
-      <TouchableHighlight onPress={() => this.props.onPress(this.props.data)} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
+      <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
-            {
-              this.props.data.avatarUrl ? 
-              <Image source={{uri: this.props.data.avatarUrl}} style={[style.contactImage, {resizeMode: 'contain'}]}/>
-              :
-              <EmptyProfileImage
-                firstName={this.props.data.firstName}
-                lastName={this.props.data.lastName}
-                textSize={18}
-                style={style.contactImage}
-              />
-            }
+            <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
+            {/* <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/> */}
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>
               <Text style={style.titleLabel}>{this.props.data.firstName} {this.props.data.lastName}</Text>
-              <Text style={style.subTitleLabel}>{this.props.data.contact.mobilePhone || ''}</Text>
+              <Text style={style.subTitleLabel}>{this.props.data.contact.mobilePhone}</Text>
             </View>
           </View>
           <View style={style.buttonContainer}>
