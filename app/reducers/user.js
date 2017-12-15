@@ -39,6 +39,7 @@ const user = (state = initialState, action) => {
         ...state,
         myProfile: null,
         validationResponse: null,
+        isFetching: false,
       }
 
     default:

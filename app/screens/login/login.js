@@ -48,7 +48,7 @@ const GuestUser = {
   }
 
   componentDidMount() {  
-    this._presetLoginData();
+    // this._presetLoginData();
     this._setupGoogleSignin();
   }
 

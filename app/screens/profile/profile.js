@@ -63,7 +63,6 @@ class ProfileScreen extends Component {
 
   _logout = () => {
     if (!this.isGuest) {
-      console.log('55555')
       GoogleSignin.signOut().then(() => {
         this._startLogin()
       })
