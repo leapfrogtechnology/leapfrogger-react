@@ -23,7 +23,6 @@ import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
 import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
-import placeHolderImage from './../../../assets/images/default.png';
 import favouriteImage from './../../../assets/images/favorite.png';
 
 import { getWidth, getHeight } from 'App/utils/dimension';
@@ -140,8 +139,8 @@ class ProfileScreen extends Component {
                   <EmptyProfileImage
                     firstName={this.data.firstName}
                     lastName={this.data.lastName}
-                    textSize={45}
-                    style={style.avatar}
+                    textSize={38}
+                    style={style.placeHolder}
                   />
                 }
               </View>

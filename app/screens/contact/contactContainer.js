@@ -6,7 +6,7 @@ import * as fetchActions from 'App/actions/fetchActions';
 
 const mapStateToProps = (state) => ({
   user: state.rootReducer.auth.user, // for guest login
-  employees: state.rootReducer.user.employees,
+  employees: state.rootReducer.employee.employees,
   departments: state.rootReducer.department.departments,
   groupedEmp: state.rootReducer.employee.groupedEmployees,
   isFetching: state.rootReducer.user.isFetching,   

@@ -92,6 +92,19 @@ const style = StyleSheet.create({
     borderColor: colors.LIGHT_GRAY,
     shadowOffset: { width: 0, height: 0 }  
   },
+  placeHolder: {
+    marginBottom: 5,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE / 2,
+    borderWidth: 2,    
+    borderRadius: AVATAR_SIZE / 3,
+    // shadowRadius: 5,
+    // shadowColor: 'black',
+    // shadowOpacity: 0.6,
+    borderColor: colors.LIGHT_GRAY,
+    // shadowOffset: { width: 0, height: 0 }  
+  },
   sectionSpeakerText: {
     fontSize: 20,    
     color: 'white',

@@ -62,7 +62,10 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       var departmentjson = require('./../../../guestDepartment.json'); //(with path)
       this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
     } else {
-      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { this.props.fetchEmployeesAndDepartments() }      
+      console.log('=====', this.props.employees, this.props.departments)
+      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
+        this.props.fetchEmployeesAndDepartments() 
+      }      
     }
   }
 

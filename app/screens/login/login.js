@@ -122,21 +122,19 @@ const GuestUser = {
   _googleSignIn = () => {
     GoogleSignin.signIn()
     .then((user) => {
-      console.log('xxxxx', user.email)
+      // console.log('xxxxx', user.email)
       this.props.validateEmail(user.accessToken)
       .then(() => {
         this._afterValidation(user);        
       })
       .catch((err) => {
-        console.log('errrrrr', err);
+        // console.log('errrrrr', err);
         this._showAlertWithMessage('Error Occured')
       })
-      // if (!this.props.isValidating) {
-      // }
     })
     .catch((err) => {
       this._revokeGoogleSigninAccess()
-      console.log(WRONG_SIGNIN.message, err);
+      // console.log(WRONG_SIGNIN.message, err);
     })
     .done();
   }

@@ -48,7 +48,6 @@ export const validateEmail = (token) => (dispatch) => {
 // }
 
 export const fetchEmployeesAndDepartmentsFromAPI = (apiKey) => {
-  // var departResponse = [];
   return (dispatch) => {
     dispatch(networkFetching(true))
     var requests = [uri.DEPARTMENT_LIST, uri.EMPLOYEES_LIST];
