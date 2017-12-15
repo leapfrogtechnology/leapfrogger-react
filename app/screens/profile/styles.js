@@ -173,9 +173,8 @@ const style = StyleSheet.create({
     resizeMode: 'contain',
   },
   simpleTextCell: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
+    flex: 1,
+    flexDirection: 'row',
   },
   logoutButtonContainer: {
     flex: 1,
@@ -190,7 +189,7 @@ const style = StyleSheet.create({
     height: 44,
   },
   logoutTitle: {
-    color: colors.IOS_RED
+    color: colors.MILD_RED
   },
   separator: {
     flex: 1,
@@ -264,6 +263,33 @@ const style = StyleSheet.create({
     width: 27,
     height: 27,
     resizeMode: 'contain',
+  },
+  simpleTextCellContainer: {
+    flex: 0.9,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+  },
+  iconsContainer: {
+    flex: 0.1,
+    paddingTop: 8,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  icons: {
+    width: 25,
+    height: 25,
+    resizeMode: 'contain',
+    tintColor: colors.LF_DARK_GRREEN,
+  },
+  separator: {
+    position: 'absolute',
+    bottom: 0,
+    left: 16,
+    height: StyleSheet.hairlineWidth,
+    width: getWidth() - 32,
+    zIndex: 10,
+    backgroundColor: colors.LIGHT_GRAY,
   }
 });
 

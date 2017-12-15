@@ -113,6 +113,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
               <Image source={moreImage} style={style.moreImage}/>
             </TouchableOpacity>
           </View>
+          <View style={style.separator}/>
         </View>
       </TouchableHighlight>
     );

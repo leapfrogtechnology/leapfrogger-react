@@ -24,6 +24,10 @@ import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import favouriteImage from './../../../assets/images/favorite.png';
+import emailImage from './../../../assets/images/mail.png';
+import locationImage from './../../../assets/images/location.png';
+import githubImage from './../../../assets/images/github.png';
+import skypeImage from './../../../assets/images/skype.png';
 
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles'; 
@@ -167,7 +171,7 @@ class ProfileScreen extends Component {
               <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>
                 {
                   !this.props.data.fromProfileTab &&
-                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.IOS_RED}: {tintColor: colors.LIGHT_GRAY}]}/>
+                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.MILD_RED}: {tintColor: colors.LIGHT_GRAY}]}/>
                 }
               </TouchableOpacity>
             </View>
@@ -180,10 +184,10 @@ class ProfileScreen extends Component {
 
   _renderItems = (item, index) => {
     switch (index) {
-      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-');      
-      case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-');
-      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-');
-      case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-');
+      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-', emailImage);      
+      case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-', locationImage);
+      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-', githubImage);
+      case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-', skypeImage);
       // case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
     }
   }
@@ -209,11 +213,17 @@ class ProfileScreen extends Component {
     );
   }
 
-  _renderTextCell = (text, data) => {
+  _renderTextCell = (text, data, image) => {
     return (
       <View style={[style.simpleTextCell, style.cell]}>
+        <View style={style.simpleTextCellContainer}>
           <Text style={style.titleText}>{text}</Text>
           <Text style={style.dataText}>{data}</Text>
+        </View>
+        <View style={style.iconsContainer}>
+          <Image source={image} style={style.icons}/>
+        </View>
+        <View style={style.separator}/>
       </View>
     );
   }

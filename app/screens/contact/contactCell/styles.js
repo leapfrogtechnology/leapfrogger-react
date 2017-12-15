@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import colors from 'App/config/colors';
+import { getWidth, getHeight } from 'App/utils/dimension';
 
 const style = StyleSheet.create({
   
@@ -98,6 +99,15 @@ const style = StyleSheet.create({
     height: 38,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  separator: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    height: StyleSheet.hairlineWidth,
+    width: getWidth(),
+    zIndex: 10,
+    backgroundColor: colors.LIGHT_GRAY,
   }
 
 });
