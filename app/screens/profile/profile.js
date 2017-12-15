@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, BackAndroid } from 'react';
 import { 
   View,
   Text,
   Image,
+  Alert,
   FlatList,
   LayoutAnimation,
   TouchableOpacity,
@@ -48,6 +49,7 @@ class ProfileScreen extends Component {
     this.state = {
       isFav: false
     }
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   componentDidMount() {
@@ -55,6 +57,13 @@ class ProfileScreen extends Component {
     let fav = this.props.favEmployees.filter(emp => emp.empId === this.data.empId).length > 0 ? true : false
     this.setState({ isFav: fav });
   }
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress' && event.id == 'backPress') {
+      this.props.navigator.popToRoot({ animated: false });
+    }
+  }
+
 
   _startLogin = () => {
     this.props.logout(); 
@@ -73,6 +82,7 @@ class ProfileScreen extends Component {
   }
 
   _moreButtonAction = () => {
+    console.log('asdasdasd')
     this.actionSheet.show();
   }
 
@@ -277,10 +287,6 @@ class ProfileScreen extends Component {
     return (
       <View style={ style.mainContainer }>
         {
-          this.props.data.fromProfileTab &&                    
-          this._renderMoreButtonWithActionSheet()
-        }
-        {
           <StateFullScreen
             style={style.mainContainer}
             state={this._getScreenState()} // fetch, normal and error
@@ -288,6 +294,10 @@ class ProfileScreen extends Component {
             bottomMargin={-145}
             reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}            
           />
+        }
+        {
+          this.props.data.fromProfileTab &&                    
+          this._renderMoreButtonWithActionSheet()
         }
       </View>      
     )
