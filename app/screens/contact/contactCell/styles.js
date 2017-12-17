@@ -19,10 +19,10 @@ const style = StyleSheet.create({
     // backgroundColor: 'red',
   },
   contactImage: {
-    width: 60,
-    height: 60,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
     borderWidth: 1,    
-    borderRadius: 30,
+    borderRadius: AVATAR_SIZE / 2,
     // shadowRadius: 5,
     // shadowColor: 'black',
     // shadowOpacity: 0.6,
@@ -110,19 +110,7 @@ const style = StyleSheet.create({
     zIndex: 10,
     backgroundColor: colors.LIGHT_GRAY,
   },
-  placeHolder: {
-    marginBottom: 5,
-    width: AVATAR_SIZE,
-    height: AVATAR_SIZE,
-    borderRadius: AVATAR_SIZE / 2,
-    borderWidth: 1,    
-    borderRadius: AVATAR_SIZE / 2,
-    // shadowRadius: 5,
-    // shadowColor: 'black',
-    // shadowOpacity: 0.6,
-    borderColor: colors.LIGHT_GRAY,
-    // shadowOffset: { width: 0, height: 0 }  
-  },
+
 });
 
 export default style;

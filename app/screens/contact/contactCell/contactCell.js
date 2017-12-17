@@ -89,21 +89,27 @@ import placeHolderImage from './../../../../assets/images/default.png';
     )
   }
 
+  _imageLoadComplete = () => {
+    // console.log('=====00000')
+  }
+
   render() {
     return (
       <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
+            <EmptyProfileImage
+              firstName={this.props.data.firstName}
+              lastName={this.props.data.lastName}
+              textSize={16}
+              style={style.contactImage}
+            />
             {
-              this.props.data.avatarUrl ?
-              <Image style={[style.contactImage, {resizeMode: 'contain'}]} source={{uri: this.props.data.avatarUrl}}/>
-              // <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
-              :
-              <EmptyProfileImage
-                firstName={this.props.data.firstName}
-                lastName={this.props.data.lastName}
-                textSize={16}
-                style={style.placeHolder}
+              this.props.data.avatarUrl &&
+              <Image 
+                style={[style.contactImage, {resizeMode: 'contain', position: 'absolute', zIndex: 10}]} 
+                source={{uri: this.props.data.avatarUrl}}
+                onLoad={() => this._imageLoadComplete()}
               />
             }
           </View>

@@ -80,7 +80,7 @@ const style = StyleSheet.create({
     flexDirection: 'column',
   },
   avatar: {
-    marginBottom: 5,
+    marginBottom: 4,
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
     borderRadius: AVATAR_SIZE / 2,
