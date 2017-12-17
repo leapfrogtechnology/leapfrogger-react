@@ -130,7 +130,6 @@ class ProfileScreen extends Component {
         backgroundSpeed={10}
         renderBackground={() => (
           <View key="background">
-            {/* <Image source={{uri: this.data.avatarUrl || 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}} style={style.tableHeaderBackgroundImage}/> */}
             <View style={style.tableHeaderBackgroundOverlay}/>
           </View>
         )}
@@ -241,16 +240,18 @@ class ProfileScreen extends Component {
   _renderTableView = () => {
     var data = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}, {key: '5'}]
     return (
-      <FlatList
-        ref="ListView"
-        style={style.listView}
-        data={data}
-        renderItem={({item, index}) => this._renderItems(item, index) }
-        renderScrollComponent={props => (
-          this._renderParallaxTableHeaderView(props)
-        )}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
-      />
+      <View style={{height: getHeight()}}>
+        <FlatList
+          ref="ListView"
+          style={style.listView}
+          data={data}
+          renderItem={({item, index}) => this._renderItems(item, index) }
+          renderScrollComponent={props => (
+            this._renderParallaxTableHeaderView(props)
+          )}
+          renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
+        />
+      </View>
     );
   }
 

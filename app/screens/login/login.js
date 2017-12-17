@@ -13,6 +13,7 @@ import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GoogleSignin } from 'react-native-google-signin';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import style from './styles';
 import colors from 'App/config/colors';
@@ -53,18 +54,20 @@ const GuestUser = {
   }
 
   _guestLogin = () => {
-    this.props.onLogin(GuestUser);    
-    this._login();    
+    if (this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) {
+      this.props.onLogin(GuestUser);    
+      startTabScreen();
+    } else {
+      // incorrect email / password
+      this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
+    }
   }
 
   _login = () => {
     Keyboard.dismiss();
-    this._setErrorMessage();    
-    if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.props.isLoggedIn)) {
+    this._setErrorMessage();
+    if (this.props.isLoggedIn) {
       startTabScreen();      
-    } else {
-      // incorrect email / password
-      this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
     }
   }
 
@@ -152,6 +155,7 @@ const GuestUser = {
 
   render() {
     return (
+    <KeyboardAwareScrollView style={style.container} keyboardShouldPersistTaps={'always'}>
       <View style={style.mainContainer}>
         <View style={style.logoContainer}>
           <Image source={logo} style={style.logoImage}/>
@@ -220,12 +224,13 @@ const GuestUser = {
             title={'Sign in with Google'}
             titleStyle={style.googleTitle}
             source={googleLogo}
-            disabled={this.state.revokingAccess}
+            disabled={this.state.revokingAccess || this.props.isValidating}
             imageStyle={style.googleImage}
             onPress={() => this._googleSignIn()}
           />
         </View>
       </View>
+    </KeyboardAwareScrollView>
     );
 
   }

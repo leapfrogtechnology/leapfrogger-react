@@ -121,7 +121,8 @@ const style = StyleSheet.create({
     paddingVertical: 5
   },
   listView: {
-
+    flex: 0.5
+    // height: getHeight() - PARALLAX_HEADER_HEIGHT,
   },
   cell: {
     flex: 1,    

@@ -93,8 +93,8 @@ import placeHolderImage from './../../../../assets/images/default.png';
       <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
-            <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
-            {/* <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/> */}
+            {/* <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} /> */}
+            <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/>
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>

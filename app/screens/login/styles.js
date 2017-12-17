@@ -2,30 +2,34 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 import colors from '../../config/colors';
 
-const screen = Dimensions.get('window');
+import { getWidth, getHeight } from 'App/utils/dimension';
 
 const style = StyleSheet.create({
   
+  container: {
+    flex: 1,
+  },
   mainContainer: {
     flex: 1,
     alignSelf: 'center',
     alignItems: 'center',
     flexDirection: 'column',    
     justifyContent: 'center', 
-    width: 0.5 * screen.width,    
+    width: 0.5 * getWidth().width,    
   },
   logoContainer: {
-    flex: 0.225,
+    flex: 0.3,
+    height: getHeight() * 0.25,
     justifyContent: 'center',    
   },
   logoImage: {
     resizeMode: 'contain',
-    flex: 0.3
+    height: 60,
   },
   formContainer: {
     flex: 0.5,
     width: 300,    
-    height: 320,
+    height: getHeight() * 0.5,
     borderRadius: 12,      
     shadowColor: '#000',
     paddingHorizontal: 25,
@@ -42,7 +46,7 @@ const style = StyleSheet.create({
   emailFieldWrapper: {
     marginVertical: 4,
     paddingHorizontal: 8,
-    borderBottomWidth: 1        
+    borderBottomWidth: StyleSheet.hairlineWidth        
   },
   emailField: {
     height: 44,
@@ -50,7 +54,7 @@ const style = StyleSheet.create({
   passwordFieldWrapper: {
     marginVertical: 4,
     paddingHorizontal: 8,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#6e6f72',
   },
   passwordField: {
@@ -70,6 +74,7 @@ const style = StyleSheet.create({
   },
   buttonContainer: {
     flex: 0.275,
+    height: getHeight() * 0.25,
     alignItems: 'center',
     justifyContent: 'center',
   },
