@@ -13,6 +13,7 @@ import style from './styles';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 import ProgressiveImage from 'App/components/progressiveImage';
+import EmptyProfileImage from 'App/components/emptyProfileImage';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -93,8 +94,18 @@ import placeHolderImage from './../../../../assets/images/default.png';
       <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
-            {/* <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} /> */}
-            <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/>
+            {
+              this.props.data.avatarUrl ?
+              <Image style={[style.contactImage, {resizeMode: 'contain'}]} source={{uri: this.props.data.avatarUrl}}/>
+              // <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} />
+              :
+              <EmptyProfileImage
+                firstName={this.props.data.firstName}
+                lastName={this.props.data.lastName}
+                textSize={16}
+                style={style.placeHolder}
+              />
+            }
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>
