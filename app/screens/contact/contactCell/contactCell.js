@@ -65,13 +65,11 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   _callButtonPressed = (event) => {
-    console.log('call');
     Communications.phonecall(this.props.data.contact.mobilePhone, true)
     this._toggleButtonState();    
   }
 
   _messageButtonPressed = (event) => {
-    console.log('message');
     Communications.text(this.props.data.contact.mobilePhone)    
     this._toggleButtonState();    
   }

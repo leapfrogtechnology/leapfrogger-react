@@ -86,7 +86,6 @@ class ProfileScreen extends Component {
   }
 
   _moreButtonAction = () => {
-    console.log('asdasdasd')
     this.actionSheet.show();
   }
 
