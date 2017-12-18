@@ -23,6 +23,7 @@ import ContactCell from './../contact/contactCell';
   _renderCell = (item) => {
     return (
       <ContactCell
+        {...this.props}
         data={item}
         onPress={this._onCellSelection}       
       />
