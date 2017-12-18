@@ -46,7 +46,8 @@ const style = StyleSheet.create({
   emailFieldWrapper: {
     marginVertical: 4,
     paddingHorizontal: 8,
-    borderBottomWidth: StyleSheet.hairlineWidth        
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#6e6f72',        
   },
   emailField: {
     height: 44,
