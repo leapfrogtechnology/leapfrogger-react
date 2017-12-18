@@ -144,15 +144,18 @@ class ProfileScreen extends Component {
               </View>
               }
               <View style={ style.photoContainer }>
-                <EmptyProfileImage
-                  firstName={this.data.firstName}
-                  lastName={this.data.lastName}
-                  textSize={38}
-                  style={style.avatar}
-                />
-                {
-                  <Image style={[style.avatar, {resizeMode: 'contain', position: 'absolute', top: 64}]} source={{uri: this.data.avatarUrl}}/>
-                }
+                <View style={style.imageProfileContainer}>
+                  <EmptyProfileImage
+                    firstName={this.data.firstName}
+                    lastName={this.data.lastName}
+                    textSize={38}
+                    style={style.avatar}
+                  />
+                  {
+                    this.data.avatarUrl &&
+                      <Image style={[style.avatar, {resizeMode: 'contain', position: 'absolute'}]} source={{uri: this.data.avatarUrl}}/>
+                  }
+                </View>
               </View>
               { !this.props.data.fromProfileTab &&
               <View style={[style.phoneContainer, style.buttonContainer]}>

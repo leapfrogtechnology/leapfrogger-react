@@ -74,15 +74,18 @@ const style = StyleSheet.create({
   },
   photoContainer: {
     flex: 0.25,
+    marginBottom: 4,
     paddingTop: 66,  
     paddingHorizontal: 25,
     alignItems: 'center',    
     flexDirection: 'column',
   },
   avatar: {
-    marginBottom: 4,
     width: AVATAR_SIZE,
-    height: AVATAR_SIZE,
+    height: AVATAR_SIZE, 
+    backgroundColor: 'white'
+  },
+  imageProfileContainer: {
     borderRadius: AVATAR_SIZE / 2,
     borderWidth: 2,    
     borderRadius: AVATAR_SIZE / 3,
@@ -90,7 +93,8 @@ const style = StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 0.6,
     borderColor: colors.LIGHT_GRAY,
-    shadowOffset: { width: 0, height: 0 }  
+    overflow: 'hidden',
+    shadowOffset: { width: 0, height: 0 }
   },
   placeHolder: {
     marginBottom: 5,

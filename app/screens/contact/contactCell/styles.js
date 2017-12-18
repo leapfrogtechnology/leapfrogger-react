@@ -13,21 +13,20 @@ const style = StyleSheet.create({
   },
   imageContainer: {
     margin: 4,        
-    paddingHorizontal: 8,        
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'red',
-  },
-  contactImage: {
-    width: AVATAR_SIZE,
-    height: AVATAR_SIZE,
     borderWidth: 1,    
     borderRadius: AVATAR_SIZE / 2,
+    overflow: 'hidden',
+    borderColor: colors.LIGHT_GRAY,
     // shadowRadius: 5,
     // shadowColor: 'black',
     // shadowOpacity: 0.6,
-    borderColor: colors.LIGHT_GRAY,
-    // shadowOffset: { width: 0, height: 0 },    
+    // shadowOffset: { width: 0, height: 0 }, 
+  },
+  contactImage: {
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,   
   },
   titleContainer: {
     flex: 0.8,

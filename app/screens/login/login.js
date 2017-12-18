@@ -182,7 +182,7 @@ const GuestUser = {
                     this.setState({ email: text });
                   }
                 }
-                underlineColorAndroid='#bbb'
+                underlineColorAndroid='transparent'
                 placeholderTextColor='#bbb'
                 onSubmitEditing={ () => {
                   this._validateEmail(this.state.email);                  

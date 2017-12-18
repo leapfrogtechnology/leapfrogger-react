@@ -38,7 +38,7 @@ import placeHolderImage from './../../../../assets/images/default.png';
       navigatorStyle: {
         drawUnderNavBar: true,
         navBarTranslucent: true,
-        // navBarTransparent: true,
+        navBarTransparent: true,
         navBarTextColor: 'white',
         navBarTransparency: 1,  
         navBarButtonColor: 'white',                  
