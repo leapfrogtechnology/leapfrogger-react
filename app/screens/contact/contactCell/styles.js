@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import colors from 'App/config/colors';
 import { getWidth, getHeight } from 'App/utils/dimension';
 
+const AVATAR_SIZE = 60;
 const style = StyleSheet.create({
   
   mainContainer: {
@@ -11,17 +12,17 @@ const style = StyleSheet.create({
     flexDirection: 'row',    
   },
   imageContainer: {
+    margin: 4,        
     paddingHorizontal: 8,        
     alignItems: 'center',
     justifyContent: 'center',
     // backgroundColor: 'red',
   },
   contactImage: {
-    margin: 4,        
-    width: 60,
-    height: 60,
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
     borderWidth: 1,    
-    borderRadius: 30,
+    borderRadius: AVATAR_SIZE / 2,
     // shadowRadius: 5,
     // shadowColor: 'black',
     // shadowOpacity: 0.6,
@@ -60,7 +61,7 @@ const style = StyleSheet.create({
   },
   moreImage: {
     width: 18,        
-    marginHorizontal: 8,
+    paddingHorizontal: 8,
     resizeMode: 'contain',
     shadowRadius: 4,
     shadowOpacity: 0.8,
@@ -68,7 +69,9 @@ const style = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },    
   },
   moreButton: {
+    width: 25,
     alignSelf: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',    
     // backgroundColor: 'purple',
   },
@@ -108,7 +111,7 @@ const style = StyleSheet.create({
     width: getWidth(),
     zIndex: 10,
     backgroundColor: colors.LIGHT_GRAY,
-  }
+  },
 
 });
 

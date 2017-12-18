@@ -13,6 +13,7 @@ import style from './styles';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 import ProgressiveImage from 'App/components/progressiveImage';
+import EmptyProfileImage from 'App/components/emptyProfileImage';
 
 import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
@@ -64,13 +65,11 @@ import placeHolderImage from './../../../../assets/images/default.png';
   }
 
   _callButtonPressed = (event) => {
-    console.log('call');
     Communications.phonecall(this.props.data.contact.mobilePhone, true)
     this._toggleButtonState();    
   }
 
   _messageButtonPressed = (event) => {
-    console.log('message');
     Communications.text(this.props.data.contact.mobilePhone)    
     this._toggleButtonState();    
   }
@@ -88,13 +87,29 @@ import placeHolderImage from './../../../../assets/images/default.png';
     )
   }
 
+  _imageLoadComplete = () => {
+    // console.log('=====00000')
+  }
+
   render() {
     return (
       <TouchableHighlight onPress={() => this._onCellSelection()} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>
           <View style={style.imageContainer}>
-            {/* <ProgressiveImage source={{uri: this.props.avatarUrl}} thumbnail={placeHolderImage} style={style.contactImage} /> */}
-            <Image source={{uri: this.props.avatarUrl}} style={style.contactImage}/>
+            <EmptyProfileImage
+              firstName={this.props.data.firstName}
+              lastName={this.props.data.lastName}
+              textSize={16}
+              style={style.contactImage}
+            />
+            {
+              this.props.data.avatarUrl &&
+              <Image 
+                style={[style.contactImage, {resizeMode: 'contain', position: 'absolute', zIndex: 10}]} 
+                source={{uri: this.props.data.avatarUrl}}
+                onLoad={() => this._imageLoadComplete()}
+              />
+            }
           </View>
           <View style={style.titleContainer}>
             <View style={style.titleSubContainer}>

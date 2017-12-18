@@ -40,20 +40,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     }
   }
 
-  // _animateOnMount = () => {
-  //   LayoutAnimation.configureNext({
-  //     duration: 700,
-  //     create: {
-  //       type: LayoutAnimation.Types.linear,
-  //       property: LayoutAnimation.Properties.opacity,
-  //     },
-  //     update: {
-  //       type: LayoutAnimation.Types.spring,
-  //       springDamping: 0.75,
-  //     },
-  //   });
-  // }
-
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
@@ -62,7 +48,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       var departmentjson = require('./../../../guestDepartment.json'); //(with path)
       this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
     } else {
-      console.log('=====', this.props.employees, this.props.departments)
       if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
         this.props.fetchEmployeesAndDepartments() 
       }      
@@ -75,7 +60,9 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
   }
 
   _onSearchBarFocus = () => {
-    this.setState({ isSearching: true });    
+    this.timeout = setTimeout(() => {
+      this.setState({ isSearching: true });
+    }, 300);
   }
 
   _onReturnAction = () => {
@@ -84,8 +71,10 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
   }
 
   _onSearchCancel = () => {
-    this.setState({ searchedEmployees: [] });
-    this.setState({ isSearching: false });    
+    this.timeout = setTimeout(() => {
+      this.setState({ searchedEmployees: [] });
+      this.setState({ isSearching: false });   
+    }, 300); 
   }
 
   _onCellSelection = (data) => {

@@ -33,18 +33,31 @@ import ContactCell from './../contact/contactCell';
   
   _renderTableView = () => {
     return (
-      <FlatList
-        ref="ListView"
-        data={this.props.data}
-        keyExtractor={this._keyExtractor}        
-        renderItem={({item, section, index}) => this._renderCell(item) }
-      />
+      <View style={style.listContainer}>
+        <FlatList
+          ref="ListView"
+          data={this.props.data}
+          keyExtractor={this._keyExtractor}        
+          renderItem={({item, section, index}) => this._renderCell(item) }
+        />
+      </View>
     );
+  }
+  
+  _renderSearchResult = () => {
+    return (
+      <View style={style.searchResult}>
+        <Text>{this.props.data.length} results found</Text>
+      </View>
+    )
   }
 
   render() {
     return (
       <View style={ style.mainContainer }>
+        {
+          this._renderSearchResult()
+        }
         {
           this._renderTableView()
         }
