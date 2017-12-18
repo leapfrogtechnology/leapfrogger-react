@@ -93,16 +93,20 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+def keystorePropertiesFile = rootProject.file("./app/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
         applicationId "com.leapfroggers"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "4.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -115,10 +119,21 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs {
+        releaseConfig {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.releaseConfig
         }
     }
     // applicationVariants are e.g. debug, release
@@ -140,7 +155,7 @@ dependencies {
     compile project(':react-native-google-signin')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile project(':react-native-navigation')
-    compile project(':react-native-blur')
+
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:27.0.2"
     compile "com.facebook.react:react-native:+"  // From node_modules
