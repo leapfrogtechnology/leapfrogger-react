@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Image,
-  Keyboard,
   SectionList,
   ActivityIndicator,
   LayoutAnimation,
@@ -38,7 +37,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       currentSwipeIndex: 0,
       searchedEmployees: [],
       screenState: 'normal',
-      isKeyboardShowing: false,
     }
   }
 
@@ -55,17 +53,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
         this.props.fetchEmployeesAndDepartments() 
       }      
     }
-    this.screenHeight = getHeight()
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-  }
-
-  _keyboardDidShow = () => {
-    // this.setState({isKeyboardShowing: true});
-  }  
-
-  _keyboardDidHide = () => {
-    this.setState({isKeyboardShowing: false});
   }
 
   _onSearchBarTextChange = (text) => {
@@ -74,7 +61,6 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
   }
 
   _onSearchBarFocus = () => {
-    this.setState({isKeyboardShowing: true});
     this.timeout = setTimeout(() => {
       this.setState({ isSearching: true });
     }, 300);
@@ -182,11 +168,12 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
 
   _renderSearchView = () => {
     return (
-      <View style={[style.searchViewContainer, {height: this.state.isKeyboardShowing ? this.screenHeight - 280 : this.screenHeight - 115}]}>
+      <View style={style.searchViewContainer}>
         <SearchContactView
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
+        <KeyboardSpacer/>
       </View>
     )
   }
