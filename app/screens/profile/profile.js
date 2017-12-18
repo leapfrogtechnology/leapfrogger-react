@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
  } from 'react-native';
-
+ 
+import FastImage from 'react-native-fast-image'
 import ActionSheet from 'react-native-actionsheet'; 
 import Communications from 'react-native-communications'; 
 import { GoogleSignin } from 'react-native-google-signin';
@@ -153,7 +154,15 @@ class ProfileScreen extends Component {
                   />
                   {
                     this.data.avatarUrl &&
-                      <Image style={[style.avatar, {resizeMode: 'contain', position: 'absolute'}]} source={{uri: this.data.avatarUrl}}/>
+                    // <Image style={[style.avatar, {resizeMode: 'contain', position: 'absolute'}]} source={{uri: this.data.avatarUrl}}/>
+                    <FastImage
+                      style={[style.avatar, {position: 'absolute', zIndex: 10}]}
+                      source={{
+                        uri: this.data.avatarUrl,
+                        priority: FastImage.priority.normal,
+                      }}
+                      resizeMode={FastImage.resizeMode.contain}
+                    />
                   }
                 </View>
               </View>

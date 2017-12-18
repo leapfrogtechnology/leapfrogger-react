@@ -25,6 +25,8 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
             // eg. new VectorIconsPackage()
             new MainReactPackage(),
+            new FastImageViewPackage(),
+            new BlurViewPackage(),
             new RNGoogleSigninPackage()
     );
   }

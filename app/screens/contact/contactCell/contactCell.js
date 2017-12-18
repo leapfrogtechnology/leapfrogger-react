@@ -7,6 +7,7 @@ import {
   TouchableHighlight
  } from 'react-native';
 
+import FastImage from 'react-native-fast-image'
 import Communications from 'react-native-communications'; 
  
 import style from './styles';
@@ -104,10 +105,18 @@ import placeHolderImage from './../../../../assets/images/default.png';
             />
             {
               this.props.data.avatarUrl &&
-              <Image 
-                style={[style.contactImage, {resizeMode: 'contain', position: 'absolute', zIndex: 10}]} 
-                source={{uri: this.props.data.avatarUrl}}
-                onLoad={() => this._imageLoadComplete()}
+              // <Image 
+              //   style={[style.contactImage, {resizeMode: 'contain', position: 'absolute', zIndex: 10}]} 
+              //   source={{uri: this.props.data.avatarUrl}}
+              //   onLoad={() => this._imageLoadComplete()}
+              // />
+              <FastImage
+                style={[style.contactImage, {position: 'absolute', zIndex: 10}]}
+                source={{
+                  uri: this.props.data.avatarUrl,
+                  priority: FastImage.priority.normal,
+                }}
+                resizeMode={FastImage.resizeMode.contain}
               />
             }
           </View>

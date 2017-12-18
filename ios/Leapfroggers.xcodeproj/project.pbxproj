@@ -54,6 +54,7 @@
 		9473A0D01FE29EF000B26FCE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0CF1FE29EF000B26FCE /* GameKit.framework */; };
 		9473A0D21FE29EFE00B26FCE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0D11FE29EFE00B26FCE /* StoreKit.framework */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		D7EADD2D9C674355AA685D62 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8E25A3A5FBC4FD19BA47A4D /* libFastImage.a */; };
 		E54D39F25735484C8A1209DD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACC65178AB344D2A8E8F052 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
@@ -247,6 +248,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		943D8B511FE7E8000031E340 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38FE153D11B248B989298D52 /* FastImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
+			remoteInfo = FastImage;
+		};
 		944BDC0D1FC5D95F00354321 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA679A7769464743BC1A25F0 /* ReactNativeNavigation.xcodeproj */;
@@ -370,6 +378,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* Leapfroggers-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Leapfroggers-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Leapfroggers-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Leapfroggers-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FE153D11B248B989298D52 /* FastImage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		580B2D63D50E4321AB6878D7 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6A8ADE51ED1A4F61B84620C9 /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
@@ -390,6 +399,7 @@
 		94669E0C1FC559FB00703528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9473A0CF1FE29EF000B26FCE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		9473A0D11FE29EFE00B26FCE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A8E25A3A5FBC4FD19BA47A4D /* libFastImage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libFastImage.a; sourceTree = "<group>"; };
 		AC119F41278D4AACBB41298A /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BA679A7769464743BC1A25F0 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
@@ -438,6 +448,7 @@
 				91093642F08F4AA8AB6BE958 /* SafariServices.framework in Frameworks */,
 				4BAB7990795F4A1BB9433738 /* SystemConfiguration.framework in Frameworks */,
 				00420B0835F54AF7B4F60021 /* AddressBook.framework in Frameworks */,
+				D7EADD2D9C674355AA685D62 /* libFastImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +641,7 @@
 				7201C862236D4C5E9413C523 /* RNBlur.xcodeproj */,
 				6E282831EE6D4B3FAD56A81C /* RNGoogleSignin.xcodeproj */,
 				BA679A7769464743BC1A25F0 /* ReactNativeNavigation.xcodeproj */,
+				38FE153D11B248B989298D52 /* FastImage.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -685,6 +697,14 @@
 			path = GoogleSDK;
 			sourceTree = "<group>";
 		};
+		943D8B4E1FE7E7FF0031E340 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				943D8B521FE7E8000031E340 /* libFastImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		944BDC0A1FC5D95E00354321 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,6 +719,7 @@
 				6A8ADE51ED1A4F61B84620C9 /* libRNBlur.a */,
 				EFCF08097D984B488740F273 /* libRNGoogleSignin.a */,
 				580B2D63D50E4321AB6878D7 /* libReactNativeNavigation.a */,
+				A8E25A3A5FBC4FD19BA47A4D /* libFastImage.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -854,6 +875,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 943D8B4E1FE7E7FF0031E340 /* Products */;
+					ProjectRef = 38FE153D11B248B989298D52 /* FastImage.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1101,6 +1126,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		943D8B521FE7E8000031E340 /* libFastImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFastImage.a;
+			remoteRef = 943D8B511FE7E8000031E340 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		944BDC0E1FC5D95F00354321 /* libReactNativeNavigation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1345,12 +1377,14 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = LeapfroggersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1375,12 +1409,14 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = LeapfroggersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1411,6 +1447,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = Leapfroggers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1442,6 +1479,7 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = Leapfroggers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1475,11 +1513,13 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = "Leapfroggers-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1514,11 +1554,13 @@
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 					"$(SRCROOT)/../node_modules/react-native-google-signin/ios/RNGoogleSignin/**",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = "Leapfroggers-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1554,6 +1596,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Leapfroggers-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1579,6 +1622,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
