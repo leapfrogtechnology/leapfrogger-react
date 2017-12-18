@@ -126,6 +126,11 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     })
   }
 
+  _groupAllEmployeesWithGroupedEmployees = () => {
+    return allEmp = [{title: 'All', data: this.props.employees}]
+    // return allEmp.concat(this.props.groupedEmp)
+  }
+
   _renderStatusBar = () => {
     return (
       <View style={[style.statusBar, {height: 20}]}/>
@@ -160,7 +165,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
         activeDotColor={colors.LF_DARK_GRREEN}
         dotStyle={{marginBottom: DOT_MARGIN}}>
           {
-            this.props.groupedEmp.map((data, index) => this._renderTableView(data, index))
+            this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
           }
       </Swiper>
     )
