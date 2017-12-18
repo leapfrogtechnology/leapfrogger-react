@@ -154,6 +154,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       <Swiper
         style={style.wrapper}
         loop={false} 
+        bounces={true}
         onIndexChanged ={this._onMomentumScrollEnd}          
         activeDotStyle={{marginBottom: DOT_MARGIN}} 
         activeDotColor={colors.LF_DARK_GRREEN}
@@ -169,6 +170,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     return (
       <View style={style.searchViewContainer}>
         <SearchContactView
+          {...this.props}
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
