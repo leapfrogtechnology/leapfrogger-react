@@ -27,7 +27,6 @@ export const startTabScreen = () => {
           statusBarTextColorScheme: 'light',                  
           navBarNoBorder: false,
           drawUnderNavBar: false,
-          // navBarTransparent: true,        
           navBarBackgroundColor: colors.LF_DARK_GRREEN, 
           navBarTextColor: 'white',
           navBarButtonColor: 'white',                  

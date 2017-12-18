@@ -104,9 +104,11 @@ const GuestUser = {
 
   async _setupGoogleSignin() {
     try {
+      console.log('cccccccc')
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
-        iosClientId: IOS_GOOGLE_CLIENT_ID,
+        webClientId: '663889381642-scqtb2kgspmer6fit0hqdtr1pevcpadc.apps.googleusercontent.com',
+        scopes: ['email', 'openid', 'profile'],
         offlineAccess: false
       });
 
