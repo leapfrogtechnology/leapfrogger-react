@@ -113,7 +113,9 @@ const style = StyleSheet.create({
     backgroundColor: 'white'
   },
   emptyView: {
-    flex: 1,
+    // flex: 1,
+    height: getHeight(),
+    marginTop: -60,
     alignItems: 'center',
   },
   emptyFavImage: {
