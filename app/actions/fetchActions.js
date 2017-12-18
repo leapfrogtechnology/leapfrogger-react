@@ -25,28 +25,6 @@ export const validateEmail = (token) => (dispatch) => {
   )
 }
 
-// export const fetchEmployeeFromAPI = (apiKey) => {
-//   return (dispatch) => {
-//     dispatch(networkFetching(true))
-//     fetch(uri.EMPLOYEES_LIST, Resource.employeesList(apiKey))
-//     .then(data => data.json())
-//     .then(jsonResponse => {
-//       // console.log('json:', jsonResponse);
-//       var state = store.getState();
-//       var myProfile = util.getMyInformation(jsonResponse, state.rootReducer.auth.user.email)[0];
-//       dispatch(employeeAction.myProfileInfo(myProfile));
-//       dispatch(employeeList(jsonResponse));
-//       dispatch(employeeAction.groupEmployeesOnDepartmentBasis(util.groupByDepartment(jsonResponse), state.rootReducer.department.departments))
-//       dispatch(networkFetching(false));
-//     })
-//     .catch(err => {
-//       // console.log('error-------');
-//       dispatch(networkFetching(false));      
-//       dispatch(networkFetchError(err))
-//     })
-//   }
-// }
-
 export const fetchEmployeesAndDepartmentsFromAPI = (apiKey) => {
   return (dispatch) => {
     dispatch(networkFetching(true))
@@ -87,27 +65,6 @@ networkFetchError = () => {
     type: ActionType.NETWORK_FETCH_ERROR,    
   }
 }
-
-// validateLFEmail = (validationResponse) => {
-//   return {
-//     type: ActionType.VALIDATE_EMAIL,
-//     validationResponse
-//   }
-// }
-
-// employeeList = (employees) => {
-//   return {
-//     type: ActionType.EMPLOYEES_LIST,
-//     employees
-//   }
-// }
-
-// departmentList = (departments) => {
-//   return {
-//     type: ActionType.DEPARTMENT_LIST,
-//     departments
-//   }    
-// }
 
 // For local guest
 export const setGuestEmployeeAndDepartmentLocal = (employees, departments) => {

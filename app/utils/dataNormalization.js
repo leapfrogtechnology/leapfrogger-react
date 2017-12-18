@@ -98,6 +98,7 @@ export const getMyInformation = (employeesList, email) => {
 //-------------------search----------
 
 export const searchEmployeesOfName = (employeesList, characters) => {
+  if (!characters) return []
   var chars = characters.toLowerCase()
   return employeesList.filter((employee) => {
     var name = (employee.firstName + " " + employee.lastName).toLowerCase();

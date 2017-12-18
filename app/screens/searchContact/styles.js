@@ -80,7 +80,19 @@ const style = StyleSheet.create({
     color: 'white',    
     paddingVertical: 5
   },
-
+  searchResult: {
+    width: getWidth(),
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.SYSTEM_LIGHT_GRAY,
+  },
+  searchResultText: {
+    color: colors.MID_GRAY,
+  },
+  listContainer: {
+    flex: 1,
+  }
 });
 
 export default style;

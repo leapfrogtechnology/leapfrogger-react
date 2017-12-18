@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Keyboard,
   SectionList,
   ActivityIndicator,
   LayoutAnimation,
@@ -37,22 +38,9 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       currentSwipeIndex: 0,
       searchedEmployees: [],
       screenState: 'normal',
+      isKeyboardShowing: false,
     }
   }
-
-  // _animateOnMount = () => {
-  //   LayoutAnimation.configureNext({
-  //     duration: 700,
-  //     create: {
-  //       type: LayoutAnimation.Types.linear,
-  //       property: LayoutAnimation.Properties.opacity,
-  //     },
-  //     update: {
-  //       type: LayoutAnimation.Types.spring,
-  //       springDamping: 0.75,
-  //     },
-  //   });
-  // }
 
   componentDidMount() {
     // this._animateOnMount();
@@ -67,6 +55,17 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
         this.props.fetchEmployeesAndDepartments() 
       }      
     }
+    this.screenHeight = getHeight()
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  _keyboardDidShow = () => {
+    // this.setState({isKeyboardShowing: true});
+  }  
+
+  _keyboardDidHide = () => {
+    this.setState({isKeyboardShowing: false});
   }
 
   _onSearchBarTextChange = (text) => {
@@ -75,7 +74,10 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
   }
 
   _onSearchBarFocus = () => {
-    this.setState({ isSearching: true });    
+    this.setState({isKeyboardShowing: true});
+    this.timeout = setTimeout(() => {
+      this.setState({ isSearching: true });
+    }, 300);
   }
 
   _onReturnAction = () => {
@@ -84,8 +86,10 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
   }
 
   _onSearchCancel = () => {
-    this.setState({ searchedEmployees: [] });
-    this.setState({ isSearching: false });    
+    this.timeout = setTimeout(() => {
+      this.setState({ searchedEmployees: [] });
+      this.setState({ isSearching: false });   
+    }, 300); 
   }
 
   _onCellSelection = (data) => {
@@ -178,12 +182,11 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
 
   _renderSearchView = () => {
     return (
-      <View style={style.searchViewContainer}>
+      <View style={[style.searchViewContainer, {height: this.state.isKeyboardShowing ? this.screenHeight - 280 : this.screenHeight - 115}]}>
         <SearchContactView
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
-        <KeyboardSpacer/>
       </View>
     )
   }

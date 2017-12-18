@@ -41,6 +41,8 @@ const GuestUser = {
       password: '',
       errorMessage: '',
       revokingAccess: false,
+      disableBtn: false,
+      isValidating: false,
     }    
   }
 
@@ -74,8 +76,7 @@ const GuestUser = {
   _revokeGoogleSigninAccess = () => {
     this.setState({revokingAccess: true})
     GoogleSignin.revokeAccess()
-    .then(() => this.setState({revokingAccess: false}))
-    .catch(err => this.setState({revokingAccess: false}))
+    .done(() => { this.setState({revokingAccess: false}) })
   }
 
   _showAlertWithMessage = (msg) => {
@@ -123,23 +124,24 @@ const GuestUser = {
   }
 
   _googleSignIn = () => {
+    this.setState({ disableBtn: true });
     GoogleSignin.signIn()
     .then((user) => {
-      // console.log('xxxxx', user.email)
+      this.setState({ isValidating: true })
       this.props.validateEmail(user.accessToken)
       .then(() => {
         this._afterValidation(user);        
       })
       .catch((err) => {
-        // console.log('errrrrr', err);
         this._showAlertWithMessage('Error Occured')
       })
+      .done(() => this.setState({ isValidating: false }))
     })
     .catch((err) => {
       this._revokeGoogleSigninAccess()
       // console.log(WRONG_SIGNIN.message, err);
     })
-    .done();
+    .done(() => this.setState({ disableBtn: false }))
   }
 
   _validateEmail = (email) => {
@@ -215,7 +217,7 @@ const GuestUser = {
         </View>
         <View style={style.buttonContainer}>
           {
-            this.props.isValidating &&
+            this.state.isValidating &&
             <ActivityIndicator size="large" color={colors.LF_DARK_GRREEN} style={[style.activityIndicator]} />                          
           }
           <Button
@@ -224,7 +226,7 @@ const GuestUser = {
             title={'Sign in with Google'}
             titleStyle={style.googleTitle}
             source={googleLogo}
-            disabled={this.state.revokingAccess || this.props.isValidating}
+            disabled={this.state.revokingAccess || this.state.disableBtn || this.state.isValidating}
             imageStyle={style.googleImage}
             onPress={() => this._googleSignIn()}
           />

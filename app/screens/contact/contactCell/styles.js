@@ -61,7 +61,7 @@ const style = StyleSheet.create({
   },
   moreImage: {
     width: 18,        
-    marginHorizontal: 8,
+    paddingHorizontal: 8,
     resizeMode: 'contain',
     shadowRadius: 4,
     shadowOpacity: 0.8,
@@ -69,7 +69,9 @@ const style = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },    
   },
   moreButton: {
+    width: 25,
     alignSelf: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',    
     // backgroundColor: 'purple',
   },
