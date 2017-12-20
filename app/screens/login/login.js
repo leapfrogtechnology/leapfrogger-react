@@ -4,6 +4,7 @@ import {
   Text,
   Image,  
   Alert,
+  Platform,
   TextInput,
   ActivityIndicator
  } from 'react-native';
@@ -102,22 +103,31 @@ const GuestUser = {
     }
   }
 
+  _getConfig = () => {
+    if (Platform.OS === 'ios') {
+      return {
+        iosClientId: IOS_GOOGLE_CLIENT_ID,
+        offlineAccess: false
+      }
+    } else {
+      return {
+        webClientId: '663889381642-scqtb2kgspmer6fit0hqdtr1pevcpadc.apps.googleusercontent.com',
+        offlineAccess: false
+      }
+    }
+  }
+
   async _setupGoogleSignin() {
     try {
-      console.log('cccccccc')
       await GoogleSignin.hasPlayServices({ autoResolve: true });
-      await GoogleSignin.configure({
-        webClientId: '663889381642-scqtb2kgspmer6fit0hqdtr1pevcpadc.apps.googleusercontent.com',
-        scopes: ['email', 'openid', 'profile'],
-        offlineAccess: false
-      });
+      await GoogleSignin.configure(this._getConfig());
 
-      const user = await GoogleSignin.currentUserAsync();
-      if (user) {
-        // this.props.validateEmail(user.accessToken);
-        // this.props.onLogin(user);
-        // this._login();
-      }      
+      // const user = await GoogleSignin.currentUserAsync();
+      // if (user) {
+      //   // this.props.validateEmail(user.accessToken);
+      //   // this.props.onLogin(user);
+      //   // this._login();
+      // }      
     }
     catch(err) {
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
