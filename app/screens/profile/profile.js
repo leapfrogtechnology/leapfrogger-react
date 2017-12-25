@@ -284,7 +284,7 @@ class ProfileScreen extends Component {
         {
           this._renderActionSheet()
         }
-        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
+        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()} disabled={this.props.isFetching}>
           <Image source={moreImage} style={style.moreButtonImage}/>
         </TouchableOpacity>
       </View>
