@@ -17,6 +17,38 @@ const colors = {
   IOS_PINK: '#fc3159',      
   SYSTEM_LIGHT_GRAY: '#f7f7f7',
   LF_GREEN: '#008a00',
+  
+  Primary: {
+    NEW_LF_GREEN: '#2ECC71',
+    NEW_LF_GRAY: '#737373',
+  },
+  Secondary: {
+    RED: '#D9534F',
+    SAFFRON: '#F0AD4E',
+    SKY: '#5BC0DE',
+    FOREST: '#25A25A'
+  },
+  Gray_Shades: {
+    TEXT: '#263238',
+    LIGHT_TEXT: '#78909c',
+    ICON: '#b0bec5',
+    BORDER_GRAY: '#E6ECEF',
+    LABEL_GRAY: '#eceff1',
+    FADED_BACKGRAOUND: '#f4f7f9',
+  },
+  Palette: {
+    BLUE: '#03a9f4',
+    GREEN1: '#66bb6a',
+    GREEN2: '#61b165',
+    YELLOW: '#FFCA28',
+    WARM_YELLOW: '#f2af4b',
+    LIGHT_ORANGE: '#fe8a80',
+    MILD_ORANGE: '#f28379',
+    PURPLE: '#b39ddb',
+    PURPLR_DARK: '#ac97d1',
+    PINK: '#f48fb1',
+    PINK1: '#e888a8',
+  }
 };
 
 const TOUCH_OPACITY = 0.6;
