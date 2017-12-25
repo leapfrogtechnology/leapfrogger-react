@@ -73,28 +73,23 @@ const style = StyleSheet.create({
     bottom: 10,
   },
   photoContainer: {
-    flex: 0.25,
-    marginBottom: 4,
-    paddingTop: 66,  
+    paddingBottom: 20,
     paddingHorizontal: 25,
-    alignItems: 'center',    
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     flexDirection: 'column',
   },
   avatar: {
     width: AVATAR_SIZE,
     height: AVATAR_SIZE, 
-    backgroundColor: 'white'
+    // backgroundColor: 'white'
   },
   imageProfileContainer: {
-    borderRadius: AVATAR_SIZE / 2,
+    height: AVATAR_SIZE,
     borderWidth: 2,    
-    borderRadius: AVATAR_SIZE / 3,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOpacity: 0.6,
+    borderRadius: AVATAR_SIZE / 2,
     borderColor: colors.LIGHT_GRAY,
     overflow: 'hidden',
-    shadowOffset: { width: 0, height: 0 }
   },
   placeHolder: {
     marginBottom: 5,
@@ -102,12 +97,7 @@ const style = StyleSheet.create({
     height: AVATAR_SIZE,
     borderRadius: AVATAR_SIZE / 2,
     borderWidth: 2,    
-    borderRadius: AVATAR_SIZE / 3,
-    // shadowRadius: 5,
-    // shadowColor: 'black',
-    // shadowOpacity: 0.6,
     borderColor: colors.LIGHT_GRAY,
-    // shadowOffset: { width: 0, height: 0 }  
   },
   sectionSpeakerText: {
     fontSize: 20,    
@@ -228,8 +218,12 @@ const style = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
   },
+  nameContainer: {
+    height: 60,
+    justifyContent: 'flex-end'
+  },
   imageNumberContainer: {
-    flex: 0.8,
+    flex: 0.75,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -246,10 +240,11 @@ const style = StyleSheet.create({
     alignItems: 'flex-end',
   },
   nameNumberFavContainer: {
-    flex: 0.45,
+    flex: 0.25,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingBottom: 10,
   },
   nameNumberContainer: {
     flex: 1,

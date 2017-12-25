@@ -14,18 +14,45 @@ import ContactCell from './../contact/contactCell';
 
   constructor(props) {
     super(props);
+    
+    this.state = {
+      selectedEmpId: null,
+    }
+  }
+
+  componentDidMount() {
+    this.didSearch = false
+  }
+
+  componentWillReceiveProps() {
+    this.didSearch = true
   }
 
   _onCellSelection = (data) => {
     this.props.onPress(data)
   }
 
+  _moreButtonOnPress = (empId) => {
+    if (this.state.selectedEmpId === empId) {
+      //If same more button is pressed even times, it needs to close
+      this.setState({selectedEmpId: null})
+    } else {
+      // Odd time press opens the button
+      this.setState({selectedEmpId: empId})
+    }
+    console.log('aaaa', this.state.selectedEmpId)
+    this.forceUpdate()
+  }
+
+
   _renderCell = (item) => {
     return (
       <ContactCell
-        {...this.props}
+        // {...this.props}
         data={item}
-        onPress={this._onCellSelection}       
+        onPress={this._onCellSelection}   
+        moreButtonAction={this._moreButtonOnPress}
+        showButtons={this.state.selectedEmpId === item.empId}
       />
     )
   }
@@ -39,7 +66,7 @@ import ContactCell from './../contact/contactCell';
           ref="ListView"
           data={this.props.data}
           keyExtractor={this._keyExtractor}        
-          renderItem={({item, section, index}) => this._renderCell(item) }
+          renderItem={({item, index}) => this._renderCell(item) }
         />
       </View>
     );
@@ -57,6 +84,7 @@ import ContactCell from './../contact/contactCell';
     return (
       <View style={ style.mainContainer }>
         {
+          this.didSearch &&
           this._renderSearchResult()
         }
         {

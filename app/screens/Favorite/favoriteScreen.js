@@ -20,6 +20,9 @@ class FavoriteScreen extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      selectedEmpId: null,
+    }
   }
 
   _onCellSelection = (data) => {
@@ -46,6 +49,16 @@ class FavoriteScreen extends Component {
     });
   }
 
+  _moreButtonOnPress = (empId) => {
+    if (this.state.selectedEmpId === empId) {
+      //If same more button is pressed even times, it needs to close
+      this.setState({selectedEmpId: null})
+    } else {
+      // Odd time press opens the button
+      this.setState({selectedEmpId: empId})
+    }
+  }
+
   _renderEmptyScreen = () => {
     return (
       <View style={[style.emptyView, {justifyContent: 'center'}]}>
@@ -64,9 +77,11 @@ class FavoriteScreen extends Component {
         keyExtractor={(item, index) => item.empId}
         renderItem={({item, index}) => 
           <ContactCell 
-            {...this.props}          
+            // {...this.props}          
             data={item} 
             onPress={this._onCellSelection}
+            moreButtonAction={this._moreButtonOnPress}
+            showButtons={this.state.selectedEmpId === item.empId}
           />
         }
       // renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        

@@ -37,6 +37,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       currentSwipeIndex: 0,
       searchedEmployees: [],
       screenState: 'normal',
+      selectedEmpId: null,
     }
   }
 
@@ -100,19 +101,31 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     });
   }
 
+  _moreButtonOnPress = (empId) => {
+    if (this.state.selectedEmpId === empId) {
+      //If same more button is pressed even times, it needs to close
+      this.setState({selectedEmpId: null})
+    } else {
+      // Odd time press opens the button
+      this.setState({selectedEmpId: empId})
+    }
+  }
+
   _renderTableView = (employees, index) => {
     const { onScroll = () => {} } = this.props;    
     return (
       <SectionList
         ref="ListView"
-        key={index}                  
+        key={'index'}
         sections={util.groupByAlphabets(employees.data)}
         keyExtractor={(item, index) => index}
-        renderItem={({item}) => 
+        renderItem={({item, index}) => 
           <ContactCell 
-            {...this.props}          
+            // {...this.props}          
             data={item} 
-            onPress={this._onCellSelection}/>
+            onPress={this._onCellSelection}
+            moreButtonAction={this._moreButtonOnPress}
+            showButtons={this.state.selectedEmpId === item.empId}/>
           }
         renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
         renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
@@ -156,18 +169,23 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
 
   _renderSwiper = () => {
     return (
-      <Swiper
-        style={style.wrapper}
-        loop={false} 
-        bounces={true}
-        onIndexChanged ={this._onMomentumScrollEnd}          
-        activeDotStyle={{marginBottom: DOT_MARGIN}} 
-        activeDotColor={colors.LF_DARK_GRREEN}
-        dotStyle={{marginBottom: DOT_MARGIN}}>
-          {
-            this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
-          }
-      </Swiper>
+      // <Swiper
+      //   style={style.wrapper}
+      //   loop={false} 
+      //   bounces={true}
+      //   onIndexChanged ={this._onMomentumScrollEnd}          
+      //   activeDotStyle={{marginBottom: DOT_MARGIN}} 
+      //   activeDotColor={colors.LF_DARK_GRREEN}
+      //   dotStyle={{marginBottom: DOT_MARGIN}}>
+      //     {
+      //       this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+      //     }
+      // </Swiper>
+      <View style={style.wrapper}>
+        {
+          this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+        }
+      </View>
     )
   }
 
@@ -175,7 +193,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     return (
       <View style={style.searchViewContainer}>
         <SearchContactView
-          {...this.props}
+          // {...this.props}
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />

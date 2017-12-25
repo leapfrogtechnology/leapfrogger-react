@@ -8,8 +8,10 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
-    paddingVertical: 8,
-    flexDirection: 'row',    
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    flexDirection: 'row',  
+    // backgroundColor: 'red',  
   },
   imageContainer: {
     margin: 4,        
@@ -29,7 +31,7 @@ const style = StyleSheet.create({
     height: AVATAR_SIZE,   
   },
   titleContainer: {
-    flex: 0.8,
+    flex: 1,
     paddingHorizontal: 4,    
     justifyContent: 'center',
   },
@@ -45,45 +47,52 @@ const style = StyleSheet.create({
     fontSize: 16,    
     paddingTop: 16,
     paddingBottom: -16,
-    alignContent: 'flex-end',    
+    alignContent: 'flex-end',
+    color: colors.Gray_Shades.TEXT    
   },
   subTitleLabel: {
     flex: 0.5,    
     fontSize: 12,
+    color: colors.Gray_Shades.LIGHT_TEXT
   },
   buttonContainer: {
-    flex: 0.2,
-    height: 35,
+    width: 40,
+    height: 50,
     alignSelf: 'center',
     alignContent: 'flex-end',
     justifyContent: 'center',
+    // backgroundColor: 'blue',
   },
   moreImage: {
     width: 18,        
     paddingHorizontal: 8,
     resizeMode: 'contain',
-    shadowRadius: 4,
-    shadowOpacity: 0.8,
-    shadowColor: 'black',    
-    shadowOffset: { width: 0, height: 0 },    
+    // shadowRadius: 4,
+    // shadowOpacity: 0.8,
+    // shadowColor: 'black',    
+    // shadowOffset: { width: 0, height: 0 },    
   },
   moreButton: {
-    width: 25,
+    width: 40,
+    paddingRight:8,
     alignSelf: 'center',
     alignItems: 'flex-end',
     justifyContent: 'center',    
     // backgroundColor: 'purple',
   },
   callMessageButtonsContainer: {
-    right: 46,
+    right: 34,
     alignSelf: 'center',
     flexDirection: 'row',
     position: 'absolute',
+    zIndex: 50,
+    // backgroundColor: 'green'
   },
   callImage: {
     width: 30,
     height: 30,
     resizeMode: 'contain', 
+    tintColor: colors.Gray_Shades.TEXT
   },
   callButton: {
     width: 38,
@@ -95,6 +104,7 @@ const style = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain', 
+    tintColor: colors.Gray_Shades.TEXT
   },
   messageButton: {
     width: 38,
