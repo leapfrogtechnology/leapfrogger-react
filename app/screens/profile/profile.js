@@ -5,10 +5,12 @@ import {
   Image,
   Alert,
   FlatList,
+  Linking,
   LayoutAnimation,
   TouchableOpacity,
   TouchableHighlight,
   ActivityIndicator,
+  TouchableWithoutFeedback,
  } from 'react-native';
  
 import FastImage from 'react-native-fast-image'
@@ -22,6 +24,7 @@ import Button from 'App/components/Button';
 import StateFullScreen from 'App/components/stateFullScreen';
 import EmptyProfileImage from 'App/components/emptyProfileImage';
 import { startLoginScreen } from 'App/navigator/loginScreenNavigator';
+import ToolTip from 'App/components/toolTip';
 
 import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
@@ -171,6 +174,14 @@ class ProfileScreen extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
+              {/* {
+                !this.props.data.fromProfileTab &&
+                <View style={style.importButtonContainer}>
+                  <TouchableOpacity>
+                    <Image source={callImage}/>
+                  </TouchableOpacity>
+                </View>
+              } */}
             </View>
             <View style={style.nameNumberFavContainer}>
               <View style={style.nameNumberContainer}>
@@ -217,13 +228,41 @@ class ProfileScreen extends Component {
     )
   }
 
+  _mailAction = () => {
+    if (this.data.username) if (this.data.username.length > 3) {
+      Linking.openURL(`mailto:${this.data.username}`)
+    }
+  }
+
+  _skypeAction = () => {
+    if (this.data.contact.skypeId) if (this.data.contact.skypeId.length > 3) {
+      Linking.openURL(`skype:${this.data.contact.skypeId}`)
+    }
+  }
+
+  _githubAction = () => {
+    if (this.data.contact.githubId) if (this.data.contact.githubId.length > 3) {
+      Linking.openURL(`https://github.com/${this.data.contact.githubId}`)
+    }
+  }
+
+  _mapAction = () => {
+    if (this.data.address.temporaryAddress) if (this.data.address.temporaryAddress.length > 3) {
+      Linking.openURL(`https://www.google.com/maps/place/${this.data.address.temporaryAddress}`)
+    }
+  }
+
+  _copyText = () => {
+    console.log('asd')
+  }
+
   _renderItems = (item, index) => {
     switch (index) {
       case CALL_AND_MESSAEGE: return this.props.data.fromProfileTab ? null : this._renderCallAndMsgCell()
-      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-', emailImage);      
-      case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-', locationImage);
-      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-', githubImage);
-      case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-', skypeImage);
+      case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-', emailImage, this._mailAction);      
+      case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-', locationImage, this._mapAction);
+      case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-', githubImage, this._githubAction);
+      case SKYPE: return this._renderTextCell('Skype ID', this.data.contact.skypeId || '-', skypeImage, this._skypeAction);
       // case DOB: return this._renderTextCell('DOB', this.data.dateofBirth || '-');
     }
   }
@@ -249,15 +288,23 @@ class ProfileScreen extends Component {
     );
   }
 
-  _renderTextCell = (text, data, image) => {
+  _renderToolTip = (event) => {
+    //todo
+  }
+
+  _renderTextCell = (text, data, image, action) => {
     return (
       <View style={[style.simpleTextCell, style.cell]}>
-        <View style={style.simpleTextCellContainer}>
-          <Text style={style.titleText}>{text}</Text>
-          <Text style={style.dataText}>{data}</Text>
-        </View>
+        <TouchableWithoutFeedback onLongPress={() => this._renderToolTip()} style={{flex: 1}}>
+          <View style={style.simpleTextCellContainer}>
+            <Text style={style.titleText}>{text}</Text>
+            <Text style={style.dataText}>{data}</Text>
+          </View>
+        </TouchableWithoutFeedback>
         <View style={style.iconsContainer}>
-          <Image source={image} style={style.icons}/>
+          <TouchableOpacity onPress={() => action()}>
+            <Image source={image} style={style.icons}/>
+          </TouchableOpacity>
         </View>
         <View style={style.separator}/>
       </View>

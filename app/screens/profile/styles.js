@@ -227,6 +227,7 @@ const style = StyleSheet.create({
   },
   imageNumberContainer: {
     flex: 0.75,
+    width: getWidth(),
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -283,7 +284,7 @@ const style = StyleSheet.create({
     width: 25,
     height: 25,
     resizeMode: 'contain',
-    tintColor: colors.Gray_Shades.ICON,
+    tintColor: colors.Palette.PURPLE,
   },
   separator: {
     position: 'absolute',
@@ -342,6 +343,12 @@ const style = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
   },
+  importButtonContainer: {
+    position: 'absolute',
+    top: 50,
+    right: 0,
+    zIndex: 100,
+  }
 });
 
 export default style;

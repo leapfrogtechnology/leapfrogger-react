@@ -110,7 +110,7 @@ export const searchEmployeesOfName = (employeesList, characters) => {
         return employee 
       }
     } else {
-      if ((name.search(chars) !== -1) || (department.search(chars)) !== -1) { //This method returns -1 if no match is found.
+      if (name.search(chars) !== -1) { //This method returns -1 if no match is found.
         return employee 
       }
     }
