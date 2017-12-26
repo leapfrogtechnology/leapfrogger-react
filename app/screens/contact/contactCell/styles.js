@@ -56,12 +56,11 @@ const style = StyleSheet.create({
     color: colors.Gray_Shades.LIGHT_TEXT
   },
   buttonContainer: {
-    width: 40,
-    height: 50,
+    flex: 0.2,
+    height: 60,
     alignSelf: 'center',
     alignContent: 'flex-end',
-    justifyContent: 'center',
-    // backgroundColor: 'blue',
+    justifyContent: 'flex-end',
   },
   moreImage: {
     width: 18,        
@@ -81,34 +80,32 @@ const style = StyleSheet.create({
     // backgroundColor: 'purple',
   },
   callMessageButtonsContainer: {
-    right: 34,
     alignSelf: 'center',
     flexDirection: 'row',
-    position: 'absolute',
-    zIndex: 50,
     // backgroundColor: 'green'
   },
   callImage: {
-    width: 30,
-    height: 30,
+    width: 18,
+    height: 18,
     resizeMode: 'contain', 
-    tintColor: colors.Gray_Shades.TEXT
+    tintColor: 'white'
   },
   callButton: {
-    width: 38,
-    height: 38,
+    width: 50,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },
   messageImage: {
-    width: 30,
-    height: 30,
+    width: 18,
+    height: 18,
     resizeMode: 'contain', 
-    tintColor: colors.Gray_Shades.TEXT
+    tintColor: 'white',
+    padding: 5,
   },
   messageButton: {
     width: 38,
-    height: 38,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -120,6 +117,22 @@ const style = StyleSheet.create({
     width: getWidth(),
     zIndex: 10,
     backgroundColor: colors.LIGHT_GRAY,
+  },
+  phoneButtonInsideWrapper: {
+    width: 32,
+    height: 32,
+    backgroundColor: colors.Palette.PURPLE,
+    borderRadius: 32 / 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  messageButtonInsideWrapper: {
+    width: 32,
+    height: 32,
+    backgroundColor: colors.Palette.PURPLE,
+    borderRadius: 32 / 2,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
 });

@@ -7,6 +7,7 @@ import {
   FlatList,
   LayoutAnimation,
   TouchableOpacity,
+  TouchableHighlight,
   ActivityIndicator,
  } from 'react-native';
  
@@ -140,13 +141,6 @@ class ProfileScreen extends Component {
         renderForeground={() => (
           <View style={style.profileContainer}>
             <View style={style.imageNumberContainer}>
-              {/* { !this.props.data.fromProfileTab &&
-              <View style={[style.messageContainer, style.buttonContainer]}>
-                <TouchableOpacity style={style.messageButton} onPress={() => Communications.text(this.data.contact.mobilePhone)}>
-                  <Image source={messageImage} style={style.phoneAndMessageButtonImage}/>
-                </TouchableOpacity>
-              </View>
-              } */}
               <View style={ style.photoContainer }>
                 <View style={style.imageProfileContainer}>
                   <EmptyProfileImage
@@ -177,13 +171,6 @@ class ProfileScreen extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-              {/* { !this.props.data.fromProfileTab &&
-              <View style={[style.phoneContainer, style.buttonContainer]}>
-                <TouchableOpacity style={style.phoneButton} onPress={() => Communications.phonecall(this.data.contact.mobilePhone, true)}>
-                  <Image source={callImage} style={style.phoneAndMessageButtonImage}/>
-                </TouchableOpacity>
-              </View>
-              } */}
             </View>
             <View style={style.nameNumberFavContainer}>
               <View style={style.nameNumberContainer}>

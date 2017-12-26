@@ -98,7 +98,7 @@ export const startTabScreen = () => {
       tabBarButtonColor: colors.LIGHT_GRAY,
       tabBarSelectedButtonColor: colors.IOS_GREEN,
       tabBarBackgroundColor: colors.SYSTEM_LIGHT_GRAY,
-      initialTabIndex: 2, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
+      initialTabIndex: 1, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
     },
     appStyle: {
       orientation: 'portrait', 

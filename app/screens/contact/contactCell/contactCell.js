@@ -20,6 +20,8 @@ import moreImage from './../../../../assets/images/more.png';
 import callImage from './../../../../assets/images/call.png';
 import messageImage from './../../../../assets/images/message.png';
 import placeHolderImage from './../../../../assets/images/default.png';
+import phoneCallImage from './../../../../assets/images/phone-call.png';
+import phoneMsgImage from './../../../../assets/images/msg.png';
 
  class ContactCell extends Component {
 
@@ -84,10 +86,9 @@ import placeHolderImage from './../../../../assets/images/default.png';
     return (
     <View style={style.callMessageButtonsContainer}>
       <TouchableOpacity style={style.callButton} onPress={() => this._callButtonPressed()}>
-        <Image source={callImage} style={style.callImage}/>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.messageButton} onPress={() => this._messageButtonPressed()}>
-        <Image source={messageImage} style={style.messageImage}/>
+        <View style={style.phoneButtonInsideWrapper}>
+          <Image source={phoneCallImage} style={style.callImage}/>
+        </View>
       </TouchableOpacity>
     </View>
     )
@@ -133,11 +134,8 @@ import placeHolderImage from './../../../../assets/images/default.png';
           </View>
           <View style={style.buttonContainer}>
             {
-              this.props.showButtons && this._showCallMessageButtons()
+              this._showCallMessageButtons()
             }
-            <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonPressed()}>
-              <Image source={moreImage} style={style.moreImage}/>
-            </TouchableOpacity>
           </View>
           <View style={style.separator}/>
         </View>

@@ -14,6 +14,7 @@ import ContactCell from './../contact/contactCell';
 import StateFullScreen from 'App/components/stateFullScreen';
 
 import emptyFav from './../../../assets/images/favorite.png';
+import emptyFavOutline from './../../../assets/images/favorite-empty.png';
 
 class FavoriteScreen extends Component {
 
@@ -66,7 +67,7 @@ class FavoriteScreen extends Component {
   _renderEmptyScreen = () => {
     return (
       <View style={[style.emptyView, {justifyContent: 'center'}]}>
-        <Image source={emptyFav} style={style.emptyFavImage}/>
+        <Image source={emptyFavOutline} style={style.emptyFavImage}/>
         <Text style={style.emptyText}>Your Favorite Frogs will {'\n'} Live Here.</Text>
       </View>
     )

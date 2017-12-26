@@ -33,7 +33,6 @@ EmptyProfileImage.defaultProps = {
 
 const style = StyleSheet.create({
   mainContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-contacts')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-fast-image')
     compile project(':react-native-blur')
