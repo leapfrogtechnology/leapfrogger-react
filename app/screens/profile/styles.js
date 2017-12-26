@@ -44,12 +44,11 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: getWidth(),
-    backgroundColor: 'red',//'rgba(0,0,0,.4)',
     height: PARALLAX_HEADER_HEIGHT,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
     shadowColor: colors.LF_GRAY,
     shadowOffset: { width: 0, height: 2.5 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.25,
     shadowRadius: 2,
   },
   stickySection: {
@@ -78,17 +77,24 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     flexDirection: 'column',
+    // backgroundColor: colors.SYSTEM_LIGHT_GRAY,
   },
   avatar: {
     width: AVATAR_SIZE,
     height: AVATAR_SIZE, 
+    borderRadius: (AVATAR_SIZE) / 2,
     // backgroundColor: 'white'
   },
   imageProfileContainer: {
-    height: AVATAR_SIZE,
-    borderWidth: 2,    
-    borderRadius: AVATAR_SIZE / 2,
-    borderColor: colors.LIGHT_GRAY,
+    // backgroundColor: 'blue',
+    height: AVATAR_SIZE + 16,
+    width: AVATAR_SIZE + 16,
+    // padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 12,    
+    borderRadius: (AVATAR_SIZE + 16) / 2,
+    borderColor: 'rgba(133, 133, 133, 0.3)',
     overflow: 'hidden',
   },
   placeHolder: {
@@ -137,7 +143,7 @@ const style = StyleSheet.create({
     flex: 1,
     fontWeight: '500',
     paddingTop: 8,
-    color: colors.LF_DARK_GRREEN,
+    color: colors.Gray_Shades.LIGHT_TEXT,
   },
   dataText: {
     flex: 1,
@@ -209,7 +215,6 @@ const style = StyleSheet.create({
     tintColor: 'white',
     shadowRadius: 5,
     shadowOpacity: 0.8,
-    shadowColor: 'blue',    
     shadowOffset: { width: 0, height: 0 },    
   },
   profileContainer: {
@@ -217,6 +222,7 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingHorizontal: 16,
+    backgroundColor: colors.IOS_GREEN
   },
   nameContainer: {
     height: 60,
@@ -251,18 +257,18 @@ const style = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: -48,
   },
   favButton: {
     width: 44,
     height: 44,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   favImage: {
-    width: 27,
-    height: 27,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
+    tintColor: 'white',
   },
   simpleTextCellContainer: {
     flex: 0.9,
@@ -280,7 +286,7 @@ const style = StyleSheet.create({
     width: 25,
     height: 25,
     resizeMode: 'contain',
-    tintColor: colors.LF_DARK_GRREEN,
+    tintColor: colors.Palette.BLUE,
   },
   separator: {
     position: 'absolute',
@@ -290,7 +296,55 @@ const style = StyleSheet.create({
     width: getWidth() - 32,
     zIndex: 10,
     backgroundColor: colors.LIGHT_GRAY,
-  }
+  },
+  callMessageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    backgroundColor: colors.IOS_GREEN
+  },
+  msgButtonContainer: {
+    flex: 1,
+    paddingHorizontal: 18,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end'
+  },
+  callButtonContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
+  },
+  favButtonContainer: {
+    position: 'absolute',
+    zIndex: 10,
+    bottom: 20,
+    right: 12,
+  },
+  googleLoginButton: {
+    height: 50,
+    backgroundColor: 'transparent',
+    borderRadius: 44,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 120,
+  },
+  googleTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: 'center',
+    flex: 0.8,
+  },
+  googleImage: {
+    width: 25,
+    height: 25,
+    tintColor: 'white',
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
 });
 
 export default style;

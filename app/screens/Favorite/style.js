@@ -23,7 +23,7 @@ const style = StyleSheet.create({
     padding: 10
   },
   statusBar: {
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
   },
   searchContainer: {
     height: 50,
@@ -33,7 +33,7 @@ const style = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     marginBottom: -3,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
     shadowColor: colors.LF_GRAY,
     shadowOffset: { width: 0, height: 2.5 },
     shadowOpacity: 0.3,
@@ -71,7 +71,7 @@ const style = StyleSheet.create({
   stickySection: {
     justifyContent: 'flex-end',    
     height: STICKY_HEADER_HEIGHT,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
     marginBottom: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },

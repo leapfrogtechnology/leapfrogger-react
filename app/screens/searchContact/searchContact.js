@@ -67,6 +67,7 @@ import ContactCell from './../contact/contactCell';
           data={this.props.data}
           keyExtractor={this._keyExtractor}        
           renderItem={({item, index}) => this._renderCell(item) }
+          extraData={this.state.selectedEmpId}
         />
       </View>
     );

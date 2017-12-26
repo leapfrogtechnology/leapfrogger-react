@@ -25,7 +25,7 @@ class EmptyProfileImage extends Component {
 
 EmptyProfileImage.defaultProps = {
   bgColor: colors.SYSTEM_LIGHT_GRAY,
-  textColor: colors.LF_DARK_GRREEN,
+  textColor: colors.IOS_GREEN,
   firstName: '',
   lastName: '',
   textSize: 14,

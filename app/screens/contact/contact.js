@@ -154,7 +154,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     return (
       <Search
         ref={component => this.searchBar = component}
-        backgroundColor={colors.LF_DARK_GRREEN}
+        backgroundColor={colors.IOS_GREEN}
         titleCancelColor='white'
         onChangeText={(text) => this._onSearchBarTextChange(text)}
         onFocus={() => this._onSearchBarFocus()}

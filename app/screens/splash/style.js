@@ -6,7 +6,7 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
   },
   splashImage: {
     flex: 1,

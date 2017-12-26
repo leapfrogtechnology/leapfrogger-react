@@ -229,7 +229,7 @@ const GuestUser = {
         <View style={style.buttonContainer}>
           {
             this.state.isValidating &&
-            <ActivityIndicator size="large" color={colors.LF_DARK_GRREEN} style={[style.activityIndicator]} />                          
+            <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />                          
           }
           <Button
             ref={component => this.googleSigninButton = component}

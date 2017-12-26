@@ -27,7 +27,7 @@ export const startTabScreen = () => {
           statusBarTextColorScheme: 'light',                  
           navBarNoBorder: false,
           drawUnderNavBar: false,
-          navBarBackgroundColor: colors.LF_DARK_GRREEN, 
+          navBarBackgroundColor: colors.IOS_GREEN, 
           navBarTextColor: 'white',
           navBarButtonColor: 'white',                  
           navBarLeftButtonColor: 'white',
@@ -54,7 +54,7 @@ export const startTabScreen = () => {
           drawUnderNavBar: true,
           navBarTranslucent: true,
           navBarTransparent: true,
-          navBarBackgroundColor: colors.LF_DARK_GRREEN,
+          navBarBackgroundColor: colors.IOS_GREEN,
           navBarButtonColor: 'white',                  
           navBarLeftButtonColor: 'white',
           navBarRightButtonColor: 'white',  
@@ -80,7 +80,7 @@ export const startTabScreen = () => {
           navBarHidden: true,          
           navBarTranslucent: true,
           navBarTransparent: true,
-          navBarBackgroundColor: colors.LF_DARK_GRREEN, 
+          navBarBackgroundColor: colors.IOS_GREEN, 
           navBarTextColor: 'white',
           navBarTransparency: 1,  
           navBarButtonColor: 'white',                  
@@ -96,9 +96,9 @@ export const startTabScreen = () => {
     ],
     tabsStyle: {
       tabBarButtonColor: colors.LIGHT_GRAY,
-      tabBarSelectedButtonColor: colors.LF_DARK_GRREEN,
+      tabBarSelectedButtonColor: colors.IOS_GREEN,
       tabBarBackgroundColor: colors.SYSTEM_LIGHT_GRAY,
-      initialTabIndex: 1, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
+      initialTabIndex: 2, // optional, the default selected bottom tab. Default: 0. On Android, add this to appStyle
     },
     appStyle: {
       orientation: 'portrait', 

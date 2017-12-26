@@ -26,19 +26,22 @@ import moreImage from './../../../assets/images/more.png';
 import callImage from './../../../assets/images/call.png';
 import messageImage from './../../../assets/images/message.png';
 import favouriteImage from './../../../assets/images/favorite.png';
+import emptyFavouriteImage from './../../../assets/images/favorite-empty.png';
 import emailImage from './../../../assets/images/mail.png';
 import locationImage from './../../../assets/images/location.png';
 import githubImage from './../../../assets/images/github.png';
 import skypeImage from './../../../assets/images/skype.png';
+import phoneCallImage from './../../../assets/images/phone-call.png';
+import phoneMsgImage from './../../../assets/images/msg.png';
 
 import { getWidth, getHeight } from 'App/utils/dimension';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles'; 
 
-// const PHONE_NUMBER = 0
-const EMAIL = 0
-const ADDRESS = 1
-const SKYPE = 2
-const GITHUB = 3
+const CALL_AND_MESSAEGE = 0
+const EMAIL = 1
+const ADDRESS = 2
+const SKYPE = 3
+const GITHUB = 4
 
 const CANCEL_INDEX = 0
 const GUEST_DESTRUCTIVE_INDEX = 1
@@ -124,10 +127,10 @@ class ProfileScreen extends Component {
       <ParallaxScrollView
         onScroll={this.props.onScroll}
         bounce={true}
-        headerBackgroundColor="#333"
+        headerBackgroundColor="pink"
         stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
         parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
-        backgroundSpeed={10}
+        backgroundSpeed={20}
         renderBackground={() => (
           <View key="background">
             <View style={style.tableHeaderBackgroundOverlay}/>
@@ -165,6 +168,14 @@ class ProfileScreen extends Component {
                     />
                   }
                 </View>
+                <View style={style.favButtonContainer}>
+                  <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>
+                    {
+                      !this.props.data.fromProfileTab &&
+                      <Image source={this.state.isFav ? favouriteImage : emptyFavouriteImage} style={[style.favImage]}/>
+                    }
+                  </TouchableOpacity>
+                </View>
               </View>
               {/* { !this.props.data.fromProfileTab &&
               <View style={[style.phoneContainer, style.buttonContainer]}>
@@ -186,12 +197,6 @@ class ProfileScreen extends Component {
                   { this.data.contact.mobilePhone }
                 </Text>
               </View>
-              <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>
-                {
-                  !this.props.data.fromProfileTab &&
-                  <Image source={favouriteImage} style={[style.favImage, this.state.isFav ? {tintColor: colors.MILD_RED}: {tintColor: colors.LIGHT_GRAY}]}/>
-                }
-              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -200,8 +205,34 @@ class ProfileScreen extends Component {
     );
   }
 
+  _renderCallAndMsgCell = () => {
+    return (
+      <View style={style.callMessageContainer}>
+        <View style={style.msgButtonContainer}>
+          <Button
+            style={style.googleLoginButton}
+            title={''}
+            source={phoneMsgImage}
+            imageStyle={style.googleImage}
+            onPress={() => Communications.text(this.data.contact.mobilePhone)}
+          />
+        </View>
+        <View style={style.callButtonContainer}>
+          <Button
+            style={style.googleLoginButton}
+            title={''}
+            source={phoneCallImage}
+            imageStyle={style.googleImage}
+            onPress={() => Communications.phonecall(this.data.contact.mobilePhone, true)}
+          />
+        </View>
+      </View>
+    )
+  }
+
   _renderItems = (item, index) => {
     switch (index) {
+      case CALL_AND_MESSAEGE: return this.props.data.fromProfileTab ? null : this._renderCallAndMsgCell()
       case EMAIL: return this._renderTextCell('E-mail', this.data.username || '-', emailImage);      
       case ADDRESS: return this._renderTextCell('Address', this.data.address.temporaryAddress || '-', locationImage);
       case GITHUB: return this._renderTextCell('Github ID', this.data.contact.githubId || '-', githubImage);

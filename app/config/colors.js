@@ -11,7 +11,7 @@ const colors = {
   IOS_BLUE: '#157efb',    
   IOS_YELLOW: '#fecb2f',    
   IOS_ORANGE: '#fd9426',    
-  IOS_GREEN: '#53d769',    
+  IOS_GREEN: '#17be9d',    
   IOS_PURPLE: '#595ad3',    
   IOS_TEAL_BLUE: '#60c9f8',    
   IOS_PINK: '#fc3159',      

@@ -52,11 +52,15 @@ class FavoriteScreen extends Component {
   _moreButtonOnPress = (empId) => {
     if (this.state.selectedEmpId === empId) {
       //If same more button is pressed even times, it needs to close
+      console.log('bbbbb')
       this.setState({selectedEmpId: null})
     } else {
       // Odd time press opens the button
+      console.log('aaaaa')
       this.setState({selectedEmpId: empId})
     }
+    this.forceUpdate()
+    console.log('------', empId)
   }
 
   _renderEmptyScreen = () => {
@@ -68,22 +72,29 @@ class FavoriteScreen extends Component {
     )
   }
 
-  _renderTableView = (items) => {
+  _renderCell = (item) => {
+    console.log('this should invoke')
+    return (
+      <ContactCell 
+        // {...this.props}          
+        data={item} 
+        onPress={this._onCellSelection}
+        moreButtonAction={this._moreButtonOnPress}
+        showButtons={this.state.selectedEmpId === item.empId}
+      />
+    )
+  }
+
+  _renderTableView = (data) => {
+    console.log('invoked')
     return (
       <FlatList
         ref="ListView"
         style={style.listView}
-        data={items}
+        data={data}
         keyExtractor={(item, index) => item.empId}
-        renderItem={({item, index}) => 
-          <ContactCell 
-            // {...this.props}          
-            data={item} 
-            onPress={this._onCellSelection}
-            moreButtonAction={this._moreButtonOnPress}
-            showButtons={this.state.selectedEmpId === item.empId}
-          />
-        }
+        extraData={this.state.selectedEmpId}
+        renderItem={({item, index}) => this._renderCell(item, this.state.selectedEmpId)}
       // renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
       />
     );
