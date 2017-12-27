@@ -5,8 +5,8 @@ import {
   Image,
   FlatList,
   ListView,
+  ScrollView,
   SectionList,
-  Platform,
   ActivityIndicator,
   LayoutAnimation,
  } from 'react-native';
@@ -121,6 +121,7 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       <ListView
         ref="ListView"
         key={'index'}
+        style={style.table}
         // sections={util.groupByAlphabets(employees.data)}
         dataSource={this.state.dataSource}
         // dataSource={(item, index) => index}
@@ -225,7 +226,7 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         <View style={style.searchContainer}>
           { this._renderSearchBar() }
         </View>
-        <View style={[style.tableContainer, {marginBottom: Platform.OS === 'android' ? -200 : 0}]}>
+        <View style={style.tableContainer}>
           {/* {
             <View style={style.stickyDepartmentSection}>
               <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>

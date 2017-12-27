@@ -42,6 +42,9 @@ const style = StyleSheet.create({
   tableContainer: {
     flex: 1,
   },
+  table: {
+    height: getHeight() - 70 - 72,
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
