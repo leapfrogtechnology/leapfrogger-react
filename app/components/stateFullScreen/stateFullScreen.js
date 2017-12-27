@@ -37,8 +37,11 @@ class StateFullScreen extends Component {
 
   _renderActivityIndicator = () => {
     return (
-      <View style={[style.activityContainer, style.container, style.horizontal]}>
-        <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator, {marginBottom: this.props.bottomMargin}]} />
+      <View style={[style.activityContainer, style.container]}>
+        <View style={[style.container, {flex: 1, marginBottom: this.props.bottomMargin}]}>
+          <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />
+          <Text>{this.props.message}</Text>
+        </View>
       </View>
     )
   }
@@ -74,6 +77,7 @@ class StateFullScreen extends Component {
 
 StateFullScreen.defaultProps = {
   state: NORMAL_STATE,
+  message: 'Loading Data...',
   style: {},
   onPress: {},
   bottomMargin: 0,

@@ -27,10 +27,10 @@ const style = StyleSheet.create({
   },
   searchContainer: {
     height: 50,
-    top: 20,
+    // top: 20,
     width: getWidth(),
-    zIndex: 10,        
-    position: 'absolute',
+    // zIndex: 10,        
+    // position: 'absolute',
     justifyContent: 'center',
     marginBottom: -3,
     backgroundColor: colors.IOS_GREEN,
@@ -40,16 +40,15 @@ const style = StyleSheet.create({
     // shadowRadius: 2,
   },
   tableContainer: {
-    marginTop: 50,
-    flex: 1
+    flex: 1,
   },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
+    // fontSize: 14,
+    // fontWeight: 'bold',
     backgroundColor: 'rgba(247, 247, 247, 1)',
   },
   item: {

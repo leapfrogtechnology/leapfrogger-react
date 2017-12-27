@@ -99,6 +99,7 @@ import phoneMsgImage from './../../../../assets/images/msg.png';
   }
 
   render() {
+    console.log('=====00000', this.props)
     return (
       <TouchableHighlight onPress={() => this.props.onPress(this.props.data)} underlayColor={colors.LIGHT_GRAY} activeOpacity={0.4}>
         <View style={ style.mainContainer }>

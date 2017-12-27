@@ -12,10 +12,13 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
+    backgroundColor: colors.SYSTEM_LIGHT_GRAY,
   },
   container: {
     flex: 1,
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.Gray_Shades.BORDER_GRAY,
   },
   horizontal: {
     flexDirection: 'row',

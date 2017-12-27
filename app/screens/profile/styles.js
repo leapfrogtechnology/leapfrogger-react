@@ -146,7 +146,8 @@ const style = StyleSheet.create({
     flex: 1,
     height: 40,
     marginTop: -4,    
-    fontSize: 18,
+    fontSize: 17,
+    color: colors.Gray_Shades.TEXT    
   },
   phoneMessageContainer: {
     flex: 0.1,

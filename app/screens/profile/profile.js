@@ -87,10 +87,15 @@ class ProfileScreen extends Component {
       GoogleSignin.signOut().then(() => {
         this._startLogin()
       })
+      .catch(() => this._startLogin())
       .done();
     } else {
       this._startLogin()
     }
+  }
+
+  _syncWithLMS = () => {
+    this.props.fetchEmployeesAndDepartments();
   }
 
   _moreButtonAction = () => {
@@ -116,7 +121,7 @@ class ProfileScreen extends Component {
       case 0:
       break
       case 1: // Update
-      this.isGuest ? this._logout() : this.props.fetchEmployeesAndDepartments();
+      this.isGuest || this.props.isFetching ? this._logout() : this._syncWithLMS();
       break
       case 2: // logout
       this._logout();
@@ -334,9 +339,9 @@ class ProfileScreen extends Component {
       <View>
         <ActionSheet
           ref={component => this.actionSheet = component}
-          options={this.isGuest ? guestOptions : options}
+          options={this.isGuest || this.props.isFetching ? guestOptions : options}
           cancelButtonIndex={CANCEL_INDEX}
-          destructiveButtonIndex={this.isGuest ? GUEST_DESTRUCTIVE_INDEX : DESTRUCTIVE_INDEX}
+          destructiveButtonIndex={this.isGuest || this.props.isFetching ? GUEST_DESTRUCTIVE_INDEX : DESTRUCTIVE_INDEX}
           onPress={(index) => this._actionSheetSelection(index)}
         />
       </View>
@@ -349,7 +354,7 @@ class ProfileScreen extends Component {
         {
           this._renderActionSheet()
         }
-        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()} disabled={this.props.isFetching}>
+        <TouchableOpacity style={style.moreButton} onPress={() => this._moreButtonAction()}>
           <Image source={moreImage} style={style.moreButtonImage}/>
         </TouchableOpacity>
       </View>

@@ -76,15 +76,16 @@ const GuestUser = {
   _revokeGoogleSigninAccess = () => {
     this.setState({revokingAccess: true})
     GoogleSignin.revokeAccess()
+    .catch((err) => this._showAlertWithMessage(err.message))
     .done(() => { this.setState({revokingAccess: false}) })
   }
 
-  _showAlertWithMessage = (msg) => {
+  _showAlertWithMessage = (msg, action) => {
     Alert.alert(
       'Unauthorized\n',
       msg,
       [
-        {text: 'OK', onPress: () => this._revokeGoogleSigninAccess()},
+        {text: 'OK', onPress: () => action},
       ],
       { cancelable: false }
     )
@@ -96,7 +97,7 @@ const GuestUser = {
         this.props.onLogin(user);
         this._login();        
       } else {        
-        this._showAlertWithMessage(this.props.validationResponse.error)
+        this._showAlertWithMessage(this.props.validationResponse.error, this._revokeGoogleSigninAccess())
       }
     } else {
       throw 'err'
@@ -130,6 +131,7 @@ const GuestUser = {
       // }      
     }
     catch(err) {
+      this._showAlertWithMessage(GOOGLE_PLAY_SERVICE_ERROR.message)
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
     }
   }
@@ -151,6 +153,7 @@ const GuestUser = {
     .catch((err) => {
       this._revokeGoogleSigninAccess()
       // console.log(WRONG_SIGNIN.message, err);
+      // this._showAlertWithMessage(err.message)
     })
     .done(() => this.setState({ disableBtn: false }))
   }

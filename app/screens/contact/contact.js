@@ -3,7 +3,10 @@ import {
   View,
   Text,
   Image,
+  FlatList,
+  ListView,
   SectionList,
+  Platform,
   ActivityIndicator,
   LayoutAnimation,
  } from 'react-native';
@@ -26,6 +29,7 @@ import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
 const GUEST_EMAIL = 'guest@lftechnology.com'
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
  class ContactScreen extends Component {
 
@@ -38,6 +42,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       searchedEmployees: [],
       screenState: 'normal',
       selectedEmpId: null,
+      dataSource: ds.cloneWithRows(this.props.employees),
     }
   }
 
@@ -111,24 +116,24 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
     }
   }
 
-  _renderTableView = (employees, index) => {
-    const { onScroll = () => {} } = this.props;    
+  _renderTableView = (employees) => {
     return (
-      <SectionList
+      <ListView
         ref="ListView"
         key={'index'}
-        sections={util.groupByAlphabets(employees.data)}
-        keyExtractor={(item, index) => index}
-        renderItem={({item, index}) => 
+        // sections={util.groupByAlphabets(employees.data)}
+        dataSource={this.state.dataSource}
+        // dataSource={(item, index) => index}
+        renderRow={(item, index) => 
           <ContactCell 
             // {...this.props}          
             data={item} 
             onPress={this._onCellSelection}
-            moreButtonAction={this._moreButtonOnPress}
-            showButtons={this.state.selectedEmpId === item.empId}/>
+            moreButtonAction={this._moreButtonOnPress}/>
           }
-        renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
+        stickySectionHeadersEnabled={true}
+        renderSectionHeader={(section) => <Text style={style.sectionHeader}>a</Text>}
+        // renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );
   }
@@ -183,7 +188,8 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
       // </Swiper>
       <View style={style.wrapper}>
         {
-          this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+          // this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+          this._renderTableView()
         }
       </View>
     )
@@ -219,7 +225,7 @@ const GUEST_EMAIL = 'guest@lftechnology.com'
         <View style={style.searchContainer}>
           { this._renderSearchBar() }
         </View>
-        <View style={style.tableContainer}>
+        <View style={[style.tableContainer, {marginBottom: Platform.OS === 'android' ? -200 : 0}]}>
           {/* {
             <View style={style.stickyDepartmentSection}>
               <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>
