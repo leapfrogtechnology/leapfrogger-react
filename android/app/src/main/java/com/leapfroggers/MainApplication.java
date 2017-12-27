@@ -1,8 +1,11 @@
 package com.leapfroggers;
 
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.reactnativenavigation.NavigationApplication;
+import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 
 import java.util.Arrays;
 import java.util.List;
