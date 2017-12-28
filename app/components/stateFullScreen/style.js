@@ -40,7 +40,8 @@ const style = StyleSheet.create({
     height: getHeight() - 118,
     backgroundColor: 'white',
   },
-  activityIndicator: {
+  messageLabel: {
+    color: colors.Gray_Shades.TEXT,
   },
 });
 

@@ -39,8 +39,8 @@ class StateFullScreen extends Component {
     return (
       <View style={[style.activityContainer, style.container]}>
         <View style={[style.container, {flex: 1, marginBottom: this.props.bottomMargin}]}>
-          <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />
-          <Text>{this.props.message}</Text>
+          <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator, {paddingBottom: 8}]} />
+          <Text style={style.messageLabel}>{this.props.message}</Text>
         </View>
       </View>
     )

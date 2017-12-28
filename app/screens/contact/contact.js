@@ -9,6 +9,7 @@ import {
   SectionList,
   ActivityIndicator,
   LayoutAnimation,
+  Platform,
  } from 'react-native';
  
 import Swiper from 'react-native-swiper'; 
@@ -29,7 +30,7 @@ import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
 const GUEST_EMAIL = 'guest@lftechnology.com'
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
  class ContactScreen extends Component {
 
@@ -42,12 +43,13 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       searchedEmployees: [],
       screenState: 'normal',
       selectedEmpId: null,
-      dataSource: ds.cloneWithRows(this.props.employees),
+      dataSource: ds.cloneWithRowsAndSections(util.categorizeEmployeeByName(this.props.employees)),
     }
   }
 
   componentDidMount() {
     // this._animateOnMount();
+    // console.log('=-=-=-', util.categorizeEmployeeByName(this.props.employees))
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     if (this.props.user.email === GUEST_EMAIL) {      
       var empjson = require('./../../../guestEmp.json'); //(with path)
@@ -119,12 +121,9 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   _renderTableView = (employees) => {
     return (
       <ListView
-        ref="ListView"
-        key={'index'}
-        style={style.table}
-        // sections={util.groupByAlphabets(employees.data)}
+        key={'listView'}
+        style={ Platform.OS === 'android' ? style.tableAndroid : null }
         dataSource={this.state.dataSource}
-        // dataSource={(item, index) => index}
         renderRow={(item, index) => 
           <ContactCell 
             // {...this.props}          
@@ -133,7 +132,7 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             moreButtonAction={this._moreButtonOnPress}/>
           }
         stickySectionHeadersEnabled={true}
-        renderSectionHeader={(section) => <Text style={style.sectionHeader}>a</Text>}
+        renderSectionHeader={(sectionData, category) => <Text style={style.sectionHeader}>{category}</Text>}
         // renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );

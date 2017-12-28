@@ -42,17 +42,21 @@ const style = StyleSheet.create({
   tableContainer: {
     flex: 1,
   },
-  table: {
+  tableiOS: {
+    flex: 1,
+  },
+  tableAndroid: {
     height: getHeight() - 70 - 72,
   },
   sectionHeader: {
-    paddingTop: 2,
+    // paddingTop: 2,
+    height: 20,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
     // fontSize: 14,
     // fontWeight: 'bold',
-    backgroundColor: 'rgba(247, 247, 247, 1)',
+    backgroundColor: colors.Gray_Shades.BORDER_GRAY,
   },
   item: {
     padding: 10,

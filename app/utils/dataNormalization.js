@@ -60,6 +60,7 @@ export const getUniqueArrayOfFirstCharOfName = (employeesList) => {
   return uniqueArray;
 }
 
+// use this for section list
 export const groupByAlphabets = (employeesList) => {
   var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
   var finalList = [];
@@ -76,6 +77,17 @@ export const groupByAlphabets = (employeesList) => {
     finalList.push(group);
   });
   return finalList;
+}
+
+//use this for listview
+export const categorizeEmployeeByName = (employeesList) => {
+  var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
+  var finalMap = {};
+  uniqueLetterList.forEach(letter => {
+    let list = employeesList.filter(emp => letter === getFirstLetterOfEmployee(emp))
+    finalMap[letter] = list
+  });
+  return finalMap;
 }
 
 //-----------------------------------

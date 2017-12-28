@@ -12,6 +12,7 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
+    backgroundColor: colors.Gray_Shades.BORDER_GRAY,
   },
   container: {
     flex: 1,
@@ -21,15 +22,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247, 247, 247, 1)',
   },
   item: {
     padding: 10,
