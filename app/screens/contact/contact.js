@@ -30,12 +30,15 @@ import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
 const GUEST_EMAIL = 'guest@lftechnology.com'
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+const empjson = require('./../../../guestEmp.json'); //(with path)
+const departmentjson = require('./../../../guestDepartment.json'); //(with path)
 
  class ContactScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
 
     this.state = {
       isSearching: false,      
@@ -49,17 +52,18 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectio
 
   componentDidMount() {
     // this._animateOnMount();
-    // console.log('=-=-=-', util.categorizeEmployeeByName(this.props.employees))
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     if (this.props.user.email === GUEST_EMAIL) {      
-      var empjson = require('./../../../guestEmp.json'); //(with path)
-      var departmentjson = require('./../../../guestDepartment.json'); //(with path)
       this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
     } else {
       if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
-        this.props.fetchEmployeesAndDepartments() 
+        this.props.fetchEmployeesAndDepartments()
       }      
     }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(util.categorizeEmployeeByName(newProps.employees))})
   }
 
   _onSearchBarTextChange = (text) => {
@@ -132,7 +136,7 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectio
             moreButtonAction={this._moreButtonOnPress}/>
           }
         stickySectionHeadersEnabled={true}
-        renderSectionHeader={(sectionData, category) => <Text style={style.sectionHeader}>{category}</Text>}
+        renderSectionHeader={(sectionData, title) => <Text style={style.sectionHeader}>{title}</Text>}
         // renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );
@@ -173,6 +177,7 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectio
   }
 
   _renderSwiper = () => {
+    // return (<Text>asdasdasdasdasdasdas</Text>)
     return (
       // <Swiper
       //   style={style.wrapper}

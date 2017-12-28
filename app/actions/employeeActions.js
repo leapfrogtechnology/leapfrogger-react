@@ -10,6 +10,13 @@ export const employeeList = (employees) => {
   }
 }
 
+export const categorizedByAlphabets = (employees) => {
+  return {
+    type: ActionType.CATEGORIZED_EMP,
+    categorizedEmployees: employees
+  }
+}
+
 export const groupEmployeesOnDepartmentBasis = (groupedEmployees) => {
   return {
     type: ActionType.GROUP_EMPLOYEES_DEPARTMENT_BASIS,

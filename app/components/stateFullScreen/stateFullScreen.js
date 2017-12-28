@@ -77,7 +77,7 @@ class StateFullScreen extends Component {
 
 StateFullScreen.defaultProps = {
   state: NORMAL_STATE,
-  message: 'Loading Data...',
+  message: 'LOADING DATA',
   style: {},
   onPress: {},
   bottomMargin: 0,
