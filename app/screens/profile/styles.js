@@ -95,19 +95,20 @@ const style = StyleSheet.create({
     borderColor: colors.LIGHT_GRAY,
   },
   sectionSpeakerText: {
-    fontSize: 20,    
+    fontSize: 20, 
+    letterSpacing: 1,   
     color: 'white',
-    paddingVertical: 4
+    paddingVertical: 2
   },
   designationText: {
     fontSize: 12, 
     color: colors.SYSTEM_LIGHT_GRAY,    
   },
   sectionTitleText: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: 'white',    
-    paddingVertical: 5
+    fontSize: 18,
+    color: 'white', 
+    letterSpacing: 1,      
+    paddingTop: 8,
   },
   listView: {
     flex: 0.5
@@ -117,7 +118,8 @@ const style = StyleSheet.create({
     flex: 1,    
     height: 66, 
     paddingHorizontal: 16, 
-    paddingTop: 10,           
+    paddingTop: 12,           
+    paddingBottom: 12
   },
   phoneCell: {
     marginTop: 8,
@@ -131,14 +133,14 @@ const style = StyleSheet.create({
   titleText: {
     flex: 1,
     fontWeight: '500',
-    paddingTop: 8,
+    // paddingTop: 4,
     color: colors.Gray_Shades.LIGHT_TEXT,
   },
   dataText: {
     flex: 1,
-    height: 40,
-    marginTop: -4,    
-    fontSize: 17,
+    // height: 40,
+    // paddingBottom: 4, 
+    fontSize: 18,
     color: colors.Gray_Shades.TEXT    
   },
   phoneMessageContainer: {
@@ -237,11 +239,11 @@ const style = StyleSheet.create({
     alignItems: 'flex-end',
   },
   nameNumberFavContainer: {
-    flex: 0.25,
+    flex: 0.27,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
   nameNumberContainer: {
     flex: 1,
@@ -256,8 +258,8 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   favImage: {
-    width: 20,
-    height: 20,
+    width: 22,
+    height: 22,
     resizeMode: 'contain',
     tintColor: 'white',
   },
@@ -269,7 +271,7 @@ const style = StyleSheet.create({
   },
   iconsContainer: {
     flex: 0.1,
-    paddingTop: 8,
+    // paddingTop: 8,
     alignItems: 'flex-end',
     justifyContent: 'center',
   },
@@ -292,6 +294,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
+    paddingBottom: 16,
     backgroundColor: colors.IOS_GREEN
   },
   msgButtonContainer: {
@@ -316,7 +319,7 @@ const style = StyleSheet.create({
     height: 50,
     backgroundColor: 'transparent',
     borderRadius: 44,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,//StyleSheet.hairlineWidth,
     borderColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',

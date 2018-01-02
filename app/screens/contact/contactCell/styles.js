@@ -33,6 +33,7 @@ const style = StyleSheet.create({
   titleContainer: {
     flex: 1,
     paddingHorizontal: 4,    
+    paddingLeft: 10,
     justifyContent: 'center',
   },
   titleSubContainer: {
@@ -44,7 +45,7 @@ const style = StyleSheet.create({
   titleLabel: {
     // backgroundColor: 'pink',
     flex: 0.5,
-    fontSize: 16,    
+    fontSize: 18,    
     paddingTop: 16,
     paddingBottom: -16,
     alignContent: 'flex-end',
@@ -53,6 +54,7 @@ const style = StyleSheet.create({
   subTitleLabel: {
     flex: 0.5,    
     fontSize: 12,
+    marginTop: -8,
     color: colors.Gray_Shades.LIGHT_TEXT
   },
   buttonContainer: {

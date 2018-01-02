@@ -107,8 +107,8 @@ import phoneMsgImage from './../../../../assets/images/msg.png';
             <EmptyProfileImage
               firstName={this.props.data.firstName}
               lastName={this.props.data.lastName}
-              textSize={16}
-              style={style.contactImage}
+              textSize={18}
+              style={[style.contactImage]}
             />
             {
               this.props.data.avatarUrl &&
@@ -123,7 +123,7 @@ import phoneMsgImage from './../../../../assets/images/msg.png';
                   uri: this.props.data.avatarUrl,
                   priority: FastImage.priority.normal,
                 }}
-                resizeMode={FastImage.resizeMode.contain}
+                resizeMode={FastImage.resizeMode.cover}
               />
             }
           </View>

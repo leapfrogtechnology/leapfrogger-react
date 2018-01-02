@@ -151,12 +151,6 @@ class ProfileScreen extends Component {
             <View style={style.imageNumberContainer}>
               <View style={ style.photoContainer }>
                 <View style={style.imageProfileContainer}>
-                  <EmptyProfileImage
-                    firstName={this.data.firstName}
-                    lastName={this.data.lastName}
-                    textSize={38}
-                    style={style.avatar}
-                  />
                   {
                     this.data.avatarUrl &&
                     // <Image style={[style.avatar, {resizeMode: 'contain', position: 'absolute'}]} source={{uri: this.data.avatarUrl}}/>
@@ -169,6 +163,12 @@ class ProfileScreen extends Component {
                       resizeMode={FastImage.resizeMode.contain}
                     />
                   }
+                  <EmptyProfileImage
+                    firstName={this.data.firstName}
+                    lastName={this.data.lastName}
+                    textSize={38}
+                    style={style.avatar}
+                  />
                 </View>
                 <View style={style.favButtonContainer}>
                   <TouchableOpacity style={style.favButton} onPress={() => this._favAction()}>

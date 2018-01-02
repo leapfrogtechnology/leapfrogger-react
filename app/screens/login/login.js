@@ -52,7 +52,10 @@ const GuestUser = {
 
   componentDidMount() {  
     // this._presetLoginData();
-    this._setupGoogleSignin();
+    this.setState({ disableBtn: true });
+    this._setupGoogleSignin()
+    .then(() => {this.setState({ disableBtn: false });
+  })
   }
 
   _guestLogin = () => {
