@@ -1,4 +1,4 @@
-package com.leapfroggers;
+package com.lftechnology.leapfroggers;
 
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;

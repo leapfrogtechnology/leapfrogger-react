@@ -1,4 +1,4 @@
-package com.leapfroggers;
+package com.lftechnology.leapfroggers;
 
 public class MainActivity extends com.reactnativenavigation.controllers.SplashActivity {
 
