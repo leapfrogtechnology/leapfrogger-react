@@ -37,6 +37,7 @@ local.properties
 android/.project
 android/app/.project
 android/app/bin/
+Android/app/google-services.json
 
 # node.js
 #

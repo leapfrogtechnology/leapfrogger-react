@@ -12,8 +12,6 @@ import java.util.List;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
-//import com.reactnativenavigation.NavigationReactPackage;
-
 public class MainApplication extends NavigationApplication {
 
   @Override

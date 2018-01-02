@@ -1,48 +1,79 @@
 {
-    "project_info": {
-      "project_number": "663889381642",
-      "project_id": "firebase-leapfrogger"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:663889381642:android:3f78a7c51140174d",
-          "android_client_info": {
-            "package_name": "com.leapfroggers"
-          }
+  "project_info": {
+    "project_number": "757135941754",
+    "project_id": "primeval-shadow-91603"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757135941754:android:3f78a7c51140174d",
+        "android_client_info": {
+          "package_name": "com.leapfroggers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757135941754-gbooajairr3ni3at3bppi46u0irn2bbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMq_-bkMv8TsBdfO_JFMhJykSinBfu2d0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
         },
-        "oauth_client": [
-          {
-            "client_id": "663889381642-1o6p6su9bmrrf45pv96bvtpkdoqguo66.apps.googleusercontent.com",
-            "client_type": 1,
-            "android_info": {
-              "package_name": "com.leapfroggers",
-              "certificate_hash": "be3183c821e29eea05ff3cb8b1265c54c9803a31"
-            }
-          },
-          {
-            "client_id": "663889381642-scqtb2kgspmer6fit0hqdtr1pevcpadc.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyDxrBHDqFR4_AbhiOiwT927CZJK_cXQ9gs"
-          }
-        ],
-        "services": {
-          "analytics_service": {
-            "status": 1
-          },
-          "appinvite_service": {
-            "status": 1,
-            "other_platform_oauth_client": []
-          },
-          "ads_service": {
-            "status": 1
-          }
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757135941754:android:e2f96b9dc48784b9",
+        "android_client_info": {
+          "package_name": "com.lftechnology.leapfroggers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757135941754-56fuh0h0lejs2etc83f5qcq56dvp3ge5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lftechnology.leapfroggers",
+            "certificate_hash": "6fcd74d0de23d3f16162b1808213255bc4d8d07a"
+          }
+        },
+        {
+          "client_id": "757135941754-gbooajairr3ni3at3bppi46u0irn2bbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMq_-bkMv8TsBdfO_JFMhJykSinBfu2d0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
