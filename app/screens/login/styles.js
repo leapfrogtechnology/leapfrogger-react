@@ -70,6 +70,8 @@ const style = StyleSheet.create({
   },
   loginButton: {
     height: 44,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#6e6f72',
   },
   separator: {
 

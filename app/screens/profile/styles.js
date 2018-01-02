@@ -118,8 +118,6 @@ const style = StyleSheet.create({
     flex: 1,    
     height: 66, 
     paddingHorizontal: 16, 
-    paddingTop: 12,           
-    paddingBottom: 12
   },
   phoneCell: {
     marginTop: 8,
@@ -135,12 +133,14 @@ const style = StyleSheet.create({
     fontWeight: '500',
     // paddingTop: 4,
     color: colors.Gray_Shades.LIGHT_TEXT,
+    paddingTop: 12,           
   },
   dataText: {
     flex: 1,
     // height: 40,
     // paddingBottom: 4, 
     fontSize: 18,
+    marginTop: -12,
     color: colors.Gray_Shades.TEXT    
   },
   phoneMessageContainer: {
