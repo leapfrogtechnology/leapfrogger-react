@@ -20,7 +20,7 @@ import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { validateEmail } from 'App/utils/validator';
 import { startTabScreen } from 'App/navigator/tabNavigator';
-import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
+import { IOS_GOOGLE_CLIENT_ID, ANDROID_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
 import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import googleLogo from '../../../assets/images/google.png';
@@ -115,7 +115,7 @@ const GuestUser = {
       }
     } else {
       return {
-        webClientId: '663889381642-scqtb2kgspmer6fit0hqdtr1pevcpadc.apps.googleusercontent.com',
+        webClientId: ANDROID_GOOGLE_CLIENT_ID,
         offlineAccess: false
       }
     }
