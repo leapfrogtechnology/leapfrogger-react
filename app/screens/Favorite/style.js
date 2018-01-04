@@ -17,6 +17,9 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
+  tableAndroid: {
+    height: getHeight() - 70 - 100,
+  },
   horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -132,7 +135,9 @@ const style = StyleSheet.create({
     color: colors.MID_GRAY,
     textAlign: 'center',
   },
-
+  listContainer: {
+    height: getHeight() - 70 - 66,
+  }
 });
 
 export default style;

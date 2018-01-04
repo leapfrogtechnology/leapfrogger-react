@@ -4,6 +4,8 @@ import {
   Text,
   Image,
   FlatList,
+  ListView,
+  Platform,
   ActivityIndicator,
   LayoutAnimation,
  } from 'react-native';
@@ -20,6 +22,8 @@ class FavoriteScreen extends Component {
 
   constructor(props) {
     super(props)
+
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {
       selectedEmpId: null,
@@ -53,15 +57,11 @@ class FavoriteScreen extends Component {
   _moreButtonOnPress = (empId) => {
     if (this.state.selectedEmpId === empId) {
       //If same more button is pressed even times, it needs to close
-      console.log('bbbbb')
       this.setState({selectedEmpId: null})
     } else {
       // Odd time press opens the button
-      console.log('aaaaa')
       this.setState({selectedEmpId: empId})
     }
-    this.forceUpdate()
-    console.log('------', empId)
   }
 
   _renderEmptyScreen = () => {
@@ -74,7 +74,6 @@ class FavoriteScreen extends Component {
   }
 
   _renderCell = (item) => {
-    console.log('this should invoke')
     return (
       <ContactCell 
         // {...this.props}          
@@ -87,17 +86,17 @@ class FavoriteScreen extends Component {
   }
 
   _renderTableView = (data) => {
-    console.log('invoked')
+    let listData = this.ds.cloneWithRows(data)
     return (
-      <FlatList
-        ref="ListView"
-        style={style.listView}
-        data={data}
-        keyExtractor={(item, index) => item.empId}
-        extraData={this.state.selectedEmpId}
-        renderItem={({item, index}) => this._renderCell(item, this.state.selectedEmpId)}
-      // renderSeparator={(sectionId, rowId) => <View key={rowId} style={style.separator}/>}        
-      />
+      <View style={style.listContainer}>
+        <ListView
+          key={'listView'}
+          style={ Platform.OS === 'android' ? style.tableAndroid : null }
+          dataSource={listData}
+          renderRow={(item, index) => this._renderCell(item, this.state.selectedEmpId) }
+          enableEmptySections={true}
+        />
+      </View>
     );
   }
 

@@ -20,6 +20,9 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.Gray_Shades.BORDER_GRAY,
   },
+  tableAndroid: {
+    height: getHeight() - 70 - 72,
+  },
   horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-around',

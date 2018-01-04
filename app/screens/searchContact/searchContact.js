@@ -3,7 +3,9 @@ import {
   View,
   Text,
   Image,
-  FlatList
+  FlatList,
+  ListView,
+  Platform
  } from 'react-native';
 
 import style from './styles'; 
@@ -15,17 +17,24 @@ import ContactCell from './../contact/contactCell';
   constructor(props) {
     super(props);
     
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
       selectedEmpId: null,
+      dataSource: this.ds.cloneWithRows(this.props.data),
     }
   }
 
   componentDidMount() {
     this.didSearch = false
+    this.setState({dataSource: this.ds.cloneWithRows(this.props.data)})
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(newProps) {
     this.didSearch = true
+    this.setState({      
+      dataSource: this.ds.cloneWithRows(newProps.data),
+    })
   }
 
   _onCellSelection = (data) => {
@@ -40,8 +49,6 @@ import ContactCell from './../contact/contactCell';
       // Odd time press opens the button
       this.setState({selectedEmpId: empId})
     }
-    console.log('aaaa', this.state.selectedEmpId)
-    this.forceUpdate()
   }
 
 
@@ -62,12 +69,12 @@ import ContactCell from './../contact/contactCell';
   _renderTableView = () => {
     return (
       <View style={style.listContainer}>
-        <FlatList
-          ref="ListView"
-          data={this.props.data}
-          keyExtractor={this._keyExtractor}        
-          renderItem={({item, index}) => this._renderCell(item) }
-          extraData={this.state.selectedEmpId}
+        <ListView
+          key={'listView'}
+          style={ Platform.OS === 'android' ? style.tableAndroid : null }
+          dataSource={this.state.dataSource}
+          renderRow={(item, index) => this._renderCell(item) }
+          enableEmptySections={true}
         />
       </View>
     );

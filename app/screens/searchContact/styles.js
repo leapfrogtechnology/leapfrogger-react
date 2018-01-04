@@ -13,6 +13,9 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  tableAndroid: {
+    height: getHeight() - 70 - 200,
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
@@ -91,7 +94,7 @@ const style = StyleSheet.create({
     color: colors.MID_GRAY,
   },
   listContainer: {
-    flex: 1,
+    height: getHeight() - 70 - 100,
   }
 });
 

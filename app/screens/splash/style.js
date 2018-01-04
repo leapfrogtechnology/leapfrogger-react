@@ -10,7 +10,7 @@ const style = StyleSheet.create({
   },
   splashImage: {
     flex: 1,
-    resizeMode: 'stretch',
+    resizeMode: 'center',
     width: getWidth(),
   }
 

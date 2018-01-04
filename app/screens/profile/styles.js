@@ -140,7 +140,7 @@ const style = StyleSheet.create({
     // height: 40,
     // paddingBottom: 4, 
     fontSize: 18,
-    marginTop: -12,
+    marginTop: -13,
     color: colors.Gray_Shades.TEXT    
   },
   phoneMessageContainer: {
@@ -193,11 +193,13 @@ const style = StyleSheet.create({
     position: 'absolute',
     zIndex: 50,
     top: 26,
-    right: 4,
+    right: 0,
     transform: [{ rotate: '90deg'}],
   },
   moreButton: {
-
+    width: 50,
+    height: 44,
+    paddingRight: 4,
   },
   moreButtonImage: {
     width: 27,

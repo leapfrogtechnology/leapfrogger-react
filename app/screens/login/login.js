@@ -52,10 +52,13 @@ const GuestUser = {
 
   componentDidMount() {  
     // this._presetLoginData();
-    this.setState({ disableBtn: true });
+    this.setState({ isValidating: true });
     this._setupGoogleSignin()
-    .then(() => {this.setState({ disableBtn: false });
-  })
+    .then(() => {
+      setTimeout(() => {
+        this.setState({ isValidating: false });
+      }, 2000)
+    })
   }
 
   _guestLogin = () => {
@@ -154,9 +157,9 @@ const GuestUser = {
       .done(() => this.setState({ isValidating: false }))
     })
     .catch((err) => {
-      this._revokeGoogleSigninAccess()
+      // this._revokeGoogleSigninAccess()
       // console.log(WRONG_SIGNIN.message, err);
-      // this._showAlertWithMessage(err.message)
+      this._showAlertWithMessage(err.message)
     })
     .done(() => this.setState({ disableBtn: false }))
   }
@@ -239,7 +242,7 @@ const GuestUser = {
           }
           <Button
             ref={component => this.googleSigninButton = component}
-            style={style.googleLoginButton}
+            style={[style.googleLoginButton, {backgroundColor: this.state.disableBtn || this.state.isValidating ? 'gray' : colors.GOOGLE_BLUE}]}
             title={'Sign in with Google'}
             titleStyle={style.googleTitle}
             source={googleLogo}

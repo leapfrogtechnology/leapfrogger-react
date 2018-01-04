@@ -79,7 +79,7 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
 
   _onReturnAction = () => {
     // also cancels on done button action 
-    this._onSearchCancel();     
+    // this._onSearchCancel();     
   }
 
   _onSearchCancel = () => {
