@@ -102,7 +102,7 @@ android {
     buildToolsVersion "27.0.2"
 
     defaultConfig {
-        applicationId "com.leapfroggers"
+        applicationId "com.lftechnology.leapfroggers"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 11
@@ -131,6 +131,11 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.releaseConfig
+        }
+        debug {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.releaseConfig
