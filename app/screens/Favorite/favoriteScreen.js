@@ -88,7 +88,7 @@ class FavoriteScreen extends Component {
   _renderTableView = (data) => {
     let listData = this.ds.cloneWithRows(data)
     return (
-      <View style={style.listContainer}>
+      <View style={Platform.OS === 'android' ? style.listContainer : null}>
         <ListView
           key={'listView'}
           style={ Platform.OS === 'android' ? style.tableAndroid : null }

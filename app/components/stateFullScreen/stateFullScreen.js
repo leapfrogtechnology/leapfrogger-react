@@ -21,6 +21,13 @@ class StateFullScreen extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      screenState: props.state
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({screenState: newProps.state})
   }
 
   _renderErrorScreen = () => {
@@ -47,7 +54,8 @@ class StateFullScreen extends Component {
   }
 
   _conditionalRender = () => {
-    switch (this.props.state) {
+    // this.setState({screenState: this.props.state})
+    switch (this.state.screenState) {
       case NORMAL_STATE:
         return this.props.contentView
         break
