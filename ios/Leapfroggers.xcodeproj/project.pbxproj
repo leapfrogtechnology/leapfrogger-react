@@ -55,6 +55,7 @@
 		94669E0D1FC559FB00703528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94669E0C1FC559FB00703528 /* GoogleService-Info.plist */; };
 		9473A0D01FE29EF000B26FCE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0CF1FE29EF000B26FCE /* GameKit.framework */; };
 		9473A0D21FE29EFE00B26FCE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0D11FE29EFE00B26FCE /* StoreKit.framework */; };
+		94A0CBE81FFE64F80065DBF9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		E54D39F25735484C8A1209DD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACC65178AB344D2A8E8F052 /* libz.tbd */; };
 /* End PBXBuildFile section */
@@ -1284,6 +1285,7 @@
 				945149E01FD6B75000D4FD5A /* GoogleSignIn.bundle in Resources */,
 				94669E0D1FC559FB00703528 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				94A0CBE81FFE64F80065DBF9 /* Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

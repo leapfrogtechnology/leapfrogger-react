@@ -68,7 +68,7 @@ import ContactCell from './../contact/contactCell';
   
   _renderTableView = () => {
     return (
-      <View style={Platform.OS === 'android' ? style.listContainer : null}>
+      <View style={Platform.OS === 'android' ? style.listContainer : style.listContaineriOS}>
         <ListView
           key={'listView'}
           style={ Platform.OS === 'android' ? style.tableAndroid : null }

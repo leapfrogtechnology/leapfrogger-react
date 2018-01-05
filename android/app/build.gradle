@@ -105,7 +105,7 @@ android {
         applicationId "com.lftechnology.leapfroggers"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 11
+        versionCode 12
         versionName "4.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"

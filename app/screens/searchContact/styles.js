@@ -95,6 +95,9 @@ const style = StyleSheet.create({
   },
   listContainer: {
     height: getHeight() - 70 - 100,
+  },
+  listContaineriOS: {
+    height: getHeight() - 70 - 80,
   }
 });
 
