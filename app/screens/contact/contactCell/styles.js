@@ -1,37 +1,39 @@
 import { StyleSheet } from 'react-native';
 
 import colors from 'App/config/colors';
+import { getWidth, getHeight } from 'App/utils/dimension';
 
+const AVATAR_SIZE = 60;
 const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
-    paddingVertical: 8,
-    flexDirection: 'row',    
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    flexDirection: 'row',  
+    // backgroundColor: 'red',  
   },
   imageContainer: {
-    paddingHorizontal: 8,        
+    margin: 4,        
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'red',
+    borderWidth: 1,    
+    borderRadius: AVATAR_SIZE / 2,
+    overflow: 'hidden',
+    borderColor: colors.LIGHT_GRAY,
+    // shadowRadius: 5,
+    // shadowColor: 'black',
+    // shadowOpacity: 0.6,
+    // shadowOffset: { width: 0, height: 0 }, 
   },
   contactImage: {
-    margin: 4,        
-    width: 60,
-    height: 60,
-    borderWidth: 1,    
-    borderRadius: 30,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOpacity: 0.6,
-    resizeMode: 'contain',
-    // backgroundColor: 'blue',
-    borderColor: colors.LIGHT_GRAY,
-    shadowOffset: { width: 0, height: 0 },    
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,   
   },
   titleContainer: {
-    flex: 0.8,
+    flex: 1,
     paddingHorizontal: 4,    
+    paddingLeft: 10,
     justifyContent: 'center',
   },
   titleSubContainer: {
@@ -43,70 +45,97 @@ const style = StyleSheet.create({
   titleLabel: {
     // backgroundColor: 'pink',
     flex: 0.5,
-    fontSize: 16,    
+    fontSize: 18,    
     paddingTop: 16,
     paddingBottom: -16,
-    alignContent: 'flex-end',    
+    alignContent: 'flex-end',
+    color: colors.Gray_Shades.TEXT    
   },
   subTitleLabel: {
     flex: 0.5,    
     fontSize: 12,
+    marginTop: -8,
+    color: colors.Gray_Shades.LIGHT_TEXT
   },
   buttonContainer: {
     flex: 0.2,
-    height: 35,
+    height: 60,
     alignSelf: 'center',
     alignContent: 'flex-end',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   moreImage: {
     width: 18,        
-    marginHorizontal: 8,
+    paddingHorizontal: 8,
     resizeMode: 'contain',
-    shadowRadius: 4,
-    shadowOpacity: 0.8,
-    shadowColor: 'black',    
-    shadowOffset: { width: 0, height: 0 },    
+    // shadowRadius: 4,
+    // shadowOpacity: 0.8,
+    // shadowColor: 'black',    
+    // shadowOffset: { width: 0, height: 0 },    
   },
   moreButton: {
+    width: 40,
+    paddingRight:8,
     alignSelf: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',    
     // backgroundColor: 'purple',
   },
   callMessageButtonsContainer: {
-    right: 46,
     alignSelf: 'center',
     flexDirection: 'row',
-    position: 'absolute',
+    // backgroundColor: 'green'
   },
   callImage: {
-    width: 30,
-    height: 30,
+    width: 18,
+    height: 18,
     resizeMode: 'contain', 
-    shadowColor: 'black',
-    shadowRadius: 1,
-    shadowOpacity: 0.8,  
-    shadowOffset: { width: 0, height: 0 },    
+    tintColor: 'white'
   },
   callButton: {
-    padding: 6,    
+    width: 50,
+    height: 60,
     alignItems: 'center',
-    // backgroundColor: 'red',
+    justifyContent: 'center',
   },
   messageImage: {
-    width: 30,
-    height: 30,
+    width: 18,
+    height: 18,
     resizeMode: 'contain', 
-    shadowColor: 'black',
-    shadowRadius: 1,
-    shadowOpacity: 0.8,
-    shadowOffset: { width: 0, height: 0 },    
+    tintColor: 'white',
+    padding: 5,
   },
   messageButton: {
-    padding: 6,    
+    width: 38,
+    height: 60,
     alignItems: 'center',
-    // backgroundColor: 'blue',
-  }
+    justifyContent: 'center',
+  },
+  separator: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    height: StyleSheet.hairlineWidth,
+    width: getWidth(),
+    zIndex: 10,
+    backgroundColor: colors.LIGHT_GRAY,
+  },
+  phoneButtonInsideWrapper: {
+    width: 32,
+    height: 32,
+    backgroundColor: colors.Palette.PURPLE,
+    borderRadius: 32 / 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  messageButtonInsideWrapper: {
+    width: 32,
+    height: 32,
+    backgroundColor: colors.Palette.PURPLE,
+    borderRadius: 32 / 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
 });
 

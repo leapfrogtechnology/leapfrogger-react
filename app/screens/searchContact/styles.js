@@ -13,6 +13,9 @@ const style = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+  tableAndroid: {
+    height: getHeight() - 70 - 200,
+  },
   sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
@@ -80,7 +83,22 @@ const style = StyleSheet.create({
     color: 'white',    
     paddingVertical: 5
   },
-
+  searchResult: {
+    width: getWidth(),
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.SYSTEM_LIGHT_GRAY,
+  },
+  searchResultText: {
+    color: colors.MID_GRAY,
+  },
+  listContainer: {
+    height: getHeight() - 70 - 100,
+  },
+  listContaineriOS: {
+    height: getHeight() - 70 - 80,
+  }
 });
 
 export default style;

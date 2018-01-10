@@ -93,16 +93,20 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+def keystorePropertiesFile = rootProject.file("./app/keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
-        applicationId "com.leapfroggers"
+        applicationId "com.lftechnology.leapfroggers"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 27
+        versionCode 12
+        versionName "4.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -115,10 +119,26 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs {
+        releaseConfig {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.releaseConfig
+        }
+        debug {
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.releaseConfig
         }
     }
     // applicationVariants are e.g. debug, release
@@ -137,13 +157,21 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-contacts')
+    compile project(':react-native-linear-gradient')
+    compile project(':react-native-fast-image')
+    compile project(':react-native-google-signin')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile project(':react-native-navigation')
-    compile project(':react-native-google-signin')
-    compile project(':react-native-blur')
+
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.android.support:appcompat-v7:27.0.2"
     compile "com.facebook.react:react-native:+"  // From node_modules
+
+    compile(project(":react-native-google-signin")){
+        exclude group: "com.google.android.gms" // very important
+    }
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
 }
 
 // Run this once to be able to run the application with BUCK
@@ -152,3 +180,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

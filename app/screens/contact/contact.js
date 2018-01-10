@@ -3,91 +3,67 @@ import {
   View,
   Text,
   Image,
+  FlatList,
+  ListView,
+  ScrollView,
   SectionList,
   ActivityIndicator,
   LayoutAnimation,
+  Platform,
  } from 'react-native';
  
 import Swiper from 'react-native-swiper'; 
 import Search from 'react-native-search-box';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import colors from 'App/config/colors';
 import ContactCell from './contactCell';
+import Button from 'App/components/Button';
 import screens from 'App/constants/screens';
 import * as util from 'App/utils/dataNormalization';
 import SearchContactView from 'App/screens/searchContact';
 import { getWidth, getHeight } from 'App/utils/dimension';
+import StateFullScreen from 'App/components/stateFullScreen';
 import { searchEmployeesOfName } from 'App/utils/dataNormalization';
+
 import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
 
-const DEPARTMENT_LIST = [{
-                            name: 'iOS', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'Android', 
-                            avatar: require('../../../assets/images/SundarPichai.jpg'), 
-                            wallpaper: require('../../../assets/images/SundarPichai.jpg'),
-                            quote: '\"Wear your failure as your badge of honour\"'
-                          }, 
-                          {
-                            name: 'Java', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'php', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'ReactNative', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }, 
-                          {
-                            name: 'PM', 
-                            avatar: require('../../../assets/images/SteveJobs.jpg'), 
-                            wallpaper: require('../../../assets/images/SteveJobs.jpg'),
-                            quote: '\"Stay hungry. Stay foolish\"'
-                          }];
+const GUEST_EMAIL = 'guest@lftechnology.com'
+const empjson = require('./../../../guestEmp.json'); //(with path)
+const departmentjson = require('./../../../guestDepartment.json'); //(with path)
 
  class ContactScreen extends Component {
 
   constructor(props) {
     super(props);
 
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
+
     this.state = {
       isSearching: false,      
       currentSwipeIndex: 0,
       searchedEmployees: [],
+      screenState: 'normal',
+      selectedEmpId: null,
+      dataSource: ds.cloneWithRowsAndSections(util.categorizeEmployeeByName(this.props.employees)),
     }
   }
-
-  // _animateOnMount = () => {
-  //   LayoutAnimation.configureNext({
-  //     duration: 700,
-  //     create: {
-  //       type: LayoutAnimation.Types.linear,
-  //       property: LayoutAnimation.Properties.opacity,
-  //     },
-  //     update: {
-  //       type: LayoutAnimation.Types.spring,
-  //       springDamping: 0.75,
-  //     },
-  //   });
-  // }
 
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    if (!this.props.employees) { this.props.fetchEmployees() }
+    if (this.props.user.email === GUEST_EMAIL) {      
+      this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
+    } else {
+      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
+        this.props.fetchEmployeesAndDepartments()
+      }      
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(util.categorizeEmployeeByName(newProps.employees))})
   }
 
   _onSearchBarTextChange = (text) => {
@@ -96,24 +72,27 @@ const DEPARTMENT_LIST = [{
   }
 
   _onSearchBarFocus = () => {
-    this.setState({ isSearching: true });    
+    this.timeout = setTimeout(() => {
+      this.setState({ isSearching: true });
+    }, 300);
   }
 
   _onReturnAction = () => {
     // also cancels on done button action 
-    this._onSearchCancel();     
+    // this._onSearchCancel();     
   }
 
   _onSearchCancel = () => {
-    this.setState({ searchedEmployees: [] });
-    this.setState({ isSearching: false });    
+    this.timeout = setTimeout(() => {
+      this.setState({ searchedEmployees: [] });
+      this.setState({ isSearching: false });   
+    }, 300); 
   }
 
   _onCellSelection = (data) => {
     this.props.navigator.push({
       screen: screens.PROFILE_SCREEN.id,
       animated: true,
-      overrideBackPress: true,
       navigatorStyle: {
         drawUnderNavBar: true,
         navBarTranslucent: true,
@@ -133,67 +112,32 @@ const DEPARTMENT_LIST = [{
     });
   }
 
-  /*
-  _renderParallaxTableHeaderView = (data, index) => {
-    // return (<View style={{width: 200, height: 200}}>asd</View>)
-    return (
-      <ParallaxScrollView
-        onScroll={this.props.onScroll}
-        bounce={true}
-        headerBackgroundColor="#333"
-        stickyHeaderHeight={ STICKY_HEADER_HEIGHT }
-        parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
-        backgroundSpeed={10}
-        renderBackground={() => (
-          <View key="background">
-            <Image source={DEPARTMENT_LIST[0].wallpaper} style={style.tableHeaderBackgroundImage}/>
-            <View style={style.tableHeaderBackgroundOverlay}/>
-          </View>
-        )}
-
-        renderForeground={() => (
-          <View key="parallax-header" style={ style.parallaxHeader }>
-            <Image style={ style.avatar } source={{uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg'}}/>
-            <Text style={ style.sectionSpeakerText }>
-              {
-                // DEPARTMENT_LIST[index].name
-              }
-            </Text>
-            <Text style={ style.sectionTitleText }>
-              Leapfrog, Inc.
-            </Text>
-          </View>
-        )}
-
-        renderStickyHeader={() => (
-          <View key="sticky-header" style={style.stickySection}>
-            <Text style={style.stickySectionText}>aaa</Text>
-          </View>
-        )}
-      />
-    );
+  _moreButtonOnPress = (empId) => {
+    if (this.state.selectedEmpId === empId) {
+      //If same more button is pressed even times, it needs to close
+      this.setState({selectedEmpId: null})
+    } else {
+      // Odd time press opens the button
+      this.setState({selectedEmpId: empId})
+    }
   }
-  */
 
-  _renderTableView = (employees, index) => {
-    const { onScroll = () => {} } = this.props;    
+  _renderTableView = (employees) => {
     return (
-      <SectionList
-        ref="ListView"
-        key={index}                  
-        sections={util.groupByAlphabets(employees.data)}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => 
+      <ListView
+        key={'listView'}
+        style={ Platform.OS === 'android' ? style.tableAndroid : null }
+        dataSource={this.state.dataSource}
+        renderRow={(item, index) => 
           <ContactCell 
-            {...this.props}          
+            // {...this.props}          
             data={item} 
-            onPress={this._onCellSelection}/>
+            onPress={this._onCellSelection}
+            moreButtonAction={this._moreButtonOnPress}/>
           }
-        renderSectionHeader={({section}) => <Text style={style.sectionHeader}>{section.title}</Text>}
-        // renderScrollComponent={props => (
-        //   this._renderParallaxTableHeaderView(props, index)
-        // )}
-        renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1}}></View>}
+        stickySectionHeadersEnabled={true}
+        renderSectionHeader={(sectionData, title) => <Text style={style.sectionHeader}>{title}</Text>}
+        // renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
       />
     );
   }
@@ -202,6 +146,11 @@ const DEPARTMENT_LIST = [{
     this.setState({
       currentSwipeIndex: index,
     })
+  }
+
+  _groupAllEmployeesWithGroupedEmployees = () => {
+    return allEmp = [{title: 'All', data: this.props.employees}]
+    // return allEmp.concat(this.props.groupedEmp)
   }
 
   _renderStatusBar = () => {
@@ -214,7 +163,7 @@ const DEPARTMENT_LIST = [{
     return (
       <Search
         ref={component => this.searchBar = component}
-        backgroundColor={colors.LF_DARK_GRREEN}
+        backgroundColor={colors.IOS_GREEN}
         titleCancelColor='white'
         onChangeText={(text) => this._onSearchBarTextChange(text)}
         onFocus={() => this._onSearchBarFocus()}
@@ -228,46 +177,53 @@ const DEPARTMENT_LIST = [{
   }
 
   _renderSwiper = () => {
+    // return (<Text>asdasdasdasdasdasdas</Text>)
     return (
-      <Swiper
-        style={style.wrapper}
-        loop={false} 
-        onIndexChanged ={this._onMomentumScrollEnd}          
-        activeDotStyle={{marginBottom: DOT_MARGIN}} 
-        activeDotColor={colors.LF_DARK_GRREEN}
-        dotStyle={{marginBottom: DOT_MARGIN}}>
-          {
-            this.props.groupedEmp.map((data, index) => this._renderTableView(data, index))
-          }
-      </Swiper>
-    )
-  }
-
-  _renderActivityIndicator = () => {
-    return (
-      <View style={[style.container, style.horizontal]}>
-        <ActivityIndicator size="large" color={colors.GRAY} />
+      // <Swiper
+      //   style={style.wrapper}
+      //   loop={false} 
+      //   bounces={true}
+      //   onIndexChanged ={this._onMomentumScrollEnd}          
+      //   activeDotStyle={{marginBottom: DOT_MARGIN}} 
+      //   activeDotColor={colors.LF_DARK_GRREEN}
+      //   dotStyle={{marginBottom: DOT_MARGIN}}>
+      //     {
+      //       this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+      //     }
+      // </Swiper>
+      <View style={style.wrapper}>
+        {
+          // this._groupAllEmployeesWithGroupedEmployees().map((data, index) => this._renderTableView(data, index))
+          this._renderTableView()
+        }
       </View>
     )
   }
 
   _renderSearchView = () => {
-    console.log('_renderSearchView')
     return (
       <View style={style.searchViewContainer}>
         <SearchContactView
+          // {...this.props}
           data={this.state.searchedEmployees}
           onPress={this._onCellSelection}
         />
+        <KeyboardSpacer/>
       </View>
     )
   }
 
+  _getScreenState = () => {
+    if (this.props.isFetching) {
+      return 'fetch';
+    }
+    if (this.props.employees.length > 0 || this.props.departments.length > 0) {
+      return 'normal'
+    }
+    return 'error'; // error or empty
+  }
+
   render() {
-    // setInterval(() => {
-    //   console.log('----_CONTACT', this.props.groupedEmp);      
-    // }, 1000);
-    // console.log('----_CONTACT', this.props.groupedEmp);
     return (
       <View style={ style.mainContainer }>
         { this._renderStatusBar() }
@@ -275,9 +231,23 @@ const DEPARTMENT_LIST = [{
           { this._renderSearchBar() }
         </View>
         <View style={style.tableContainer}>
-          { (!this.props.employees) && this._renderActivityIndicator() }
-          { (this.props.employees) && this._renderSwiper() }
-          { (this.state.isSearching) && this._renderSearchView() }
+          {/* {
+            <View style={style.stickyDepartmentSection}>
+              <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>
+            </View> 
+          } */}
+          {                         
+            <StateFullScreen
+              style={style.mainContainer}
+              state={this._getScreenState()} // fetch, normal and error
+              contentView={this._renderSwiper()}
+              reloadButtonAction={() => this.props.fetchEmployeesAndDepartments()}
+            />
+          }
+          {
+            ((this._getScreenState() === 'normal') && (this.state.isSearching)) &&
+            this._renderSearchView()
+          }
         </View>
       </View>
     );

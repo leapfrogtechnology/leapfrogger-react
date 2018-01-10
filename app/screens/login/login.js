@@ -3,20 +3,24 @@ import {
   View, 
   Text,
   Image,  
+  Alert,
+  Platform,
   TextInput,
+  ActivityIndicator
  } from 'react-native';
 
 import { Keyboard } from 'react-native'; 
-import { BlurView } from 'react-native-blur';
 import { setInterval } from 'core-js/library/web/timers';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { GoogleSignin } from 'react-native-google-signin';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import style from './styles';
+import colors from 'App/config/colors';
 import Button from 'App/components/Button';
 import { validateEmail } from 'App/utils/validator';
 import { startTabScreen } from 'App/navigator/tabNavigator';
-import { IOS_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
+import { IOS_GOOGLE_CLIENT_ID, ANDROID_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
 import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import googleLogo from '../../../assets/images/google.png';
@@ -24,7 +28,8 @@ import logo from '../../../assets/images/logo-with-name.png';
 import splash from '../../../assets/images/splash-screen.png';
 
 const GuestUser = {
-  guest: true
+  email: loginCredentials.email,
+  password: loginCredentials.password,
 }
  class LoginScreen extends Component {
 
@@ -35,68 +40,128 @@ const GuestUser = {
       email: '',
       password: '',
       errorMessage: '',
+      revokingAccess: false,
+      disableBtn: false,
+      isValidating: false,
     }    
   }
 
   _presetLoginData = () => {
-    this.setState({
-      email: loginCredentials.email,
-      password: loginCredentials.password,
-    });
+    this.setState(GuestUser);
   }
 
   componentDidMount() {  
-    this._presetLoginData();
-    this._setupGoogleSignin();
+    // this._presetLoginData();
+    this.setState({ isValidating: true });
+    this._setupGoogleSignin()
+    .then(() => {
+      setTimeout(() => {
+        this.setState({ isValidating: false });
+      }, 2000)
+    })
   }
 
   _guestLogin = () => {
-    this.props.onLogin(GuestUser);    
-    this._login();    
-  }
-
-  _login = () => {
-    Keyboard.dismiss();
-    this._setErrorMessage();    
-    if ((this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) || (this.props.isLoggedIn)) {
-      startTabScreen();      
+    if (this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) {
+      this.props.onLogin(GuestUser);    
+      startTabScreen();
     } else {
       // incorrect email / password
       this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
     }
   }
 
+  _login = () => {
+    Keyboard.dismiss();
+    this._setErrorMessage();
+    if (this.props.isLoggedIn) {
+      startTabScreen();      
+    }
+  }
+
+  _revokeGoogleSigninAccess = () => {
+    this.setState({revokingAccess: true})
+    GoogleSignin.revokeAccess()
+    .catch((err) => this._showAlertWithMessage(err.message))
+    .done(() => { this.setState({revokingAccess: false}) })
+  }
+
+  _showAlertWithMessage = (msg, action) => {
+    Alert.alert(
+      'Unauthorized\n',
+      msg,
+      [
+        {text: 'OK', onPress: () => action},
+      ],
+      { cancelable: false }
+    )
+  }
+
+  _afterValidation = (user) => {
+    if (this.props.validationResponse) {
+      if (this.props.validationResponse.hasOwnProperty('success')) {
+        this.props.onLogin(user);
+        this._login();        
+      } else {        
+        this._showAlertWithMessage(this.props.validationResponse.error, this._revokeGoogleSigninAccess())
+      }
+    } else {
+      throw 'err'
+    }
+  }
+
+  _getConfig = () => {
+    if (Platform.OS === 'ios') {
+      return {
+        iosClientId: IOS_GOOGLE_CLIENT_ID,
+        offlineAccess: false
+      }
+    } else {
+      return {
+        webClientId: ANDROID_GOOGLE_CLIENT_ID,
+        offlineAccess: false
+      }
+    }
+  }
+
   async _setupGoogleSignin() {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
-      await GoogleSignin.configure({
-        iosClientId: IOS_GOOGLE_CLIENT_ID,
-        offlineAccess: false
-      });
+      await GoogleSignin.configure(this._getConfig());
 
-      const user = await GoogleSignin.currentUserAsync();
-      if (user) {
-        this.props.validateEmail(user.accessToken);
-        // this.props.onLogin(user);
-        // this._login();
-      }      
+      // const user = await GoogleSignin.currentUserAsync();
+      // if (user) {
+      //   // this.props.validateEmail(user.accessToken);
+      //   // this.props.onLogin(user);
+      //   // this._login();
+      // }      
     }
     catch(err) {
+      this._showAlertWithMessage(GOOGLE_PLAY_SERVICE_ERROR.message)
       console.log(GOOGLE_PLAY_SERVICE_ERROR.message, err.code, err.message);
     }
   }
 
   _googleSignIn = () => {
+    this.setState({ disableBtn: true });
     GoogleSignin.signIn()
     .then((user) => {
-      this.props.validateEmail(user.accessToken);
-      this.props.onLogin(user);
-      this._login();      
+      this.setState({ isValidating: true })
+      this.props.validateEmail(user.accessToken)
+      .then(() => {
+        this._afterValidation(user);        
+      })
+      .catch((err) => {
+        this._showAlertWithMessage('Error Occured')
+      })
+      .done(() => this.setState({ isValidating: false }))
     })
     .catch((err) => {
-      console.log(WRONG_SIGNIN.message, err);
+      // this._revokeGoogleSigninAccess()
+      // console.log(WRONG_SIGNIN.message, err);
+      this._showAlertWithMessage(err.message)
     })
-    .done();
+    .done(() => this.setState({ disableBtn: false }))
   }
 
   _validateEmail = (email) => {
@@ -112,6 +177,7 @@ const GuestUser = {
 
   render() {
     return (
+    <KeyboardAwareScrollView style={style.container} keyboardShouldPersistTaps={'always'}>
       <View style={style.mainContainer}>
         <View style={style.logoContainer}>
           <Image source={logo} style={style.logoImage}/>
@@ -136,7 +202,7 @@ const GuestUser = {
                     this.setState({ email: text });
                   }
                 }
-                underlineColorAndroid='#bbb'
+                underlineColorAndroid='transparent'
                 placeholderTextColor='#bbb'
                 onSubmitEditing={ () => {
                   this._validateEmail(this.state.email);                  
@@ -170,16 +236,23 @@ const GuestUser = {
           </View>
         </View>
         <View style={style.buttonContainer}>
+          {
+            this.state.isValidating &&
+            <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />                          
+          }
           <Button
-            style={style.googleLoginButton}
+            ref={component => this.googleSigninButton = component}
+            style={[style.googleLoginButton, {backgroundColor: this.state.disableBtn || this.state.isValidating ? 'gray' : colors.GOOGLE_BLUE}]}
             title={'Sign in with Google'}
             titleStyle={style.googleTitle}
             source={googleLogo}
+            disabled={this.state.revokingAccess || this.state.disableBtn || this.state.isValidating}
             imageStyle={style.googleImage}
             onPress={() => this._googleSignIn()}
           />
         </View>
       </View>
+    </KeyboardAwareScrollView>
     );
 
   }

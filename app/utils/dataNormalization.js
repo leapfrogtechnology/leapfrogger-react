@@ -60,6 +60,7 @@ export const getUniqueArrayOfFirstCharOfName = (employeesList) => {
   return uniqueArray;
 }
 
+// use this for section list
 export const groupByAlphabets = (employeesList) => {
   var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
   var finalList = [];
@@ -78,45 +79,38 @@ export const groupByAlphabets = (employeesList) => {
   return finalList;
 }
 
-//-----------------------------------
-
-export const getUniqueArrayOfDepartmrnt = (employeesList) => {
-  var departments = employeesList.map((employee) => {
-    return employee.department.id;
+//use this for listview
+export const categorizeEmployeeByName = (employeesList) => {
+  var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
+  var finalMap = {};
+  uniqueLetterList.forEach(letter => {
+    let list = employeesList.filter(emp => letter === getFirstLetterOfEmployee(emp))
+    finalMap[letter] = list
   });
-  var uniquedepartment = departments.filter((value, index, array) => {
-    return index == array.indexOf(value);
-  });
-  return uniquedepartment;
+  return finalMap;
 }
 
-export const groupByDepartment = (employeesList = []) => {
-  var uniqueDepartmentList = getUniqueArrayOfDepartmrnt(employeesList)
-  var finalList = [];
-  uniqueDepartmentList.forEach(department => {
-    var group = {};    
-    var list = [];
-    employeesList.forEach(employee => {
-      if (department === employee.department.id) {
-        list.push(employee); 
-      }
-    });
-    group.title = department;
-    group.data = list;
-    finalList.push(group);
-  });
+//-----------------------------------
+
+export const groupByDepartment = (employeesList = [], departmentList = []) => {  
+  var finalList = departmentList.map(department => {
+    var employees = employeesList.filter(emp => emp.department.id === department.id)
+    return {
+      title: department.name,
+      data: employees
+    }
+  })
   return finalList;
 }
 
 export const getMyInformation = (employeesList, email) => {
-  return employeesList.filter((employee) => {
-    if (employee.username === email) { return employee }
-  })
+  return employeesList.filter((employee) => employee.username === email)
 }
 
 //-------------------search----------
 
 export const searchEmployeesOfName = (employeesList, characters) => {
+  if (!characters) return []
   var chars = characters.toLowerCase()
   return employeesList.filter((employee) => {
     var name = (employee.firstName + " " + employee.lastName).toLowerCase();
@@ -128,7 +122,7 @@ export const searchEmployeesOfName = (employeesList, characters) => {
         return employee 
       }
     } else {
-      if ((name.search(chars) !== -1) || (department.search(chars)) !== -1) { //This method returns -1 if no match is found.
+      if (name.search(chars) !== -1) { //This method returns -1 if no match is found.
         return employee 
       }
     }

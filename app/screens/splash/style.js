@@ -6,11 +6,11 @@ const style = StyleSheet.create({
   
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: '#e2e2e2',
   },
   splashImage: {
     flex: 1,
-    resizeMode: 'contain',
+    resizeMode: 'center',
     width: getWidth(),
   }
 

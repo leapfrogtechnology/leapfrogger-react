@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import colors from 'App/config/colors';
 import { getWidth, getHeight } from 'App/utils/dimension';
 
-export const DOT_MARGIN = -28;
+export const DOT_MARGIN = -28//getHeight() - 158//-28;
 export const AVATAR_SIZE = 100;
 export const STICKY_HEADER_HEIGHT = 60;
 export const PARALLAX_HEADER_HEIGHT = 250;
@@ -23,34 +23,40 @@ const style = StyleSheet.create({
     padding: 10
   },
   statusBar: {
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
   },
   searchContainer: {
     height: 50,
-    top: 20,
+    // top: 20,
     width: getWidth(),
-    zIndex: 10,        
-    position: 'absolute',
+    // zIndex: 10,        
+    // position: 'absolute',
     justifyContent: 'center',
     marginBottom: -3,
-    backgroundColor: colors.LF_DARK_GRREEN,
-    shadowColor: colors.LF_GRAY,
-    shadowOffset: { width: 0, height: 2.5 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    backgroundColor: colors.IOS_GREEN,
+    // shadowColor: colors.LF_GRAY,
+    // shadowOffset: { width: 0, height: 2.5 },
+    // shadowOpacity: 0.3,
+    // shadowRadius: 2,
   },
   tableContainer: {
-    marginTop: 50,
-    flex: 1
+    flex: 1,
+  },
+  tableiOS: {
+    flex: 1,
+  },
+  tableAndroid: {
+    height: getHeight() - 70 - 72,
   },
   sectionHeader: {
-    paddingTop: 2,
+    // paddingTop: 2,
+    height: 20,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247, 247, 247, 1)',
+    // fontSize: 14,
+    // fontWeight: 'bold',
+    backgroundColor: colors.Gray_Shades.BORDER_GRAY,
   },
   item: {
     padding: 10,
@@ -71,12 +77,12 @@ const style = StyleSheet.create({
   stickySection: {
     justifyContent: 'flex-end',    
     height: STICKY_HEADER_HEIGHT,
-    backgroundColor: colors.LF_DARK_GRREEN,
+    backgroundColor: colors.IOS_GREEN,
     marginBottom: 5,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 10,
-    shadowOpacity: 0.8, 
+    // shadowColor: 'black',
+    // shadowOffset: { width: 0, height: 0 },
+    // shadowRadius: 10,
+    // shadowOpacity: 0.8, 
   },
   stickySectionText: {
     color: 'white',
@@ -107,12 +113,25 @@ const style = StyleSheet.create({
   },
   searchViewContainer: {
     position: 'absolute',
-    zIndex: 100,
+    zIndex: 90,
     width: getWidth(),
-    height: getHeight() - 120,
+    height: getHeight() - 115,
     backgroundColor: 'white'
+  },
+  stickyDepartmentSection: {
+    position: 'absolute',
+    top: 2,
+    left: 50,
+    height: 10,
+    zIndex: 100,
+    width: getWidth() - 60,
+    backgroundColor: 'transparent',
+    // backgroundColor: 'red',
+  },
+  departmentNameText: {
+    textAlign: 'right',
+    color: colors.MID_GRAY,    
   }
-
 });
 
 export default style;
