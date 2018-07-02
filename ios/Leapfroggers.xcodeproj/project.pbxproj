@@ -867,7 +867,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 446V7WHT8W;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -1485,10 +1485,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 446V7WHT8W;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1513,8 +1514,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
-				PROVISIONING_PROFILE = "9a347c0b-6eab-4dbd-855f-84ab6d6032ce";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Team Store Provisioning Profile: com.lf.Leapfroggers";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1524,9 +1525,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 446V7WHT8W;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1551,8 +1553,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lf.Leapfroggers;
 				PRODUCT_NAME = Leapfroggers;
-				PROVISIONING_PROFILE = "9a347c0b-6eab-4dbd-855f-84ab6d6032ce";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Team Store Provisioning Profile: com.lf.Leapfroggers";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
