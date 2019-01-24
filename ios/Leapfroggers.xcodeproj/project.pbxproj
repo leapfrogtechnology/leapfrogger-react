@@ -55,8 +55,8 @@
 		94669E0D1FC559FB00703528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94669E0C1FC559FB00703528 /* GoogleService-Info.plist */; };
 		9473A0D01FE29EF000B26FCE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0CF1FE29EF000B26FCE /* GameKit.framework */; };
 		9473A0D21FE29EFE00B26FCE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9473A0D11FE29EFE00B26FCE /* StoreKit.framework */; };
-		94A0CBE81FFE64F80065DBF9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		BB5AB62421F9E8E70077E5DB /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9451667C1FC44DBA008BBF44 /* libfishhook.a */; };
 		E54D39F25735484C8A1209DD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ACC65178AB344D2A8E8F052 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
@@ -432,6 +432,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5AB62421F9E8E70077E5DB /* libfishhook.a in Frameworks */,
 				9407315A1FF2C380005DAF1B /* libRCTContacts.a in Frameworks */,
 				940731591FF2C378005DAF1B /* libBVLinearGradient.a in Frameworks */,
 				940731581FF2C36F005DAF1B /* libFastImage.a in Frameworks */,
@@ -1286,7 +1287,6 @@
 				945149E01FD6B75000D4FD5A /* GoogleSignIn.bundle in Resources */,
 				94669E0D1FC559FB00703528 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				94A0CBE81FFE64F80065DBF9 /* Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1321,7 +1321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
