@@ -1,57 +1,41 @@
 import React, { Component } from 'react';
-import { 
-  View, 
-  Text,
-  Image,  
+import {
+  View,
+  Image,
   Alert,
   Platform,
-  TextInput,
   ActivityIndicator
  } from 'react-native';
 
-import { Keyboard } from 'react-native'; 
-import { setInterval } from 'core-js/library/web/timers';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { Keyboard } from 'react-native';
 import { GoogleSignin } from 'react-native-google-signin';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import style from './styles';
 import colors from 'App/config/colors';
 import Button from 'App/components/Button';
-import { validateEmail } from 'App/utils/validator';
 import { startTabScreen } from 'App/navigator/tabNavigator';
-import { IOS_GOOGLE_CLIENT_ID, ANDROID_GOOGLE_CLIENT_ID, loginCredentials } from 'App/constants/credentials';
-import { INCORRECT_CREDENTIALS, INVALID_Email, WRONG_SIGNIN, GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
+import { IOS_GOOGLE_CLIENT_ID, ANDROID_GOOGLE_CLIENT_ID } from 'App/constants/credentials';
+import { GOOGLE_PLAY_SERVICE_ERROR } from 'App/constants/errorConstants';
 
 import googleLogo from '../../../assets/images/google.png';
 import logo from '../../../assets/images/logo-with-name.png';
-import splash from '../../../assets/images/splash-screen.png';
 
-const GuestUser = {
-  email: loginCredentials.email,
-  password: loginCredentials.password,
-}
  class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       email: '',
       password: '',
       errorMessage: '',
       revokingAccess: false,
       disableBtn: false,
       isValidating: false,
-    }    
+    }
   }
 
-  _presetLoginData = () => {
-    this.setState(GuestUser);
-  }
-
-  componentDidMount() {  
-    // this._presetLoginData();
+  componentDidMount() {
     this.setState({ isValidating: true });
     this._setupGoogleSignin()
     .then(() => {
@@ -61,21 +45,11 @@ const GuestUser = {
     })
   }
 
-  _guestLogin = () => {
-    if (this.state.email === loginCredentials.email && this.state.password === loginCredentials.password) {
-      this.props.onLogin(GuestUser);    
-      startTabScreen();
-    } else {
-      // incorrect email / password
-      this._setErrorMessage(INCORRECT_CREDENTIALS.message);      
-    }
-  }
-
   _login = () => {
     Keyboard.dismiss();
     this._setErrorMessage();
     if (this.props.isLoggedIn) {
-      startTabScreen();      
+      startTabScreen();
     }
   }
 
@@ -101,8 +75,8 @@ const GuestUser = {
     if (this.props.validationResponse) {
       if (this.props.validationResponse.hasOwnProperty('success')) {
         this.props.onLogin(user);
-        this._login();        
-      } else {        
+        this._login();
+      } else {
         this._showAlertWithMessage(this.props.validationResponse.error, this._revokeGoogleSigninAccess())
       }
     } else {
@@ -128,13 +102,6 @@ const GuestUser = {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure(this._getConfig());
-
-      // const user = await GoogleSignin.currentUserAsync();
-      // if (user) {
-      //   // this.props.validateEmail(user.accessToken);
-      //   // this.props.onLogin(user);
-      //   // this._login();
-      // }      
     }
     catch(err) {
       this._showAlertWithMessage(GOOGLE_PLAY_SERVICE_ERROR.message)
@@ -149,26 +116,17 @@ const GuestUser = {
       this.setState({ isValidating: true })
       this.props.validateEmail(user.accessToken)
       .then(() => {
-        this._afterValidation(user);        
+        this._afterValidation(user);
       })
       .catch((err) => {
-        this._showAlertWithMessage('Error Occured')
+        this._showAlertWithMessage('Error Occured:', err.message)
       })
       .done(() => this.setState({ isValidating: false }))
     })
     .catch((err) => {
-      // this._revokeGoogleSigninAccess()
-      // console.log(WRONG_SIGNIN.message, err);
-      this._showAlertWithMessage(err.message)
+      this._showAlertWithMessage('Error Occured:',err.message)
     })
     .done(() => this.setState({ disableBtn: false }))
-  }
-
-  _validateEmail = (email) => {
-    isEmailValid = validateEmail(email);
-    if (!isEmailValid) {
-      this._setErrorMessage(INVALID_Email.message);
-    }
   }
 
   _setErrorMessage = (message) => {
@@ -177,68 +135,14 @@ const GuestUser = {
 
   render() {
     return (
-    <KeyboardAwareScrollView style={style.container} keyboardShouldPersistTaps={'always'}>
       <View style={style.mainContainer}>
         <View style={style.logoContainer}>
           <Image source={logo} style={style.logoImage}/>
         </View>
-        <View style={style.formContainer}>
-          <View style={style.errorLabelContainer}>
-            <Text style={style.errorLabel}>{ this.state.errorMessage }</Text>
-          </View>
-          <View style={style.formSubContainer}>
-            <View style={style.emailFieldWrapper}>
-              <TextInput
-                ref={(component) => this.emailField = component }
-                placeholder='Email'
-                returnKeyType='next'
-                autoCapitalize='none'
-                autoCorrect={ false }
-                style={ style.emailField }
-                keyboardType='email-address'
-                onFocus={() => this._setErrorMessage()}
-                onChangeText={
-                  (text) => {
-                    this.setState({ email: text });
-                  }
-                }
-                underlineColorAndroid='transparent'
-                placeholderTextColor='#bbb'
-                onSubmitEditing={ () => {
-                  this._validateEmail(this.state.email);                  
-                  this.passwordField.focus()
-                }}
-                value={this.state.email}
-              />
-            </View>
-            <View style={style.passwordFieldWrapper}>
-              <TextInput
-                ref={(component) => this.passwordField = component }
-                returnKeyType='default'
-                placeholder='Password'
-                secureTextEntry={ true }
-                style={ style.passwordField }
-                placeholderTextColor='#bbb'
-                onFocus={() => this._validateEmail(this.state.email)}                
-                underlineColorAndroid='transparent'
-                onChangeText={ (text) => this.setState({ password: text, isValidPassword: true }) }
-                onSubmitEditing={ () => { this._login() } }
-                value={this.state.password}                
-              />
-            </View>
-          </View>
-          <View style={style.loginButtonWrapper}>
-            <Button 
-              style={style.loginButton}
-              title={'Login'}
-              onPress={() => this._guestLogin()}
-            />
-          </View>
-        </View>
         <View style={style.buttonContainer}>
           {
             this.state.isValidating &&
-            <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />                          
+            <ActivityIndicator size="large" color={colors.IOS_GREEN} style={[style.activityIndicator]} />
           }
           <Button
             ref={component => this.googleSigninButton = component}
@@ -252,7 +156,6 @@ const GuestUser = {
           />
         </View>
       </View>
-    </KeyboardAwareScrollView>
     );
 
   }
