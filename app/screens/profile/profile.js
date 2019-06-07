@@ -83,15 +83,7 @@ class ProfileScreen extends Component {
   }
 
   _logout = () => {
-    // if (!this.isGuest) {
-    //   GoogleSignin.signOut().then(() => {
-    //     this._startLogin()
-    //   })
-    //   .catch(() => this._startLogin())
-    //   .done();
-    // } else {
       this._startLogin()
-    // }
   }
 
   _syncWithLMS = () => {
