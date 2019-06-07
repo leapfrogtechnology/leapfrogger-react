@@ -83,15 +83,7 @@ class ProfileScreen extends Component {
   }
 
   _logout = () => {
-    if (!this.isGuest) {
-      GoogleSignin.signOut().then(() => {
-        this._startLogin()
-      })
-      .catch(() => this._startLogin())
-      .done();
-    } else {
       this._startLogin()
-    }
   }
 
   _syncWithLMS = () => {
@@ -373,7 +365,7 @@ class ProfileScreen extends Component {
 
   render() {
     this.data = this.props.data.fromProfileTab ? this.props.me : this.props.data.profile;
-    this.isGuest = (this.data && this.data.username === GUEST_EMAIL);    
+    // this.isGuest = (this.data && this.data.username === GUEST_EMAIL);
     return (
       <View style={ style.mainContainer }>
         {
