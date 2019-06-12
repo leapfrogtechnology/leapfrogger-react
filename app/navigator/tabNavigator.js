@@ -1,6 +1,5 @@
 import { Navigation } from 'react-native-navigation';
 
-import { store } from './../../App';
 import colors from 'App/config/colors';
 import screens from 'App/constants/screens';
 
@@ -103,6 +102,7 @@ export const startTabScreen = () => {
     appStyle: {
       orientation: 'portrait', 
       // backButtonImage: require('./pathToImage.png'),
+      initialTabIndex: 1,
       hideBackButtonTitle: true,
     },
     passProps: {}, // simple serializable object that will pass as props to all top screens (optional)
