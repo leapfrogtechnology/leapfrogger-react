@@ -1,39 +1,30 @@
 import React, { Component } from 'react';
-import { 
+import {
   View,
   Text,
-  Image,
   FlatList,
-  ListView,
   Platform
  } from 'react-native';
 
-import style from './styles'; 
-import { getWidth, getHeight } from 'App/utils/dimension';
+import style from './styles';
 import ContactCell from './../contact/contactCell';
- 
+
  class SearchContactView extends Component {
 
   constructor(props) {
     super(props);
-    
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
     this.state = {
       selectedEmpId: null,
-      dataSource: this.ds.cloneWithRows(this.props.data),
     }
   }
 
   componentDidMount() {
     this.didSearch = false
-    this.setState({dataSource: this.ds.cloneWithRows(this.props.data)})
   }
 
   componentWillReceiveProps(newProps) {
     this.didSearch = true
-    this.setState({      
-      dataSource: this.ds.cloneWithRows(newProps.data),
+    this.setState({
     })
   }
 
@@ -55,31 +46,31 @@ import ContactCell from './../contact/contactCell';
   _renderCell = (item) => {
     return (
       <ContactCell
-        // {...this.props}
         data={item}
-        onPress={this._onCellSelection}   
+        onPress={this._onCellSelection}
         moreButtonAction={this._moreButtonOnPress}
         showButtons={this.state.selectedEmpId === item.empId}
       />
     )
   }
 
-  _keyExtractor = (item, index) => item.empId;
-  
+  _keyExtractor = (item) => item.empId;
+
   _renderTableView = () => {
-    return (
+      console.log(this.props.data)
+      return (
       <View style={Platform.OS === 'android' ? style.listContainer : style.listContaineriOS}>
-        <ListView
-          key={'listView'}
+        <FlatList
           style={ Platform.OS === 'android' ? style.tableAndroid : null }
-          dataSource={this.state.dataSource}
-          renderRow={(item, index) => this._renderCell(item) }
+          data={this.props.data}
+          renderItem={(item) => this._renderCell(item.item) }
           enableEmptySections={true}
+          keyExtractor={this._keyExtractor}
         />
       </View>
     );
   }
-  
+
   _renderSearchResult = () => {
     return (
       <View style={style.searchResult}>

@@ -79,16 +79,19 @@ export const groupByAlphabets = (employeesList) => {
   return finalList;
 }
 
-//use this for listview
+//use this for section list
 export const categorizeEmployeeByName = (employeesList) => {
-  var uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList)
-  var finalMap = {};
+  const uniqueLetterList = getUniqueArrayOfFirstCharOfName(employeesList);
+  let finalList = [];
+
   uniqueLetterList.forEach(letter => {
     let list = employeesList.filter(emp => letter === getFirstLetterOfEmployee(emp))
-    finalMap[letter] = list
+    let sectionList = {title: letter, data: list}
+    finalList.push(sectionList)
   });
-  return finalMap;
+  return finalList;
 }
+
 
 //-----------------------------------
 

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { 
+import {
   View,
   Text,
-  Image,
-  FlatList,
-  ListView,
-  ScrollView,
-  SectionList,
-  ActivityIndicator,
   LayoutAnimation,
+  SectionList,
   Platform,
  } from 'react-native';
- 
-import Swiper from 'react-native-swiper'; 
+
+import Swiper from 'react-native-swiper';
 import Search from 'react-native-search-box';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
@@ -27,7 +22,7 @@ import { getWidth, getHeight } from 'App/utils/dimension';
 import StateFullScreen from 'App/components/stateFullScreen';
 import { searchEmployeesOfName } from 'App/utils/dataNormalization';
 
-import style, { AVATAR_SIZE, STICKY_HEADER_HEIGHT, DOT_MARGIN, PARALLAX_HEADER_HEIGHT } from './styles';
+import style from './styles';
 
 const GUEST_EMAIL = 'guest@lftechnology.com'
 const empjson = require('./../../../guestEmp.json'); //(with path)
@@ -35,40 +30,32 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
 
  class ContactScreen extends Component {
 
-  constructor(props) {
+    constructor(props) {
     super(props);
-
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2, sectionHeaderHasChanged: (s1, s2) => s1 !== s2});
-
     this.state = {
-      isSearching: false,      
+      isSearching: false,
       currentSwipeIndex: 0,
       searchedEmployees: [],
       screenState: 'normal',
       selectedEmpId: null,
-      dataSource: ds.cloneWithRowsAndSections(util.categorizeEmployeeByName(this.props.employees)),
     }
   }
 
   componentDidMount() {
     // this._animateOnMount();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    if (this.props.user.email === GUEST_EMAIL) {      
+    if (this.props.user.email === GUEST_EMAIL) {
       this.props.setGuestEmployeeAndDepartment(empjson, departmentjson)
     } else {
-      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) { 
+      if ((this.props.employees.length === 0) || (this.props.departments.length === 0)) {
         this.props.fetchEmployeesAndDepartments()
-      }      
+      }
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(util.categorizeEmployeeByName(newProps.employees))})
-  }
-
   _onSearchBarTextChange = (text) => {
-    var employees = searchEmployeesOfName(this.props.employees, text);    
-    this.setState({ searchedEmployees: employees });    
+    var employees = searchEmployeesOfName(this.props.employees, text);
+    this.setState({ searchedEmployees: employees });
   }
 
   _onSearchBarFocus = () => {
@@ -78,15 +65,15 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
   }
 
   _onReturnAction = () => {
-    // also cancels on done button action 
-    // this._onSearchCancel();     
+    // also cancels on done button action
+    // this._onSearchCancel();
   }
 
   _onSearchCancel = () => {
     this.timeout = setTimeout(() => {
       this.setState({ searchedEmployees: [] });
-      this.setState({ isSearching: false });   
-    }, 300); 
+      this.setState({ isSearching: false });
+    }, 300);
   }
 
   _onCellSelection = (data) => {
@@ -98,8 +85,8 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
         navBarTranslucent: true,
         navBarTransparent: true,
         navBarTextColor: 'white',
-        navBarTransparency: 1,  
-        navBarButtonColor: 'white',                  
+        navBarTransparency: 1,
+        navBarButtonColor: 'white',
         navBarLeftButtonColor: 'white',
         navBarRightButtonColor: 'white',
       },
@@ -108,7 +95,7 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
         data: {
           profile: data
         }
-      }        
+      }
     });
   }
 
@@ -122,22 +109,22 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
     }
   }
 
-  _renderTableView = (employees) => {
-    return (
-      <ListView
-        key={'listView'}
-        style={ Platform.OS === 'android' ? style.tableAndroid : null }
-        dataSource={this.state.dataSource}
-        renderRow={(item, index) => 
-          <ContactCell 
-            // {...this.props}          
-            data={item} 
-            onPress={this._onCellSelection}
-            moreButtonAction={this._moreButtonOnPress}/>
+  _renderTableView = () => {
+      const  dataSource = util.categorizeEmployeeByName(this.props.employees);
+      return (
+      <SectionList
+          style={ Platform.OS === 'android' ? style.tableAndroid : null }
+          sections={dataSource}
+          renderItem={(item, index) =>
+              <ContactCell
+                  // {...this.props}
+                  data={item.item}
+                  onPress={this._onCellSelection}
+                  moreButtonAction={this._moreButtonOnPress}/>
           }
-        stickySectionHeadersEnabled={true}
-        renderSectionHeader={(sectionData, title) => <Text style={style.sectionHeader}>{title}</Text>}
-        // renderSeparator={() => <View style={{backgroundColor: colors.GRAY, height: 1, width: 200, marginBottom: -1}}></View>}
+          stickySectionHeadersEnabled={true}
+          renderSectionHeader={({section: {title}}) => <Text style={style.sectionHeader}>{title}</Text>}
+          keyExtractor={(item, index) => item + index}
       />
     );
   }
@@ -146,11 +133,6 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
     this.setState({
       currentSwipeIndex: index,
     })
-  }
-
-  _groupAllEmployeesWithGroupedEmployees = () => {
-    return allEmp = [{title: 'All', data: this.props.employees}]
-    // return allEmp.concat(this.props.groupedEmp)
   }
 
   _renderStatusBar = () => {
@@ -177,14 +159,13 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
   }
 
   _renderSwiper = () => {
-    // return (<Text>asdasdasdasdasdasdas</Text>)
     return (
       // <Swiper
       //   style={style.wrapper}
-      //   loop={false} 
+      //   loop={false}
       //   bounces={true}
-      //   onIndexChanged ={this._onMomentumScrollEnd}          
-      //   activeDotStyle={{marginBottom: DOT_MARGIN}} 
+      //   onIndexChanged ={this._onMomentumScrollEnd}
+      //   activeDotStyle={{marginBottom: DOT_MARGIN}}
       //   activeDotColor={colors.LF_DARK_GRREEN}
       //   dotStyle={{marginBottom: DOT_MARGIN}}>
       //     {
@@ -236,7 +217,7 @@ const departmentjson = require('./../../../guestDepartment.json'); //(with path)
               <Text style={style.departmentNameText}>{this.props.departments[this.state.currentSwipeIndex].name}</Text>
             </View> 
           } */}
-          {                         
+          {
             <StateFullScreen
               style={style.mainContainer}
               state={this._getScreenState()} // fetch, normal and error

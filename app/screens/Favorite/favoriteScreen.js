@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   FlatList,
-  ListView,
   Platform,
   ActivityIndicator,
   LayoutAnimation,
@@ -22,9 +21,6 @@ class FavoriteScreen extends Component {
 
   constructor(props) {
     super(props)
-
-    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
     this.state = {
       selectedEmpId: null,
     }
@@ -76,8 +72,7 @@ class FavoriteScreen extends Component {
   _renderCell = (item) => {
     return (
       <ContactCell 
-        // {...this.props}          
-        data={item} 
+        data={item}
         onPress={this._onCellSelection}
         moreButtonAction={this._moreButtonOnPress}
         showButtons={this.state.selectedEmpId === item.empId}
@@ -86,15 +81,13 @@ class FavoriteScreen extends Component {
   }
 
   _renderTableView = (data) => {
-    let listData = this.ds.cloneWithRows(data)
     return (
       <View style={Platform.OS === 'android' ? style.listContainer : null}>
-        <ListView
-          key={'listView'}
+        <FlatList
           style={ Platform.OS === 'android' ? style.tableAndroid : null }
-          dataSource={listData}
-          renderRow={(item, index) => this._renderCell(item, this.state.selectedEmpId) }
-          enableEmptySections={true}
+          data={data}
+          renderItem={(item) => this._renderCell(item.item, this.state.selectedEmpId) }
+          keyExtractor={(item) => item.empId}
         />
       </View>
     );
